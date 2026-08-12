@@ -6,9 +6,9 @@ agent_created: true
 
 # 多 Agent 第三方 Skill 统一安装流水线
 
-把第三方 skill 安全地接入多 agent 环境。每个新 skill 都必须走完下面五步，缺一不可：
+把第三方 skill 安全地接入多 agent 环境。每个新 skill 都必须走完下面六步，缺一不可：
 
-**安全审计 → 安装到公共池 → 中文化 → 软链桥接 → 校验 agent 去重**
+**安全审计 → 安装到公共池 → 中文化 → 软链桥接 → 校验 agent 去重 → 同步回 GitHub**
 
 ## 核心概念
 
@@ -130,16 +130,35 @@ python3 <skill>/scripts/bridge.py --mode dedup --fix
 
 ---
 
+## 第 5 步：同步回 GitHub（自动回传）
+
+让「本地改动」与集中管理仓库 `~/my-agent-skills`（公开仓库 `crystepj-max/my-agent-skills`）保持一致，支撑跨设备快速恢复。仓库同时存**自有 skill 完整数据**（仅 `my-skills/`，第三方只存元数据清单，不囤数据）。
+
+触发方式：
+
+- **自动**：`apply` / `cn --fix` / `dedup --fix` 成功后自动执行（除非传 `--no-sync`）。
+- **手动**：`python3 <skill>/scripts/bridge.py --mode sync`
+
+`run_sync()` 依次做三件事：
+
+1. 复制自有 skill `agent-skill-bridge` 当前真源 → 仓库 `my-skills/agent-skill-bridge/`。
+2. 运行 `scripts/refresh_inventory.py` 刷新 `inventory/skill-desc-translation.md` 的「最新更新」列（按各仓库 `pushed_at`）。
+3. 运行 `scripts/sync.sh` 提交并推送 `main`（`sync.sh` 仅在确有变更时提交，无变更自动跳过）。
+
+> 前提：`~/my-agent-skills` 须是 git 仓库（已 `git clone` 或初始化的）。若不是，自动跳过同步、不影响本地。
+
 ## 工作流串起来（安装一个新第三方 skill 的标准动作）
 
 ```
-1. skills-security-check 审计目标 skill            # 第 0 步
+1. skills-security-check 审计目标 skill            # 第 0 步（skills-security-check 已随 my-skills 自动桥接进公共池）
 2. cp -R <skill> ~/.agents/skills/<skill>          # 第 1 步：安装到公共池
 3. bridge.py --mode cn --fix  -> 对列出的纯英文项用 Edit 译中文 -> 重跑直到归零   # 第 2 步：中文化
 4. bridge.py --mode dry      -> 用户确认           # 第 3a 步
-5. bridge.py --mode apply     (含自动 verify)       # 第 3b/c 步：桥接
-6. bridge.py --mode dedup --fix                     # 第 4 步：去重
+5. bridge.py --mode apply     (含自动 verify + 自动同步回 GitHub)   # 第 3b/c 步：桥接
+6. bridge.py --mode dedup --fix                     # 第 4 步：去重（--fix 也会自动同步）
 ```
+
+> 第 0 步的 `skills-security-check` 已纳入本仓库 `my-skills/`，经 `restore.sh` 自动软链进公共池，无需再手动安装。
 
 ## 扩展
 

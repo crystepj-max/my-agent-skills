@@ -19,6 +19,9 @@ agent-skill-bridge: 把公共池 ~/.agents/skills/ 桥接进各 agent 默认 ski
   --mode dedup     # 校验/修复同名 skill 去重（默认只读；加 --fix 才实际删除重复项）
   --mode cn        # 中文化：检测自有 skill 的英文/空 description，自动归一化中英夹杂项，
                    #          报告仍需 LLM 翻译的纯英文项（默认只读；加 --fix 才写入归一化结果）
+  --mode sync      # 同步回 GitHub：复制自有 skill(agent-skill-bridge)进仓库 + 刷新清单最新更新列
+                   #          + 运行 sync.sh 提交推送 main。也可由 apply / cn --fix / dedup --fix 自动触发
+  --no-sync        # 上述写操作后不自动推送 GitHub（默认自动同步）
 用法：
   python3 bridge.py --mode dry
   python3 bridge.py --mode apply
@@ -29,7 +32,7 @@ agent-skill-bridge: 把公共池 ~/.agents/skills/ 桥接进各 agent 默认 ski
   python3 bridge.py --mode cn --fix         # 自动归一化中英夹杂项并写入；列出仍需 LLM 翻译的纯英文项
   python3 bridge.py --mode apply --agents claude,codex,workbuddy
 """
-import os, shutil, argparse, re, json, time
+import os, shutil, argparse, re, json, time, sys, subprocess
 
 HOME = os.path.expanduser("~")
 USER_SRC = os.path.join(HOME, ".agents", "skills")
@@ -44,6 +47,10 @@ DEFAULT_AGENTS = {
 }
 # 可选（当前无可用可执行文件/暂未启用，需要时取消注释）：
 # "kimicode": os.path.join(HOME, ".kimi-code", "skills"),
+
+# 自有 skill 集中管理仓库（用于同步回 GitHub）
+MY_REPO = os.path.join(HOME, "my-agent-skills")
+OWN_BRIDGE = "agent-skill-bridge"
 
 
 # ---------------------------------------------------------------------------
@@ -441,14 +448,68 @@ def cn(agents, fix):
 
 
 # ---------------------------------------------------------------------------
+# 同步回 GitHub（sync）
+# ---------------------------------------------------------------------------
+def _sync_copy_own_skill():
+    """把自有 skill（agent-skill-bridge）的当前真源复制到仓库 my-skills/ 下。"""
+    src_pool = os.path.join(USER_SRC, OWN_BRIDGE)
+    if os.path.isdir(src_pool):
+        src = realpath(src_pool)
+    else:
+        src = os.path.join(HOME, ".workbuddy", "skills", OWN_BRIDGE)
+    if not os.path.isdir(src):
+        print(f"    [sync] 未找到自有 skill 源: {src}")
+        return False
+    dst = os.path.join(MY_REPO, "my-skills", OWN_BRIDGE)
+    if os.path.isdir(dst):
+        shutil.rmtree(dst)
+    shutil.copytree(src, dst)
+    print(f"    [sync] 复制自有 skill -> {dst}")
+    return True
+
+
+def run_sync():
+    """第 5 步：把变更同步回 GitHub 仓库（my-agent-skills）。
+
+    - 复制自有 skill 数据进仓库
+    - 刷新 inventory 的「最新更新」列（若 refresh_inventory.py 存在）
+    - 运行 sync.sh 提交并推送 main（无变更则 sync.sh 自动跳过）
+    """
+    print("\n=== 第 5 步：同步回 GitHub ===")
+    if not os.path.isdir(os.path.join(MY_REPO, ".git")):
+        print(f"    仓库不存在或非 git 目录: {MY_REPO} -> 跳过同步（不影响本地）")
+        return
+    # 1) 复制自有 skill 数据
+    _sync_copy_own_skill()
+    # 2) 刷新清单「最新更新」列
+    refresh = os.path.join(MY_REPO, "scripts", "refresh_inventory.py")
+    if os.path.isfile(refresh):
+        print("    [sync] 刷新清单最新更新列...")
+        subprocess.run([sys.executable, refresh], capture_output=True, text=True)
+    # 3) 提交并推送
+    sync = os.path.join(MY_REPO, "scripts", "sync.sh")
+    if os.path.isfile(sync):
+        print("    [sync] 提交并推送到 main...")
+        r = subprocess.run(["bash", sync], capture_output=True, text=True)
+        if r.stdout.strip():
+            print(r.stdout.strip())
+        if r.stderr.strip():
+            print(r.stderr.strip())
+    else:
+        print(f"    [sync] 未找到 sync.sh: {sync}")
+
+
+# ---------------------------------------------------------------------------
 # 主入口
 # ---------------------------------------------------------------------------
 def main():
     ap = argparse.ArgumentParser(
         description="Bridge ~/.agents/skills/ into agent default skill dirs via symlinks, with dedup + cn.")
-    ap.add_argument("--mode", choices=["dry", "apply", "verify", "dedup", "cn"], default="dry")
+    ap.add_argument("--mode", choices=["dry", "apply", "verify", "dedup", "cn", "sync"], default="dry")
     ap.add_argument("--fix", action="store_true",
                     help="dedup/cn 模式下实际写入修改(默认只读报告)")
+    ap.add_argument("--no-sync", action="store_true",
+                    help="写操作(apply/cn --fix/dedup --fix)后不自动同步回 GitHub")
     ap.add_argument("--agents", default=",".join(DEFAULT_AGENTS.keys()),
                     help="逗号分隔的 agent 名; 必须是 DEFAULT_AGENTS 中已定义的键")
     args = ap.parse_args()
@@ -470,12 +531,20 @@ def main():
     elif args.mode == "apply":
         apply(user_skills, agents)
         verify(user_skills, agents)
+        if not args.no_sync:
+            run_sync()
     elif args.mode == "verify":
         verify(user_skills, agents)
     elif args.mode == "dedup":
         dedup(user_skills, agents, fix=args.fix)
+        if args.fix and not args.no_sync:
+            run_sync()
     elif args.mode == "cn":
         cn(agents, fix=args.fix)
+        if args.fix and not args.no_sync:
+            run_sync()
+    elif args.mode == "sync":
+        run_sync()
 
 
 if __name__ == "__main__":

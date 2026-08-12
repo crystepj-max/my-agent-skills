@@ -58,5 +58,6 @@ echo "      edit-article、find-skills、frontend-design、git-guardrails-claude
 echo "      migrate-to-shoehorn、neat-freak、obsidian-vault、remotion-best-practices、"
 echo "      remotion-video-production、scaffold-exercises、setup-pre-commit、skill-creator、"
 echo "      storage-analyzer、video-production"
+echo "  • 注：skills-security-check 已随 my-skills/ 自动软链进公共池（流水线第 0 步开箱即用），无需手动安装。"
 echo
 echo "完成。请重启 claude / codex / workbuddy 会话，使 / 命令刷新。"

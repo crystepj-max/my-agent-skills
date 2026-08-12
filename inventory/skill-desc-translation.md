@@ -19,6 +19,10 @@
 
 |---|---|---|---|
 
+|---|---|---|---|---|
+
+
+> **新增「最新更新」列（2026-08-11）**：通过各仓库 `pushed_at` 自动获取，按来源分类展示。无公开仓库的 WorkBuddy 内置/市场 skill 标记为「平台内置」。
 | # | Skill 名称 | 中文描述 | 仓库链接 / 来源 | 最新更新 |
 |---|---|---|---|---|
 | 1 | `agnes-ai-generation-skill` | 调用 Agnes AI / Sapiens AI 的生成接口，支持文本、图像、视频。当用户要使用 Agnes 模型、Agnes 图像/视频、Agnes 2.0 Flash、apihub.agnes-ai.com，或要生成文本、图像、编辑图像、创作视频、让图像动起来、生成关键帧视频，或测试 Agnes API 时。 | [github.com/Yacey/agnes-ai-generation-skill](https://github.com/Yacey/agnes-ai-generation-skill) | 2026-06-21 |
@@ -49,7 +53,7 @@
 | 26 | `guizang-ppt-skill` | 生成横向翻页网页 PPT（单 HTML 文件），含 WebGL 背景、章节幕封、数据大字报、图片网格等模板。提供两种风格：① "电子杂志 × 电子墨水"（衬线 + 流体背景 + 暖色） ② "瑞士国际主义"（无衬线 + 网格点阵 + IKB/柠檬黄/柠檬绿/安全橙高亮）。当用户需要制作分享 / 演讲 / 发布会风格的网页 PPT，或提到"杂志风 PPT"、"瑞士风 PPT"、"Swiss Style"、"horizontal swipe deck"时使用。 | [github.com/op7418/guizang-ppt-skill](https://github.com/op7418/guizang-ppt-skill)（体积大，建议用仓库链接安装，未打包进脚本） | 2026-08-07 |
 | 27 | `handoff` | 把当前对话压缩成一份交接文档，供另一个 agent 接手。 | [github.com/mattpocock/skills](https://github.com/mattpocock/skills) | 2026-08-07 |
 | 28 | `hatch-pet` | 从角色原画、生成图、公司/客户品牌线索或视觉参考中，创建、修复、校验、可视化 QA，并打包兼容 Codex 的 v2 动画宠物。适用于任何新的 Codex 宠物、自定义吉祥物、非像素风宠物、品牌灵感宠物、已有宠物修复，或需要 9 行标准动画、16 个朝向、确定性装配、QA 产物与 spriteVersionNumber 2 打包的 8x11 雪碧图流程。 | WorkBuddy 内置/应用市场（见 install_all_skills.sh 原样打包） | 平台内置 |
-| 29 | `humanize-ppt` | 为 Agent 生成的 PPT 做『人性化』润色——把原始素材转成以听众心智转化为目标的结构化演讲，而非模板堆砌。当用户要制作演讲/PPT/幻灯片，或希望内容有叙事与节奏时使用。 | [github.com/LearnPrompt/humanize-ppt](https://github.com/LearnPrompt/humanize-ppt)（体积大，建议用仓库链接安装，未打包进脚本） | 2026-07-31 |
+| 29 | `humanize-ppt` | 为 Agent 生成的 PPT 做『人性化』润色——把原始素材转成以听众心智转化为目标的结构化演讲，而非模板堆砌。当用户要制作演讲/PPT/幻灯片，或希望内容有叙事与节奏时使用。 | [github.com/LearnPrompt/humanize-ppt](https://github.com/LearnPrompt/humanize-ppt)（体积大，建议用仓库链接安装，未打包进脚本） | N/A |
 | 30 | `implement` | 根据规格说明或一组工单来实现某项工作。 | [github.com/mattpocock/skills](https://github.com/mattpocock/skills) | 2026-08-07 |
 | 31 | `improve-codebase-architecture` | 扫描代码库寻找深化机会，以可视化 HTML 报告呈现，再就你选定的那一项展开追问式打磨。 | [github.com/mattpocock/skills](https://github.com/mattpocock/skills) | 2026-08-07 |
 | 32 | `income-investment` | 收益投资——稳健与机会主义的分配分析。来源：skills/income-investment.md。 | [github.com/xbtlin/ai-berkshire](https://github.com/xbtlin/ai-berkshire) | 2026-08-10 |
@@ -66,7 +70,7 @@
 | 43 | `news-pulse` | 公司新闻脉搏：股价异动时快速归因。用 4 个并行 Agent 侦察公司事件/监管政策/行业对手/市场情绪，产出"事件时间线 + 异动主因判断 + 是否触发论文重审"。 | [github.com/xbtlin/ai-berkshire](https://github.com/xbtlin/ai-berkshire) | 2026-08-10 |
 | 44 | `obsidian-vault` | 在 Obsidian 仓库中搜索、创建与管理笔记，支持双链与索引笔记。当用户想在 Obsidian 中查找、创建或整理笔记时使用。 | WorkBuddy 内置/应用市场（见 install_all_skills.sh 原样打包） | 平台内置 |
 | 45 | `portfolio-review` | 组合管理：从\\"研究公司\\"到\\"管理组合\\"。来源：skills/portfolio-review.md. | [github.com/xbtlin/ai-berkshire](https://github.com/xbtlin/ai-berkshire) | 2026-08-10 |
-| 46 | `ppt-master` | AI 驱动的演示文稿工作流：生成可编辑的 PPTX 文件，创建可复用的品牌/版式/成套工作区，填充原生 PPTX 模板。 | [github.com/hugohe3/ppt-master](https://github.com/hugohe3/ppt-master)（体积大，建议用仓库链接安装，未打包进脚本） | 2026-08-11 |
+| 46 | `ppt-master` | AI 驱动的演示文稿工作流：生成可编辑的 PPTX 文件，创建可复用的品牌/版式/成套工作区，填充原生 PPTX 模板。 | [github.com/hugohe3/ppt-master](https://github.com/hugohe3/ppt-master)（体积大，建议用仓库链接安装，未打包进脚本） | 2026-08-12 |
 | 47 | `private-company-research` | 未上市公司研究：多Agent并行深度研究框架。来源：skills/private-company-research.md. | [github.com/xbtlin/ai-berkshire](https://github.com/xbtlin/ai-berkshire) | 2026-08-10 |
 | 48 | `prototype` | 构建一个一次性的原型来验证某个设计问题。当用户想快速验证状态模型或逻辑是否成立，或探索某个 UI 应该长什么样时使用。 | [github.com/mattpocock/skills](https://github.com/mattpocock/skills) | 2026-08-07 |
 | 49 | `quality-screen` | 去劣筛选：7条指标快速排除非一流公司。来源：skills/quality-screen.md. | [github.com/xbtlin/ai-berkshire](https://github.com/xbtlin/ai-berkshire) | 2026-08-10 |
@@ -97,4 +101,4 @@
 
 **合计：73 个 skill 描述已全部中文化，并标注最新更新。**
 
-> **新增「最新更新」列（2026-08-11）**：通过各仓库 `pushed_at` 自动获取，按来源分类展示。无公开仓库的 WorkBuddy 内置/市场 skill 标记为「平台内置」。
+> **「最新更新」列**：通过各仓库 `pushed_at` 自动获取，按来源分类展示。无公开仓库的 WorkBuddy 内置/市场 skill 标记为「平台内置」。可运行 `scripts/refresh_inventory.py` 刷新。
