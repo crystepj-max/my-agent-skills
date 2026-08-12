@@ -1,0 +1,23 @@
+{
+  "skill_name": "agent-skill-bridge",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "我装了 claude、codex、workbuddy 三个 AI agent，现在想让它们都用同一套技能，不用各维护一份。技能都放在 ~/.agents/skills/ 里，怎么让其他 agent 也能发现？",
+      "expected_output": "识别用户需要跨 agent 共享公共池 ~/.agents/skills/；先跑 bridge.py --mode dry 规划，列出各 agent 的 ADD/REPLACE，让用户确认后再 apply+verify。不碰插件型和 agent 独有 skill。",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "让 codex 也能用 claude 那边的 skill，统一一下各 agent 的技能入口，别重复维护。",
+      "expected_output": "触发桥接流程：dry-run 展示映射（公共池 soft-link 进 ~/.codex/skills/ 等），用户确认后执行，冲突副本先备份再替换，最后 verify 0 缺失 0 断链。",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "我担心你乱改我的 agent 目录。把 ~/.agents/skills 桥接给其他 agent 的时候，会不会动到我 codex 自己独有、公共池里没有的那些 skill？",
+      "expected_output": "明确解释规则 2：agent 独有（公共池无同名）的 skill 保持不动；只有与公共池同名的才按规则 4 备份后替换；插件型完全不碰。先 dry-run 给用户看哪些不动。",
+      "files": []
+    }
+  ]
+}
