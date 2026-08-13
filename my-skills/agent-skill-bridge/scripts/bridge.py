@@ -361,7 +361,7 @@ def normalize_bilingual(desc):
        - 把结尾的 'Source: skills/X' 改成 '。来源：skills/X'
        返回 (new_text, changed)
     """
-    new = re.sub(r"^AI Berkshire (?:系列 )?skill[:：]\s*", "", desc)
+    new = re.sub(r'^(["\']?)AI Berkshire (?:系列 )?skill[:：]\s*', r"\1", desc)
     new = re.sub(r"\.?\s*Source:\s*skills/", "。来源：skills/", new)
     return new, (new != desc)
 
