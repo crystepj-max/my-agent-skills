@@ -417,8 +417,9 @@ def cn(agents, fix):
             # 归一化成功 -> 已是纯中文
             if fix:
                 new_line = "description: " + json.dumps(new, ensure_ascii=False)
-                new_fm = re.sub(r"^description:.*$", new_line, fm_match.group(2), count=1, flags=re.M)
-                new_txt = fm_match.group(1) + new_fm + fm_match.group(3)
+                # 关键修复：在【整份文件】上替换 description 行，保留 frontmatter 其余字段与正文(body)，
+                # 旧实现用 frontmatter 三段重建会丢失 '---' 之后的全部正文。
+                new_txt = re.sub(r"^description:.*$", new_line, txt, count=1, flags=re.M)
                 cn_backup_and_write(path, new_txt)
             normalized.append((name, scope, new[:40]))
             continue
