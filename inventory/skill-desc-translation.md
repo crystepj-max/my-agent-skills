@@ -1,4 +1,4 @@
-# 公共池 Skill 中文描述总表（共 73 个）
+# 公共池 Skill 中文描述总表（共 74 个）
 
 > 生成：2026-08-02 ｜ 范围：公共池 `~/.agents/skills/`（codex / claude / workbuddy 三端经软链同步中文）
 
@@ -11,6 +11,7 @@
 >    - `xbtlin/ai-berkshire` → 21 个（bottleneck-hunter、deep-company-series、dyp-ask、earnings-review、earnings-team、financial-data、income-investment、industry-funnel、industry-research、investment-checklist、investment-memo-craft、investment-research、investment-team、management-deep-dive、portfolio-review、private-company-research、quality-screen、thesis-drift、thesis-tracker、wechat-article、news-pulse）
 > 2. **独立仓库（直接克隆对应仓库）**：agnes-ai-generation-skill、beautiful-html-templates、frontend-slides、guizang-ppt-skill、humanize-ppt、llm-wiki、remotion-video-toolkit、ppt-master（共 8 个）
 > 3. **WorkBuddy 内置 / 应用市场（无独立公开仓库）**：edit-article、find-skills、frontend-design、git-guardrails-claude-code、hatch-pet、migrate-to-shoehorn、neat-freak、obsidian-vault、remotion-best-practices、remotion-video-production、scaffold-exercises、setup-pre-commit、skill-creator、storage-analyzer、video-production（共 15 个）→ 用下方「一键原样脚本」安装
+> 4. **自建 skill（2026-08-15 起新增）**：requirements-analysis —— 编排层 skill，完整数据存于本仓库 `my-skills/<name>/`（含 SKILL.md、references/、evals/），恢复时原样复制到 `~/.agents/skills/` 即可，不走上游仓库拉取。
 >
 > **两种安装方式**
 > - **仓库链接安装**：从上游重新拉取，干净但版本可能略新于本机。
@@ -114,6 +115,7 @@
 | 71 | `wizard` | 生成一个交互式 bash 向导(TUI)，一步步带人完成只有人能手动完成的操作——配置基础设施、设置凭证或 CI 密钥、走陌生的第三方后台、执行一次性迁移或切换。agent 自己能做的步骤不要用它。 | [github.com/mattpocock/skills/tree/main/skills/engineering/wizard](https://github.com/mattpocock/skills/tree/main/skills/engineering/wizard) | 2026-08-07 |
 | 72 | `to-questionnaire` | 把你自己答不上来的决策，变成一份交给别人填写的问卷文档。 | [github.com/mattpocock/skills/tree/main/skills/productivity/to-questionnaire](https://github.com/mattpocock/skills/tree/main/skills/productivity/to-questionnaire) | 2026-08-07 |
 | 73 | `wait-what` | 没看懂模型上一句在说什么？让它重述：补上你缺失的上下文，用更简单的语言讲清楚。 | [github.com/mattpocock/skills/tree/main/skills/productivity/wait-what](https://github.com/mattpocock/skills/tree/main/skills/productivity/wait-what) | 2026-08-07 |
+| 74 | `requirements-analysis` | 需求分析统一入口：把 GitHub issue 或用户的原始输入加工成含三要素（任务目标/涉及范围/验收标准）的可执行需求，先澄清后按复杂度定 S/M/L，M 型经 to-tickets 拆带依赖任务清单、L 型经 wayfinder 拆决策地图+OpenSpec（禁止直接开工）；三要素缺失如实标注不编造，落盘并回写 issue。当用户说『做个需求分析/拆需求/拆任务/出规格/评估需求体量/这个需求怎么落地』时使用。 | 自建（完整数据存于本仓库 `my-skills/requirements-analysis/`） | 2026-08-15 |
 
 **合计：73 个 skill 描述已全部中文化，并标注最新更新。**
 
