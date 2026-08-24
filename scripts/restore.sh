@@ -40,7 +40,7 @@ echo "=== [3/4] 桥接各 agent ==="
 BRIDGE="$REPO_DIR/my-skills/agent-skill-bridge/scripts/bridge.py"
 if [ -f "$BRIDGE" ]; then
   if command -v python3 >/dev/null 2>&1; then
-    python3 "$BRIDGE" --mode apply || echo "  桥接失败，请检查 python3 与 bridge.py"
+    python3 "$BRIDGE" --mode apply || { echo "  ❌ 桥接失败，详情见上方 traceback（脚本已退出，未打印成功）" >&2; exit 1; }
   else
     echo "  未找到 python3，跳过桥接（请手动运行 bridge.py --mode apply）"
   fi

@@ -1,3 +1,6 @@
 .DS_Store
 *.pyc
 __pycache__/
+
+# WorkBuddy 工作区记忆（不入库）
+.workbuddy/
