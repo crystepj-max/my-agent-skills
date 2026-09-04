@@ -4,3 +4,7 @@ __pycache__/
 
 # WorkBuddy 工作区记忆（不入库）
 .workbuddy/
+
+# 评测评审页：可用命令重新生成；且预览面板打开时会注入 data-page-node-id 标记，
+# 每次预览都产生一次无内容的假 diff，是误提交的主要来源。
+review.html
