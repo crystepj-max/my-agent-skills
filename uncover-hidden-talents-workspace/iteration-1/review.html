@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="en" data-page-node-id="sJS4KnwjzuuviJdjbE5MON">
+<head data-page-node-id="DaTyiZhFTUeGqHhPj3WDOi">
+  <meta charset="UTF-8" data-page-node-id="a2lEqMHw6ibBGqIIjYfKq6">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" data-page-node-id="JsZctThujekHLs8rG5a0cK">
   <title>Eval Review</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&family=Lora:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com" data-page-node-id="IHPKba0bN7iFz7PAytiXTQ">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin data-page-node-id="27vBYyB3GavRd2EByzoZRy">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&family=Lora:wght@400;500&display=swap" rel="stylesheet" data-page-node-id="9vxshmmriuTVK3GtiWIiL4">
   <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js" integrity="sha384-EnyY0/GSHQGSxSgMwaIPzSESbqoOLSexfnSMN2AP+39Ckmn92stwABZynq1JyzdT" crossorigin="anonymous"></script>
   <style>
     :root {
@@ -540,109 +540,109 @@
     }
   </style>
 </head>
-<body>
-  <div id="app" style="height:100vh; display:flex; flex-direction:column;">
-    <div class="header">
-      <div>
-        <h1>Eval Review: <span id="skill-name"></span></h1>
-        <div class="instructions">Review each output and leave feedback below. Navigate with arrow keys or buttons. When done, copy feedback and paste into Claude Code.</div>
+<body data-page-node-id="I6liW1RvpELzpATTJ6eQiu">
+  <div id="app" style="height:100vh; display:flex; flex-direction:column;" data-page-node-id="fZTvOzuPSQDtUiNP4RjuW2">
+    <div class="header" data-page-node-id="gwqdZ2KKNxipSlabw1JxQ0">
+      <div data-page-node-id="m9vG98268VPCZQJlGIEHfA">
+        <h1 data-page-node-id="BWTiEZa43gPMVfwp9jdszt">Eval Review: <span id="skill-name" data-page-node-id="WbaVFCuRKzHxwcbGbyhRh0"></span></h1>
+        <div class="instructions" data-page-node-id="GoIniCoGVOKVaOWl15d1Gt">Review each output and leave feedback below. Navigate with arrow keys or buttons. When done, copy feedback and paste into Claude Code.</div>
       </div>
-      <div class="progress" id="progress"></div>
+      <div class="progress" id="progress" data-page-node-id="Pa2WJcEfMsFbHXqHvJbMnQ"></div>
     </div>
 
     <!-- View tabs (only shown when benchmark data exists) -->
-    <div class="view-tabs" id="view-tabs" style="display:none;">
-      <button class="view-tab active" onclick="switchView('outputs')">Outputs</button>
-      <button class="view-tab" onclick="switchView('benchmark')">Benchmark</button>
+    <div class="view-tabs" id="view-tabs" style="display:none;" data-page-node-id="cEERc9WD0COD1OYgeXHo1W">
+      <button class="view-tab active" onclick="switchView('outputs')" data-page-node-id="ZVH2kt1XzK6vJ0PYmDvgMD">Outputs</button>
+      <button class="view-tab" onclick="switchView('benchmark')" data-page-node-id="lc8o0Sm35DLa275DsTQHB5">Benchmark</button>
     </div>
 
     <!-- Outputs panel (qualitative review) -->
-    <div class="view-panel active" id="panel-outputs">
-    <div class="main">
+    <div class="view-panel active" id="panel-outputs" data-page-node-id="RXNBal6OD1dvfFt3IctTGJ">
+    <div class="main" data-page-node-id="HUG0CvcjsVQvOSvqito5Fi">
       <!-- Prompt -->
-      <div class="section">
-        <div class="section-header">Prompt <span class="config-badge" id="config-badge" style="display:none;"></span></div>
-        <div class="section-body">
-          <div class="prompt-text" id="prompt-text"></div>
+      <div class="section" data-page-node-id="LRhWEd2dIthJCu63bt2FfZ">
+        <div class="section-header" data-page-node-id="UuMo2ecbiues1QPuoUBEKF">Prompt <span class="config-badge" id="config-badge" style="display:none;" data-page-node-id="mIAwm4d1fVqA7bVDJNyHod"></span></div>
+        <div class="section-body" data-page-node-id="6xl3C6bnTWghj52jYJJXc1">
+          <div class="prompt-text" id="prompt-text" data-page-node-id="Lu0LcxewrBawuMrhXS7dw9"></div>
         </div>
       </div>
 
       <!-- Outputs -->
-      <div class="section">
-        <div class="section-header">Output</div>
-        <div class="section-body" id="outputs-body">
-          <div class="empty-state">No output files found</div>
+      <div class="section" data-page-node-id="hIlcyCEog1h9cE04O8ag8K">
+        <div class="section-header" data-page-node-id="PofDx1gcFrimxsMhlzhcR1">Output</div>
+        <div class="section-body" id="outputs-body" data-page-node-id="641BrJ8mi4MUfc5I4ZHCFA">
+          <div class="empty-state" data-page-node-id="nxDClC1W5P9ei1U4VuHdGP">No output files found</div>
         </div>
       </div>
 
       <!-- Previous Output (collapsible) -->
-      <div class="section" id="prev-outputs-section" style="display:none;">
-        <div class="section-header">
-          <div class="grades-toggle" onclick="togglePrevOutputs()">
-            <span class="arrow" id="prev-outputs-arrow">&#9654;</span>
+      <div class="section" id="prev-outputs-section" style="display:none;" data-page-node-id="lYCyfYgQC6EQSrE7PYwBTC">
+        <div class="section-header" data-page-node-id="Op2GOVcPG4PZqn1BMlYpqq">
+          <div class="grades-toggle" onclick="togglePrevOutputs()" data-page-node-id="XAutx9hiYY1538nLf4H1jN">
+            <span class="arrow" id="prev-outputs-arrow" data-page-node-id="70pljKGJPSXni1Pu1hy4SL">&#9654;</span>
             Previous Output
           </div>
         </div>
-        <div class="grades-content" id="prev-outputs-content"></div>
+        <div class="grades-content" id="prev-outputs-content" data-page-node-id="C90TqRHP68DiabWbIPlkwd"></div>
       </div>
 
       <!-- Grades (collapsible) -->
-      <div class="section" id="grades-section" style="display:none;">
-        <div class="section-header">
-          <div class="grades-toggle" onclick="toggleGrades()">
-            <span class="arrow" id="grades-arrow">&#9654;</span>
+      <div class="section" id="grades-section" style="display:none;" data-page-node-id="2Yr0qndOfxEyss3hRmtJjN">
+        <div class="section-header" data-page-node-id="jdq5Ql1obv1UNZl9XEtYfR">
+          <div class="grades-toggle" onclick="toggleGrades()" data-page-node-id="ILGwCdDDDwxEepscgXoWHX">
+            <span class="arrow" id="grades-arrow" data-page-node-id="zGoSyPFcuOxSkeexzPIUoY">&#9654;</span>
             Formal Grades
           </div>
         </div>
-        <div class="grades-content" id="grades-content"></div>
+        <div class="grades-content" id="grades-content" data-page-node-id="dSe1E8uT4j6wT0zUDtQjiD"></div>
       </div>
 
       <!-- Feedback -->
-      <div class="section">
-        <div class="section-header">Your Feedback</div>
-        <div class="section-body">
+      <div class="section" data-page-node-id="iQNeHaX1w0KkCHBw2DWvP8">
+        <div class="section-header" data-page-node-id="wgNtOzLkpvt0wyjkRfk4M7">Your Feedback</div>
+        <div class="section-body" data-page-node-id="PJSSgmLEaikyo8tbK3HOZ6">
           <textarea
             class="feedback-textarea"
             id="feedback"
             placeholder="What do you think of this output? Any issues, suggestions, or things that look great?"
           ></textarea>
-          <div class="feedback-status" id="feedback-status"></div>
-          <div class="prev-feedback" id="prev-feedback" style="display:none;">
-            <div class="prev-feedback-label">Previous feedback</div>
-            <div id="prev-feedback-text"></div>
+          <div class="feedback-status" id="feedback-status" data-page-node-id="8NZykDBQfsmqCnAqnaVFpQ"></div>
+          <div class="prev-feedback" id="prev-feedback" style="display:none;" data-page-node-id="e8t42wZ3kAl4BDdjNjpuYZ">
+            <div class="prev-feedback-label" data-page-node-id="jGQNbD9R4n0QdHIBRuXItN">Previous feedback</div>
+            <div id="prev-feedback-text" data-page-node-id="HvDgjyaU1BF7KMf0ZR8jo5"></div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="nav" id="outputs-nav">
-      <button class="nav-btn" id="prev-btn" onclick="navigate(-1)">&#8592; Previous</button>
-      <button class="done-btn" id="done-btn" onclick="showDoneDialog()">Submit All Reviews</button>
-      <button class="nav-btn" id="next-btn" onclick="navigate(1)">Next &#8594;</button>
+    <div class="nav" id="outputs-nav" data-page-node-id="doB8z8Ifg9N1bXLqnTtSzj">
+      <button class="nav-btn" id="prev-btn" onclick="navigate(-1)" data-page-node-id="6c1Ge3NVrJGb2NK6s8rI0W">&#8592; Previous</button>
+      <button class="done-btn" id="done-btn" onclick="showDoneDialog()" data-page-node-id="f5jEHMYQHRJw35Z36gsJkV">Submit All Reviews</button>
+      <button class="nav-btn" id="next-btn" onclick="navigate(1)" data-page-node-id="C891XjDTEPplcWPI8IMiIn">Next &#8594;</button>
     </div>
     </div><!-- end panel-outputs -->
 
     <!-- Benchmark panel (quantitative stats) -->
-    <div class="view-panel" id="panel-benchmark">
-      <div class="benchmark-view" id="benchmark-content">
-        <div class="benchmark-empty">No benchmark data available. Run a benchmark to see quantitative results here.</div>
+    <div class="view-panel" id="panel-benchmark" data-page-node-id="yuJEAPbjcpFRLUx1sPCLzc">
+      <div class="benchmark-view" id="benchmark-content" data-page-node-id="cHHuR30iOW7Av9WRlwvdyC">
+        <div class="benchmark-empty" data-page-node-id="vOycJGCdGC6aiOWWHeR0Ln">No benchmark data available. Run a benchmark to see quantitative results here.</div>
       </div>
     </div>
   </div>
 
   <!-- Done overlay -->
-  <div class="done-overlay" id="done-overlay">
-    <div class="done-card">
-      <h2>Review Complete</h2>
-      <p>Your feedback has been saved. Go back to your Claude Code session and tell Claude you're done reviewing.</p>
-      <div class="btn-row">
-        <button onclick="closeDoneDialog()">OK</button>
+  <div class="done-overlay" id="done-overlay" data-page-node-id="wFyJTlCTxNA3SFzfZ3epPz">
+    <div class="done-card" data-page-node-id="1srSHwpvElb1zwmssOrcmq">
+      <h2 data-page-node-id="fAVDlIqH5wGZpDCIW5bljB">Review Complete</h2>
+      <p data-page-node-id="tUBFfXbXlG7AFdGaGi5Ky7">Your feedback has been saved. Go back to your Claude Code session and tell Claude you're done reviewing.</p>
+      <div class="btn-row" data-page-node-id="AGYL5OoOZy7yFNYU3vCs0W">
+        <button onclick="closeDoneDialog()" data-page-node-id="Zw5snSlOUyNI8sXZ34s488">OK</button>
       </div>
     </div>
   </div>
 
   <!-- Toast -->
-  <div class="toast" id="toast"></div>
+  <div class="toast" id="toast" data-page-node-id="CPHxirm82awakEHmbUDJg3"></div>
 
   <script>
     // ---- Embedded data (injected by generate_review.py) ----

@@ -7,7 +7,19 @@
 本仓库刻意**只存两类内容**，不囤第三方 skill 的完整数据：
 
 1. **我自己原创的 skill（完整数据）** —— `my-skills/`
-   - 目前：`agent-skill-bridge`（统一管理多 agent 第三方 skill 安装的安全审计 + 公共池 + 中文化 + 桥接 + 去重流水线）
+   - 目前 12 个：
+     - `agent-skill-bridge` —— 统一管理多 agent 第三方 skill 安装的安全审计 + 公共池 + 中文化 + 桥接 + 去重流水线
+     - `life-design` —— 人生设计术：多轮深度对话，生成三个五年人生版本与原型行动，产出《个人人生设计蓝图》
+     - `uncover-hidden-talents` —— 深度天赋挖掘机：从具体经历中挖出底层天赋，产出《个人天赋使用说明书》
+     - `minimum-scale-experiment` —— 把纠结的决定拆成可验证的最小实验
+     - `expert-consultation` —— 多视角专家会诊框架
+     - `cross-domain-borrowing` —— 跨领域借解：从远距离领域找结构同构的解法
+     - `socratic-clarify` —— 苏格拉底式追问，帮用户自己分清事实/解释/判断
+     - `first-principle` —— 第一性原理拆解
+     - `fact-check` —— 事实核查：可验证事实 / 推理链 / 价值判断三层分离
+     - `requirements-analysis` —— 需求分析统一入口
+     - `learn_something_new` —— 系统化学习辅助
+     - `skills-security-check` —— Skill 安全审查（安装新 skill 前的强制第 0 步）
    - 后续你自建/深度改造的 skill，都放这里，带完整文件。
 2. **公共 skill 清单（仅元数据，不存数据）** —— `inventory/skill-desc-translation.md`
    - 我当前维护的全部 skill（含第三方）的名称、中文描述、仓库链接/来源、最新更新时间。

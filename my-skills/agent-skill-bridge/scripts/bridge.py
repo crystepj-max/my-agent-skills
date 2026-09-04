@@ -72,6 +72,18 @@ def list_skills(root):
     return out
 
 
+def is_pool_source(rp, name, user_skills):
+    """判断一个解析后的真实路径，是否就是公共池中该 skill 的真源。
+
+    不能只按路径前缀判断。公共池条目本身可能是软链——自有 skill 由
+    restore.sh 从仓库 my-skills/ 软链进池，realpath 会跳出 USER_SRC，
+    前缀判定就会把它误判成「非池副本」，导致 verify 报缺失、dedup 找不到
+    真源而失去去重能力。改为按内容同一性判定：等于池中同名条目的 realpath
+    即为真源。这样 agent 软链无论指向池路径还是仓库路径，都算正确桥接。
+    """
+    return rp == user_skills.get(name)
+
+
 def backup_and_remove(agent, name, path, sub="bridge"):
     """先备份（软链保留指向，实体目录 copytree），再删除原路径。返回是否执行了删除。"""
     dest = os.path.join(BACKUP_ROOT, sub, agent, name)
@@ -179,7 +191,7 @@ def verify(user_skills, agents):
             p = os.path.join(tgt, n)
             if os.path.islink(p):
                 rp = realpath(p)
-                if rp.startswith(USER_SRC + os.sep) or rp == USER_SRC:
+                if is_pool_source(rp, n, user_skills):
                     reached.add(n)
                     if not os.path.exists(p):
                         broken += 1
@@ -196,7 +208,7 @@ def verify(user_skills, agents):
 # ---------------------------------------------------------------------------
 # 去重（dedup）：确保每个 agent 对同一 skill 只保留 1 份（指向公共池的真源）
 # ---------------------------------------------------------------------------
-def discover_entries(agent, skills_dir):
+def discover_entries(agent, skills_dir, user_skills):
     """枚举一个 agent 所有会被识别为 skill 的条目。
 
     覆盖三种发现路径：
@@ -214,7 +226,7 @@ def discover_entries(agent, skills_dir):
                 rp = realpath(p)
                 entries.append({
                     "name": n, "path": p, "kind": "skills",
-                    "is_pool": rp.startswith(USER_SRC + os.sep) or rp == USER_SRC,
+                    "is_pool": is_pool_source(rp, n, user_skills),
                     "real": rp,
                 })
     # 2) commands（仅 claude）
@@ -247,7 +259,7 @@ def dedup(user_skills, agents, fix):
     print("=" * 72)
     total_removed = 0
     for ag, skills_dir in agents.items():
-        entries = discover_entries(ag, skills_dir)
+        entries = discover_entries(ag, skills_dir, user_skills)
         groups = {}
         for e in entries:
             groups.setdefault(e["name"], []).append(e)
