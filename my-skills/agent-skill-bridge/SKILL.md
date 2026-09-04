@@ -26,6 +26,8 @@ agent_created: true
 
 > 规则 2 与规则 4 在"同名"上冲突：**规则 4 优先级更高**——名字撞到公共池的，就地替换成软链。
 
+> **例外：同名不同物 → 改名并存（第三条路）**。规则 4 的前提是"同名即同一个 skill 的不同副本"。若比对后确认两者**功能不同、都有价值**（如 `llm-wiki`：Hermes 自带的是"手搓互链知识库"方法论，新装的是某桌面应用的 API 契约文档），机械替换会造成有效资产丢失。此时应给用户选项，推荐**新装的那份改名进池**（目录名 + frontmatter `name` 同步改，如 `llm-wiki-app`），旧的保留原名。判定手法：`cmp` 逐文件比对 + 读两边 frontmatter 的 `description`/`author`/`version`，**不要只看目录名就判定为副本**。
+
 ---
 
 ## 第 0 步：安全审计（装任何第三方 skill 之前必做）
@@ -51,7 +53,37 @@ cp -R /tmp/_skill_src/<skill> ~/.agents/skills/<skill>
 ```
 
 - 目标目录必须是 `~/.agents/skills/<skill>/`，且含 `SKILL.md`。
+- 记得 `rm -rf <目标>/.git`，别把仓库元数据带进池。
 - 安装后**立刻跑第 2、3、4、5 步**；不要只装不桥接。
+
+**装前两项前置核验（省得装完发现是摆设）：**
+
+1. **依赖的本机应用/服务是否真的存在且在跑**。很多 skill 是某个本地服务的接口说明书，服务没装等于白装。核验手法：`pgrep -fl -i <关键词>`、`lsof -nP -iTCP:<端口> -sTCP:LISTEN`、`ls -d /Applications/*<关键词>*`。若服务有免鉴权健康检查接口，直接探一次拿到**鉴权状态与版本号**——能提前发现「token 未配置，所有接口 401」这类装完即不可用的情况，以及「skill 文档标注适配 v0.4，本机已是 v0.6」的接口漂移风险。
+2. **跨全部 agent 做重名碰撞检查**（含 hermes 递归子目录、openclaw 各 workspace）：
+   ```sh
+   for d in ~/.claude/skills ~/.codex/skills ~/.workbuddy/skills ~/.openclaw/skills ~/.hermes/skills; do
+     find "$d" -maxdepth 2 -iname "*<关键词>*"
+   done
+   ```
+   有碰撞先按上面「同名不同物」判定，再决定替换还是改名。
+
+### 第 1b 步：把已锁在单个 agent 里的通用 skill 提升进池（promote）
+
+场景：某个通用 skill 当初只装在 `~/.codex/skills/` 或 `~/.workbuddy/skills/` 下，其它 agent 用不到。用 `promote` 把它**移动**进公共池，原位置自动换成软链——一次操作，全 agent 共享。
+
+```sh
+# 只读规划：检查哪些可提升、有无与池同名冲突
+python3 <skill>/scripts/bridge.py --mode promote \
+  --agents codex,workbuddy --names skillA,skillB
+
+# 实际执行（自动备份到 ~/.agents/skill-bridge-backups/promote/<日期>/）
+python3 <skill>/scripts/bridge.py --mode promote --fix \
+  --agents codex,workbuddy --names skillA,skillB
+```
+
+**提升前必做重名碰撞检查**：把「提升后池名单」与所有待桥接 agent（尤其 hermes 递归子目录、openclaw 各 workspace）的现有 skill 名求交集，交集非空就先跟用户确认取舍，别直接覆盖。
+
+> 提升进池后**必须重跑第 2 步中文化**——被提升的 skill 可能是英文描述，进池即被全 agent 看见。
 
 ## 第 2 步：中文化（把英文 / 空 description 译为中文）
 
@@ -73,6 +105,8 @@ python3 <skill>/scripts/bridge.py --mode cn --fix
 - 范围：**公共池全集 + WorkBuddy 原生（非软链）skill**。**53 个 Claude 插件 skill 受规则 1 约束不在范围内**（插件更新会覆盖，需另处理）。
 
 闭环操作：先跑 `--mode cn --fix`（自动归一化 + 列出纯英文项）→ 用 Edit 把列出的纯英文项译为中文 → 重跑 `--mode cn` 直到「需 LLM 翻译」计数归零。
+
+**日常守护脚本 `cn_guard.sh`**（A 方案落地）：把上面的闭环封装成「更新/重装 skill 后的强制收尾」一键命令。从上游重新 clone/pull 覆盖了公共池后，跑 `bash scripts/cn_guard.sh` 即可自动归一化并校验「需 LLM 翻译」计数是否归零，未归零会列出待翻译清单。任何重拉/重装动作后必跑。
 
 ## 第 3 步：软链桥接（dry → apply → verify）
 
@@ -132,7 +166,7 @@ python3 <skill>/scripts/bridge.py --mode dedup --fix
 
 ## 第 5 步：同步回 GitHub（自动回传）
 
-让「本地改动」与集中管理仓库 `~/my-agent-skills`（公开仓库 `crystepj-max/my-agent-skills`）保持一致，支撑跨设备快速恢复。仓库同时存**自有 skill 完整数据**（仅 `my-skills/`，第三方只存元数据清单，不囤数据）。
+让「本地改动」与集中管理仓库保持一致（公开仓库 `crystepj-max/my-agent-skills`），支撑跨设备快速恢复。仓库同时存**自有 skill 完整数据**（仅 `my-skills/`，第三方只存元数据清单，不囤数据）。
 
 触发方式：
 
@@ -141,30 +175,47 @@ python3 <skill>/scripts/bridge.py --mode dedup --fix
 
 `run_sync()` 依次做三件事：
 
-1. 复制自有 skill `agent-skill-bridge` 当前真源 → 仓库 `my-skills/agent-skill-bridge/`。
+1. 复制自有 skill `agent-skill-bridge` 当前真源 → 仓库 `my-skills/agent-skill-bridge/`（自动排除 `__pycache__` 等）。
 2. 运行 `scripts/refresh_inventory.py` 刷新 `inventory/skill-desc-translation.md` 的「最新更新」列（按各仓库 `pushed_at`）。
 3. 运行 `scripts/sync.sh` 提交并推送 `main`（`sync.sh` 仅在确有变更时提交，无变更自动跳过）。
 
-> 前提：`~/my-agent-skills` 须是 git 仓库（已 `git clone` 或初始化的）。若不是，自动跳过同步、不影响本地。
+> 仓库位置优先取活跃工作区 `~/workspace/my-agent-skills`（日常开发提交都在这里），不存在时才退回 `~/my-agent-skills`。若两者都不是 git 仓库，自动跳过同步、不影响本地。
+
+---
 
 ## 工作流串起来（安装一个新第三方 skill 的标准动作）
 
 ```
-1. skills-security-check 审计目标 skill            # 第 0 步（skills-security-check 已随 my-skills 自动桥接进公共池）
+1. skills-security-check 审计目标 skill            # 第 0 步
 2. cp -R <skill> ~/.agents/skills/<skill>          # 第 1 步：安装到公共池
+2b. bridge.py --mode promote --fix --agents .. --names ..   # 第 1b 步（可选）：提升 agent 专属 skill 进池
 3. bridge.py --mode cn --fix  -> 对列出的纯英文项用 Edit 译中文 -> 重跑直到归零   # 第 2 步：中文化
+3b. bash scripts/cn_guard.sh   # 日后任何『重拉/重装 skill』后的强制收尾（A 方案：更新-翻译一条龙守护）
 4. bridge.py --mode dry      -> 用户确认           # 第 3a 步
 5. bridge.py --mode apply     (含自动 verify + 自动同步回 GitHub)   # 第 3b/c 步：桥接
-6. bridge.py --mode dedup --fix                     # 第 4 步：去重（--fix 也会自动同步）
+6. bridge.py --mode dedup --fix                     # 第 4 步：去重（--fix 也会自动同步；--no-sync 可关闭回传）
 ```
 
-> 第 0 步的 `skills-security-check` 已纳入本仓库 `my-skills/`，经 `restore.sh` 自动软链进公共池，无需再手动安装。
+**全量梳理场景**（用户说"梳理本机所有 agent 的 skill"）额外前置：先只读盘点全机 skill 容器（`find ~ -name SKILL.md`，排除 node_modules / Library / plugins），按 agent 归类统计「实体 vs 软链」，用 realpath 做异源重复分析，**把方案选项摆给用户确认收拢范围后再动手**。
 
 ## 扩展
 
 - **加 agent**：编辑脚本里 `DEFAULT_AGENTS`，加一行 `"<name>": os.path.expanduser("~/.<agent>/skills")`，再用 `--agents <name>` 调用。未知 agent 名会被跳过并提示。
 - **项目级池**：约定 `<project>/.agents/skills/`。当前脚本聚焦用户级；项目级做法是堆一版指向项目池的软链（同样走 dry→apply→verify→dedup），按需扩展。
-- **kimicode**：默认未启用（当前无可用可执行文件、目录不存在）；需要时取消脚本注释并按需建目录。
+
+### 本机 agent 加载约定实测表（2026-08-03 核验）
+
+| Agent | skill 加载目录 | 是否需桥接 |
+|---|---|---|
+| **kimi**（kimi-code） | 二进制内 `USER_GENERIC_DIRS = [".agents/skills"]` | ❌ **原生直读公共池，零操作** |
+| **opencode** | 官方文档明写 `~/.agents/skills/<name>/SKILL.md` 自动加载 | ❌ **原生直读公共池，零操作** |
+| claude | `~/.claude/skills` | ✅ 已桥接 |
+| codex | `~/.codex/skills`（`.system/` 为官方内置，升级会重建，**不碰**） | ✅ 已桥接 |
+| workbuddy | `~/.workbuddy/skills` | ✅ 已桥接 |
+| openclaw | 源码 `join(agentDir,"skills")` → `~/.openclaw/skills`；另有 workspace 级隔离池（`~/.openclaw/<workspace>/skills`，**不动**） | ✅ 已桥接 |
+| hermes | `~/hermes-agent/tools/skills_hub.py` 里 `SKILLS_DIR = ~/.hermes/skills`；原生是**分类子目录**结构（aihot/buffett/... 36 类、约 130 个），池软链平铺在顶层与之共存 | ✅ 已桥接 |
+
+> 判定手法：二进制用 `strings -a <bin> | grep -i skill` 找路径常量；源码型 agent 直接 grep `SKILLS_DIR` / `join(...,"skills")`。**不要凭空建目录**，先确认加载约定。
 
 ## 已知坑（务必提醒用户）
 
@@ -173,7 +224,9 @@ python3 <skill>/scripts/bridge.py --mode dedup --fix
 3. **运行时是否 follow 软链需分别验证**：文件系统层软链正确 ≠ agent 运行时真的加载。Claude 已实测可加载；Codex/WorkBuddy 建议各跑一次 skill 列表确认，若哪个不跟软链，需单独处理。
 4. **name 冲突定位**：用 realpath 比对，不要靠目录名（会有同名不同源的软链），否则会误判。
 5. **cc-switch 聚合视图会"虚高"**：cc-switch 同时扫描公共池 + 各 agent 软链，同一个 skill 会被计成多份（池 1 + 每个 agent 软链 1）。这是聚合视图的显示特性，不是真有 N 份文件；真源只有公共池那 1 份。
-6. **中文化/改描述后需重启 agent 会话才生效**：agent 在会话启动时把 skill 列表读进内存缓存，改完磁盘描述后，**当前会话不会自动刷新**。Claude Code / WorkBuddy / Codex 都需新开（或重启）会话，打 `/` 才会显示更新后的中文描述。验证可直接读磁盘文件确认已改，不依赖会话内显示。
+6. **SKILL.md 可能带非 UTF-8 字节，会让 cn 模式报「解析错误」**：实测 `dataclaw/SKILL.md` 混入 Big5 残留 `\xa1\xaa`(应为 `—`, 17 处) 与 `\xa1\xfa`(应为 `→`, 5 处)，Python 以 utf-8 打开直接抛 `UnicodeDecodeError`。处理套路：以 **bytes 方式**读入 → 逐字节定位非 UTF-8 序列并打印上下文 → `s.decode('big5')` 反推原字符 → `raw.replace()` 修复 → 再 `decode('utf-8')` 校验 → 然后才做描述替换。**别用文本模式硬读，也别 `errors='ignore'`（会静默丢字符）。**
+7. **英文判定会误伤技术名词密集的中文描述**：`has_english_sentence` 原按「≥4 个连续英文单词」判定，`clashx-openai-sse-debug` 这类中文描述里塞满 `ClashX Pro / OpenAI SSE / TUN` 的会被误判为英文。现已改为**先算 CJK 占比，中文占主导则直接判定为已中文**。若再遇假阳性，优先改判定逻辑，不要去改描述迁就脚本。
+8. **中文化/改描述后需重启 agent 会话才生效**：agent 在会话启动时把 skill 列表读进内存缓存，改完磁盘描述后，**当前会话不会自动刷新**。Claude Code / WorkBuddy / Codex 都需新开（或重启）会话，打 `/` 才会显示更新后的中文描述。验证可直接读磁盘文件确认已改，不依赖会话内显示。
 
 ## 回滚
 

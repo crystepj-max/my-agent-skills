@@ -19,6 +19,7 @@ agent-skill-bridge: 把公共池 ~/.agents/skills/ 桥接进各 agent 默认 ski
   --mode dedup     # 校验/修复同名 skill 去重（默认只读；加 --fix 才实际删除重复项）
   --mode cn        # 中文化：检测自有 skill 的英文/空 description，自动归一化中英夹杂项，
                    #          报告仍需 LLM 翻译的纯英文项（默认只读；加 --fix 才写入归一化结果）
+  --mode promote   # 把 agent 独有的通用 skill 移进公共池，原位留软链（默认只读；--fix 执行）
   --mode sync      # 同步回 GitHub：复制自有 skill(agent-skill-bridge)进仓库 + 刷新清单最新更新列
                    #          + 运行 sync.sh 提交推送 main。也可由 apply / cn --fix / dedup --fix 自动触发
   --no-sync        # 上述写操作后不自动推送 GitHub（默认自动同步）
@@ -30,6 +31,7 @@ agent-skill-bridge: 把公共池 ~/.agents/skills/ 桥接进各 agent 默认 ski
   python3 bridge.py --mode dedup --fix      # 实际移除可安全删除的重复项（命令 .md / 非池软链），插件内重复仅报告
   python3 bridge.py --mode cn               # 仅报告英文/空 description（不改文件）
   python3 bridge.py --mode cn --fix         # 自动归一化中英夹杂项并写入；列出仍需 LLM 翻译的纯英文项
+  python3 bridge.py --mode promote --names skillA,skillB [--fix]
   python3 bridge.py --mode apply --agents claude,codex,workbuddy
 """
 import os, shutil, argparse, re, json, time, sys, subprocess
@@ -39,18 +41,28 @@ USER_SRC = os.path.join(HOME, ".agents", "skills")
 BACKUP_ROOT = os.path.join(HOME, ".agents", "skill-bridge-backups")
 DATE_STR = time.strftime("%Y-%m-%d")
 
+# 自有 skill 集中管理仓库（用于同步回 GitHub）。
+# 优先用活跃工作区副本（日常开发与提交都在这里），不存在再退回 ~/my-agent-skills。
+_ws_repo = os.path.join(HOME, "workspace", "my-agent-skills")
+MY_REPO = _ws_repo if os.path.isdir(os.path.join(_ws_repo, ".git")) \
+    else os.path.join(HOME, "my-agent-skills")
+OWN_BRIDGE = "agent-skill-bridge"
+
 # 默认 agent -> 默认 skill 目录。新增 agent 在此加一行即可。
 DEFAULT_AGENTS = {
     "claude":    os.path.join(HOME, ".claude", "skills"),
     "codex":     os.path.join(HOME, ".codex", "skills"),
     "workbuddy": os.path.join(HOME, ".workbuddy", "skills"),
+    "openclaw":  os.path.join(HOME, ".openclaw", "skills"),   # openclaw agentDir 级: join(agentDir,"skills")
+    "hermes":    os.path.join(HOME, ".hermes", "skills"),     # hermes: SKILLS_DIR = HERMES_HOME/"skills"
 }
-# 可选（当前无可用可执行文件/暂未启用，需要时取消注释）：
-# "kimicode": os.path.join(HOME, ".kimi-code", "skills"),
 
-# 自有 skill 集中管理仓库（用于同步回 GitHub）
-MY_REPO = os.path.join(HOME, "my-agent-skills")
-OWN_BRIDGE = "agent-skill-bridge"
+# 原生直读公共池、无需软链桥接的 agent（仅登记，脚本不对其做任何写操作）。
+# 依据：二进制/文档中明确把 ~/.agents/skills 列为 user-level skill 发现路径。
+NATIVE_POOL_AGENTS = {
+    "kimi":     "USER_GENERIC_DIRS = ['.agents/skills'] (~/.kimi-code/bin/kimi)",
+    "opencode": "docs: External skills auto-loaded from ~/.agents/skills/<name>/SKILL.md",
+}
 
 
 # ---------------------------------------------------------------------------
@@ -80,8 +92,26 @@ def is_pool_source(rp, name, user_skills):
     前缀判定就会把它误判成「非池副本」，导致 verify 报缺失、dedup 找不到
     真源而失去去重能力。改为按内容同一性判定：等于池中同名条目的 realpath
     即为真源。这样 agent 软链无论指向池路径还是仓库路径，都算正确桥接。
+    （2026-09-03 修复）
     """
     return rp == user_skills.get(name)
+
+
+def classify_occupant(tpath):
+    """判断目标路径上的『占位物』类型（用于 ADD 前的冲突检测）。
+
+    list_skills() 只收录带 SKILL.md 的目录，因此以下两类会漏判为「可 ADD」，
+    但 os.symlink 仍会抛 FileExistsError：
+      - 'broken-link' : 断链软链（池内 skill 被移除后的残留），可安全删除重建
+      - 'foreign'     : 实体目录/文件但无 SKILL.md（如 hermes 的 research 分类目录），
+                        属 agent 原生资产，必须跳过不动
+      - None          : 路径为空，可直接创建
+    """
+    if not os.path.lexists(tpath):
+        return None
+    if os.path.islink(tpath) and not os.path.exists(tpath):
+        return "broken-link"
+    return "foreign"
 
 
 def backup_and_remove(agent, name, path, sub="bridge"):
@@ -120,11 +150,17 @@ def plan(user_skills, agents):
         if not os.path.isdir(tgt):
             print("    [需先] mkdir -p 目标目录 (当前不存在)")
             continue
-        adds, replaces, keep = [], [], []
+        adds, replaces, keep, relink, conflict = [], [], [], [], []
         for name, src_real in user_skills.items():
             tpath = os.path.join(tgt, name)
             if name not in existing:
-                adds.append(name)
+                kind = classify_occupant(tpath)
+                if kind == "broken-link":
+                    relink.append(name)      # 断链残留，删后重建
+                elif kind == "foreign":
+                    conflict.append(name)    # agent 原生资产，规则2 不动
+                else:
+                    adds.append(name)
             elif existing[name] == src_real:
                 keep.append(name)            # 已是公共池软链，跳过
             else:
@@ -133,6 +169,10 @@ def plan(user_skills, agents):
         print(f"    [REPLACE 删副本] {len(replaces)}:")
         for n, ex, sr in sorted(replaces):
             print(f"        {n}: 删除 {ex} -> 链接 {sr}")
+        if relink:
+            print(f"    [RELINK 清断链] {len(relink)}: {', '.join(sorted(relink))}")
+        if conflict:
+            print(f"    [SKIP 同名不同物] {len(conflict)}: {', '.join(sorted(conflict))}  <- agent 原生资产,规则2 保持不动")
         if keep:
             print(f"    [已正确,跳过] {len(keep)}: {', '.join(sorted(keep))}")
     print("\n" + "=" * 72)
@@ -157,11 +197,22 @@ def apply(user_skills, agents):
             continue
         os.makedirs(tgt, exist_ok=True)
         existing = list_skills(tgt)
-        added = repl = kept = 0
+        added = repl = kept = relinked = skipped = 0
         print(f"### {ag}  ->  {tgt}")
         for name, src_real in sorted(user_skills.items()):
             tpath = os.path.join(tgt, name)
             if name not in existing:
+                kind = classify_occupant(tpath)
+                if kind == "foreign":
+                    print(f"    [SKIP] {name}: 同名不同物(agent 原生资产),规则2 保持不动")
+                    skipped += 1
+                    continue
+                if kind == "broken-link":
+                    os.remove(tpath)
+                    os.symlink(src_real, tpath)
+                    print(f"    [RELINK] {name}: 清断链后重建 -> {src_real}")
+                    relinked += 1
+                    continue
                 os.symlink(src_real, tpath)
                 print(f"    [ADD] {name} -> {src_real}")
                 added += 1
@@ -173,7 +224,18 @@ def apply(user_skills, agents):
                 os.symlink(src_real, tpath)
                 print(f"             -> {src_real}")
                 repl += 1
-        print(f"    => ADD {added} | REPLACE {repl} | 已正确跳过 {kept}")
+        # 孤儿断链清理：指向公共池但池内已无对应 skill（skill 被移除后的残留）
+        orphan = 0
+        for n in sorted(os.listdir(tgt)):
+            p = os.path.join(tgt, n)
+            if not (os.path.islink(p) and not os.path.exists(p)):
+                continue
+            if os.readlink(p).startswith(USER_SRC) and n not in user_skills:
+                os.remove(p)
+                print(f"    [ORPHAN] {n}: 清理指向已移除池 skill 的断链")
+                orphan += 1
+        print(f"    => ADD {added} | RELINK {relinked} | REPLACE {repl} | "
+              f"ORPHAN清理 {orphan} | SKIP冲突 {skipped} | 已正确跳过 {kept}")
     print("=" * 72)
 
 
@@ -381,13 +443,33 @@ def normalize_bilingual(desc):
 ENGLISH_SENTENCE = re.compile(r"(?:[A-Za-z][A-Za-z'\-]*\s+){3,}[A-Za-z][A-Za-z'\-]*")
 
 
-def has_english_sentence(s):
-    """判断是否仍含英文句子（>=4 个连续英文单词）。
+CJK_RE = re.compile(r"[\u4e00-\u9fff]")
+CJK_THRESHOLD = 0.15   # 中文字符占比达到该值即视为『中文为主』
 
-    用『连续英文词』而非字母占比，避免把『中文为主、仅夹英文品牌名/文件名』
-    的描述（如『来源：skills/bottleneck-hunter.md』『Remotion 最佳实践』）误判为英文。
+
+def cjk_ratio(s):
+    """中文字符数 / 总字符数（不含空白）。"""
+    body = re.sub(r"\s", "", s or "")
+    if not body:
+        return 0.0
+    return len(CJK_RE.findall(body)) / len(body)
+
+
+def has_english_sentence(s):
+    """判断 description 是否仍需翻译成中文。
+
+    两级判定（顺序不可颠倒）：
+      1) 中文占比 >= CJK_THRESHOLD -> 判为『已是中文』，直接放行。
+         必要性：技术类中文描述常内嵌成串英文（报错原文、API 名、CLI 参数），
+         如『排查 ClashX 代理导致 stream closed before response.completed 的问题』，
+         仅靠连续英文词会误判为英文（实测 clashx-openai-sse-debug 假阳性）。
+      2) 否则看是否存在 >=4 个连续英文单词。用『连续英文词』而非字母占比，
+         避免把『来源：skills/bottleneck-hunter.md』这类中文描述误判为英文。
     """
-    return bool(ENGLISH_SENTENCE.search(s or ""))
+    s = s or ""
+    if cjk_ratio(s) >= CJK_THRESHOLD:
+        return False
+    return bool(ENGLISH_SENTENCE.search(s))
 
 
 def cn_backup_and_write(path, new_txt):
@@ -403,7 +485,7 @@ def cn(agents, fix):
     print("中文化校验 - 自有 skill 的 description 应为中文(便于 '/' 命令可读):")
     print("=" * 72)
     print("范围: 公共池 ~/.agents/skills/ + WorkBuddy 原生(非软链) skill")
-    print("      （53 个 Claude 插件 skill 受规则1约束不在此范围；需另处理）")
+    print("      （Claude 插件 skill 受规则1约束不在此范围；需另处理）")
     print("-" * 72)
     files = owned_skill_files()
     normalized, needs, already_cn, errors = [], [], 0, 0
@@ -429,8 +511,8 @@ def cn(agents, fix):
             # 归一化成功 -> 已是纯中文
             if fix:
                 new_line = "description: " + json.dumps(new, ensure_ascii=False)
-                # 关键修复：在【整份文件】上替换 description 行，保留 frontmatter 其余字段与正文(body)，
-                # 旧实现用 frontmatter 三段重建会丢失 '---' 之后的全部正文。
+                # 关键修复：在【整份文件】上替换 description 行，保留 frontmatter 其余字段与正文(body)。
+                # 旧实现用 frontmatter 三段重建，会把 '---' 之后的全部正文截掉。
                 new_txt = re.sub(r"^description:.*$", new_line, txt, count=1, flags=re.M)
                 cn_backup_and_write(path, new_txt)
             normalized.append((name, scope, new[:40]))
@@ -461,6 +543,67 @@ def cn(agents, fix):
 
 
 # ---------------------------------------------------------------------------
+# 提升进池（promote）：把 agent 独有的通用 skill 移进公共池，原地留软链
+# ---------------------------------------------------------------------------
+def promote(names, agents, fix=False):
+    """把指定 agent 目录下的实体 skill 移入公共池，并在原位置留下指向池的软链。
+
+    安全约束：
+      - 只处理「实体目录」；软链、不存在、公共池已存在同名 -> 跳过并报告。
+      - 移动前先完整备份到 BACKUP_ROOT/promote/<日期>/<agent>/<name>。
+      - 默认只读；--fix 才实际写入。
+    """
+    want = set(names)
+    print(f"提升候选 {len(want)} 个: {', '.join(sorted(want))}")
+    print("=" * 72)
+    todo, skipped = [], []
+    for ag, tgt in agents.items():
+        if not os.path.isdir(tgt):
+            continue
+        for n in sorted(os.listdir(tgt)):
+            if n not in want:
+                continue
+            p = os.path.join(tgt, n)
+            if os.path.islink(p):
+                skipped.append((ag, n, "已是软链，无需提升"))
+            elif not os.path.isdir(p) or not os.path.isfile(os.path.join(p, "SKILL.md")):
+                skipped.append((ag, n, "非合法 skill 目录"))
+            elif os.path.exists(os.path.join(USER_SRC, n)):
+                skipped.append((ag, n, "公共池已存在同名 -> 需人工比对，未处理"))
+            else:
+                todo.append((ag, n, p))
+
+    for ag, n, p in todo:
+        sz = sum(os.path.getsize(os.path.join(dp, f))
+                 for dp, _, fs in os.walk(p) for f in fs
+                 if os.path.exists(os.path.join(dp, f))) // 1024
+        print(f"  [提升] {ag:<10} {n:<34} {sz:>6} KB  {p} -> {USER_SRC}/{n} (原位留软链)")
+    for ag, n, why in skipped:
+        print(f"  [跳过] {ag:<10} {n:<34} {why}")
+
+    if not fix:
+        print("\n以上为只读规划。加 --fix 实际执行（先备份到 "
+              f"{os.path.join(BACKUP_ROOT, 'promote', DATE_STR)}）")
+        return [n for _, n, _ in todo]
+
+    print("\n--- 执行 ---")
+    done = []
+    for ag, n, p in todo:
+        bak = os.path.join(BACKUP_ROOT, "promote", DATE_STR, ag, n)
+        if not os.path.exists(bak):
+            os.makedirs(os.path.dirname(bak), exist_ok=True)
+            shutil.copytree(p, bak, symlinks=True)
+            print(f"    [备份] {p} -> {bak}")
+        dst = os.path.join(USER_SRC, n)
+        shutil.move(p, dst)                    # 实体移入公共池
+        os.symlink(dst, p)                     # 原位留软链
+        print(f"    [完成] {ag}/{n} -> 池真源 {dst}，原位软链已建")
+        done.append(n)
+    print(f"\n提升完成 {len(done)} 个。公共池现有 {len(list_skills(USER_SRC))} 个。")
+    return done
+
+
+# ---------------------------------------------------------------------------
 # 同步回 GitHub（sync）
 # ---------------------------------------------------------------------------
 def _sync_copy_own_skill():
@@ -476,19 +619,19 @@ def _sync_copy_own_skill():
     dst = os.path.join(MY_REPO, "my-skills", OWN_BRIDGE)
     if os.path.isdir(dst):
         shutil.rmtree(dst)
-    shutil.copytree(src, dst)
+    shutil.copytree(src, dst, ignore=shutil.ignore_patterns("__pycache__", "*.pyc", ".DS_Store"))
     print(f"    [sync] 复制自有 skill -> {dst}")
     return True
 
 
 def run_sync():
-    """第 5 步：把变更同步回 GitHub 仓库（my-agent-skills）。
+    """把变更同步回 GitHub 仓库（my-agent-skills）。
 
     - 复制自有 skill 数据进仓库
     - 刷新 inventory 的「最新更新」列（若 refresh_inventory.py 存在）
     - 运行 sync.sh 提交并推送 main（无变更则 sync.sh 自动跳过）
     """
-    print("\n=== 第 5 步：同步回 GitHub ===")
+    print("\n=== 同步回 GitHub ===")
     if not os.path.isdir(os.path.join(MY_REPO, ".git")):
         print(f"    仓库不存在或非 git 目录: {MY_REPO} -> 跳过同步（不影响本地）")
         return
@@ -518,13 +661,15 @@ def run_sync():
 def main():
     ap = argparse.ArgumentParser(
         description="Bridge ~/.agents/skills/ into agent default skill dirs via symlinks, with dedup + cn.")
-    ap.add_argument("--mode", choices=["dry", "apply", "verify", "dedup", "cn", "sync"], default="dry")
+    ap.add_argument("--mode", choices=["dry", "apply", "verify", "dedup", "cn", "promote", "sync"], default="dry")
     ap.add_argument("--fix", action="store_true",
-                    help="dedup/cn 模式下实际写入修改(默认只读报告)")
+                    help="dedup/cn/promote 模式下实际写入修改(默认只读报告)")
     ap.add_argument("--no-sync", action="store_true",
                     help="写操作(apply/cn --fix/dedup --fix)后不自动同步回 GitHub")
     ap.add_argument("--agents", default=",".join(DEFAULT_AGENTS.keys()),
                     help="逗号分隔的 agent 名; 必须是 DEFAULT_AGENTS 中已定义的键")
+    ap.add_argument("--names", default="",
+                    help="promote 模式下要提升进公共池的 skill 名(逗号分隔)")
     args = ap.parse_args()
 
     agents = {}
@@ -535,6 +680,22 @@ def main():
             print(f"[跳过] 未知 agent: {a} (在脚本 DEFAULT_AGENTS 中扩展后可用)")
     if not agents:
         print("无有效 agent，退出")
+        return
+
+    if NATIVE_POOL_AGENTS:
+        print("原生直读公共池(无需桥接): " +
+              ", ".join(f"{k}" for k in NATIVE_POOL_AGENTS))
+
+    if args.mode == "promote":
+        names = [x.strip() for x in args.names.split(",") if x.strip()]
+        if not names:
+            print("promote 模式需通过 --names 指定要提升的 skill 名")
+            return
+        promote(names, agents, fix=args.fix)
+        return
+
+    if args.mode == "sync":
+        run_sync()
         return
 
     user_skills = list_skills(USER_SRC)
@@ -556,8 +717,6 @@ def main():
         cn(agents, fix=args.fix)
         if args.fix and not args.no_sync:
             run_sync()
-    elif args.mode == "sync":
-        run_sync()
 
 
 if __name__ == "__main__":
