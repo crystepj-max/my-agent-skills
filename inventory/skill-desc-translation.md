@@ -132,7 +132,7 @@
 | 78 | `clashx-openai-sse-debug` | 排查 ClashX（ClashX Pro）代理导致 OpenAI 或 API 流式 SSE 连接中断的问题：Codex 桌面端连不上、stream closed before response.completed、SSE 断连、macOS 上 ClashX 规则模式或全局模式下 OpenAI 流式失败。覆盖 ClashX 控制 API、热重载导致 DNS 崩溃的坑、验证 OpenAI 必须走代理、节点选择、SSE 稳定性测试。 |  | 平台内置 |
 | 79 | `dev-workflow-2-0` | 在 DeepSeek Harness（DSH）会话中驱动「开发工作流 2.0」：以 GitHub issue（须含任务目标/涉及范围/验收标准三要素）为唯一需求来源，自动完成 调度 → 开发 →（可选）测试 → 审核 → 人工验收 → 收口 全流程；打回上限 9 轮、超限自动归因、全程结构化报告留痕、开发与审核异源异模型。 |  | 平台内置 |
 | 80 | `duplicate-cli-unify` | 当同一个命令行工具（如 Claude Code、Codex 或任何 npm/node 类 CLI）被多个包管理器重复安装时使用——最常见的是 nvm 全局安装与 Homebrew 安装并存，导致版本混乱、残留旧副本、或自动更新静默写入错误路径。提供检测、分析、决策、修复的完整流程，把工具统一到单一安装源。 |  | 平台内置 |
-| 81 | `requirements-analysis` | 需求分析统一入口：把 GitHub issue 或用户的原始输入加工成一份含三要素（任务目标/涉及范围/验收标准）的可执行需求，按体量拆解为任务清单或决策地图，并落盘回写 issue。 |  | 平台内置 |
+| 81 | `requirements-analysis` | 需求分析统一入口：把 GitHub issue 或用户的原始输入加工成「已定义」任务——含人工确认的需求基线、Issue 基本信息、本地详细任务规格、Definition Check 通过；按体量拆解为任务清单或决策地图并回写 issue。 |  | 平台内置 |
 
 **合计：81 个 skill 描述已全部中文化，并标注最新更新。**
 
