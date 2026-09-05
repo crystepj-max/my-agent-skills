@@ -5,6 +5,8 @@ description: "需求分析统一入口：把 GitHub issue 或用户的原始输�
 
 # Requirements Analysis（需求分析）→ 任务定义
 
+> **工程真源仓库**：workflow-manager（本文件）。通用副本同步至 my-agent-skills。公共契约亦见 `docs/design/ai-task-define-delivery/public-task-contract.md`。
+
 把一份原始输入（GitHub issue 或用户的自然语言描述）加工成**可无人值守开工的「已定义」任务**。
 
 本 skill 是**自洽的编排能力**：分诊、澄清、定体量、拆解、探路、Definition Check、基线确认与落档所需知识内联于此，**不通过 `skill` 工具调用任何子 skill**。
