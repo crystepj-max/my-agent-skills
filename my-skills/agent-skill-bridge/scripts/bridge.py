@@ -114,6 +114,32 @@ def classify_occupant(tpath):
     return "foreign"
 
 
+def symlink_to(src, dst):
+    """创建目录软链（跨平台）。
+
+    Windows 坑：CreateSymbolicLinkW 偶发「链接已建成但仍返回错误」——防病毒/文件
+    系统过滤驱动介入时，Python 会抛 FileNotFoundError/OSError，可磁盘上的链接其
+    实已经建好（实测 Win11 26200 + Python 3.13）。原逻辑直接 os.symlink 会在建好
+    第一个链接后崩溃退出，导致整个 apply 只桥接 1 个 skill 就中断。
+    故捕获后先校验链接是否真的可用，可用即视为成功；确实没建成才向上抛。
+
+    另外显式传 target_is_directory：Windows 上目录软链与文件软链是不同类型，
+    不传时虽多数情况能自动推断，但在跨卷（如 D: 仓库 -> C: 用户目录）场景不稳。
+    POSIX 下该参数被忽略，对 macOS 无影响。
+    """
+    try:
+        os.symlink(src, dst, target_is_directory=os.path.isdir(src))
+    except OSError:
+        if os.path.islink(dst) and os.path.isdir(dst):
+            return          # 实际已建成，属误报
+        raise
+    # 少量 Windows 环境即使不抛错也可能留下断链，兜底校验一次
+    if not (os.path.islink(dst) and os.path.isdir(dst)):
+        if os.path.lexists(dst):
+            return
+        raise OSError(f"软链创建后校验失败: {src} -> {dst}")
+
+
 def backup_and_remove(agent, name, path, sub="bridge"):
     """先备份（软链保留指向，实体目录 copytree），再删除原路径。返回是否执行了删除。"""
     dest = os.path.join(BACKUP_ROOT, sub, agent, name)
@@ -121,7 +147,7 @@ def backup_and_remove(agent, name, path, sub="bridge"):
         os.makedirs(os.path.dirname(dest), exist_ok=True)
         if os.path.islink(path):
             link = os.readlink(path)
-            os.symlink(link, dest)
+            symlink_to(link, dest)
             with open(dest + ".linktarget.txt", "w") as f:
                 f.write(link)
         else:
@@ -209,11 +235,11 @@ def apply(user_skills, agents):
                     continue
                 if kind == "broken-link":
                     os.remove(tpath)
-                    os.symlink(src_real, tpath)
+                    symlink_to(src_real, tpath)
                     print(f"    [RELINK] {name}: 清断链后重建 -> {src_real}")
                     relinked += 1
                     continue
-                os.symlink(src_real, tpath)
+                symlink_to(src_real, tpath)
                 print(f"    [ADD] {name} -> {src_real}")
                 added += 1
             elif existing[name] == src_real:
@@ -221,7 +247,7 @@ def apply(user_skills, agents):
             else:
                 print(f"    [REPLACE] {name}: 删 agent 副本,改指公共池")
                 backup_and_remove(ag, name, tpath)
-                os.symlink(src_real, tpath)
+                symlink_to(src_real, tpath)
                 print(f"             -> {src_real}")
                 repl += 1
         # 孤儿断链清理：指向公共池但池内已无对应 skill（skill 被移除后的残留）
@@ -352,7 +378,7 @@ def dedup(user_skills, agents, fix):
                 elif e["kind"] == "skills":
                     # skills 目录内、同名但没指向公共池的软链/目录 -> 删，改为真源
                     backup_and_remove(ag, name, e["path"], sub="dedup-skills")
-                    os.symlink(canonical[0]["real"], e["path"])
+                    symlink_to(canonical[0]["real"], e["path"])
                     print(f"             -> 重建为 {canonical[0]['real']}")
                     removed_here += 1
                 else:
@@ -596,7 +622,7 @@ def promote(names, agents, fix=False):
             print(f"    [备份] {p} -> {bak}")
         dst = os.path.join(USER_SRC, n)
         shutil.move(p, dst)                    # 实体移入公共池
-        os.symlink(dst, p)                     # 原位留软链
+        symlink_to(dst, p)                     # 原位留软链
         print(f"    [完成] {ag}/{n} -> 池真源 {dst}，原位软链已建")
         done.append(n)
     print(f"\n提升完成 {len(done)} 个。公共池现有 {len(list_skills(USER_SRC))} 个。")
