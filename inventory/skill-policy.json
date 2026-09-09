@@ -1,0 +1,1106 @@
+{
+  "version": 1,
+  "pool": "~/.agents/skills",
+  "agent_roots": [
+    "~/.codex/skills",
+    "~/.claude/skills",
+    "~/.config/claude/skills",
+    "~/.workbuddy/skills",
+    "~/.openclaw/skills",
+    "~/.hermes/skills"
+  ],
+  "projects": {
+    "presentations": "~/Obsidian-Chris-Vault"
+  },
+  "project_entry_roots": [
+    ".agents/skills",
+    ".claude/skills"
+  ],
+  "skills": [
+    {
+      "name": "agent-cli-tool-residue-purge",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/agent-cli-tool-residue-purge",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "31d5ed85193140d631e45bfb76951cdafba16ad5c1653e0661d0ac6d13de04ad"
+      ]
+    },
+    {
+      "name": "agent-skill-bridge",
+      "state": "active",
+      "scope": "global",
+      "source": "my-skills/agent-skill-bridge",
+      "origin": "first-party",
+      "accepted_fingerprints": [
+        "d22ad333668cda47ba3c75a8d8a7f217e5131465ebb58abacdbb916a6dc9c79b",
+        "aba26b3f68a0a85bb96cf8c1b0e33eea2eb2265da5e615ae0268430539012bfb"
+      ]
+    },
+    {
+      "name": "agnes-ai-generation-skill",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/agnes-ai-generation-skill",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "57f727a07ca3aa4ad1b7a7e8ac02ecb615e4a093606891c4ecc257a399467d3a"
+      ]
+    },
+    {
+      "name": "ask-matt",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/ask-matt",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "0f6bda9ca2b9b621b09906c8b21450b470ad411409f8dc62cfebe334ca4a60d5"
+      ]
+    },
+    {
+      "name": "baoyu-comic",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/baoyu-comic",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "850f5aa962a04fc603b83072fb2ebc756e95191dcecb1ae0f6709f0f160a9d9f"
+      ]
+    },
+    {
+      "name": "baoyu-image-gen",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/baoyu-image-gen",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "7e4d228394270acd0c71563e109b35a39562766794943a900638eaba89a43596"
+      ]
+    },
+    {
+      "name": "baoyu-infographic",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/baoyu-infographic",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "0caed33b6af996eda14cb2484abf84e099415cfc52cfdb7c9d8f42fe992026cc"
+      ]
+    },
+    {
+      "name": "baoyu-slide-deck",
+      "state": "reference",
+      "scope": "presentations",
+      "source": "project:presentations/.agent-assets/presentations/baoyu-slide-deck",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "ace95b88d9afc00ba241360053c7655d20a104d443a184885a73cc16e1fec846"
+      ],
+      "migrate": true
+    },
+    {
+      "name": "beautiful-html-templates",
+      "state": "reference",
+      "scope": "presentations",
+      "source": "project:presentations/.agent-assets/presentations/beautiful-html-templates",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "21e0412ee634039ffb60ed85c0348ab635d49aac08a985fab50f1c4b9bc1c7f8"
+      ],
+      "migrate": true
+    },
+    {
+      "name": "bottleneck-hunter",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/bottleneck-hunter",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "e8e8a78d7b21988603abbce237c6c18dfc41420cbf235e8be7ba17e134bb83aa"
+      ]
+    },
+    {
+      "name": "clashx-openai-sse-debug",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/clashx-openai-sse-debug",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "0950d054dc662f5030bf6040a00ebc11c3f939238efb9872331a5acb1d3c3496"
+      ]
+    },
+    {
+      "name": "code-review",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/code-review",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "3ef44e9286d36fb09816412d926e9ee6324940d6f664df569cfdee776e346bd4"
+      ]
+    },
+    {
+      "name": "codebase-design",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/codebase-design",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "2aaef482a9075b501c6429f3345e37cfc88a4eb4655074c460fbda363e3bd2ba"
+      ]
+    },
+    {
+      "name": "construction-bootstrap",
+      "state": "active",
+      "scope": "global",
+      "source": "my-skills/construction-bootstrap",
+      "origin": "first-party",
+      "accepted_fingerprints": [
+        "960e98a9104549118f01b20af24990dcfa2061415796294d2dfb7b210465666c",
+        "b4ef5b7e1ee63e7572273e552a71c8326aad9a19c24c923af29b4092f00bd90e",
+        "e2f6febe26ea0d274abdbd13fa2b7be3bff535927f7ae6696a1aa83f5447a79e"
+      ],
+      "upstream": "~/workspace/workflow-manager/dsh/skills/construction-bootstrap"
+    },
+    {
+      "name": "cross-domain-borrowing",
+      "state": "active",
+      "scope": "global",
+      "source": "my-skills/cross-domain-borrowing",
+      "origin": "first-party",
+      "accepted_fingerprints": [
+        "31783907ec6ce9a0f10b9c09589a2923e9168bea46ab4b9196d29f22a751195c",
+        "31783907ec6ce9a0f10b9c09589a2923e9168bea46ab4b9196d29f22a751195c"
+      ]
+    },
+    {
+      "name": "deep-company-series",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/deep-company-series",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "8d6c319b9e194ec59b13c6571ab5968d11561041f489ef104583bea0630ad6db"
+      ]
+    },
+    {
+      "name": "dev-workflow-2-0",
+      "state": "transition",
+      "scope": "global",
+      "source": "my-skills/dev-workflow-2-0",
+      "origin": "first-party",
+      "accepted_fingerprints": [
+        "7cb668cd71d3dbb4ff00599ec94933160e461d4e9dac8b14e2bebfd3b0fc617d",
+        "b00046b1ee2dbe4bc89b2e8a7a6bee1d552d82c677e0d65619d87b463e61770f"
+      ],
+      "invocation": "explicit-legacy-only"
+    },
+    {
+      "name": "diagnosing-bugs",
+      "state": "active",
+      "scope": "global",
+      "source": "my-skills/diagnosing-bugs",
+      "origin": "first-party",
+      "accepted_fingerprints": [
+        "3575fe92012d21b56b1532356da6e5caa5caad739ed12781eb860153caa7976d",
+        "c2755a20a88eee09d36933f0dcaea3471ae0be14644da47505e9f0fa2b130945"
+      ]
+    },
+    {
+      "name": "domain-modeling",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/domain-modeling",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "6b28ebf7a58fcc1305243953311a92d3f3584ad692b4a274cb397b3263746163"
+      ]
+    },
+    {
+      "name": "duplicate-cli-unify",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/duplicate-cli-unify",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "6e29a28a79410c7c1209fa7ab6b007890c8f579c09b36fd08fc9c122ec2d6f33"
+      ]
+    },
+    {
+      "name": "dyp-ask",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/dyp-ask",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "b793202910e027c085ebc818d9540bb9faecec187f495becfd15f4794156424f"
+      ]
+    },
+    {
+      "name": "earnings-review",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/earnings-review",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "f2f7172117916213d4505dd9179ecbbd1f4436c429448a8e3f9fca86ff863278"
+      ]
+    },
+    {
+      "name": "earnings-team",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/earnings-team",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "24f4347001e372d73906ccca72ab07f1a83d4f64faf3e87eef4e4fda1e93cfab"
+      ]
+    },
+    {
+      "name": "edit-article",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/edit-article",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "eb2608e8ccad6ab1f514afbe6c3577e234c0d8000cb831d0cbb1569032b9ca84"
+      ]
+    },
+    {
+      "name": "eli5",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/eli5",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "1f3df97bd61af3a1efbe757c4f90461b02f0b9747574d6c33d49125474984470"
+      ]
+    },
+    {
+      "name": "execution-plan",
+      "state": "active",
+      "scope": "global",
+      "source": "my-skills/execution-plan",
+      "origin": "first-party",
+      "accepted_fingerprints": [
+        "04b9609bde8dde3fb2849225e90e769b77deaf8ef06f1a7f93d6ec4fc61accfd",
+        "b1a6a8bd06b8880ce584e1e64cf0898069f1c4c29cab38bdca4c5ea72d172fb2"
+      ],
+      "upstream": "~/workspace/workflow-manager/dsh/skills/execution-plan"
+    },
+    {
+      "name": "expert-consultation",
+      "state": "active",
+      "scope": "global",
+      "source": "my-skills/expert-consultation",
+      "origin": "first-party",
+      "accepted_fingerprints": [
+        "58ee4dc3f0a4df749623673d7c4c70d37d5d943528fd45b02163617867cdb287",
+        "58ee4dc3f0a4df749623673d7c4c70d37d5d943528fd45b02163617867cdb287"
+      ]
+    },
+    {
+      "name": "fact-check",
+      "state": "active",
+      "scope": "global",
+      "source": "my-skills/fact-check",
+      "origin": "first-party",
+      "accepted_fingerprints": [
+        "fcbceb9aac22f41143aceda4cc0d783deb1c2d8c47c3823b95c0fcd5a7fabe01",
+        "fcbceb9aac22f41143aceda4cc0d783deb1c2d8c47c3823b95c0fcd5a7fabe01"
+      ]
+    },
+    {
+      "name": "financial-data",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/financial-data",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "53f17f32ff2f73c3dbd3c333fda143d8e30cfd59682e47a3c5cf28806b78b373"
+      ]
+    },
+    {
+      "name": "find-skills",
+      "state": "reference",
+      "scope": "global",
+      "source": "~/.local/share/agent-skills/reference/find-skills",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "4bc67d88ec1a7f4c2a943215c823fc197bb40be3f614455dca4f75ff6563a088"
+      ],
+      "migrate": true
+    },
+    {
+      "name": "first-principle",
+      "state": "active",
+      "scope": "global",
+      "source": "my-skills/first-principle",
+      "origin": "first-party",
+      "accepted_fingerprints": [
+        "d116b298b9d0982343c4567f40d7e34285eb9709270d3ec9119bef449ba17caa",
+        "d116b298b9d0982343c4567f40d7e34285eb9709270d3ec9119bef449ba17caa"
+      ]
+    },
+    {
+      "name": "frontend-design",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/frontend-design",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "7a4fe587bcb14139cf136732ae4cfb68ccdeedbbaff34dbc97093519be509275"
+      ]
+    },
+    {
+      "name": "frontend-slides",
+      "state": "reference",
+      "scope": "presentations",
+      "source": "project:presentations/.agent-assets/presentations/frontend-slides",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "249b2731ae196f6ca0850c67df461d87d8b586814f7d6e2e3b7a97670dd88297"
+      ],
+      "migrate": true
+    },
+    {
+      "name": "git-guardrails-claude-code",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/git-guardrails-claude-code",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "b536fbc9fd0a3a25bcd82ab3d4bc20efa947f15168d7c18f881164b768a122d3"
+      ]
+    },
+    {
+      "name": "grill-me",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/grill-me",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "2eace01128cf74c4a7caaeb8e41c2b2e34ac321c6d8388e47d2697ad9c13e381"
+      ]
+    },
+    {
+      "name": "grill-with-docs",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/grill-with-docs",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "adcee4bcbf9542d2cbf8512ca556157c56e6f63d06e7ed05d854e8830ae5cca1"
+      ]
+    },
+    {
+      "name": "grilling",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/grilling",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "ec124983a527056c1e3fda9237756f2c743af6f3aab5a18e19c5452423fa8229"
+      ]
+    },
+    {
+      "name": "guizang-ppt-skill",
+      "state": "reference",
+      "scope": "presentations",
+      "source": "project:presentations/.agent-assets/presentations/guizang-ppt-skill",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "66789c0638373b14fcf0d90063c786bdf13853989e3c816ce6161c7a73e87490"
+      ],
+      "migrate": true
+    },
+    {
+      "name": "handoff",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/handoff",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "1bae6708815b80229afcc014ed09b75ed04f42f9c1cc60c0fd261275c8d88693"
+      ]
+    },
+    {
+      "name": "hatch-pet",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/hatch-pet",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "cf5705e0a600631dc98e925e9823e08aa2bf335b219c5d38d410a4035c70f5e3"
+      ]
+    },
+    {
+      "name": "humanize-ppt",
+      "state": "reference",
+      "scope": "presentations",
+      "source": "project:presentations/.agent-assets/presentations/humanize-ppt",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "138eea823a22b492636836ab7a61bd28f838b8d24bc5628b45aa5c177f0963fc"
+      ],
+      "migrate": true
+    },
+    {
+      "name": "implement",
+      "state": "reference",
+      "scope": "global",
+      "source": "~/.local/share/agent-skills/reference/implement",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "f571f47360a6dc2f3ab57bb53e8c934506fba476c0bf9e55776979dddd889fbd"
+      ],
+      "migrate": true
+    },
+    {
+      "name": "improve-codebase-architecture",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/improve-codebase-architecture",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "3c1a813518dafff509bdf8eddfdab96542115e860edd596cc9bcb31af1a7882c"
+      ]
+    },
+    {
+      "name": "income-investment",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/income-investment",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "68a1fc8a3916f90b442b90fea273810a86664345a81e733d2f071949a0e624e3"
+      ]
+    },
+    {
+      "name": "industry-funnel",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/industry-funnel",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "83214becb7c4cea6adfc97626c4cf9f5232a2393f26959a2aae5383bc8582e06"
+      ]
+    },
+    {
+      "name": "industry-research",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/industry-research",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "e99037b725a420dffac1e44dadb021accac619d91707e7b0c247f9943dfb4776"
+      ]
+    },
+    {
+      "name": "investment-checklist",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/investment-checklist",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "0107a64269696dc49a9b985484e369aa42694f81e3e1cd9d2be4827954e0ea20"
+      ]
+    },
+    {
+      "name": "investment-memo-craft",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/investment-memo-craft",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "4f4ed7f431adf6783c4a515a8d06d4a134b56b94b4ed37fbacad90007aa465f8"
+      ]
+    },
+    {
+      "name": "investment-research",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/investment-research",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "9327ba616fbf5feeabade83c8c628f37a3688c64d9686d38f896f6aaa9fc3d68"
+      ]
+    },
+    {
+      "name": "investment-team",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/investment-team",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "526a0b0ec517a27be5593c4f011ea23d91f965d9c8cbc0296f82b0b6d7e98ed1"
+      ]
+    },
+    {
+      "name": "learn_something_new",
+      "state": "active",
+      "scope": "global",
+      "source": "my-skills/learn_something_new",
+      "origin": "first-party",
+      "accepted_fingerprints": [
+        "035674b21c93caba7a8e2c40097f548847906c247ec3d3895f27a20416ab94c1",
+        "1574fe8eed0dcf4e82d45b639e01fde2a9280d68de5b65d2f7f188356e305ad4"
+      ]
+    },
+    {
+      "name": "life-design",
+      "state": "active",
+      "scope": "global",
+      "source": "my-skills/life-design",
+      "origin": "first-party",
+      "accepted_fingerprints": [
+        "e24e231d84adb84712ebedaf173d7366d5a0a55e4d78d606b8c93437173fd466",
+        "e24e231d84adb84712ebedaf173d7366d5a0a55e4d78d606b8c93437173fd466"
+      ]
+    },
+    {
+      "name": "llm-wiki-app",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/llm-wiki-app",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "fcfdd66d5ed2bb9666738df44ca688a15ea1b768defbb77c5583c6302bf7c334"
+      ]
+    },
+    {
+      "name": "management-deep-dive",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/management-deep-dive",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "405c3e1858b0153b06b6105060e845339ee334065bde5032610c4f381fd37bfd"
+      ]
+    },
+    {
+      "name": "migrate-to-shoehorn",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/migrate-to-shoehorn",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "3d68a6abe15d6f3fe7c6c84c83f32828c7859f8028801fb0acc0252bf00a44d9"
+      ]
+    },
+    {
+      "name": "minimum-scale-experiment",
+      "state": "active",
+      "scope": "global",
+      "source": "my-skills/minimum-scale-experiment",
+      "origin": "first-party",
+      "accepted_fingerprints": [
+        "e47d4d6d7d3c96c6504d6e453cedb63600b918ccfdb4ba7b58af39e78a2a591d"
+      ]
+    },
+    {
+      "name": "neat-freak",
+      "state": "active",
+      "scope": "global",
+      "source": "my-skills/neat-freak",
+      "origin": "first-party",
+      "accepted_fingerprints": [
+        "aab8084701bdcc6c6ab3388d5323b3644e5b4fb8c8a1911a437995a2111052d4",
+        "603f2341338f86b3b64f7ba38dc27c3abeed892b72694284976e7738553c5421"
+      ]
+    },
+    {
+      "name": "news-pulse",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/news-pulse",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "b4829049d368fe025717d9d54c414304aea9bc36da9eedb7ebc65a17c4acb5d6"
+      ]
+    },
+    {
+      "name": "obsidian-vault",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/obsidian-vault",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "1e1e6edb5b5bc47a2c364b8ee4028a7d8f67b598421c80c21b032f9a54a4ca99"
+      ]
+    },
+    {
+      "name": "portfolio-review",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/portfolio-review",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "06a2d8e02e14b66d586605b4190e710d86b2336b7a8e41896975c1383e1bee86"
+      ]
+    },
+    {
+      "name": "ppt-master",
+      "state": "reference",
+      "scope": "presentations",
+      "source": "project:presentations/.agent-assets/presentations/ppt-master",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "3fde1cafa6922b5319dc6031ba079f802b827a6d4e1db49310df618ecb421ef7"
+      ],
+      "migrate": true
+    },
+    {
+      "name": "presentation-production",
+      "state": "active",
+      "scope": "presentations",
+      "source": "my-skills/presentation-production",
+      "origin": "first-party",
+      "accepted_fingerprints": [
+        "6caf2a5e2b62e61ed458bf72244c26a8f6c60b8d709a724ba63d6610e1c6be62"
+      ]
+    },
+    {
+      "name": "private-company-research",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/private-company-research",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "9a83cf578a8a2c3fb64a0b496fe2962c0e865968ba9ead7900284c2f408ed143"
+      ]
+    },
+    {
+      "name": "prototype",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/prototype",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "fc2f489c9c5a28f0efdfafc1eb3a742fac238082e0236bc803a34f2723403fdc"
+      ]
+    },
+    {
+      "name": "quality-screen",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/quality-screen",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "88bb6acfbd396a6d310b977ad42531d4911393a40c938164991ae0c42f45ac4e"
+      ]
+    },
+    {
+      "name": "remotion-best-practices",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/remotion-best-practices",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "84ee3a68fac8e38f2a62471c16490e43b1a1f216ad1d1e6adeab3981bb57ab34"
+      ]
+    },
+    {
+      "name": "remotion-video-production",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/remotion-video-production",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "fbb7d388cd9bec623156cd9b6e54ef1081a389e64e5f3bf991b030efc27c91f5"
+      ]
+    },
+    {
+      "name": "remotion-video-toolkit",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/remotion-video-toolkit",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "b6359ec78b9713f82d625123e63e0fdb527dfa40b529b4e95ef9ce3d341c3626"
+      ]
+    },
+    {
+      "name": "requirements-analysis",
+      "state": "active",
+      "scope": "global",
+      "source": "my-skills/requirements-analysis",
+      "origin": "first-party",
+      "accepted_fingerprints": [
+        "73be1bc8d0dcbb0dcd7bb88869a8eeb19bb2b97ad6e52ed6fb37868333096b20",
+        "cf23135cd317fa978c9e6fe5c528d6b9d865ac792902ae4afb08d54cef918101"
+      ],
+      "upstream": "~/workspace/workflow-manager/dsh/skills/requirements-analysis"
+    },
+    {
+      "name": "requirements-analysis.bak-20260905-224705",
+      "state": "retired",
+      "scope": "global",
+      "source": "~/.local/share/agent-skills/retired/requirements-analysis.bak-20260905-224705",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "bc3db34bba7ca4531afc4d4e81b7922aa2b9b6979c6bc103737a1bd920d4b63d"
+      ],
+      "migrate": true
+    },
+    {
+      "name": "research",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/research",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "2e41568f66e40f3910f818f173baf0b06434d161ee3c36d31be44e8b0d9ee15d"
+      ],
+      "excluded_agent_roots": [
+        "~/.hermes/skills"
+      ],
+      "exclusion_reason": "Hermes 的 research 是包含多个内置技能的分类目录，不可替换为公共技能"
+    },
+    {
+      "name": "resolving-merge-conflicts",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/resolving-merge-conflicts",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "06a18c01997a91af90a3212d2c9dcd049717e5afcf90312d9201ce647b74a50f"
+      ]
+    },
+    {
+      "name": "scaffold-exercises",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/scaffold-exercises",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "412d7a60ff07b3f1098bc64cc96dee6bc1f92e352b429cbefb1845a060491432"
+      ]
+    },
+    {
+      "name": "setup-matt-pocock-skills",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/setup-matt-pocock-skills",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "9821e1b9b93d1c847240b530a88fa84572d25dcbd80ff26665c18c8a675dcba1"
+      ]
+    },
+    {
+      "name": "setup-pre-commit",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/setup-pre-commit",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "2005bce61d510f4b26c9d0bba226668d047f29115d924118902bf5917ffab44c"
+      ]
+    },
+    {
+      "name": "skill-creator",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/skill-creator",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "bdf6b27be9b3c1d10b3716e9a13d99472355c5e97ec4e44e865e5dc7da146533"
+      ]
+    },
+    {
+      "name": "skills-security-check",
+      "state": "active",
+      "scope": "global",
+      "source": "my-skills/skills-security-check",
+      "origin": "first-party",
+      "accepted_fingerprints": [
+        "7874e26763723a5035e813f8e9803ee534bb14fc7af45afa7a1c741a017e07c6",
+        "7874e26763723a5035e813f8e9803ee534bb14fc7af45afa7a1c741a017e07c6"
+      ]
+    },
+    {
+      "name": "socratic-clarify",
+      "state": "active",
+      "scope": "global",
+      "source": "my-skills/socratic-clarify",
+      "origin": "first-party",
+      "accepted_fingerprints": [
+        "02325587707e074383f7e337734960c8f52ed7880dc0fe79f28a51619d3e8bcd",
+        "45a976f983ec1c0932280cfa3a28d18664c559155d814fccfee75ca55acef9db"
+      ]
+    },
+    {
+      "name": "steelmanning",
+      "state": "active",
+      "scope": "global",
+      "source": "my-skills/steelmanning",
+      "origin": "first-party",
+      "accepted_fingerprints": [
+        "6409688d8e09ce114d5c7e6ce0e447e39d10b736aaac90b3f54e9ad345d3630f",
+        "6409688d8e09ce114d5c7e6ce0e447e39d10b736aaac90b3f54e9ad345d3630f"
+      ]
+    },
+    {
+      "name": "storage-analyzer",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/storage-analyzer",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "ffd48cfe6cb2f59a594d928acb8e002eb55d33c52b94ff435f150ac1de9ed948"
+      ]
+    },
+    {
+      "name": "sts2-gawain-regression-recovery",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/sts2-gawain-regression-recovery",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "dc68f6f5088356feb169a5ec1bf234eb87cebde35936ef6b9a8541b2d51c80b4"
+      ]
+    },
+    {
+      "name": "sts2-independent-run-regression",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/sts2-independent-run-regression",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "fe4f1b0c5bc0ee2fcc83100ee80ce392f0f80286c1985e6058fec6f0d296ffc3"
+      ]
+    },
+    {
+      "name": "sts2-start-game",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/sts2-start-game",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "03ecdd6f71d1d53e1fe7588243469315773cbbfc12c2bbf1ee554d6c758eb8d2"
+      ]
+    },
+    {
+      "name": "tdd",
+      "state": "active",
+      "scope": "global",
+      "source": "my-skills/tdd",
+      "origin": "first-party",
+      "accepted_fingerprints": [
+        "6fea8acf23410b4d398b1b36dcc759bd9400c2b893c2073729456c5a8595e855",
+        "ccb363ecb8d881884475d4355641ac5424b958eac794e40a89cc6bee772f598f"
+      ]
+    },
+    {
+      "name": "teach",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/teach",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "eaa00f6089caa35ebae0e757d9d3a5e15c9532ef834e53b24b4b16c5dec51b28"
+      ]
+    },
+    {
+      "name": "test-report-html",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/test-report-html",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "373c74a4f28c8b5742dd6baf189b156e868a4bba8e889e891995e44fbf02b28a"
+      ]
+    },
+    {
+      "name": "thesis-drift",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/thesis-drift",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "fca243739db6a27f01b95fa8d5d49951a8ffebd3a87003f71f2bcc64146026af"
+      ]
+    },
+    {
+      "name": "thesis-tracker",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/thesis-tracker",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "d2e416aaad1651239e50ddc811cc0b689a4f952cf759257ce3b75c4f4cfdff99"
+      ]
+    },
+    {
+      "name": "to-questionnaire",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/to-questionnaire",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "687c758a5b1dae182bc36445528354f1d0c677c44ab366adee75c1642b5c8b16"
+      ]
+    },
+    {
+      "name": "to-spec",
+      "state": "reference",
+      "scope": "global",
+      "source": "~/.local/share/agent-skills/reference/to-spec",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "4f8eac9a8edec0b6054110e2e86352075fc3abd314302c5b379df43024062c0c"
+      ],
+      "migrate": true
+    },
+    {
+      "name": "to-tickets",
+      "state": "reference",
+      "scope": "global",
+      "source": "~/.local/share/agent-skills/reference/to-tickets",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "e2572d2684ad81a38a508ff933e8dc2570611e785f3f58c120dc8fc990850e55"
+      ],
+      "migrate": true
+    },
+    {
+      "name": "triage",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/triage",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "bdee25be135d933dd4b0a4a81452d9c7e24eddaad5f62a0115ab0d8227f4d1f6"
+      ]
+    },
+    {
+      "name": "uncover-hidden-talents",
+      "state": "active",
+      "scope": "global",
+      "source": "my-skills/uncover-hidden-talents",
+      "origin": "first-party",
+      "accepted_fingerprints": [
+        "42aa150ee2a5c33a88ebf72097f3394b9f65b5ee927ee1e8ef4fc92d7d2738bb",
+        "42aa150ee2a5c33a88ebf72097f3394b9f65b5ee927ee1e8ef4fc92d7d2738bb"
+      ]
+    },
+    {
+      "name": "video-production",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/video-production",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "8aa32e8b8c9b2ef1afebd74c7246cf208f02e07ff1d3c29123febd450b813b36"
+      ]
+    },
+    {
+      "name": "wait-what",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/wait-what",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "d7d8aedc70004c5643a44deabac190ecb2967d581b3bccaf7769ee925f4cf2cf"
+      ]
+    },
+    {
+      "name": "wayfinder",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/wayfinder",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "584e12d55fdac0f343d879037ff9142f9f7b17c724d0143a616ccbbb4b075d74"
+      ]
+    },
+    {
+      "name": "wechat-article",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/wechat-article",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "3bc1b6912f0e8082360b8c34e75d2d01226ca0332648d2d7ad763972ae8fef04"
+      ]
+    },
+    {
+      "name": "wizard",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/wizard",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "b27d464aa9f987b1853891923078951ab7028a38192450004aca0559b28448e0"
+      ]
+    },
+    {
+      "name": "writing-great-skills",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/writing-great-skills",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "d32f93eb1e63c78fa8d47581694e2f1c2c2098978a362ae16edf875670bed1c4"
+      ]
+    }
+  ],
+  "reference_copies": [
+    {
+      "name": "tdd",
+      "source": "~/.agents/skills/tdd",
+      "destination": "~/.local/share/agent-skills/references/tdd",
+      "fingerprint": "6fea8acf23410b4d398b1b36dcc759bd9400c2b893c2073729456c5a8595e855"
+    },
+    {
+      "name": "diagnosing-bugs",
+      "source": "~/.agents/skills/diagnosing-bugs",
+      "destination": "~/.local/share/agent-skills/references/diagnosing-bugs",
+      "fingerprint": "3575fe92012d21b56b1532356da6e5caa5caad739ed12781eb860153caa7976d"
+    },
+    {
+      "name": "neat-freak",
+      "source": "~/.agents/skills/neat-freak",
+      "destination": "~/.local/share/agent-skills/references/neat-freak",
+      "fingerprint": "aab8084701bdcc6c6ab3388d5323b3644e5b4fb8c8a1911a437995a2111052d4"
+    }
+  ],
+  "overrides": [
+    {
+      "name": "baoyu-image-gen",
+      "path": "~/.agents/skills/baoyu-image-gen/SKILL.md",
+      "patch": "overrides/baoyu-image-gen.json"
+    },
+    {
+      "name": "baoyu-infographic",
+      "path": "~/.agents/skills/baoyu-infographic/SKILL.md",
+      "patch": "overrides/baoyu-infographic.json"
+    },
+    {
+      "name": "investment-team",
+      "path": "~/.agents/skills/investment-team/SKILL.md",
+      "patch": "overrides/investment-team.json"
+    },
+    {
+      "name": "grilling",
+      "path": "~/.agents/skills/grilling/SKILL.md",
+      "patch": "overrides/grilling.json"
+    },
+    {
+      "name": "leader",
+      "path": "/Users/chris/.codex/plugins/cache/personal/leader/0.1.0/skills/leader/SKILL.md",
+      "patch": "overrides/leader.json",
+      "optional": true
+    }
+  ],
+  "owned_plugins": [
+    {
+      "name": "leader",
+      "source": "my-plugins/leader",
+      "installed": "~/.codex/plugins/cache/personal/leader/0.1.0",
+      "note": "用户授权修正的个人插件；不卸载其他插件，不修改宿主内置插件",
+      "marketplace_entry": "~/.agents/plugins/plugins/leader"
+    }
+  ]
+}

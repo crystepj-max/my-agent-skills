@@ -8,3 +8,9 @@ __pycache__/
 # 评测评审页：可用命令重新生成；且预览面板打开时会注入 data-page-node-id 标记，
 # 每次预览都产生一次无内容的假 diff，是误提交的主要来源。
 review.html
+
+.skill-sync-backups/
+reports/
+
+# 打包产物：由 tools/build_install_all.py 生成，进库只会产生无意义的二进制 diff
+*.tar.gz

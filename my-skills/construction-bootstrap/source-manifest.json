@@ -1,0 +1,27 @@
+{
+  "upstream": "workflow-manager",
+  "files": {
+    "SKILL.md": "9a661e49eb416117bfad042942dea32d91140a32f012041051c34bbb44f800c5",
+    "assets/ai-task-define-delivery/preflight-check.md": "df3d4eb38002f782b9176de70668797e2ce571631f18a1923bbf431c69d269ed",
+    "assets/ai-task-define-delivery/public-task-contract.md": "4b7b61e4acd2da6489ec106c47a8d88fa6949c428f1707d2d36cded14a09fa2f",
+    "assets/ai-task-define-delivery/single-task-delivery-m2.md": "6971cddddcbc60029f7f0b0fde32d299287e99ed4a0e675c1442ee5cc6e408bc",
+    "assets/ai-task-define-delivery/task-workspace-env.md": "610643760be9c17fca04c592c6d715766c5096d7c4d50b0bce0d289e60e10bc6",
+    "assets/ai-task-define-delivery/uat-card-template.md": "5e63a19c99ff256f6cb25c0a49e27b70db33399f517fffda627e58c7a0844c1a",
+    "assets/ai-task-preflight-check.mjs": "5ff2a0dbecbe23a230a32deacedf80fb4f812c2d2cf21ac7e1470a669ecebf9b",
+    "assets/ai-task-workspace-env.mjs": "6cfcf6292aa5f055da8c62569d0d6d35a3b99e784b50668727837bdb8cb74da7",
+    "assets/construction-workflow-portable-contract.md": "51f636cdc06a31a565ae493c20a04e241a2008e90637af64bca45bb2db3d276e",
+    "assets/cwf-checkpoint.mjs": "1328e6d0f40868533374b1355f1866bc76089b81a6e731981d34d855f63fd685",
+    "assets/cwf-evidence-verify.mjs": "c3c46e336ef6105559e4b46c076fb5165712da90b33b746c1edd205770593e8d",
+    "assets/cwf-record.mjs": "ed0b7d3f87fe16d8352eed7fdcc13e9fb831c7cf425b062b8046aead68da2262",
+    "assets/cwf-run-init.mjs": "74162859bdbe1a7ae73508e2c4b8a6577ccf672ad42eb60b8201bf3c4e5c267a",
+    "assets/cwf-validate.mjs": "737d43f3b953cf117b53ba2abb3fee38b1bc94233396065c3806f594efa19154",
+    "assets/formal-artifacts.cjs": "63e7f3c9820cc0b5d060aaa6919f90c812a8c30be3c867b8c250905e3cad2af0",
+    "assets/formal-records.mjs": "039d8b0bedf55236c96c56d7b33efaf3e32dc8bbbe87e0271c5c6c63d357716b",
+    "assets/handoff.schema.json": "aa0b4bbb22d642f4540118fce92f36d950bce1aeaa1bcae2008290d753c35113",
+    "assets/local-task-merge.mjs": "61869855a9d79198c4e22663381004cc1cf951f720be0900e0124c8c2856b1a4",
+    "assets/local-task-registry.mjs": "60c74825e386c857d08775773b7ca993c380cf43ecd2179b48416bacb7bf4807",
+    "assets/workspace-isolation.mjs": "9eb483a23b3894b1cbb2b6879c42f89da318d274674b2b630fd34c64951dfcb8",
+    "runbook.md": "e5678d0a5c0f20d7e9a2f500162d31c4bf452dd81eed4d72d83a4001da9d7b64",
+    "shim-map.md": "0722c4eae8a16a3edeff6396a5c422da1c71daead0d625583b6cb2cf1f4b579f"
+  }
+}

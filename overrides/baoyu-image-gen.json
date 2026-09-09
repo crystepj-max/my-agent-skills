@@ -1,0 +1,22 @@
+{
+  "original_sha256": "2c6f62770d15bdd73bc17f4cb8fbbf7379e3d2ac5bfb71070c4e93e1156b5c22",
+  "updated_sha256": "80266546904acef2399c00b4f815d21024713086f09e8fb063786efd5f323fe6",
+  "replacements": [
+    [
+      "## Step 0: Load Preferences ⛔ BLOCKING",
+      "## Step 0: Reuse available preferences"
+    ],
+    [
+      "This step MUST complete before any image generation — generation is blocked until EXTEND.md exists.",
+      "已有偏好可复用；没有长期偏好文件不阻塞一次性制作。当前请求参数优先，非关键设置用可用默认值。"
+    ],
+    [
+      "- **Found** → load, parse, apply. If `default_model.[provider]` is null → ask model only.",
+      "- **Found** → load, parse, apply. 必需设置缺失时先核对当前工具可用默认值；只对新增费用或无法自行决定的关键缺口提问。"
+    ],
+    [
+      "- **Not found** → run first-time setup (`references/config/first-time-setup.md`) using AskUserQuestion to collect provider + model + quality + save location. Save EXTEND.md, then continue. Do not generate images before this completes.",
+      "- **Not found** → 使用本轮参数和现有可用工具完成制作。仅在用户要求长期保存偏好时运行 `references/config/first-time-setup.md`；新增付费服务或必需凭据缺失按全局授权边界处理。"
+    ]
+  ]
+}

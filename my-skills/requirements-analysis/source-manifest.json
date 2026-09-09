@@ -1,0 +1,15 @@
+{
+  "upstream": "workflow-manager",
+  "files": {
+    "SKILL.md": "4901ad009b40f8cc61dba69baca4ad0efa5ed09afa20b6940381d4c8c0cabbde",
+    "assets/local-task-registry.mjs": "60c74825e386c857d08775773b7ca993c380cf43ecd2179b48416bacb7bf4807",
+    "evals/evals.json": "6a828918ebfe548e6e51183d5b7cd19ce04279e33278c6942b5a2fe7bb453e55",
+    "references/baseline-change-v1-v2.md": "f115705646a3bd2ee89ef7f2eeb35ef7ec1b08ab2f641093fe156fe77f0bf6e6",
+    "references/definition-check.md": "12d15954e50d1fb106f258fd50e76b760e5aefcb30a6a712a2c0e84ba5ec5a6c",
+    "references/issue-basics-template.md": "18250f5d9231d4003a8b4101e2e2023d8d5574d064b40257d1a9b0b6347c3c2c",
+    "references/local-task-card-template.md": "e449e2681e0204ff3924ba43f4e3d6057b073c760a3e64b81e8e2ecbe60e8f87",
+    "references/openspec-template.md": "a59153ba424ee625cdd94b7ee4979872812e83bb41c9cae14db9b696fe47033a",
+    "references/public-task-contract.md": "4b7b61e4acd2da6489ec106c47a8d88fa6949c428f1707d2d36cded14a09fa2f",
+    "references/task-spec-template.md": "66fb73f003766d3c43d9de1a22b54c6af6c867685ebe7271adc305d35256aaa1"
+  }
+}

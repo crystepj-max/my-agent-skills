@@ -1,0 +1,18 @@
+{
+  "name": "leader",
+  "version": "0.1.0",
+  "description": "把一句话的想法拆成 AI agent 能独立跑完的目标任务书。用户说「帮我给 agent 写个目标」「帮我详细拆一下这个目标」「写个任务书/brief 给 agent」「写个 goal 提示词」「让 agent 自己跑这个项目」「把活分给几个 agent 并行」时使用。先进代码库实测、必要时联网调研，再一次性提问（≤5 个），产出一份 ≤4000 字符、直接粘进 /goal 就能跑的任务书，含实测数字、白名单地界、防作弊验收和断点续跑。执行型与探索型（调研/选型/找方案）自动分流。",
+  "author": {
+    "name": "Local adaptation of khazix-skills"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Leader",
+    "shortDescription": "把想法整理成可独立执行的任务书。",
+    "longDescription": "Leader 将一句话想法整理为可直接交给执行者的任务书，包含实测依据、明确边界、验收标准、防作弊约束和断点续跑规则。",
+    "developerName": "Local adaptation of khazix-skills",
+    "category": "Productivity",
+    "capabilities": [],
+    "defaultPrompt": "把我的想法整理成一份执行者可以独立完成的任务书。"
+  }
+}

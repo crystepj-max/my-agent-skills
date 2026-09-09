@@ -1,3 +1,5 @@
+> **实际启用状态已迁移到 [生命周期清单](skill-lifecycle.md) 与 skill-policy.json。** 本文件保留描述和来源，不作为恢复器的全量安装名单；旧“使用范围”以生命周期清单为准。
+
 # 公共池 Skill 中文描述总表
 
 > 生成：2026-08-24 ｜ 范围：公共池 `~/.agents/skills/`（claude / codex / workbuddy / openclaw / hermes 五端经软链同步中文；kimi / opencode 原生直读公共池）

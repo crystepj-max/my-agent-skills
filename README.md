@@ -1,83 +1,36 @@
 # my-agent-skills
 
-集中管理与跨设备同步我的 agent skill。
+维护个性化第一方技能、第三方参考与过渡能力，以及多助手实际入口。
 
-## 这个仓库存什么
+## 唯一登记与职责
 
-本仓库刻意**只存两类内容**，不囤第三方 skill 的完整数据：
+- `inventory/skill-policy.json`：正式状态、范围、维护来源、已审阅版本和专业工作空间位置。
+- `inventory/skill-lifecycle.md`：登记表的人读版本；`skill-desc-translation.md` 保留上游来源与描述。
+- `my-skills/`：第一方执行入口。需求、建设、批量调度三项从 workflow-manager 同步，带完整 assets 和 source-manifest，不能仅同步 SKILL.md。
+- `my-plugins/leader/`：个人插件的可维护来源；`overrides/` 保存已审阅第三方条款与个人插件的定点修正，不自动适配未知上游版本。
+- 全局任务分类、批准与完成规则由 agent-policy 维护，此仓不复制一套。
 
-1. **我自己原创的 skill（完整数据）** —— `my-skills/`
-   - 目前 12 个：
-     - `agent-skill-bridge` —— 统一管理多 agent 第三方 skill 安装的安全审计 + 公共池 + 中文化 + 桥接 + 去重流水线
-     - `life-design` —— 人生设计术：多轮深度对话，生成三个五年人生版本与原型行动，产出《个人人生设计蓝图》
-     - `uncover-hidden-talents` —— 深度天赋挖掘机：从具体经历中挖出底层天赋，产出《个人天赋使用说明书》
-     - `minimum-scale-experiment` —— 把纠结的决定拆成可验证的最小实验
-     - `expert-consultation` —— 多视角专家会诊框架
-     - `cross-domain-borrowing` —— 跨领域借解：从远距离领域找结构同构的解法
-     - `socratic-clarify` —— 苏格拉底式追问，帮用户自己分清事实/解释/判断
-     - `first-principle` —— 第一性原理拆解
-     - `fact-check` —— 事实核查：可验证事实 / 推理链 / 价值判断三层分离
-     - `requirements-analysis` —— 需求分析统一入口
-     - `learn_something_new` —— 系统化学习辅助
-     - `skills-security-check` —— Skill 安全审查（安装新 skill 前的强制第 0 步）
-   - 后续你自建/深度改造的 skill，都放这里，带完整文件。
-2. **公共 skill 清单（仅元数据，不存数据）** —— `inventory/skill-desc-translation.md`
-   - 我当前维护的全部 skill（含第三方）的名称、中文描述、仓库链接/来源、最新更新时间。
-   - 按来源分类：大型集合仓库 / 独立仓库 / WorkBuddy 内置·市场。
-   - 第三方 skill 只记录信息，**不克隆、不存储其数据**；恢复时按链接从上游拉取。
-
-此外 `tools/` 放我自用的安装/打包脚本（如 `install_all_skills.sh` 一键原样安装 65 个轻量第三方 skill），直接服务跨设备恢复。
-
-## 目录结构
-
-```
-my-agent-skills/
-├── my-skills/                    # 我自己原创的 skill，完整数据（git 跟踪）
-│   └── agent-skill-bridge/
-├── inventory/
-│   └── skill-desc-translation.md # 公共清单（来源分类 + 最新更新）
-├── tools/                        # 自用管理/安装脚本（跨设备恢复用）
-│   ├── install_all_skills.sh     # 一键原样安装 65 个轻量第三方 skill（自解压）
-│   ├── build_install_all.py
-│   ├── add_repo_column.py
-│   └── fetch_new_skills.py
-├── scripts/
-│   ├── sync.sh                   # 自动：提交并推送变更到 main
-│   └── restore.sh                # 新电脑：恢复我的常用 skill
-├── .gitignore
-└── README.md
-```
-
-## 日常：更新后自动同步到 GitHub
-
-当你改了 `my-skills/` 下的自有 skill，或更新了清单 `inventory/`，运行：
+## 使用与恢复
 
 ```bash
-bash scripts/sync.sh
+python3 scripts/manage-skills.py plan --report /tmp/skill-plan.json
+python3 scripts/manage-skills.py apply --report /tmp/skill-apply.json
+python3 scripts/manage-skills.py check
+python3 -m unittest discover -s tests
 ```
 
-它会 `git add -A && commit && push` 到 `main`（仅在确有变更时提交）。
+应用前核对范围；任务已有授权时不重复批准。不同本机内容保留为 CONFLICT；MISSING 不当作成功。备份留在 `~/.local/share/agent-skills/backups/`，退出执行的资料留在登记的 reference/retired 或专业工作空间。
 
-> 想更“自动”：可把 `sync.sh` 接进 `agent-skill-bridge` 流水线的最后一步，让每次装/更新 skill 后顺手提交推送。
+换设备：先 clone 本仓，按实际位置修改登记表的 projects，再运行 `bash scripts/restore.sh`。恢复器只提取清单需要且缺失的离线资料，随后按范围建立入口；已存在内容不会被旧全量包覆盖。
 
-## 换电脑：快速恢复
+`tools/skills-bundle.tar.gz` 是轻量过渡/参考资料的离线恢复包，延续原有打包能力但不包含第一方副本、退役备份和大型 PPT 资产。用 `python3 tools/build_install_all.py` 从已核对来源重建。原 `tools/install_all_skills.sh` 只转交新恢复器。
 
-在全新或存量电脑上：
+大型演示资料留在 Chris-Vault 的 `.agent-assets/presentations/`，不收入技能仓库。更换设备需同步该专业空间的资产；缺失时报告 MISSING，不把旧能力重新装回全局。第一方 `presentation-production` 安装在该空间的 `.agents/skills/` 和 `.claude/skills/`，可使用宿主已有制作能力。其他插件内置演示能力仍属宿主管理，不自动卸载或改写。
 
-```bash
-git clone https://github.com/crystepj-max/my-agent-skills.git
-cd my-agent-skills
-bash scripts/restore.sh
-```
+新会话才可能载入更新后的技能目录；当前会话中已展开的旧指令不会因改文件自动消失。检查磁盘入口、宿主实际目录与任务行为是三个不同层次。
 
-`restore.sh` 会：
-1. 把 `my-skills/*` 软链进 `~/.agents/skills/`（自有 skill 直接生效，且改完跑 `sync.sh` 即回传）；
-2. 运行 `tools/install_all_skills.sh`，字节级一致地恢复 **65 个轻量第三方 skill** 并桥接 WorkBuddy；
-3. 运行 `agent-skill-bridge` 把全部 skill 桥接到 claude / codex / workbuddy；
-4. 打印 **5 个大体积 skill** 与 **15 个 WorkBuddy 内置/市场 skill** 的手动安装步骤（前者走仓库链接，后者走技能市场）。
+## 维护与发布
 
-> ⚠️ 各 agent 在会话启动时缓存 skill 列表，恢复后请**重启对应 agent 会话**，`/` 才会刷新。
+第一方源改动经校验后直接经入口引用；三项开发流程先在 workflow-manager 修改，然后运行 `node scripts/sync-ai-task-skill-set.mjs <本仓路径>`。完整同步会保留原目录备份。
 
-## 新增「我自己原创的 skill」
-
-把完整 skill 目录丢进 `my-skills/`，然后 `bash scripts/sync.sh`。
+本地应用、恢复或检查不自动提交。用户明确要求发布后，先审阅并只暂存本次文件，再运行 `bash scripts/sync.sh --publish-staged "提交说明"`；只推送当前分支，不强制推到 main。

@@ -1,0 +1,13 @@
+{
+  "upstream": "workflow-manager",
+  "files": {
+    "SKILL.md": "8a1d50632690900fff8ba97b14d2ad924914542a239859522561350435324651",
+    "assets/ai-task-define-delivery/execution-plan-m3.md": "37952827e681216daab68787419609842376b7da4b0a527ab554254b6ec1b8bc",
+    "assets/ai-task-define-delivery/public-task-contract.md": "4b7b61e4acd2da6489ec106c47a8d88fa6949c428f1707d2d36cded14a09fa2f",
+    "assets/ai-task-define-delivery/scheduled-trigger-m4.md": "a5d51ac8ea2e43f22f84bb6c465411504bbe3348ba73749b556e0b2186d5cc9c",
+    "assets/ai-task-define-delivery/skill-set.md": "f3890ee888e12bb2fb499ef2f96992bb79d885481763572b1f818d45ee510749",
+    "assets/ai-task-execution-plan.mjs": "158160c229ad755bd17591824152bda0659c87f297c479c46ea1ff6f422cd63f",
+    "assets/ai-task-preflight-check.mjs": "5ff2a0dbecbe23a230a32deacedf80fb4f812c2d2cf21ac7e1470a669ecebf9b",
+    "assets/ai-task-scheduled-trigger.mjs": "1982f3dc85e01c7490c4491f84233eed393a6027dff439c984d54587702873f5"
+  }
+}

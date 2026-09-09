@@ -1,0 +1,14 @@
+{
+  "original_sha256": "7ad6e00c3904670513cc679bd2ddd390e6ed601717fd48e873c45aa5ca4b266f",
+  "updated_sha256": "8c0c752572e98bbd65526c2ae066f6e361945cf8cfea1aa54aabcd811335ca71",
+  "replacements": [
+    [
+      "Interview the user relentlessly until you reach a shared understanding.",
+      "仅在用户明确要求压力测试或深度追问时进行，围绕本轮决定达到可行动的共同理解即结束。"
+    ],
+    [
+      "The session is done when the frontier is empty: every branch of the design tree visited, nothing left silently assumed. Do not act on it until the user confirms you have reached a shared understanding.",
+      "当前决定的关键问题已回答、剩余分支不影响本轮结果时结束，不扩展到所有潜在分支。给出结论、依据和仍未验证的假设；既有确认可复用，实质改变目标的部分才重新确认。"
+    ]
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "original_sha256": "5b4ee2b92cbed947aedb2acb0f79111fb64290297d9110fa52901284ce2bcf22",
+  "updated_sha256": "e6f1b107d2f11e9d8f4356f103cff8b8b66f8d9be856548577624fad8bfc1158",
+  "replacements": [
+    [
+      "Default behavior: **confirm before generation**.",
+      "默认属于办公制作：已有目的与内容即可选择合理版式完成成品；用户要求共同设计或存在关键缺口时才确认。"
+    ],
+    [
+      "- Treat explicit skill invocation, a file path, a matched keyword shortcut, `EXTEND.md` defaults, and the documented default combination as **recommendation inputs only**. None of them authorizes skipping confirmation.",
+      "- 同一任务已有选择和授权持续有效，切换技能或续做不要求重复批准。"
+    ],
+    [
+      "- Do **not** start Step 5 or Step 6 until the user confirms the combination/aspect/language/backend choices.",
+      "- 版式、比例等可逆选择可采用合理默认值；新增费用、关键事实和发布范围仍须遵循用户授权。"
+    ],
+    [
+      "- Skip confirmation only when the current request explicitly says to do so, for example: `--no-confirm`, \"直接生成\", \"不用确认\", \"跳过确认\", \"按默认出图\", or equivalent wording.",
+      "- `--no-confirm` 和“直接生成”等是明确偏好；不要求用户每次复述这些词才能继续已授权制作。"
+    ]
+  ]
+}
