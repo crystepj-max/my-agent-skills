@@ -152,9 +152,9 @@
     },
     {
       "name": "construction-bootstrap",
-      "state": "active",
+      "state": "retired",
       "scope": "global",
-      "source": "my-skills/construction-bootstrap",
+      "source": "~/.local/share/agent-skills/retired/construction-bootstrap",
       "origin": "first-party",
       "accepted_fingerprints": [
         "960e98a9104549118f01b20af24990dcfa2061415796294d2dfb7b210465666c",
@@ -186,9 +186,9 @@
     },
     {
       "name": "dev-workflow-2-0",
-      "state": "transition",
+      "state": "retired",
       "scope": "global",
-      "source": "my-skills/dev-workflow-2-0",
+      "source": "~/.local/share/agent-skills/retired/dev-workflow-2-0",
       "origin": "first-party",
       "accepted_fingerprints": [
         "7cb668cd71d3dbb4ff00599ec94933160e461d4e9dac8b14e2bebfd3b0fc617d",
@@ -1024,6 +1024,50 @@
       "accepted_fingerprints": [
         "3bc1b6912f0e8082360b8c34e75d2d01226ca0332648d2d7ad763972ae8fef04"
       ]
+    },
+    {
+      "name": "wf-construction-full-feature",
+      "state": "active",
+      "scope": "global",
+      "source": "~/.agents/skills/wf-construction-full-feature",
+      "origin": "first-party",
+      "accepted_fingerprints": [
+        "0d8589dad309f561243d25eebd8656aae582ee871233c02a664f2d6bbbf1deea"
+      ],
+      "upstream": "~/workspace/workflow-manager/templates/wf-construction-full-feature.json"
+    },
+    {
+      "name": "wf-diagnose",
+      "state": "active",
+      "scope": "global",
+      "source": "~/.agents/skills/wf-diagnose",
+      "origin": "first-party",
+      "accepted_fingerprints": [
+        "ff11e92e5b64e3864ba270b766855f06001fc3a9577296491470eab699facc2d"
+      ],
+      "upstream": "~/workspace/workflow-manager/templates/wf-diagnose.json"
+    },
+    {
+      "name": "wf-explore",
+      "state": "active",
+      "scope": "global",
+      "source": "~/.agents/skills/wf-explore",
+      "origin": "first-party",
+      "accepted_fingerprints": [
+        "aafec6dc8109e57b9d13078dda4e599b64023221ddd8251993274f9583d1b489"
+      ],
+      "upstream": "~/workspace/workflow-manager/templates/wf-explore.json"
+    },
+    {
+      "name": "wf-optimize",
+      "state": "active",
+      "scope": "global",
+      "source": "~/.agents/skills/wf-optimize",
+      "origin": "first-party",
+      "accepted_fingerprints": [
+        "ea56293d4ffe6537d2390f1f41c0c35bf64f5f54c04e93ac0c2bd2ed6ff22992"
+      ],
+      "upstream": "~/workspace/workflow-manager/templates/wf-optimize.json"
     },
     {
       "name": "wizard",

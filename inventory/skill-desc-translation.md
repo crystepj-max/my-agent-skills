@@ -19,13 +19,14 @@
 | 1 | `agent-cli-tool-residue-purge` | 当 AI 编程 CLI（Claude Code、Codex、Gemini CLI 等）在某个辅助/代理/包装工具被卸载后开始报错时使用——例如 SessionStart:startup hook error、每次 Bash 调用都 command not found、或 CLI 静默指向已失效的 localhost 端口。提供跨所有配置层（settings 文件、MCP 注册表、hooks、shell rc、launchd、cron）的全面排查与清理流程，确保不留任何陈旧引用。  | —  | —  | 用户级  | 平台内置  |
 | 2 | `agent-skill-bridge` | 统一管理多个 AI agent（claude / codex / workbuddy 等）的第三方 skill 安装流程——安全审计 + 安装到公共池 ~/.agents/skills/ + 中文化 + 软链桥接到各 agent 默认目录 + 校验每个 agent 对同一 skill 只保留 1 份（去重）。  | find-skills | 2026-08-22 | 用户级  | 平台内置  |
 | 3 | `clashx-openai-sse-debug` | 排查 ClashX（ClashX Pro）代理导致 OpenAI 或 API 流式 SSE 连接中断的问题：Codex 桌面端连不上、stream closed before response.completed、SSE 断连、macOS 上 ClashX 规则模式或全局模式下 OpenAI 流式失败。覆盖 ClashX 控制 API、热重载导致 DNS 崩溃的坑、验证 OpenAI 必须走代理、节点选择、SSE 稳定性测试。  | —  | —  | 用户级  | 平台内置  |
-| 4 | `dev-workflow-2-0` | 在 DeepSeek Harness（DSH）会话中驱动「开发工作流 2.0」：以 GitHub issue（须含任务目标/涉及范围/验收标准三要素）为唯一需求来源，自动完成 调度 → 开发 →（可选）测试 → 审核 → 人工验收 → 收口 全流程；打回上限 9 轮、超限自动归因、全程结构化报告留痕、开发与审核异源异模型。  | implement | 2026-08-20 | 用户级  | 平台内置  |
-| 5 | `duplicate-cli-unify` | 当同一个命令行工具（如 Claude Code、Codex 或任何 npm/node 类 CLI）被多个包管理器重复安装时使用——最常见的是 nvm 全局安装与 Homebrew 安装并存，导致版本混乱、残留旧副本、或自动更新静默写入错误路径。提供检测、分析、决策、修复的完整流程，把工具统一到单一安装源。  | —  | —  | 用户级  | 平台内置  |
-| 6 | `requirements-analysis` | 需求分析统一入口：把 GitHub issue 或用户的原始输入加工成一份含三要素（任务目标/涉及范围/验收标准）的可执行需求，按体量拆解为任务清单或决策地图，并落盘回写 issue。  | to-spec、to-tickets | 2026-08-18 | 用户级  | 平台内置  |
+| 4 | `duplicate-cli-unify` | 当同一个命令行工具（如 Claude Code、Codex 或任何 npm/node 类 CLI）被多个包管理器重复安装时使用——最常见的是 nvm 全局安装与 Homebrew 安装并存，导致版本混乱、残留旧副本、或自动更新静默写入错误路径。提供检测、分析、决策、修复的完整流程，把工具统一到单一安装源。  | —  | —  | 用户级  | 平台内置  |
+| 5 | `requirements-analysis` | 需求分析统一入口：把 GitHub issue 或用户的原始输入加工成一份含三要素（任务目标/涉及范围/验收标准）的可执行需求，按体量拆解为任务清单或决策地图，并落盘回写 issue。  | to-spec、to-tickets | 2026-08-18 | 用户级  | 平台内置  |
+
+> **2026-09-15 退役**：原第 4 项 `dev-workflow-2-0`。其职责已由「AI 任务交付」集合拆分为 M1 `requirements-analysis` / M2 `wf-construction-full-feature` / M3 `execution-plan` 承接，已在 `skill-policy.json` 置为 `retired`，源目录移出发现目录至 `~/.local/share/agent-skills/retired/dev-workflow-2-0`。同批退役的还有 `construction-bootstrap`。
 
 ## 第三方 Skill（公共池收录）
 
-> 按「来源分类 > 字母顺序」排序。PPT 相关 skill 标记为项目级，归入 `crystepj-max/Chris-Vault/`。以下 skill 已被对应第一方 skill **部分覆盖**，仍保留为可用入口：`triage`（被 `requirements-analysis` 部分覆盖）、`grill-with-docs`（被 `requirements-analysis` 部分覆盖）、`wayfinder`（被 `requirements-analysis` 部分覆盖）、`tdd`（被 `dev-workflow-2-0` 部分覆盖）、`skills-security-check`（被 `agent-skill-bridge` 部分覆盖）。
+> 按「来源分类 > 字母顺序」排序。PPT 相关 skill 标记为项目级，归入 `crystepj-max/Chris-Vault/`。以下 skill 已被对应第一方 skill **部分覆盖**，仍保留为可用入口：`triage`（被 `requirements-analysis` 部分覆盖）、`grill-with-docs`（被 `requirements-analysis` 部分覆盖）、`wayfinder`（被 `requirements-analysis` 部分覆盖）、`skills-security-check`（被 `agent-skill-bridge` 部分覆盖）。原列于此处的 `tdd`（被 `dev-workflow-2-0` 部分覆盖）已随该第一方 skill 退役一并移除——`tdd` 现无覆盖来源。
 
 | # | Skill 名称 | 中文描述 | 仓库链接 / 来源 | 作者 | 仓库简介 | skill 范围 | 最新更新 |
 |---|---|---|---|---|---|---|---|
@@ -112,7 +113,9 @@
 | 3 | `to-tickets` | 把计划、规格或当前对话拆解成一组『追踪子弹』工单，每张标注其阻塞边界，发布到已配置的跟踪器——本地以每工单一个文件、边界以文本呈现，或在真实跟踪器上以原生阻塞链接呈现。  |  |  |  | 用户级  | 平台内置  |
 | 4 | `find-skills` | 当用户问『怎么实现 X』『有没有做 X 的 skill』『有没有能…的 skill』，或表达想扩展能力时，帮助发现并安装 agent skill。应在用户寻找可能以可安装 skill 形式存在的功能时使用。  |  |  |  | 用户级  | 平台内置  |
 
-**合计**：共 **81** 个 skill —— 第一方 **6** + 第三方 **71** + 参考 Skill **4**。
+**合计**：共 **80** 个 skill —— 第一方 **5** + 第三方 **71** + 参考 Skill **4**。
+
+> 2026-09-15 减 1：第一方 `dev-workflow-2-0` 退役（81 → 80）。技能范围的权威登记表是 `inventory/skill-policy.json`，本表与 `skill-lifecycle.md` 均由其派生。
 
 ## 版本更新记录
 
@@ -121,6 +124,11 @@
 > - WorkBuddy 内置 / 应用市场 skill：无公开仓库，标记为「平台内置」。
 > - 自研（本仓库 / 用户自建）skill：无上游仓库，标记为本地 `SKILL.md` 最后修改日期。
 > - 可运行 `scripts/refresh_inventory.py` 刷新「最新更新」列。
+
+> **近期更新（2026-09 月）**：
+> - 09-15：**`dev-workflow-2-0` 退役** —— 职责已由 M1 `requirements-analysis` / M2 `wf-construction-full-feature` / M3 `execution-plan` 拆分承接。合计 81 → 80，第一方 6 → 5。
+> - 09-15：同步移除第三方前言中的「`tdd` 被 `dev-workflow-2-0` 部分覆盖」——覆盖来源消失，`tdd` 视为无覆盖。
+> - 09-14：`construction-bootstrap` 退役（见 `skill-policy.json`）。
 
 > **近期更新（2026-08 月）**：
 > - 08-24：新增 `eli5`、`video-production`、`remotion-video-production`、`to-questionnaire`、`wait-what`、`wizard`（均为第三方，经 GitHub 核实来源）；移除 4 个 STS2 项目级 skill。
@@ -144,7 +152,7 @@
 > 2. **独立仓库（直接克隆对应仓库）**：12 个（agnes-ai-generation-skill、beautiful-html-templates、companion-inc/feynman、frontend-slides、guizang-ppt-skill、humanize-ppt、jmagly/aiwg、akillness/jeo-skills、llm-wiki-app、ppt-master、remotion-video-toolkit、sickn33/agentic-awesome-skills）
 > 3. **WorkBuddy 内置 / 应用市场（GitHub 检索未定位独立上游仓库）**：4 个（edit-article、find-skills、obsidian-vault、remotion-best-practices）
 > 4. **WorkBuddy 内置（腾讯云鼎实验室出品）**：1 个（skills-security-check）
-> 5. **自研（本仓库 / 用户自建）**：6 个，详见上方「第一方 Skill」板块（agent-cli-tool-residue-purge、agent-skill-bridge、clashx-openai-sse-debug、dev-workflow-2-0、duplicate-cli-unify、requirements-analysis）
+> 5. **自研（本仓库 / 用户自建）**：5 个，详见上方「第一方 Skill」板块（agent-cli-tool-residue-purge、agent-skill-bridge、clashx-openai-sse-debug、duplicate-cli-unify、requirements-analysis）
 
 > **体积提示**：以下 5 个 skill 含大体积本地资源，未打包进一键安装脚本，请用其仓库链接单独安装——`ppt-master`、`humanize-ppt`、`beautiful-html-templates`、`baoyu-slide-deck`、`guizang-ppt-skill`。
 
