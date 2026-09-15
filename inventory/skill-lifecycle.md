@@ -21,7 +21,7 @@
 | cross-domain-borrowing | active | global | `my-skills/cross-domain-borrowing` |
 | deep-company-series | transition | global | `~/.agents/skills/deep-company-series` |
 | dev-workflow-2-0 | retired | global | `~/.local/share/agent-skills/retired/dev-workflow-2-0` |
-| diagnosing-bugs | active | global | `my-skills/diagnosing-bugs` |
+| diagnosing-bugs | reference | global | `~/.local/share/agent-skills/references/diagnosing-bugs` |
 | domain-modeling | transition | global | `~/.agents/skills/domain-modeling` |
 | duplicate-cli-unify | transition | global | `~/.agents/skills/duplicate-cli-unify` |
 | dyp-ask | transition | global | `~/.agents/skills/dyp-ask` |

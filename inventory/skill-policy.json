@@ -198,14 +198,14 @@
     },
     {
       "name": "diagnosing-bugs",
-      "state": "active",
+      "state": "reference",
       "scope": "global",
-      "source": "my-skills/diagnosing-bugs",
-      "origin": "first-party",
+      "source": "~/.local/share/agent-skills/references/diagnosing-bugs",
+      "origin": "third-party",
       "accepted_fingerprints": [
-        "3575fe92012d21b56b1532356da6e5caa5caad739ed12781eb860153caa7976d",
-        "c2755a20a88eee09d36933f0dcaea3471ae0be14644da47505e9f0fa2b130945"
-      ]
+        "3575fe92012d21b56b1532356da6e5caa5caad739ed12781eb860153caa7976d"
+      ],
+      "migrate": true
     },
     {
       "name": "domain-modeling",

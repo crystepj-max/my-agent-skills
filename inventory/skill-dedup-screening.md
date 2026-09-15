@@ -60,10 +60,10 @@
 | 10 | `domain-modeling` | 开发 | 模型+斜杠 | 无 | 留 | |
 | 11 | `code-review` | 审查 | 模型+斜杠 | 无（`wf-*` 的 review 角色是引擎内证明者，非同一入口） | 留 | |
 | 12 | `improve-codebase-architecture` | 审查 | 仅斜杠 | 无 | 留 | |
-| 13 | `diagnosing-bugs` | 诊断 | 模型+斜杠 | **D-3**：与 `wf-diagnose` 重叠 | 待议（D-3） | |
+| 13 | `diagnosing-bugs` | 诊断 | 模型+斜杠 | **D-3**：与 `wf-diagnose` 重叠 | **已退役为参考类（2026-09-15）** | 退役 |
 | 14 | `grilling` | 打磨 | 模型+斜杠 | **D-2** 保留方 | 留 | |
-| 15 | `grill-me` | 打磨 | 仅斜杠 | **D-2**：与 `grilling` 零增量 | **候选（D-2）** | |
-| 16 | `grill-with-docs` | 打磨 | 仅斜杠 | **D-2**：`grilling` + 产出 ADR/术语表 | 待议（D-2） | |
+| 15 | `grill-me` | 打磨 | 仅斜杠 | **D-2**：与 `grilling` 零增量 | **保留（2026-09-15）** | 留 |
+| 16 | `grill-with-docs` | 打磨 | 仅斜杠 | **D-2**：`grilling` + 产出 ADR/术语表 | **保留（2026-09-15）** | 留 |
 | 17 | `handoff` | 交接 | 仅斜杠 | 无 | 留 | |
 | 18 | `resolving-merge-conflicts` | 收尾 | 模型+斜杠 | 无 | 留 | |
 | 19 | `setup-pre-commit` | 收尾 | 模型+斜杠 | 无 | 留 | |
@@ -107,28 +107,77 @@
 | 删除影响面 | 需四处同时生效：`~/.agents/skills`、`~/.workbuddy/skills`、`~/.claude/skills`、`~/.codex/skills`（桥接由脚本统一处理）；斜杠命令 `/grill-me` 消失 |
 | 回滚成本 | 中 —— 公共池非 git 管理，需删排除清单行后重装，或从上游仓库重取 |
 | 建议 | 删 `grill-me`（零增量），保留 `grilling` + `grill-with-docs` |
-| 你的决定 | |
+| 你的决定 | **保留全部三个（2026-09-15）** —— 三者的触发面不同（`grilling` 模型可触发，另两个 `disable-model-invocation` 仅斜杠），`/grill-me` 与 `/grill-with-docs` 是独立入口，不做合并。本组结案，不动任何文件 |
 
 ### D-3 缺陷诊断 —— 中置信
 
 | 项 | 内容 |
 |---|---|
-| 成员 | `wf-diagnose`（生成物）⟷ `diagnosing-bugs`（第三方） |
+| 成员 | `wf-diagnose`（生成物）⟷ `diagnosing-bugs`（第三方 + 第一方改写版） |
 | 证据 | 都是 bug 诊断 → 修复闭环 |
 | 增量差异 | `wf-diagnose`：5 节点 18 边、返工额度记账、需 workflowEngine。`diagnosing-bugs`：轻量诊断循环，任意会话可用、无编排无记录 |
 | 删除影响面 | 删 `diagnosing-bugs` 后，非运行时的临时排查无轻量专用入口，须起 `wf-diagnose` |
 | 建议 | 保留双方（调用面不同）。确实要收敛则删 `diagnosing-bugs` |
-| 你的决定 | |
+| 你的决定 | **保留 `wf-diagnose`，`diagnosing-bugs` 退役为参考类第三方（2026-09-15，已执行）** —— 见 §8 执行记录 |
 
-### D-4 多视角 —— 中置信
+### D-4 多视角 —— 中置信【已补充详细信息，待你定】
 
 | 项 | 内容 |
 |---|---|
 | 成员 | `wf-explore`（生成物）⟷ `expert-consultation`（第一方，git 管理） |
 | 证据 | 都是「挑互补视角 → 独立研究 → 交叉质疑 → 汇总共识/分歧」 |
-| 增量差异 | `wf-explore`：轮次机制、`PASS`/`NEEDS_RESEARCH`/`INSUFFICIENT` 完成类型、认知隔离、独立 scratch。`expert-consultation`：单会话框架、无需引擎 |
-| 建议 | 保留双方；若收敛，把 `expert-consultation` 降级为「引擎不可用时的轻量入口」或删除 |
-| 你的决定 | |
+| 建议 | 见下方详细对比后判断 |
+| 你的决定 | **待定** |
+
+#### D-4a `expert-consultation` 来源
+
+| 项 | 事实 |
+|---|---|
+| 性质 | **纯第一方自研**，非改编自任何第三方 |
+| 引入 | 单次提交 `f87433a`，2026-09-01 15:21，"feat: 新增 expert-consultation 多视角专家会诊 skill (完整数据)" |
+| 改动面 | 仅新增 1 个文件，118 行；**无** `source-manifest.json`、无 `upstream` 字段、无 `reference_copies` 条目 |
+| 资产 | 无脚本、无 `assets/`、无 `roles/`、无 `evals/` |
+| 登记 | `skill-policy.json`：`active` / `global` / `origin: first-party` / 2 个 `accepted_fingerprints`（值相同） |
+| **文档缺口** | **未出现在 `skill-desc-translation.md` 任何一张表**（第一方/第三方/参考表均无），该表漏收了它 |
+| 与第三方关系 | 无参考来源声明，判定为方法自拟 |
+
+#### D-4b `expert-consultation` 作用
+
+面向**「难决的问题」**，把单一视角的路径依赖拆开，收敛到一份决策建议。
+
+流程四步：
+
+1. **信息核查**——核对「问题 / 已知事实 / 目标 / 现实约束」四项；缺关键项时**只问一个问题**，不列清单。
+2. **选 3 个互补视角并说明必要性**——硬性规则明确禁止「3 个相似身份」（如三个前端工程师），必须从不同维度切分（价值机会 / 风险约束 / 落地可行 / 用户受影响 / 长期系统）。
+3. **每视角独立答 4 问**——①重定义问题 ②最推荐路径 ③其他视角易忽略的风险 ④什么新证据会推翻自己。强调认知隔离，不提前剧透他人结论。
+4. **三方互相质疑**——共同认可的事实 / 真正的分歧 / **分歧背后的不同假设**（作者认为多数「分歧」实为假设不同）。
+5. **主持人综合收口（五段）**——推荐方案 / 适用条件 / 最大风险 / 退出条件（止损线）/ 第一步行动。
+
+硬性护栏：先不开药（流程走完前不给结论）；不模仿、不编造真实人物，视角是「专业透镜」而非具名个人。
+
+#### D-4c 与 `wf-explore` 的逐维对比
+
+| 维度 | `expert-consultation` | `wf-explore` |
+|---|---|---|
+| 收敛目标 | **决策**（要不要做、怎么做） | **研究结论**（问题到底是怎么回事） |
+| 视角数量 | 固定 3 个 | 3–5 个，由统筹节点决定 |
+| 产出物 | 决策建议五段（含退出条件、第一步行动） | 证据地图 + 共识/分歧 + 完成类型 |
+| 终止条件 | 走完四步即结束 | `PASS` / `NEEDS_RESEARCH` / `INSUFFICIENT`，可自动补研 ≤2 轮 |
+| 运行载体 | 单会话内完成，**零外部依赖** | 4 节点 / 10 边，**需 `wf_run` 或 workflowEngine** |
+| 记录留痕 | 无落盘要求 | Logical Run / 分段 / 完成类型 / 可续跑 |
+| 视角身份 | 抽象专业透镜（明令禁止套用真人） | 专家 Agent，接收任务书 |
+| 体量 | 118 行单文件 | 6 文件（SKILL + meta + script + 4 roles，共约 480 行） |
+| 上游 | 松哥自研，无上游 | workflow-manager 蓝图编译生成物 |
+
+**结论**：重叠是真实存在的（都做「互补视角 + 独立作答 + 交叉质疑」），但**收敛目标不同**——一个收敛到决策，一个收敛到研究结论；且 `wf-explore` 硬依赖引擎，`expert-consultation` 零依赖，因此后者天然是「引擎不可用时」的轻量替代路径。
+
+**三个可选处置**（未选定，等你定）：
+
+| 选项 | 动作 | 代价 |
+|---|---|---|
+| A 保留双方 | 不动，各自按触发词分流 | 触发词有重叠（"从多个角度看""帮我分析一下"），可能都触发 |
+| B 降级为轻量替代 | 保留但改 `description`，明确「仅当 wf-explore 引擎不可用时使用」 | 需改 SKILL.md 触发条件；功能仍在 |
+| C 退役 | 与 D-1/D-3 同法，`skill-policy.json` 置 `retired` + 目录移出发现目录 | 失去零依赖路径；且它是自研资产，无第三方可回退 |
 
 ---
 
@@ -204,13 +253,33 @@
 | **跨机器待办** | 仓库同步到 Mac 后，需在 Mac 上清理 4 处悬空软链：`~/.agents/skills/construction-bootstrap`、`~/.workbuddy/skills/construction-bootstrap`、`~/.claude/skills/construction-bootstrap`、`~/.codex/skills/construction-bootstrap` |
 | **遗留验证缺口** | `wf_run` 通道仍未实测。若 `workflowEngine` 不可用，`wf-construction-full-feature` 会退化为内置 `workflow` 工具单段运行、不可从看板续跑 |
 
+> 说明：D-1 当日在**过期基线**（`8617e8c`）上执行；09-15 发现 CNB 基线 `b6933e4` 已把 `my-skills/construction-bootstrap` 扩到 23 文件，遂在新基线上重做，并在同一 PR 内登记 4 个 `wf-*`。以 §2026-09-15 记录为准。
+
+### 2026-09-15｜D-3 已执行 + `wf-*` 登记
+
+**决定**：登记 4 个 `wf-*`；`construction-bootstrap` 与 `dev-workflow-2-0` 置 `retired`；`diagnosing-bugs` 退役为参考类第三方，诊断职责由 `wf-diagnose` 承接。
+
+| 项 | 内容 |
+|---|---|
+| 基线 | CNB `b6933e4`（本地原基线 `8617e8c` 落后 2 提交，已快进对齐） |
+| 登记 4 个 `wf-*` | `wf-construction-full-feature` / `wf-diagnose` / `wf-explore` / `wf-optimize`，`active` + `global`，`upstream` 指向 workflow-manager 蓝图，指纹由 `manage-skills.fingerprint()` 生成 |
+| 退役 2 个 | `construction-bootstrap`（23 文件，active）、`dev-workflow-2-0`（9 文件，transition）→ `retired`，目录移至 `~/.local/share/agent-skills/retired/<name>` |
+| D-3 处置 | `diagnosing-bugs`：`active`/`first-party`/`my-skills/diagnosing-bugs` → `reference`/`third-party`/`~/.local/share/agent-skills/references/diagnosing-bugs`，加 `migrate: true`；第一方改写版（1 文件）归档至 `retired/diagnosing-bugs-first-party/`；`my-skills/diagnosing-bugs/` 已 `git rm` |
+| 参考副本落盘 | 执行 `reference_copies` 声明的迁移：`~/.agents/skills/diagnosing-bugs` → `~/.local/share/agent-skills/references/diagnosing-bugs`（3 文件）；清理 `.workbuddy` / `.claude` / `.codex` 三处桥接软链，无悬空 |
+| 派生文档 | `skill-lifecycle.md` 按登记表重建（D-1 部分 6 行 + D-3 部分 1 行）；`skill-desc-translation.md` 中 `diagnosing-bugs` 由第三方表移入「参考 Skill」板块（第三方 71→70、参考 4→5，总数不变） |
+| 验证 | `plan`：UNMANAGED 6→2（余 `llm-wiki`、`windows-ai-coding-env-setup`）、MISSING 17→16（`references/diagnosing-bugs` 由缺失转为就位）、OK 224→228、SOURCE 75→79 |
+| **已知偏差** | `plan` 对 `references/diagnosing-bugs` 报 `CONFLICT 参考资料与保留版本不同，未覆盖` —— 因参考副本由手工落盘而非 `apply` 生成。该行为**不覆盖任何内容、无数据损失**；在本机执行一次 `manage-skills.py apply` 即可对齐 |
+| 产物 | commit `010c0d4` + 本批 D-3 改动，已推送 CNB 分支 `chore-skill-dedup-20260915`，PR #2 |
+
 ---
 
 ## 待办
 
-- [x] D-1 执行（2026-09-14）
+- [x] D-1 执行（2026-09-14，后于 09-15 在新基线上重做）
+- [x] D-2 结论：保留全部三个
+- [x] D-3 执行（2026-09-15）
+- [ ] **D-4 待你选**：A 保留双方 / B 降级为轻量替代 / C 退役（见 D-4 详细对比）
 - [ ] 实测 `wf_run` 通道（D-1 遗留验证缺口）
-- [ ] 在 Mac 上清理 4 处悬空软链（仓库同步后执行）
-- [ ] 在 §1 / §2 / §3 剩余项的「你的决定」列填写筛选结果
-- [ ] 把筛选出的第三方移除项写入 `tools/skill-exclusions.txt`
-- [ ] 择机在**各自机器上**修正两份 Mac 快照文档（`inventory/skill-desc-translation.md` 第一方板块与计数、`docs/diagnostic-deepseek-harness-skill-discovery.md` 技能计数）—— 不在 Windows 侧代改
+- [ ] 在 Mac 上清理 `construction-bootstrap` 4 处悬空软链，并在本机跑一次 `manage-skills.py apply` 对齐 `references/diagnosing-bugs` 的 CONFLICT
+- [ ] 修正 `skill-desc-translation.md` 漏收 `expert-consultation` 的缺口（D-4a 发现）
+- [ ] 择机在**各自机器上**修正两份 Mac 快照文档（`docs/diagnostic-deepseek-harness-skill-discovery.md` 技能计数）—— 不在 Windows 侧代改
