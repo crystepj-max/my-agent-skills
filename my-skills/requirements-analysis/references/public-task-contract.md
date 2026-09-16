@@ -5,7 +5,7 @@
 > **产品拍板（相对上游规格的覆盖）**：自动返工上限 **3**（非上游文中的 2）；人工验收严格三态；定义 / 单任务 / 批量构成同一 skill 集合（见 `skill-set.md`），工程真源在本仓库，通用副本同步 my-agent-skills；定时开跑（M4）只到点唤起同一执行计划，不另建调度。  
 > **本文件职责**：定义 / 单任务交付 / Execution Plan 三块能力共用的任务字段、状态与版本规则。不单独建设第四套系统。  
 > **M1 范围**：契约 + Definition Skill（`dsh/skills/requirements-analysis/`）。  
-> **M2 范围**：内置模板 `templates/construction-full-feature.json` + 启动 Skill；单任务交付主链——见 `single-task-delivery-m2.md`。  
+> **M2 范围**：内置模板 `templates/wf-construction-full-feature.json` + 启动 Skill；单任务交付主链——见 `single-task-delivery-m2.md`。  
 > **M3 范围**：Execution Plan Skill——见 `execution-plan-m3.md`。  
 > **M4 范围**：到点唤起同一执行计划 + 夜间报告 + 试跑——见 `scheduled-trigger-m4.md`（不含完整验收工作台 / 每晚循环）。
 
@@ -267,7 +267,7 @@ Issue「任务规格位置」写上述相对路径。
 - **一任务一工作区**机制不变；分支基线改为**本地主干当前提交**（不再从远程拉取）。
 - 窗口期内本地主干**只能由任务合并推进**，禁止在主干上直接改动。
 - 合并采用**一任务一提交**：提交信息必带任务标识、需求基线、需求来源、任务范围、验收结果、任务卡与规格归档路径。
-- 合并后打标签 `task/loc-001/v1`，并把任务卡与对应版本规格归档至 `docs/tasks/archive/LOC-001/`（确保合并后仍可追溯）；工作区与分支**暂不删除**，留作恢复后补 PR 的原料。
+- 合并后打标签 `task/loc-001/v1`，并把任务卡与对应版本规格归档至 `docs/tasks/archive/LOC-001/`（确保合并后仍可追溯）；**工作区删除、分支保留**（阶段一口径：工作区可再生，随时可用 `git worktree add` 重建；分支不可再生，是补登 PR 的唯一载体）。
 
 ### 11.5 跟踪与回填
 

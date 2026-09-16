@@ -131,6 +131,17 @@
       ]
     },
     {
+      "name": "cnb-push",
+      "state": "active",
+      "scope": "global",
+      "source": "my-skills/cnb-push",
+      "origin": "first-party",
+      "note": "推送到 CNB 的封装脚本；内置代理绕过与 HTTP/1.1 修正",
+      "accepted_fingerprints": [
+        "5ebecc5e1ff85c944372bba78d30aa977c183eda1bd8ee1a500eb16cdb21d55c"
+      ]
+    },
+    {
       "name": "code-review",
       "state": "transition",
       "scope": "global",
@@ -1087,6 +1098,17 @@
       "origin": "third-party",
       "accepted_fingerprints": [
         "d32f93eb1e63c78fa8d47581694e2f1c2c2098978a362ae16edf875670bed1c4"
+      ]
+    },
+    {
+      "name": "cnb-git",
+      "state": "active",
+      "scope": "global",
+      "source": "my-skills/cnb-git",
+      "origin": "first-party",
+      "note": "CNB 全场景 Git 操作：clone/pull/fetch/push/分支/PR(含 WIP 草稿)/合并；内置凭据注入、代理修正与平台差异处理",
+      "accepted_fingerprints": [
+        "bbef8092ec0e90b87326a8099cc2ab88b91ad1f792265ce450b34caa7b167a2c"
       ]
     }
   ],

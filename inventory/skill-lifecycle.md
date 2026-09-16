@@ -17,6 +17,8 @@
 | clashx-openai-sse-debug | transition | global | `~/.agents/skills/clashx-openai-sse-debug` |
 | code-review | transition | global | `~/.agents/skills/code-review` |
 | codebase-design | transition | global | `~/.agents/skills/codebase-design` |
+| cnb-git | active | global | `my-skills/cnb-git` |
+| cnb-push | active | global | `my-skills/cnb-push` |
 | construction-bootstrap | retired | global | `~/.local/share/agent-skills/retired/construction-bootstrap` |
 | cross-domain-borrowing | active | global | `my-skills/cross-domain-borrowing` |
 | deep-company-series | transition | global | `~/.agents/skills/deep-company-series` |
