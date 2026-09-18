@@ -17,11 +17,11 @@
 | clashx-openai-sse-debug | transition | global | `~/.agents/skills/clashx-openai-sse-debug` |
 | code-review | transition | global | `~/.agents/skills/code-review` |
 | codebase-design | transition | global | `~/.agents/skills/codebase-design` |
-| construction-bootstrap | active | global | `my-skills/construction-bootstrap` |
+| construction-bootstrap | retired | global | `~/.local/share/agent-skills/retired/construction-bootstrap` |
 | cross-domain-borrowing | active | global | `my-skills/cross-domain-borrowing` |
 | deep-company-series | transition | global | `~/.agents/skills/deep-company-series` |
-| dev-workflow-2-0 | transition | global | `my-skills/dev-workflow-2-0` |
-| diagnosing-bugs | active | global | `my-skills/diagnosing-bugs` |
+| dev-workflow-2-0 | retired | global | `~/.local/share/agent-skills/retired/dev-workflow-2-0` |
+| diagnosing-bugs | reference | global | `~/.local/share/agent-skills/references/diagnosing-bugs` |
 | domain-modeling | transition | global | `~/.agents/skills/domain-modeling` |
 | duplicate-cli-unify | transition | global | `~/.agents/skills/duplicate-cli-unify` |
 | dyp-ask | transition | global | `~/.agents/skills/dyp-ask` |
@@ -101,5 +101,9 @@
 | wait-what | transition | global | `~/.agents/skills/wait-what` |
 | wayfinder | transition | global | `~/.agents/skills/wayfinder` |
 | wechat-article | transition | global | `~/.agents/skills/wechat-article` |
+| wf-construction-full-feature | active | global | `~/.agents/skills/wf-construction-full-feature` |
+| wf-diagnose | active | global | `~/.agents/skills/wf-diagnose` |
+| wf-explore | active | global | `~/.agents/skills/wf-explore` |
+| wf-optimize | active | global | `~/.agents/skills/wf-optimize` |
 | wizard | transition | global | `~/.agents/skills/wizard` |
 | writing-great-skills | transition | global | `~/.agents/skills/writing-great-skills` |
