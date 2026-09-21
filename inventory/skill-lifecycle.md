@@ -44,7 +44,7 @@
 | grill-with-docs | transition | global | `~/.agents/skills/grill-with-docs` |
 | grilling | transition | global | `~/.agents/skills/grilling` |
 | guizang-ppt-skill | reference | presentations | `project:presentations/.agent-assets/presentations/guizang-ppt-skill` |
-| handoff | transition | global | `~/.agents/skills/handoff` |
+| handoff | active | global | `~/.agents/skills/handoff` |
 | hatch-pet | transition | global | `~/.agents/skills/hatch-pet` |
 | humanize-ppt | reference | presentations | `project:presentations/.agent-assets/presentations/humanize-ppt` |
 | implement | reference | global | `~/.local/share/agent-skills/reference/implement` |

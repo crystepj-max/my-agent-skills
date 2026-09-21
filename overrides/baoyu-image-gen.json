@@ -1,6 +1,6 @@
 {
-  "original_sha256": "2c6f62770d15bdd73bc17f4cb8fbbf7379e3d2ac5bfb71070c4e93e1156b5c22",
-  "updated_sha256": "80266546904acef2399c00b4f815d21024713086f09e8fb063786efd5f323fe6",
+  "original_sha256": "212ce2f9c4b49b165b09e8f8b47416f3cc716796ed1b79c4c3a08dc9db539ab9",
+  "updated_sha256": "e8f7ad4163765cb68d763b0240ae4db8d08ddc5682debd0cc0cf3dfe245314e6",
   "replacements": [
     [
       "## Step 0: Load Preferences ⛔ BLOCKING",
@@ -17,6 +17,10 @@
     [
       "- **Not found** → run first-time setup (`references/config/first-time-setup.md`) using AskUserQuestion to collect provider + model + quality + save location. Save EXTEND.md, then continue. Do not generate images before this completes.",
       "- **Not found** → 使用本轮参数和现有可用工具完成制作。仅在用户要求长期保存偏好时运行 `references/config/first-time-setup.md`；新增付费服务或必需凭据缺失按全局授权边界处理。"
+    ],
+    [
+      "AI image generation with OpenAI GPT Image 2.5, Azure OpenAI, Google, OpenRouter, DashScope, Z.AI GLM-Image, MiniMax, Jimeng, Seedream, Replicate and Agnes APIs. Supports text-to-image, reference images, aspect ratios, and batch generation from saved prompt files. Sequential by default; use batch parallel generation when the user already has multiple prompts or wants stable multi-image throughput. Use when user asks to generate, create, or draw images.",
+      "\"基于 OpenAI、Google、DashScope 接口的 AI 图像生成。支持文生图、参考图、多种宽高比。默认串行生成，可按需并行。当用户要生成、创作或绘制图像时使用。\""
     ]
   ]
 }

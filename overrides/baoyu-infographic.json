@@ -1,5 +1,5 @@
 {
-  "original_sha256": "5b4ee2b92cbed947aedb2acb0f79111fb64290297d9110fa52901284ce2bcf22",
+  "original_sha256": "1572aaa294c5f7547889f520b6efeed979aeaaf58b4e7c4bcaaa26ace2ee3564",
   "updated_sha256": "e6f1b107d2f11e9d8f4356f103cff8b8b66f8d9be856548577624fad8bfc1158",
   "replacements": [
     [
@@ -17,6 +17,10 @@
     [
       "- Skip confirmation only when the current request explicitly says to do so, for example: `--no-confirm`, \"直接生成\", \"不用确认\", \"跳过确认\", \"按默认出图\", or equivalent wording.",
       "- `--no-confirm` 和“直接生成”等是明确偏好；不要求用户每次复述这些词才能继续已授权制作。"
+    ],
+    [
+      "Generate professional infographics with 21 layout types and 22 visual styles. Analyzes content, recommends layout×style combinations, and generates publication-ready infographics. Use when user asks to create \"infographic\", \"信息图\", \"visual summary\", \"可视化\", or \"高密度信息大图\".",
+      "\"专业信息图生成工具，提供 20 种版式与 17 种视觉风格。会分析内容、推荐『版式×风格』组合并生成可直接发布的成品信息图。当用户要制作信息图、数据可视化海报或一页式图解时使用。\""
     ]
   ]
 }

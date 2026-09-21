@@ -55,7 +55,7 @@
       "source": "~/.agents/skills/ask-matt",
       "origin": "third-party",
       "accepted_fingerprints": [
-        "0f6bda9ca2b9b621b09906c8b21450b470ad411409f8dc62cfebe334ca4a60d5"
+        "284c0e7894cab1ac15184bf9589909d4c5a88a2bc2f978c85663bf59a13c41a8"
       ]
     },
     {
@@ -75,7 +75,7 @@
       "source": "~/.agents/skills/baoyu-image-gen",
       "origin": "third-party",
       "accepted_fingerprints": [
-        "7e4d228394270acd0c71563e109b35a39562766794943a900638eaba89a43596"
+        "9b2f7de08c021d0264900b4646b31c362ba9128f23f6e8205b139e24089a1533"
       ]
     },
     {
@@ -85,7 +85,7 @@
       "source": "~/.agents/skills/baoyu-infographic",
       "origin": "third-party",
       "accepted_fingerprints": [
-        "0caed33b6af996eda14cb2484abf84e099415cfc52cfdb7c9d8f42fe992026cc"
+        "01f33d202b693552bb643053ebc9d08749af5a9cd24afb9fd451c7d1293f4d54"
       ]
     },
     {
@@ -148,7 +148,7 @@
       "source": "~/.agents/skills/code-review",
       "origin": "third-party",
       "accepted_fingerprints": [
-        "3ef44e9286d36fb09816412d926e9ee6324940d6f664df569cfdee776e346bd4"
+        "76cb67fdc0e0f4b58a37d038ecf8dcf4cccc81bab5edb5a5a892d762651ac5ca"
       ]
     },
     {
@@ -158,7 +158,7 @@
       "source": "~/.agents/skills/codebase-design",
       "origin": "third-party",
       "accepted_fingerprints": [
-        "2aaef482a9075b501c6429f3345e37cfc88a4eb4655074c460fbda363e3bd2ba"
+        "d4125d23a7f78a44ac515418ad02af316acfbc3d61a4f32b0eb96110f96c5872"
       ]
     },
     {
@@ -225,7 +225,7 @@
       "source": "~/.agents/skills/domain-modeling",
       "origin": "third-party",
       "accepted_fingerprints": [
-        "6b28ebf7a58fcc1305243953311a92d3f3584ad692b4a274cb397b3263746163"
+        "16b3c134713d50d8af073a407eafa863cffce6ee983c345a8da80d05940fd427"
       ]
     },
     {
@@ -285,7 +285,7 @@
       "source": "~/.agents/skills/eli5",
       "origin": "third-party",
       "accepted_fingerprints": [
-        "1f3df97bd61af3a1efbe757c4f90461b02f0b9747574d6c33d49125474984470"
+        "accdc6106eea72ab497345cd20dabcbd13fd5eac8dd61183a9a13b7cdab767ce"
       ]
     },
     {
@@ -361,7 +361,7 @@
       "source": "~/.agents/skills/frontend-design",
       "origin": "third-party",
       "accepted_fingerprints": [
-        "7a4fe587bcb14139cf136732ae4cfb68ccdeedbbaff34dbc97093519be509275"
+        "cf0574391f0be8a5bd84e8163df9ab430c39a4d3a9c61b8b7e6f4f39c2a54e3a"
       ]
     },
     {
@@ -392,7 +392,7 @@
       "source": "~/.agents/skills/grill-me",
       "origin": "third-party",
       "accepted_fingerprints": [
-        "2eace01128cf74c4a7caaeb8e41c2b2e34ac321c6d8388e47d2697ad9c13e381"
+        "2f11b873a2e48e200e9c9b45ed702bb57881bbeb70f1bde3555925aef30cc083"
       ]
     },
     {
@@ -402,7 +402,7 @@
       "source": "~/.agents/skills/grill-with-docs",
       "origin": "third-party",
       "accepted_fingerprints": [
-        "adcee4bcbf9542d2cbf8512ca556157c56e6f63d06e7ed05d854e8830ae5cca1"
+        "d9577ee5edf112b481cb26f99fb5813d2378388f0c5764be3683571a37311b2b"
       ]
     },
     {
@@ -412,7 +412,7 @@
       "source": "~/.agents/skills/grilling",
       "origin": "third-party",
       "accepted_fingerprints": [
-        "ec124983a527056c1e3fda9237756f2c743af6f3aab5a18e19c5452423fa8229"
+        "ec388b77e7aff294289ea4b393211a07f2b11f6f8c01e802747a520be8e13f01"
       ]
     },
     {
@@ -428,12 +428,12 @@
     },
     {
       "name": "handoff",
-      "state": "transition",
+      "state": "active",
       "scope": "global",
       "source": "~/.agents/skills/handoff",
       "origin": "third-party",
       "accepted_fingerprints": [
-        "1bae6708815b80229afcc014ed09b75ed04f42f9c1cc60c0fd261275c8d88693"
+        "637095c0ccea0501b0e2da8ed8315d613ffe8e511a059282ca9b4d2272c66b14"
       ]
     },
     {
@@ -475,7 +475,7 @@
       "source": "~/.agents/skills/improve-codebase-architecture",
       "origin": "third-party",
       "accepted_fingerprints": [
-        "3c1a813518dafff509bdf8eddfdab96542115e860edd596cc9bcb31af1a7882c"
+        "6b2f96240cd24ffb1cac03e5a9451cfe3c1ebb84c99943ed2cd60d7c3c60953c"
       ]
     },
     {
@@ -535,7 +535,7 @@
       "source": "~/.agents/skills/investment-research",
       "origin": "third-party",
       "accepted_fingerprints": [
-        "9327ba616fbf5feeabade83c8c628f37a3688c64d9686d38f896f6aaa9fc3d68"
+        "8196fb63d11c95dcc26f2059895605bcd5960ff9569db5a3ae22933be27b1e5d"
       ]
     },
     {
@@ -545,7 +545,7 @@
       "source": "~/.agents/skills/investment-team",
       "origin": "third-party",
       "accepted_fingerprints": [
-        "526a0b0ec517a27be5593c4f011ea23d91f965d9c8cbc0296f82b0b6d7e98ed1"
+        "0089cbd0e1c54f72c74a66d2be5612a462f7241d369dc29b759f9c3fd3e63de2"
       ]
     },
     {
@@ -617,7 +617,6 @@
       "source": "my-skills/neat-freak",
       "origin": "first-party",
       "accepted_fingerprints": [
-        "aab8084701bdcc6c6ab3388d5323b3644e5b4fb8c8a1911a437995a2111052d4",
         "603f2341338f86b3b64f7ba38dc27c3abeed892b72694284976e7738553c5421"
       ]
     },
@@ -628,7 +627,7 @@
       "source": "~/.agents/skills/news-pulse",
       "origin": "third-party",
       "accepted_fingerprints": [
-        "b4829049d368fe025717d9d54c414304aea9bc36da9eedb7ebc65a17c4acb5d6"
+        "1db367b7b8054af6f400134a2924206be5c35a016c124f6657ed63dd70cf6bf8"
       ]
     },
     {
@@ -689,7 +688,7 @@
       "source": "~/.agents/skills/prototype",
       "origin": "third-party",
       "accepted_fingerprints": [
-        "fc2f489c9c5a28f0efdfafc1eb3a742fac238082e0236bc803a34f2723403fdc"
+        "e4d5340364cece12ebd91ed8bf4838ace18de3f12b5b7616ec443b61a2da574b"
       ]
     },
     {
@@ -762,7 +761,7 @@
       "source": "~/.agents/skills/research",
       "origin": "third-party",
       "accepted_fingerprints": [
-        "2e41568f66e40f3910f818f173baf0b06434d161ee3c36d31be44e8b0d9ee15d"
+        "46f7431025029d5c2962da63aea6ab97dc0ea4f8d9e4868d707fe0eb5b514f9e"
       ],
       "excluded_agent_roots": [
         "~/.hermes/skills"
@@ -776,7 +775,7 @@
       "source": "~/.agents/skills/resolving-merge-conflicts",
       "origin": "third-party",
       "accepted_fingerprints": [
-        "06a18c01997a91af90a3212d2c9dcd049717e5afcf90312d9201ce647b74a50f"
+        "7ff10b7fb850868660f2b2550d86909c263c0351e4c3a145090cce465acaab78"
       ]
     },
     {
@@ -796,7 +795,7 @@
       "source": "~/.agents/skills/setup-matt-pocock-skills",
       "origin": "third-party",
       "accepted_fingerprints": [
-        "9821e1b9b93d1c847240b530a88fa84572d25dcbd80ff26665c18c8a675dcba1"
+        "153481315e5f9bb669b8e10acce97118efc9e9bf7bd0916289d5556cc3942843"
       ]
     },
     {
@@ -899,7 +898,6 @@
       "source": "my-skills/tdd",
       "origin": "first-party",
       "accepted_fingerprints": [
-        "6fea8acf23410b4d398b1b36dcc759bd9400c2b893c2073729456c5a8595e855",
         "ccb363ecb8d881884475d4355641ac5424b958eac794e40a89cc6bee772f598f"
       ]
     },
@@ -910,7 +908,7 @@
       "source": "~/.agents/skills/teach",
       "origin": "third-party",
       "accepted_fingerprints": [
-        "eaa00f6089caa35ebae0e757d9d3a5e15c9532ef834e53b24b4b16c5dec51b28"
+        "2d1b03f9deb23caad13bd76c5905ddf644bd2f15157fa9f774b5f89959c9b8f4"
       ]
     },
     {
@@ -982,7 +980,7 @@
       "source": "~/.agents/skills/triage",
       "origin": "third-party",
       "accepted_fingerprints": [
-        "bdee25be135d933dd4b0a4a81452d9c7e24eddaad5f62a0115ab0d8227f4d1f6"
+        "b44cb50f39c02e26a7968bc4e7d06aa7936ebf6b0a115e4de46919281cf6d063"
       ]
     },
     {
@@ -1023,7 +1021,7 @@
       "source": "~/.agents/skills/wayfinder",
       "origin": "third-party",
       "accepted_fingerprints": [
-        "584e12d55fdac0f343d879037ff9142f9f7b17c724d0143a616ccbbb4b075d74"
+        "73a884fa4157a6b3bbe2b8939844ff66b8cffbbb9b80620bae120326c94e2a18"
       ]
     },
     {
@@ -1097,7 +1095,7 @@
       "source": "~/.agents/skills/writing-great-skills",
       "origin": "third-party",
       "accepted_fingerprints": [
-        "d32f93eb1e63c78fa8d47581694e2f1c2c2098978a362ae16edf875670bed1c4"
+        "3c287bd4177a38375e4f2fa24d62847ea1c0134d9b7fe00d64a5f428191e9856"
       ]
     },
     {

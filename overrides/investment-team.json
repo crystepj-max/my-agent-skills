@@ -1,5 +1,5 @@
 {
-  "original_sha256": "d02e5cbe80d2459709e7dd66f8df62d4680b092d806d06bf3c6cc6b79ba757cf",
+  "original_sha256": "4b5060622c325111053edb75e521684da3749cf6bfc7090618f5bd47fd9a307f",
   "updated_sha256": "7b76547f2252f364377aa8343f8b76a5e7b454570f5ebd97ecaf7d568b13a09d",
   "replacements": [
     [
@@ -13,6 +13,10 @@
     [
       "2. 若两处都未命中（即未放行）→ **停下来，不要启动 Agent**，提示用户：",
       "2. 仅在 Claude Code 的对应能力确认被阻止、且无可用等价方式时暂停依赖联网的研究，完成已有资料分析后提示缺口："
+    ],
+    [
+      "\"AI Berkshire skill: 投研团队：四角色并行分析框架. Source: skills/investment-team.md.\"",
+      "\"投研团队：四角色并行分析框架。来源：skills/investment-team.md.\""
     ]
   ]
 }
