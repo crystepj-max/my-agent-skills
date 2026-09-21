@@ -58,7 +58,9 @@ cd "$REPO_DIR" 2>/dev/null || { echo "❌ 无法进入目录：$REPO_DIR" >&2; e
 REPO_DIR="$PWD"
 
 # ---------- 基础校验 ----------
-if [ ! -d ".git" ]; then
+# 注意：worktree 里 .git 是「文件」（内容 gitdir: ...），用 [ -d .git ] 会误判「不是 git 仓库」。
+# 用 rev-parse --is-inside-work-tree 判断才兼容 worktree（2026-09-18 实测踩坑）。
+if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
   echo "❌ 不是 git 仓库：$REPO_DIR" >&2; exit 1
 fi
 
