@@ -22,6 +22,26 @@ description: "管理多助手技能的启用、参考、退役、使用范围、
 - 本地应用、检查、恢复均不自动提交或推送。用户明确要求发布时只提交已审阅的指定文件；不得把整个工作区无关改动一起提交，不强推或强制推到 main。
 - 本技能脚本是入口，调用本仓库 `scripts/manage-skills.py`。仓库不存在时说明缺少维护源，不从安装副本反向覆盖仓库。
 
+## 中文化：description 必须译为中文
+
+**第三方 skill 的 frontmatter `description` 一律译为中文**，正文保持原语言不译。这样 `/` 命令与各助手的选择列表可读，也便于人工核对。
+
+装完或从上游更新后跑一次守护：
+
+```bash
+bash ~/.agents/skills/agent-skill-bridge/scripts/cn_guard.sh          # 登记表内 active/transition
+bash ~/.agents/skills/agent-skill-bridge/scripts/cn_guard.sh --all    # 并查未登记条目
+```
+
+退出码：`0` 通过 / `1` 有纯英文或缺失需翻译 / `2` 环境异常（维护源缺失、目标不可读、校验范围为空）。
+
+两条硬规则：
+
+- **只读，不自动改写。** 翻译需要 LLM 判断，脚本只如实报告，由 agent 用 Edit 逐项写入。旧 `cn --fix` 已移除——无人审阅的自动写入会覆盖已核对的中文描述。
+- **退出码是唯一可信信号。** 早期实现用 `grep` 匹配输出来判断，工具报错时 grep 无匹配 → 误判「通过」并 exit 0，是**假绿灯**，会骗过 CI。判断成败只准看退出码，不准解析输出文本。
+
+判定英文用两级顺序：中文占比 ≥ 15% 即放行（技术类中文描述常内嵌成串英文，如报错原文、API 名、CLI 参数），否则看是否存在连续 4 个以上英文单词。阈值与检测逻辑在 `manage-skills.py` 的 `needs_translation()`，回归见 `tests/test_cn_guard.py`。
+
 ## 语义重复：不同名同物（登记表查不出来，必须人工判）
 
 `manage-skills.py plan` 只按声明名与来源判断重复，**不同名但功能重叠它查不出来**。这类重叠里最高频的是新旧两代并存，判法如下。

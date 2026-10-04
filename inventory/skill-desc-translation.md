@@ -17,7 +17,7 @@
 | # | Skill 名称 | 中文描述 | 参考的 skill | 参考日期 | skill 范围 | 最新更新 |
 |---|---|---|---|---|---|---|
 | 1 | `agent-cli-tool-residue-purge` | 当 AI 编程 CLI（Claude Code、Codex、Gemini CLI 等）在某个辅助/代理/包装工具被卸载后开始报错时使用——例如 SessionStart:startup hook error、每次 Bash 调用都 command not found、或 CLI 静默指向已失效的 localhost 端口。提供跨所有配置层（settings 文件、MCP 注册表、hooks、shell rc、launchd、cron）的全面排查与清理流程，确保不留任何陈旧引用。 | — | — | 用户级 | 平台内置 |
-| 2 | `agent-skill-bridge` | 统一管理多个 AI agent（claude / codex / workbuddy 等）的第三方 skill 安装流程——安全审计 + 安装到公共池 ~/.agents/skills/ + 中文化 + 软链桥接到各 agent 默认目录 + 校验每个 agent 对同一 skill 只保留 1 份（去重）。 | find-skills | 2026-08-22 | 用户级 | 平台内置 |
+| 2 | `agent-skill-bridge` | 统一管理多个 AI agent（claude / codex / workbuddy 等）的第三方 skill 安装流程——安全审计 + 安装到公共池 ~/.agents/skills/ + 中文化 + 软链桥接到各 agent 默认目录 + 校验每个 agent 对同一 skill 只保留 1 份（去重）。含只读的中文化守护 `cn_guard.sh`：校验已登记技能 description 是否仍为中文，退出码 0/1/2，不自动改写。 | find-skills | 2026-10-05 | 用户级 | 平台内置 |
 | 3 | `clashx-openai-sse-debug` | 排查 ClashX（ClashX Pro）代理导致 OpenAI 或 API 流式 SSE 连接中断的问题：Codex 桌面端连不上、stream closed before response.completed、SSE 断连、macOS 上 ClashX 规则模式或全局模式下 OpenAI 流式失败。覆盖 ClashX 控制 API、热重载导致 DNS 崩溃的坑、验证 OpenAI 必须走代理、节点选择、SSE 稳定性测试。 | — | — | 用户级 | 平台内置 |
 | 4 | `duplicate-cli-unify` | 当同一个命令行工具（如 Claude Code、Codex 或任何 npm/node 类 CLI）被多个包管理器重复安装时使用——最常见的是 nvm 全局安装与 Homebrew 安装并存，导致版本混乱、残留旧副本、或自动更新静默写入错误路径。提供检测、分析、决策、修复的完整流程，把工具统一到单一安装源。 | — | — | 用户级 | 平台内置 |
 | 5 | `requirements-analysis` | 需求分析统一入口：把 GitHub issue 或用户的原始输入加工成一份含三要素（任务目标/涉及范围/验收标准）的可执行需求，按体量拆解为任务清单或决策地图，并落盘回写 issue。 | to-spec、to-tickets | 2026-08-18 | 用户级 | 平台内置 |
@@ -131,6 +131,7 @@
 > - 可运行 `scripts/refresh_inventory.py` 刷新「最新更新」列。
 
 > **近期更新（2026-10 月）**：
+> - 10-05：**`agent-skill-bridge` 中文化守护修复** —— `cn_guard.sh` 此前调用的 `bridge.py --mode cn` 在 b6933e4 重构中已被删除，脚本成为孤儿；且它用 `grep` 匹配输出判断成败，工具报错时 grep 无匹配 → **误判「守护通过」并 exit 0（假绿灯，会骗过 CI）**。现把 `cn` 能力作为 `manage-skills.py` 的一个模式恢复（只读校验，不自动改写），`bridge.py` 与 `cn_guard.sh` 均转交该模式并直接透传退出码。回归见 `tests/test_cn_guard.py`（11 例）。
 > - 10-04：新增第三方 `typesafe-ai`（来源 [github.com/typesafe-ai/skills](https://github.com/typesafe-ai/skills)）。经安全审计为 P2：仅 SKILL.md + LICENSE 纯文档，无脚本、无远程执行、无凭据读取；description 已中文化。
 
 > **近期更新（2026-09 月）**：

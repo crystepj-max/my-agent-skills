@@ -1,9 +1,15 @@
 #!/usr/bin/env python3
-"""按登记的状态、来源和范围恢复技能；只移动已核对的入口，保留异动。"""
+"""按登记的状态、来源和范围恢复技能；只移动已核对的入口，保留异动。
+
+模式：
+  plan / apply / check  —— 技能入口治理（唯一实现，bridge.py 转交到这里）
+  cn                    —— 中文化守护：校验已登记技能的 description 是否仍为中文
+"""
 import argparse
 import hashlib
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -240,14 +246,152 @@ class Manager:
         return self.rows
 
 
+CJK_RE = re.compile(r'[\u4e00-\u9fff]')
+# 「连续 4 个以上英文单词」才判为英文句子；避免把 `skills/foo.md`、`GPT-5.6` 误判。
+ENGLISH_SENTENCE = re.compile(r"(?:[A-Za-z][A-Za-z'\-]*\s+){3,}[A-Za-z][A-Za-z'\-]*")
+FRONTMATTER_RE = re.compile(r"^---\s*\n(.*?)\n---", re.S)
+DESCRIPTION_RE = re.compile(r"^description:\s*(.*)$", re.M)
+BLOCK_SCALAR = ('', '>', '|', '>-', '|-', '>+', '|+')
+# 技术类中文描述常内嵌成串英文（报错原文、API 名、CLI 参数），中文占比达标即放行。
+CJK_THRESHOLD = 0.15
+
+
+def cjk_ratio(text):
+    body = re.sub(r'\s', '', text or '')
+    return len(CJK_RE.findall(body)) / len(body) if body else 0.0
+
+
+def needs_translation(text):
+    """判定 description 是否仍是英文（需 LLM 翻译）。顺序不可颠倒。"""
+    if cjk_ratio(text) >= CJK_THRESHOLD:
+        return False
+    return bool(ENGLISH_SENTENCE.search(text or ''))
+
+
+def read_description(text):
+    """返回 (描述文本, 是否块标量)；无 description 字段时返回 (None, False)。
+
+    块标量（`>`/`|`）会把后续缩进行折叠进来，必须一并读出，否则误判为空。
+    """
+    matched = FRONTMATTER_RE.match(text)
+    if not matched:
+        return None, False
+    frontmatter = matched.group(1)
+    line = DESCRIPTION_RE.search(frontmatter)
+    if not line:
+        return None, False
+    if line.group(1).strip() not in BLOCK_SCALAR:
+        return line.group(1).strip(), False
+    lines = frontmatter.splitlines()
+    for index, current in enumerate(lines):
+        if re.match(r'^description:\s*', current):
+            cursor, block = index + 1, []
+            while cursor < len(lines) and lines[cursor][:1] in (' ', '\t'):
+                block.append(lines[cursor].strip())
+                cursor += 1
+            return '\n'.join(block), True
+    return '', True
+
+
+def cn_targets(config, scope):
+    """列出待校验的 (技能名, SKILL.md 路径)。
+
+    managed：登记表内且状态会进入执行目录的技能（active/transition）。
+    all：再加上公共池里未登记的发现目录条目，用于发现新装未登记的英文 skill。
+    """
+    pool = Path(config['pool']).expanduser()
+    rows = []
+    for entry in config['skills']:
+        if entry['state'] not in {'active', 'transition'}:
+            continue
+        source = Path(entry['source']).expanduser()
+        skill_md = source / 'SKILL.md'
+        if skill_md.is_file():
+            rows.append((entry['name'], skill_md, 'managed'))
+    if scope == 'all' and pool.is_dir():
+        registered = {name for name, _, _ in rows}
+        for folder in sorted(pool.iterdir()):
+            skill_md = folder / 'SKILL.md'
+            if folder.is_dir() and skill_md.is_file() and folder.name not in registered:
+                rows.append((folder.name, skill_md, 'unmanaged'))
+    return rows
+
+
+def cn_guard(config, scope='managed', report=None):
+    """校验已登记技能的 description 是否仍为中文。
+
+    退出码：0=全部中文；1=有需翻译/缺失项；2=环境异常。
+    这里不做任何自动翻译写入——翻译需要 LLM 判断，脚本只负责如实报告。
+    """
+    print('中文化守护 - 校验技能 description 是否仍为中文')
+    print('=' * 72)
+    print(f'范围：{scope}（managed=登记表内 active/transition 技能）')
+    print('-' * 72)
+    targets = cn_targets(config, scope)
+    if not targets:
+        print('未找到可校验的技能（登记表与公共池均为空？请检查维护源是否完整）。')
+        print('=' * 72)
+        return 2
+    already_cn, needs, missing, unreadable = [], [], [], []
+    for name, skill_md, kind in targets:
+        try:
+            text = skill_md.read_text(encoding='utf-8')
+        except OSError as error:
+            unreadable.append((name, kind, str(error)))
+            continue
+        description, _ = read_description(text)
+        if description is None:
+            missing.append((name, kind, '无 description 字段'))
+        elif not description.strip():
+            missing.append((name, kind, 'description 为空'))
+        elif needs_translation(description):
+            needs.append((name, kind, description[:70]))
+        else:
+            already_cn.append(name)
+    print(f'已是中文：{len(already_cn)} 项')
+    if needs:
+        print(f'\n[需 LLM 翻译] {len(needs)} 项（纯英文，脚本无法自动翻译）：')
+        for name, kind, current in needs:
+            print(f'   - {name} ({kind}): {current}')
+    if missing:
+        print(f'\n[缺失描述] {len(missing)} 项：')
+        for name, kind, reason in missing:
+            print(f'   - {name} ({kind}): {reason}')
+    if unreadable:
+        print(f'\n[读取失败] {len(unreadable)} 项：')
+        for name, kind, reason in unreadable:
+            print(f'   - {name} ({kind}): {reason}')
+    print('=' * 72)
+    result = dict(mode='cn', scope=scope, already_cn=len(already_cn),
+                  needs=[name for name, _, _ in needs],
+                  missing=[name for name, _, _ in missing],
+                  unreadable=[name for name, _, _ in unreadable])
+    if report:
+        report.parent.mkdir(parents=True, exist_ok=True)
+        report.write_text(json.dumps(result, ensure_ascii=False, indent=2) + '\n')
+    if unreadable:
+        print('⚠️ 有技能无法读取，守护结论不可信，请先修复文件权限。')
+        return 2
+    if needs or missing:
+        print('⚠️ 守护未通过：请用 Edit 把上述技能的 description 译为中文，然后重跑本模式。')
+        return 1
+    print('✅ 守护通过：已登记技能的 description 全部为中文，无被上游覆盖回英文的项。')
+    return 0
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('mode', choices=['plan', 'apply', 'check'])
+    parser.add_argument('mode', choices=['plan', 'apply', 'check', 'cn'])
     parser.add_argument('--config', type=Path)
     parser.add_argument('--report', type=Path)
+    parser.add_argument('--cn-scope', default='managed',
+                        choices=['managed', 'all'],
+                        help='managed=只查登记表内技能（默认）；all=并查未登记的发现目录条目')
     args = parser.parse_args()
     repo = Path(__file__).resolve().parents[1]
     config = json.loads((args.config or repo/'inventory/skill-policy.json').read_text())
+    if args.mode == 'cn':
+        return cn_guard(config, scope=args.cn_scope, report=args.report)
     manager = Manager(repo, config, apply=args.mode == 'apply')
     rows = manager.run()
     if args.mode == 'apply':
