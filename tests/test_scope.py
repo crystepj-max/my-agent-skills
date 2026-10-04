@@ -33,7 +33,7 @@ class ScopeTests(unittest.TestCase):
     def test_firstparty_updates_all_files_and_repeat_has_no_changes(self):
         source = self.skill(self.repo/'my-skills/sample', 'new')
         old = self.skill(self.pool/'sample')
-        (self.alias/'sample').symlink_to(old)
+        module.make_link(self.alias/'sample', old)
         self.config['skills']=[dict(name='sample', source='my-skills/sample', state='active', scope='global', accepted_fingerprints=[module.fingerprint(old)])]
         self.run_manager(True)
         self.assertEqual((self.alias/'sample/SKILL.md').read_text(),(source/'SKILL.md').read_text())
@@ -44,7 +44,7 @@ class ScopeTests(unittest.TestCase):
 
     def test_reference_and_backup_leave_discovery_and_do_not_return(self):
         old=self.skill(self.pool/'sample')
-        (self.alias/'sample').symlink_to(old)
+        module.make_link(self.alias/'sample', old)
         self.config['skills']=[dict(name='sample',source='~/.local/share/refs/sample',state='reference',scope='global',migrate=True,accepted_fingerprints=[module.fingerprint(old)])]
         self.run_manager(True)
         self.assertFalse((self.pool/'sample').exists())

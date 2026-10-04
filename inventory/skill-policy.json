@@ -984,6 +984,17 @@
       ]
     },
     {
+      "name": "typesafe-ai",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/typesafe-ai",
+      "origin": "third-party",
+      "accepted_fingerprints": [
+        "07d76735eed4b7e88e1d32c592ae6642f165bb9c004f337f3f90edc70ac7fbb9",
+        "2b5db0876564e34f65eb6c22f9962d5d94c1d4bf9dce868d9e10e0ab7a4cb9fc"
+      ]
+    },
+    {
       "name": "uncover-hidden-talents",
       "state": "active",
       "scope": "global",

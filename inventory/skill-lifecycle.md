@@ -98,6 +98,7 @@
 | to-spec | reference | global | `~/.local/share/agent-skills/reference/to-spec` |
 | to-tickets | reference | global | `~/.local/share/agent-skills/reference/to-tickets` |
 | triage | transition | global | `~/.agents/skills/triage` |
+| typesafe-ai | transition | global | `~/.agents/skills/typesafe-ai` |
 | uncover-hidden-talents | active | global | `my-skills/uncover-hidden-talents` |
 | video-production | transition | global | `~/.agents/skills/video-production` |
 | wait-what | transition | global | `~/.agents/skills/wait-what` |

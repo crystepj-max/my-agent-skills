@@ -5,9 +5,30 @@ import hashlib
 import json
 import os
 import shutil
+import subprocess
 import sys
 from datetime import datetime
 from pathlib import Path
+
+
+def is_link(path):
+    """软链与 Windows 目录联接都是合规入口；未开启开发者模式时只能建联接。"""
+    if path.is_symlink():
+        return True
+    is_junction = getattr(path, 'is_junction', None)
+    return bool(is_junction and is_junction())
+
+
+def make_link(path, source):
+    path.symlink_to(source, target_is_directory=True)
+    if path.is_symlink():
+        return
+    if os.name != 'nt':
+        raise OSError(f'无法建立入口：{path}')
+    # Windows 未开启开发者模式时 symlink_to 会被降级；退回目录联接，仍是单一入口。
+    path.rmdir()
+    subprocess.run(['cmd', '/c', 'mklink', '/J', str(path), str(source)],
+                   check=True, capture_output=True)
 
 
 def fingerprint(path):
@@ -61,12 +82,12 @@ class Manager:
         return dest
 
     def accepted(self, path, entry):
-        if path.is_symlink():
+        if is_link(path):
             return path.resolve() in {(self.pool / entry['name']).resolve(), self.expand(entry['source']).resolve()}
         return path.is_dir() and fingerprint(path) in entry.get('accepted_fingerprints', [])
 
     def ensure_link(self, path, source, entry):
-        if path.is_symlink() and path.resolve() == source.resolve():
+        if is_link(path) and path.resolve() == source.resolve():
             self.note('OK', path, '来源一致；完整配套材料随正式源更新')
             return
         if path == source:
@@ -81,7 +102,7 @@ class Manager:
             if exists:
                 self.archive(path)
             path.parent.mkdir(parents=True, exist_ok=True)
-            path.symlink_to(source, target_is_directory=True)
+            make_link(path, source)
 
     def remove_entry(self, path, entry, source):
         if not os.path.lexists(path):

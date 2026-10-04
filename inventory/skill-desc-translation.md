@@ -8,7 +8,7 @@
 
 > ⚠️ **排版保护说明**：本表为人工优化版。结构（三块分区、列定义、参考/范围列）请勿手工整体重写；第三方 skill 移入「参考 Skill」板块、第一方「参考的 skill/参考日期」回填，请直接在对应表格行编辑。刷新「最新更新」列请只运行 `scripts/refresh_inventory.py`（该脚本仅更新此列，不改动排版与列结构）。
 
-> 本表共 **81** 个 skill，拆分为三块——**第一方 6 个**（本仓库自研）、**第三方 71 个**（公共池收录）、**参考 Skill 4 个**（被第一方参考/可替代的第三方）。各 skill 含「skill 范围」列：用户级 / 项目仓库名。
+> 本表共 **81** 个 skill，拆分为三块——**第一方 5 个**（本仓库自研）、**第三方 71 个**（公共池收录）、**参考 Skill 5 个**（被第一方参考/可替代的第三方）。各 skill 含「skill 范围」列：用户级 / 项目仓库名。
 
 ## 第一方 Skill（本仓库自研，经软链同步至公共池 `~/.agents/skills/`）
 
@@ -100,6 +100,7 @@
 | 68 | `obsidian-vault` | 在 Obsidian 仓库中搜索、创建与管理笔记，支持双链与索引笔记。当用户想在 Obsidian 中查找、创建或整理笔记时使用。 |  |  |  | 用户级 | 平台内置 |
 | 69 | `remotion-best-practices` | Remotion 最佳实践。 |  |  |  | 用户级 | 平台内置 |
 | 70 | `skills-security-check` | 腾讯云鼎实验室出品，Skill 安全审查工具。对用户指定的 skill.md 文件及其配套的文档、程序、脚本等进行全面安全审计，确保引用安全。 | WorkBuddy 内置 / 应用市场（腾讯云鼎实验室） | 腾讯云鼎实验室 | Skill 安全审查工具（腾讯云鼎实验室出品，WorkBuddy 平台内置） | 用户级 | 平台内置 |
+| 71 | `typesafe-ai` | 用 TypeSafe 把 AI 智能做成可组合的编程原语：System One 模型（含旗舰模型 Jev）读自然语言与应用状态，输出带类型与概率的判断而非生成文本。适用于路由、排序、抽取、校验、重排及交互式体验。规则、计算与执行仍留在代码里；实时文档与 cookbook 是准绳。  | [github.com/typesafe-ai/skills](https://github.com/typesafe-ai/skills)  | typesafe-ai  | TypeSafe System One / Jev 结构化判断原语  | 用户级  | 2026-10-04  |
 
 ## 参考 Skill（被第一方参考或可替代的第三方）
 
@@ -113,7 +114,9 @@
 | 5 | `find-skills` | 当用户问『怎么实现 X』『有没有做 X 的 skill』『有没有能…的 skill』，或表达想扩展能力时，帮助发现并安装 agent skill。应在用户寻找可能以可安装 skill 形式存在的功能时使用。 |  |  |  | 用户级 | 平台内置 |
 | 6 | `diagnosing-bugs` | 针对难缠 bug 与性能回退的诊断循环。当用户说『diagnose』『debug this』，或报告某东西报错/失败/变慢时使用。已于 2026-09-15 退役为参考：诊断职责由 `wf-diagnose` 承接。 |  |  |  | 用户级 | 平台内置 |
 
-**合计**：共 **80** 个 skill —— 第一方 **5** + 第三方 **70** + 参考 Skill **5**。
+**合计**：共 **81** 个 skill —— 第一方 **5** + 第三方 **71** + 参考 Skill **5**。
+
+> 2026-10-04：新增第三方 `typesafe-ai`（typesafe-ai/skills，TypeSafe System One / Jev 结构化判断原语）。合计 80 → 81，第三方 70 → 71。同时按表格实际行数校正前言计数（原写 6/71/4，实为 5/70/5）。安装前已过安全审计（纯文档、无脚本、无网络执行，P2）。
 
 > 2026-09-15：`diagnosing-bugs` 由第三方表移入参考 Skill 板块（退役为参考，诊断职责由 `wf-diagnose` 承接）。总数不变，第三方 71 → 70、参考 4 → 5。
 
@@ -126,6 +129,9 @@
 > - WorkBuddy 内置 / 应用市场 skill：无公开仓库，标记为「平台内置」。
 > - 自研（本仓库 / 用户自建）skill：无上游仓库，标记为本地 `SKILL.md` 最后修改日期。
 > - 可运行 `scripts/refresh_inventory.py` 刷新「最新更新」列。
+
+> **近期更新（2026-10 月）**：
+> - 10-04：新增第三方 `typesafe-ai`（来源 [github.com/typesafe-ai/skills](https://github.com/typesafe-ai/skills)）。经安全审计为 P2：仅 SKILL.md + LICENSE 纯文档，无脚本、无远程执行、无凭据读取；description 已中文化。
 
 > **近期更新（2026-09 月）**：
 > - 09-15：**`dev-workflow-2-0` 退役** —— 职责已由 M1 `requirements-analysis` / M2 `wf-construction-full-feature` / M3 `execution-plan` 拆分承接。合计 81 → 80，第一方 6 → 5。
