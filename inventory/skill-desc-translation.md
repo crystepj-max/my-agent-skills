@@ -30,20 +30,20 @@
 
 | # | Skill 名称 | 中文描述 | 仓库链接 / 来源 | 作者 | 仓库简介 | skill 范围 | 最新更新 |
 |---|---|---|---|---|---|---|---|
-| 1 | `remotion-video-production` | Remotion 视频生产：当提示或既有流程显式要求 Remotion 视频生产时使用（代码优先的视频生成方案）。 | [github.com/akillness/jeo-skills](https://github.com/akillness/jeo-skills) | akillness | 面向 codex/code/antigravity 的 skills 合集 | 用户级 | 2026-09-20 |
-| 2 | `frontend-design` | 构建新界面或重塑旧界面时，提供独特、有意图的视觉设计指引。帮助确定美学方向、排版，以及做出不像模板默认值的取舍。 | [github.com/anthropics/skills](https://github.com/anthropics/skills) | Anthropic（官方） | Anthropic 官方 Agent Skills 公共仓库 | 用户级 | 2026-09-10 |
+| 1 | `remotion-video-production` | Remotion 视频生产：当提示或既有流程显式要求 Remotion 视频生产时使用（代码优先的视频生成方案）。 | [github.com/akillness/jeo-skills](https://github.com/akillness/jeo-skills) | akillness | 面向 codex/code/antigravity 的 skills 合集 | 用户级 | 2026-10-03 |
+| 2 | `frontend-design` | 构建新界面或重塑旧界面时，提供独特、有意图的视觉设计指引。帮助确定美学方向、排版，以及做出不像模板默认值的取舍。 | [github.com/anthropics/skills](https://github.com/anthropics/skills) | Anthropic（官方） | Anthropic 官方 Agent Skills 公共仓库 | 用户级 | 2026-10-03 |
 | 3 | `skill-creator` | 创建新 skill、修改并改进已有 skill，并衡量 skill 表现。当用户想从零创建 skill、编辑或优化已有 skill、运行评测测试 skill、用方差分析基准测试 skill 表现，或为更好的触发准确率优化 skill 的描述时使用。 |  |  |  | 用户级 | 平台内置 |
-| 4 | `eli5` | 当用户键入 /eli5 或想要图文并茂的讲解时使用。用大图、少文字的 HTML 图卡，把任意主题讲得像给 5 岁小孩解释那样通俗易懂。 | [github.com/companion-inc/feynman](https://github.com/companion-inc/feynman) | Companion Inc | 用通俗方式讲解概念的 skill（费曼学习法） | 用户级 | 2026-09-06 |
-| 5 | `ppt-master` | AI 驱动的演示文稿工作流：生成可编辑的 PPTX 文件，创建可复用的品牌/版式/成套工作区，填充原生 PPTX 模板。 | [github.com/hugohe3/ppt-master](https://github.com/hugohe3/ppt-master) | Hugo He | AI 将文档/主题转为原生 PowerPoint 演示文稿 | crystepj-max/Chris-Vault/ | 2026-09-20 |
+| 4 | `eli5` | 当用户键入 /eli5 或想要图文并茂的讲解时使用。用大图、少文字的 HTML 图卡，把任意主题讲得像给 5 岁小孩解释那样通俗易懂。 | [github.com/companion-inc/feynman](https://github.com/companion-inc/feynman) | Companion Inc | 用通俗方式讲解概念的 skill（费曼学习法） | 用户级 | 2026-10-03 |
+| 5 | `ppt-master` | AI 驱动的演示文稿工作流：生成可编辑的 PPTX 文件，创建可复用的品牌/版式/成套工作区，填充原生 PPTX 模板。 | [github.com/hugohe3/ppt-master](https://github.com/hugohe3/ppt-master) | Hugo He | AI 将文档/主题转为原生 PowerPoint 演示文稿 | crystepj-max/Chris-Vault/ | 2026-09-30 |
 | 6 | `baoyu-comic` | 基于多种艺术风格与基调的知识漫画创作工具，可生成原创教育漫画，含分镜排版与连贯的图像生成。当用户要创作『知识漫画』『教育漫画』『传记漫画』『教程漫画』或 Logicomix 风格的漫画时使用。 | [github.com/JimLiu/baoyu-skills](https://github.com/JimLiu/baoyu-skills) | Jim Liu | 宝哥（baoyu）系列 AI 创作工具合集 | 用户级 | 2026-09-10 |
 | 7 | `baoyu-image-gen` | 基于 OpenAI、Google、DashScope 接口的 AI 图像生成。支持文生图、参考图、多种宽高比。默认串行生成，可按需并行。当用户要生成、创作或绘制图像时使用。 |  |  |  | 用户级 | 平台内置 |
 | 8 | `baoyu-infographic` | 专业信息图生成工具，提供 20 种版式与 17 种视觉风格。会分析内容、推荐『版式×风格』组合并生成可直接发布的成品信息图。当用户要制作信息图、数据可视化海报或一页式图解时使用。 |  |  |  | 用户级 | 平台内置 |
 | 9 | `baoyu-slide-deck` | 根据内容生成专业的幻灯片图像。先生成带风格说明的大纲，再逐页生成幻灯片图。当用户说『做幻灯片』『做演示』『生成 deck』『slide deck』或『PPT』时使用。 |  |  |  | crystepj-max/Chris-Vault/ | 平台内置 |
-| 10 | `video-production` | 规划并调度「代码优先 / 模板优先 / 混合」的内容视频生产管线。当用户需要可程序化或自动化的视频生产时使用。 | [github.com/jmagly/aiwg](https://github.com/jmagly/aiwg) | jmagly | 面向 AI 辅助软件开发的认知架构：专用 agent、结构化工作流、多平台部署 | 用户级 | 2026-09-21 |
-| 11 | `neat-freak` | 会话结束时以极致严谨做知识清理：将项目文档(CLAUDE.md、README、docs)与 agent 记忆、代码库对账，消除不一致，保持仓库整洁。 | [github.com/KKKKhazix/khazix-skills](https://github.com/KKKKhazix/khazix-skills) | 数字生命卡兹克 (KKKKhazix) | 数字生命卡兹克开源的 AI Skills 合集 | 用户级 | 2026-09-16 |
+| 10 | `video-production` | 规划并调度「代码优先 / 模板优先 / 混合」的内容视频生产管线。当用户需要可程序化或自动化的视频生产时使用。 | [github.com/jmagly/aiwg](https://github.com/jmagly/aiwg) | jmagly | 面向 AI 辅助软件开发的认知架构：专用 agent、结构化工作流、多平台部署 | 用户级 | 2026-10-03 |
+| 11 | `neat-freak` | 会话结束时以极致严谨做知识清理：将项目文档(CLAUDE.md、README、docs)与 agent 记忆、代码库对账，消除不一致，保持仓库整洁。 | [github.com/KKKKhazix/khazix-skills](https://github.com/KKKKhazix/khazix-skills) | 数字生命卡兹克 (KKKKhazix) | 数字生命卡兹克开源的 AI Skills 合集 | 用户级 | 2026-10-01 |
 | 12 | `storage-analyzer` | macOS / Windows 只读存储分析：扫描整机磁盘占用，定位占用大户，分级给出可自动清理/需人工判断/谨慎清理方案，并生成可一键删除的交互式 HTML 报告。 |  |  |  | 用户级 | 平台内置 |
 | 13 | `humanize-ppt` | 为 Agent 生成的 PPT 做『人性化』润色——把原始素材转成以听众心智转化为目标的结构化演讲，而非模板堆砌。当用户要制作演讲/PPT/幻灯片，或希望内容有叙事与节奏时使用。 | [github.com/LearnPrompt/humanize-ppt](https://github.com/LearnPrompt/humanize-ppt) | LearnPrompt | 基于 AST 的大纲导演，打造以人为中心的 AI 演示工作流 | crystepj-max/Chris-Vault/ | 2026-07-31 |
-| 14 | `ask-matt` | 询问哪个 skill 或流程适合当前情况。相当于本仓库 skills 的路由器。 | [github.com/mattpocock/skills](https://github.com/mattpocock/skills) | Matt Pocock | 面向真实工程师的 Skills 合集，源自作者 .agents 目录 | 用户级 | 2026-09-18 |
+| 14 | `ask-matt` | 询问哪个 skill 或流程适合当前情况。相当于本仓库 skills 的路由器。 | [github.com/mattpocock/skills](https://github.com/mattpocock/skills) | Matt Pocock | 面向真实工程师的 Skills 合集，源自作者 .agents 目录 | 用户级 | 2026-10-04 |
 | 15 | `code-review` | 针对某个基准点(提交/分支/标签/merge-base)之后的改动做审查，分两个维度——规范(代码是否遵循本仓库编码规范?)与需求(代码是否匹配原始 issue/PRD 的要求?)。两个维度并行由子 agent 审查并并排汇报。当用户要审查分支、PR、进行中的改动，或说『review since X』时使用。 |  |  |  | 用户级 | 平台内置 |
 | 16 | `codebase-design` | 设计深层模块时的共享词汇表。当用户要设计或改进某模块的接口、寻找深化机会、决定接缝位置、让代码更易测试或更利于 AI 导航，或别的 skill 需要深层模块词汇时使用。 |  |  |  | 用户级 | 平台内置 |
 | 17 | `domain-modeling` | 构建并打磨项目的领域模型。当用户要敲定领域术语或通用语言、记录架构决策，或别的 skill 需要维护领域模型时使用。 |  |  |  | 用户级 | 平台内置 |
@@ -51,7 +51,7 @@
 | 19 | `grill-me` | 一场毫不留情的追问式访谈，用来打磨计划或设计。 |  |  |  | 用户级 | 平台内置 |
 | 20 | `grill-with-docs` | 一场毫不留情的追问式访谈，用来打磨计划或设计，同时边聊边产出文档(ADR 与术语表)。 |  |  |  | 用户级 | 平台内置 |
 | 21 | `grilling` | 就某个计划、决策或想法对用户穷追不舍地追问。当用户想压力测试自己的思路，或使用了任何『grill』触发词时使用。 |  |  |  | 用户级 | 平台内置 |
-| 22 | `handoff` | 把当前对话压缩成一份交接文档，供另一个 agent 接手。 | [github.com/mattpocock/skills](https://github.com/mattpocock/skills) | Matt Pocock | 面向真实工程师的 Skills 合集，源自作者 .agents 目录 | 用户级 | 2026-09-18 |
+| 22 | `handoff` | 把当前对话压缩成一份交接文档，供另一个 agent 接手。 | [github.com/mattpocock/skills](https://github.com/mattpocock/skills) | Matt Pocock | 面向真实工程师的 Skills 合集，源自作者 .agents 目录 | 用户级 | 2026-10-04 |
 | 23 | `improve-codebase-architecture` | 扫描代码库寻找深化机会，以可视化 HTML 报告呈现，再就你选定的那一项展开追问式打磨。 |  |  |  | 用户级 | 平台内置 |
 | 24 | `migrate-to-shoehorn` | 把测试文件从 `as` 类型断言迁移到 @total-typescript/shoehorn。当用户提到 shoehorn、想替换测试中的 `as`，或需要部分测试数据时使用。 |  |  |  | 用户级 | 平台内置 |
 | 25 | `prototype` | 构建一个一次性的原型来验证某个设计问题。当用户想快速验证状态模型或逻辑是否成立，或探索某个 UI 应该长什么样时使用。 |  |  |  | 用户级 | 平台内置 |
@@ -71,8 +71,8 @@
 | 39 | `guizang-ppt-skill` | 生成横向翻页网页 PPT（单 HTML 文件），含 WebGL 背景、章节幕封、数据大字报、图片网格等模板。提供两种风格：① "电子杂志 × 电子墨水"（衬线 + 流体背景 + 暖色） ② "瑞士国际主义"（无衬线 + 网格点阵 + IKB/柠檬黄/柠檬绿/安全橙高亮）。当用户需要制作分享 / 演讲 / 发布会风格的网页 PPT，或提到"杂志风 PPT"、"瑞士风 PPT"、"Swiss Style"、"horizontal swipe deck"时使用。 | [github.com/op7418/guizang-ppt-skill](https://github.com/op7418/guizang-ppt-skill) | op7418 | 生成精美 HTML 幻灯片的 AI-agent skill（杂志风/瑞士风） | crystepj-max/Chris-Vault/ | 2026-08-07 |
 | 40 | `hatch-pet` | 从角色原画、生成图、公司/客户品牌线索或视觉参考中，创建、修复、校验、可视化 QA，并打包兼容 Codex 的 v2 动画宠物。适用于任何新的 Codex 宠物、自定义吉祥物、非像素风宠物、品牌灵感宠物、已有宠物修复，或需要 9 行标准动画、16 个朝向、确定性装配、QA 产物与 spriteVersionNumber 2 打包的 8x11 雪碧图流程。 | [github.com/openai/skills](https://github.com/openai/skills) | OpenAI（官方） | OpenAI 官方 Skills 目录（面向 Codex） | 用户级 | 2026-09-08 |
 | 41 | `remotion-video-toolkit` | 用 Remotion + React 做程序化视频创作的完整工具箱。涵盖动画、时序、渲染(CLI/Node.js/Lambda/Cloud Run)、字幕、3D、图表、文字特效、转场与媒体处理。在编写 Remotion 代码、搭建视频生成管线，或创建数据驱动视频模板时使用。 | [github.com/shreefentsar/remotion-video-toolkit](https://github.com/shreefentsar/remotion-video-toolkit) | shreefentsar | Remotion 程序化视频创作工具箱（React） | 用户级 | 2026-01-29 |
-| 42 | `writing-great-skills` | 写好、改好 skill 的参考书——让 skill 可预期所需的词汇与原则。 | [github.com/sickn33/agentic-awesome-skills](https://github.com/sickn33/agentic-awesome-skills) | sickn33 | 本地 agent-first 控制面，包含 2000+ agentic skills 编目 | 用户级 | 2026-09-20 |
-| 43 | `bottleneck-hunter` | 供应链瓶颈猎手：AI驱动的全球产业链瓶颈套利。来源：skills/bottleneck-hunter.md. | [github.com/xbtlin/ai-berkshire](https://github.com/xbtlin/ai-berkshire) | xbtlin | AI 时代伯克希尔：基于 Claude Code/Codex 的价值投资研究框架 | 用户级 | 2026-09-20 |
+| 42 | `writing-great-skills` | 写好、改好 skill 的参考书——让 skill 可预期所需的词汇与原则。 | [github.com/sickn33/agentic-awesome-skills](https://github.com/sickn33/agentic-awesome-skills) | sickn33 | 本地 agent-first 控制面，包含 2000+ agentic skills 编目 | 用户级 | 2026-10-04 |
+| 43 | `bottleneck-hunter` | 供应链瓶颈猎手：AI驱动的全球产业链瓶颈套利。来源：skills/bottleneck-hunter.md. | [github.com/xbtlin/ai-berkshire](https://github.com/xbtlin/ai-berkshire) | xbtlin | AI 时代伯克希尔：基于 Claude Code/Codex 的价值投资研究框架 | 用户级 | 2026-09-27 |
 | 44 | `deep-company-series` | 深度公司系列：8 篇长文拆一家公司。来源：skills/deep-company-series.md. |  |  |  | 用户级 | 平台内置 |
 | 45 | `dyp-ask` | 段永平问答：以他的方式思考。来源：skills/dyp-ask.md. |  |  |  | 用户级 | 平台内置 |
 | 46 | `earnings-review` | 财报精读：一手资料深度解读。来源：skills/earnings-review.md. |  |  |  | 用户级 | 平台内置 |
