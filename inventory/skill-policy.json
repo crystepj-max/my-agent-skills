@@ -132,6 +132,17 @@
       ]
     },
     {
+      "name": "cnb-git",
+      "state": "active",
+      "scope": "global",
+      "source": "my-skills/cnb-git",
+      "origin": "first-party",
+      "note": "CNB 全场景 Git 操作：clone/pull/fetch/push/分支/PR(含 WIP 草稿)/合并；内置凭据注入、代理修正与平台差异处理",
+      "accepted_fingerprints": [
+        "bbef8092ec0e90b87326a8099cc2ab88b91ad1f792265ce450b34caa7b167a2c"
+      ]
+    },
+    {
       "name": "cnb-push",
       "state": "active",
       "scope": "global",
@@ -470,6 +481,17 @@
       "migrate": true
     },
     {
+      "name": "implement-spec",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/implement-spec",
+      "origin": "third-party",
+      "upstream": "https://github.com/mattpocock/skills/tree/main/skills/engineering/implement-spec",
+      "accepted_fingerprints": [
+        "06a8b953ea63758794346115a5266d6e8ab8f2140746be5918a62d05833f877d"
+      ]
+    },
+    {
       "name": "improve-codebase-architecture",
       "state": "transition",
       "scope": "global",
@@ -663,6 +685,17 @@
       "migrate": true
     },
     {
+      "name": "pr",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/pr",
+      "origin": "third-party",
+      "upstream": "https://github.com/mattpocock/skills/tree/main/skills/engineering/pr",
+      "accepted_fingerprints": [
+        "cfb2a05039a036ad0f9d8b58b4eac2d3c34149a242504a2bafb54d6972bfcb43"
+      ]
+    },
+    {
       "name": "presentation-production",
       "state": "active",
       "scope": "presentations",
@@ -771,12 +804,25 @@
     },
     {
       "name": "resolving-merge-conflicts",
-      "state": "transition",
+      "state": "retired",
       "scope": "global",
-      "source": "~/.agents/skills/resolving-merge-conflicts",
+      "source": "~/.local/share/agent-skills/retired/resolving-merge-conflicts",
       "origin": "third-party",
       "accepted_fingerprints": [
         "7ff10b7fb850868660f2b2550d86909c263c0351e4c3a145090cce465acaab78"
+      ],
+      "retired_reason": "上游 mattpocock/skills v1.3.0 已移除该 skill（无替代，agent 自行处理合并/rebase 冲突）",
+      "retired_on": "2026-10-06"
+    },
+    {
+      "name": "retro",
+      "state": "transition",
+      "scope": "global",
+      "source": "~/.agents/skills/retro",
+      "origin": "third-party",
+      "upstream": "https://github.com/mattpocock/skills/tree/main/skills/engineering/retro",
+      "accepted_fingerprints": [
+        "ac467f9e12877170132552d2da6f71ed84a741e83a128d29289771c30b354332"
       ]
     },
     {
@@ -1108,17 +1154,6 @@
       "origin": "third-party",
       "accepted_fingerprints": [
         "3c287bd4177a38375e4f2fa24d62847ea1c0134d9b7fe00d64a5f428191e9856"
-      ]
-    },
-    {
-      "name": "cnb-git",
-      "state": "active",
-      "scope": "global",
-      "source": "my-skills/cnb-git",
-      "origin": "first-party",
-      "note": "CNB 全场景 Git 操作：clone/pull/fetch/push/分支/PR(含 WIP 草稿)/合并；内置凭据注入、代理修正与平台差异处理",
-      "accepted_fingerprints": [
-        "bbef8092ec0e90b87326a8099cc2ab88b91ad1f792265ce450b34caa7b167a2c"
       ]
     }
   ],
