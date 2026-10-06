@@ -10,3 +10,13 @@
 - 规则文字或安装行为调整属于编程治理工作：明确范围→内部验证→呈交验收。用户对两轮审阅调整的现有授权是本次范围基线，不逐文件重复确认。
 - 验证：`python3 -m unittest discover -s tests`；`python3 scripts/manage-skills.py plan`；应用后 `python3 scripts/manage-skills.py check`；核对新会话可见目录与未验证限制。管理检查不是每个创作工具的业务验收。
 - 不自动提交、推送或发布；明确授权后只处理已审阅的指定文件。备份与生成检查报告不进入版本库。
+
+## 分支保护与发布（2026-10-06 起）
+
+- `main` 已启用 GitHub ruleset `main-pr-gate`（id `24555832`）：禁止删除、禁止强推、**变更必须经 PR 合入**。
+- 绕过主体：`RepositoryRole=5`（maintain，本机账号 `crystepj-max`）为 `always` 放行——保证维护者不会被锁死，但也意味着**门禁只约束第三方/自动化推送，不约束维护者本人**。这是有意设计：单人维护仓强制自审无意义。
+- 发布前先 `git fetch origin`；远端有他人提交时 `git pull --rebase origin main` 再推，冲突逐条人工判定，不强推 main（除清理自身探测提交）。
+- `scripts/sync.sh` 在无暂存内容时静默 `exit 0`（不报错、不推送）。若提交后 `git status -sb` 仍显示 `[ahead N]`，说明推送未发生，需手动 `git push origin HEAD:main` 复核。
+- CNB 镜像为单向 GitHub → CNB（`.github/workflows/mirror-cnb.yml`，`on: push` 触发、`contents: read`、推 `cnb.cool/chris.ai/my-agent-skills`），**不受 GitHub 分支保护约束**，是异步的；推送后需 `git fetch cnb` 核对两端 sha 一致，镜像落后 1～2 个提交属正常。
+- 临时验证分支用完必须删除：本地 `git branch -D`、远端 `git push origin --delete <branch>`；若探测提交已进 main，需 force-with-lease 回退并**同步修正 CNB 镜像**（镜像已在 GitHub 侧触发过）。
+
