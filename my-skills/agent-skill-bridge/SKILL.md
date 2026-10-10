@@ -7,7 +7,7 @@ description: "管理多助手技能的启用、参考、退役、使用范围、
 
 第一方执行入口与使用范围由本仓库 `inventory/skill-policy.json` 决定；不要把公共池全集当成所有助手的必装列表。
 
-1. 读取登记表及当前入口，核对来源与完整配套材料。第一方维护源在 `my-skills/`；需求、建设、调度三项须先在 workflow-manager 的 `dsh/skills/` 修改，再同步到这里。
+1. 读取登记表及当前入口，核对来源与完整配套材料。M1 `requirements-analysis` 由 workflow-manager 维护并直接分发到用户级目录；M3 `execution-plan` 由 dev-flow 维护为项目级 Skill；M2 单任务交付由 workflow-manager 蓝图生成。此仓不镜像、不登记、不分发 M1/M3。
 2. 运行 `python3 scripts/bridge.py --mode dry` 生成计划；用户已有明确调整授权时直接继续，不逐项重复批准。确有未决用途或不同本机修改时保留冲突，仅暂停相关项。
 3. 运行 `python3 scripts/bridge.py --mode apply` 按范围落地；替换入口前保存备份。正式与过渡全局项才进入公共池；参考和退役项保存在发现目录以外；专业能力进入指定项目。
 4. 运行 `python3 scripts/bridge.py --mode verify` 核对该出现的出现、不该出现的不出现。第一方使用同一维护源，不能只比对名称或 SKILL.md 而忽略配套脚本。

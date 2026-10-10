@@ -31,7 +31,7 @@
 | earnings-team | transition | global | `~/.agents/skills/earnings-team` |
 | edit-article | transition | global | `~/.agents/skills/edit-article` |
 | eli5 | transition | global | `~/.agents/skills/eli5` |
-| execution-plan | active | global | `my-skills/execution-plan` |
+| execution-plan | retired | global | `~/.local/share/agent-skills/retired/execution-plan`（历史副本保留；正式入口为 dev-flow 项目级技能） |
 | expert-consultation | active | global | `my-skills/expert-consultation` |
 | fact-check | active | global | `my-skills/fact-check` |
 | financial-data | transition | global | `~/.agents/skills/financial-data` |
@@ -74,7 +74,6 @@
 | remotion-best-practices | transition | global | `~/.agents/skills/remotion-best-practices` |
 | remotion-video-production | transition | global | `~/.agents/skills/remotion-video-production` |
 | remotion-video-toolkit | transition | global | `~/.agents/skills/remotion-video-toolkit` |
-| requirements-analysis | active | global | `my-skills/requirements-analysis` |
 | requirements-analysis.bak-20260905-224705 | retired | global | `~/.local/share/agent-skills/retired/requirements-analysis.bak-20260905-224705` |
 | research | transition | global | `~/.agents/skills/research` |
 | resolving-merge-conflicts | transition | global | `~/.agents/skills/resolving-merge-conflicts` |
