@@ -8,9 +8,9 @@
 
 > ⚠️ **排版保护说明**：本表为人工优化版。结构（三块分区、列定义、参考/范围列）请勿手工整体重写；第三方 skill 移入「参考 Skill」板块、第一方「参考的 skill/参考日期」回填，请直接在对应表格行编辑。刷新「最新更新」列请只运行 `scripts/refresh_inventory.py`（该脚本仅更新此列，不改动排版与列结构）。
 
-> 本表共 **81** 个 skill，拆分为三块——**第一方 5 个**（本仓库自研）、**第三方 71 个**（公共池收录）、**参考 Skill 5 个**（被第一方参考/可替代的第三方）。各 skill 含「skill 范围」列：用户级 / 项目仓库名。
+> 本表共 **81** 个 skill，拆分为三块——**第一方 5 个**（本仓库 4 个、workflow-manager 维护 1 个）、**第三方 71 个**（公共池收录）、**参考 Skill 5 个**（被第一方参考/可替代的第三方）。各 skill 含「skill 范围」列：用户级 / 项目仓库名。
 
-## 第一方 Skill（本仓库自研，经软链同步至公共池 `~/.agents/skills/`）
+## 第一方 Skill（本仓库自研，经软链同步至公共池 `~/.agents/skills/`；共 4 个）
 
 > 本仓库（松哥）自研的 skill。表格「参考的 skill」「参考日期」两列，记录该第一方 skill 打造时参考的第三方 skill；第三方 skill 若可被第一方替代，则移至文末「参考 Skill」板块。未来第三方 skill 的「最新更新」大于「参考日期」时，说明第三方已有更新版本，可基于此更新第一方 skill。
 
@@ -20,7 +20,14 @@
 | 2 | `agent-skill-bridge` | 统一管理多个 AI agent（claude / codex / workbuddy 等）的第三方 skill 安装流程——安全审计 + 安装到公共池 ~/.agents/skills/ + 中文化 + 软链桥接到各 agent 默认目录 + 校验每个 agent 对同一 skill 只保留 1 份（去重）。含只读的中文化守护 `cn_guard.sh`：校验已登记技能 description 是否仍为中文，退出码 0/1/2，不自动改写。 | find-skills | 2026-10-05 | 用户级 | 平台内置 |
 | 3 | `clashx-openai-sse-debug` | 排查 ClashX（ClashX Pro）代理导致 OpenAI 或 API 流式 SSE 连接中断的问题：Codex 桌面端连不上、stream closed before response.completed、SSE 断连、macOS 上 ClashX 规则模式或全局模式下 OpenAI 流式失败。覆盖 ClashX 控制 API、热重载导致 DNS 崩溃的坑、验证 OpenAI 必须走代理、节点选择、SSE 稳定性测试。 | — | — | 用户级 | 平台内置 |
 | 4 | `duplicate-cli-unify` | 当同一个命令行工具（如 Claude Code、Codex 或任何 npm/node 类 CLI）被多个包管理器重复安装时使用——最常见的是 nvm 全局安装与 Homebrew 安装并存，导致版本混乱、残留旧副本、或自动更新静默写入错误路径。提供检测、分析、决策、修复的完整流程，把工具统一到单一安装源。 | — | — | 用户级 | 平台内置 |
-| 5 | `requirements-analysis` | 需求分析统一入口：把 GitHub issue 或用户的原始输入加工成一份含三要素（任务目标/涉及范围/验收标准）的可执行需求，按体量拆解为任务清单或决策地图，并落盘回写 issue。 | to-spec、to-tickets | 2026-08-18 | 用户级 | 平台内置 |
+
+## 其他项目维护的第一方 Skill
+
+> 仅记录其仍可能出现在公共池中的描述。本仓不维护其源代码、不登记或分发；由对应项目直接安装到用户级目录。
+
+| Skill 名称 | 中文描述 | 参考的 skill | 参考日期 | skill 范围 | 维护项目 |
+|---|---|---|---|---|---|
+| `requirements-analysis` | 需求分析统一入口：把需求来源加工成经人工确认的任务定义，并将正式状态写入 Multica Task；workflow-manager 维护并直接分发，my-agent-skills 不镜像、不登记、不提供用户级入口。 | to-spec、to-tickets | 2026-10-08 | 用户级 | workflow-manager |
 
 > **2026-09-15 退役**：原第 4 项 `dev-workflow-2-0`。其职责已由「AI 任务交付」集合拆分为 M1 `requirements-analysis` / M2 `wf-construction-full-feature` / M3 `execution-plan` 承接，已在 `skill-policy.json` 置为 `retired`，源目录移出发现目录至 `~/.local/share/agent-skills/retired/dev-workflow-2-0`。同批退役的还有 `construction-bootstrap`。
 
@@ -143,7 +150,9 @@
 > - 10-06：`resolving-merge-conflicts` **退役** —— 上游 v1.3.0 明确移除且无替代（合并/rebase 冲突由 agent 自行处理），源目录移至 `~/.local/share/agent-skills/retired/resolving-merge-conflicts`。
 > - 10-06：`ppt-master` v4.5.0 → **v6.6.0**（跨 2 个大版本）。旧 CLI（`template_fill_pptx` / `native_enhance_pptx` / `native_narration_pptx`）及 45 张旧图表 SVG 由上游 `7f000fb8` 主动废弃，本次一并清理；新入口为 `workflows/edit-native-pptx.md` + `scripts/authoring_roundtrip.py`（未改动页面可字节级还原）。
 
-> **近期更新（2026-09 月）**：
+> **近期更新**：
+> - 10-10：`requirements-analysis` 改由 workflow-manager 统一维护并直接分发；本仓退役其登记并把完整历史副本移至 `inventory/history/requirements-analysis/`。
+> - 10-08：`execution-plan` 改为 dev-flow 项目级技能，旧用户级副本退出公共入口并保留到 `~/.local/share/agent-skills/retired/execution-plan`。
 > - 09-15：**`dev-workflow-2-0` 退役** —— 职责已由 M1 `requirements-analysis` / M2 `wf-construction-full-feature` / M3 `execution-plan` 拆分承接。合计 81 → 80，第一方 6 → 5。
 > - 09-15：同步移除第三方前言中的「`tdd` 被 `dev-workflow-2-0` 部分覆盖」——覆盖来源消失，`tdd` 视为无覆盖。
 > - 09-14：`construction-bootstrap` 退役（见 `skill-policy.json`）。
@@ -170,7 +179,7 @@
 > 2. **独立仓库（直接克隆对应仓库）**：12 个（agnes-ai-generation-skill、beautiful-html-templates、companion-inc/feynman、frontend-slides、guizang-ppt-skill、humanize-ppt、jmagly/aiwg、akillness/jeo-skills、llm-wiki-app、ppt-master、remotion-video-toolkit、sickn33/agentic-awesome-skills）
 > 3. **WorkBuddy 内置 / 应用市场（GitHub 检索未定位独立上游仓库）**：4 个（edit-article、find-skills、obsidian-vault、remotion-best-practices）
 > 4. **WorkBuddy 内置（腾讯云鼎实验室出品）**：1 个（skills-security-check）
-> 5. **自研（本仓库 / 用户自建）**：5 个，详见上方「第一方 Skill」板块（agent-cli-tool-residue-purge、agent-skill-bridge、clashx-openai-sse-debug、duplicate-cli-unify、requirements-analysis）
+> 5. **自研（本仓库 / 用户自建）**：本仓 4 个，详见上方「第一方 Skill」板块；`requirements-analysis` 由 workflow-manager 维护，见「其他项目维护的第一方 Skill」
 
 > **体积提示**：以下 5 个 skill 含大体积本地资源，未打包进一键安装脚本，请用其仓库链接单独安装——`ppt-master`、`humanize-ppt`、`beautiful-html-templates`、`baoyu-slide-deck`、`guizang-ppt-skill`。
 
@@ -179,6 +188,3 @@
 > **两种安装方式**
 > - **仓库链接安装**：从上游重新拉取，干净但版本可能略新于本机。
 > - **一键原样安装（推荐，字节级一致，含本机中文化与私有改动）**：`bash install_all_skills.sh` —— 自动解包到 `~/.agents/skills/` 并桥接到 `~/.workbuddy/skills/` 等目录。脚本已打包 **65 个轻量 skill**；**5 个含大体积本地资源的 skill**（见上「体积提示」）未打包，请用其仓库链接安装。
-
-
-

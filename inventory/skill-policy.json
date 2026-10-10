@@ -302,15 +302,16 @@
     },
     {
       "name": "execution-plan",
-      "state": "active",
+      "state": "retired",
       "scope": "global",
-      "source": "my-skills/execution-plan",
+      "source": "~/.local/share/agent-skills/retired/execution-plan",
       "origin": "first-party",
       "accepted_fingerprints": [
         "04b9609bde8dde3fb2849225e90e769b77deaf8ef06f1a7f93d6ec4fc61accfd",
-        "b1a6a8bd06b8880ce584e1e64cf0898069f1c4c29cab38bdca4c5ea72d172fb2"
+        "b1a6a8bd06b8880ce584e1e64cf0898069f1c4c29cab38bdca4c5ea72d172fb2",
+        "f32e586124c81b960b88f2cd83fa4a5e57433caef4eef8b424b53411bf4d1728"
       ],
-      "upstream": "~/workspace/workflow-manager/dsh/skills/execution-plan"
+      "upstream": "dev-flow/.agents/skills/execution-plan (project-level)"
     },
     {
       "name": "expert-consultation",
@@ -764,18 +765,6 @@
       "accepted_fingerprints": [
         "b6359ec78b9713f82d625123e63e0fdb527dfa40b529b4e95ef9ce3d341c3626"
       ]
-    },
-    {
-      "name": "requirements-analysis",
-      "state": "active",
-      "scope": "global",
-      "source": "my-skills/requirements-analysis",
-      "origin": "first-party",
-      "accepted_fingerprints": [
-        "73be1bc8d0dcbb0dcd7bb88869a8eeb19bb2b97ad6e52ed6fb37868333096b20",
-        "cf23135cd317fa978c9e6fe5c528d6b9d865ac792902ae4afb08d54cef918101"
-      ],
-      "upstream": "~/workspace/workflow-manager/dsh/skills/requirements-analysis"
     },
     {
       "name": "requirements-analysis.bak-20260905-224705",
