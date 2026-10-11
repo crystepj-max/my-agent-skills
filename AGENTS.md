@@ -5,8 +5,8 @@
 - 目标：第一方入口负责完整执行，第三方逐步转为参考，专业能力进入项目工作空间；恢复后不倒退。
 - 正式登记为 `inventory/skill-policy.json`，人读状态表为 `inventory/skill-lifecycle.md`。说明清单保留来源资料，不能代替实际启用状态。
 - 允许围绕当前请求修改 my-skills、my-plugins、overrides、inventory、scripts、tools 和相应说明；不改无关业务代码、凭据、其他助手独有配置。
-- 需求、建设、批量调度在 workflow-manager 的 dsh/skills 和对应 scripts/docs 维护，通过其 sync-ai-task-skill-set.mjs 连同资产及校验清单分发；不在这里独立演变这三项产品流程。
-- 第一方入口连接维护源；未审阅的本机差异须保留。参考、退役和备份放在发现目录外。定点第三方修正仅适配登记的原版本，遇到上游变化先报告。
+- M1 Requirements Analysis 由 workflow-manager 维护并直接安装到用户级技能目录；M3 Execution Plan 由 dev-flow 维护为项目级 Skill；M2 单任务交付继续由 workflow-manager 蓝图生成。本仓不登记、不镜像、不分发 M1 或 M3。遗留的 `inventory/history/requirements-analysis/content/` 仅作历史副本保留，不在此编辑或安装。
+- 第一方入口连接各自维护源；未审阅的本机差异须保留。参考、退役和备份放在发现目录外。定点第三方修正仅适配登记的原版本，遇到上游变化先报告。
 - 规则文字或安装行为调整属于编程治理工作：明确范围→内部验证→呈交验收。用户对两轮审阅调整的现有授权是本次范围基线，不逐文件重复确认。
 - 验证：`python3 -m unittest discover -s tests`；`python3 scripts/manage-skills.py plan`；应用后 `python3 scripts/manage-skills.py check`；核对新会话可见目录与未验证限制。管理检查不是每个创作工具的业务验收。
 - 不自动提交、推送或发布；明确授权后只处理已审阅的指定文件。备份与生成检查报告不进入版本库。
@@ -20,4 +20,3 @@
 - CNB 镜像为单向 GitHub → CNB（`.github/workflows/mirror-cnb.yml`，`on: push` 触发、`contents: read`、推 `cnb.cool/chris.ai/my-agent-skills`），**不受 GitHub 分支保护约束**，是异步的；推送后需 `git fetch cnb` 核对两端 sha 一致，镜像落后 1～2 个提交属正常。
 - 临时验证分支用完必须删除：`gh pr merge --delete-branch` **不会**删除远端分支（实测失效），须显式 `git push origin --delete <branch>`，再 `git remote prune origin` 清本地过期追踪引用。若探测提交已进 main，需 force-with-lease 回退并**同步修正 CNB 镜像**（镜像在 GitHub 侧已触发过，会快进到错误状态）。
 - 规则集查询用 `gh api repos/<owner>/<repo>/rulesets/<id> --jq ...`；直接对 `.../rulesets` 列表用 `[.rules[].type]` 会因列表项无 `rules` 字段而报 `cannot iterate over: null`，须逐条取。
-

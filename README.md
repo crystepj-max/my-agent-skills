@@ -6,7 +6,7 @@
 
 - `inventory/skill-policy.json`：正式状态、范围、维护来源、已审阅版本和专业工作空间位置。
 - `inventory/skill-lifecycle.md`：登记表的人读版本；`skill-desc-translation.md` 保留上游来源与描述。
-- `my-skills/`：第一方执行入口。需求、建设、批量调度三项从 workflow-manager 同步，带完整 assets 和 source-manifest，不能仅同步 SKILL.md。
+- `my-skills/`：本仓登记的第一方执行入口。历史副本在 `inventory/history/requirements-analysis/`，不再登记或分发；唯一维护源和用户级安装入口在 workflow-manager。执行计划留在 dev-flow 项目的 `.agents/skills/`，不放入全局技能池；单任务交付继续由 workflow-manager 蓝图生成。
 - `my-plugins/leader/`：个人插件的可维护来源；`overrides/` 保存已审阅第三方条款与个人插件的定点修正，不自动适配未知上游版本。
 - 全局任务分类、批准与完成规则由 agent-policy 维护，此仓不复制一套。
 
@@ -31,6 +31,6 @@ python3 -m unittest discover -s tests
 
 ## 维护与发布
 
-第一方源改动经校验后直接经入口引用；三项开发流程先在 workflow-manager 修改，然后运行 `node scripts/sync-ai-task-skill-set.mjs <本仓路径>`。完整同步会保留原目录备份。
+`requirements-analysis` 的维护和用户级分发由 workflow-manager 完成；本仓不提供同步命令。执行计划只在 dev-flow 项目目录中使用，不经本仓同步。
 
 本地应用、恢复或检查不自动提交。用户明确要求发布后，先审阅并只暂存本次文件，再运行 `bash scripts/sync.sh --publish-staged "提交说明"`；只推送当前分支，不强制推到 main。
