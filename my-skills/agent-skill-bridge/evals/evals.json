@@ -4,19 +4,19 @@
     {
       "id": 1,
       "prompt": "我装了 claude、codex、workbuddy 三个 AI agent，现在想让它们都用同一套技能，不用各维护一份。技能都放在 ~/.agents/skills/ 里，怎么让其他 agent 也能发现？",
-      "expected_output": "识别用户需要跨 agent 共享公共池 ~/.agents/skills/；先跑 bridge.py --mode dry 规划，列出各 agent 的 ADD/REPLACE，让用户确认后再 apply+verify。不碰插件型和 agent 独有 skill。",
+      "expected_output": "解释可用公共池与软链共享入口，并说明可先用 bridge.py --mode dry 查看 ADD/REPLACE 计划；这是“怎么做”的咨询，不擅自 apply，也不把没有提出的确认流程当作前置。插件型和 agent 独有 skill 保持不动。",
       "files": []
     },
     {
       "id": 2,
       "prompt": "让 codex 也能用 claude 那边的 skill，统一一下各 agent 的技能入口，别重复维护。",
-      "expected_output": "触发桥接流程：dry-run 展示映射（公共池 soft-link 进 ~/.codex/skills/ 等），用户确认后执行，冲突副本先备份再替换，最后 verify 0 缺失 0 断链。",
+      "expected_output": "将“统一各 agent 入口”作为明确的调整授权，按该范围 dry-run 后继续 apply 与 verify；不重复询问已授权范围。保留 agent 独有项和插件；遇到与请求相关且无法安全合并的本机差异时，只暂停该冲突项。",
       "files": []
     },
     {
       "id": 3,
       "prompt": "我担心你乱改我的 agent 目录。把 ~/.agents/skills 桥接给其他 agent 的时候，会不会动到我 codex 自己独有、公共池里没有的那些 skill？",
-      "expected_output": "明确解释规则 2：agent 独有（公共池无同名）的 skill 保持不动；只有与公共池同名的才按规则 4 备份后替换；插件型完全不碰。先 dry-run 给用户看哪些不动。",
+      "expected_output": "直接解释公共池只桥接已登记的共享技能，Codex 独有且公共池无同名的条目保持不动，插件不在此次范围内；用户问的是影响说明，不执行修改或要求 dry-run。",
       "files": []
     }
   ]

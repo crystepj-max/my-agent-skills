@@ -20,11 +20,13 @@ agent_created: true
 ```bash
 S=~/.agents/skills/cnb-git/scripts/cnb-git.sh
 
-# 拉代码（默认走 cnb remote —— 上游多半还指向已暂停的 GitHub）
+# 拉取默认使用当前分支配置的远端上游及其远端分支
 bash $S pull /path/to/repo
 bash $S fetch /path/to/repo            # 只拉取不合并
 bash $S fetch .                        # worktree 里也能直接跑（.git 是文件也认）
-bash $S fetch /path/to/repo            # 公开仓库无凭据可读；失效 token 会自动降级匿名重试
+bash $S pull /path/to/repo release/server-side --remote cnb  # 显式选择远端与服务端分支
+# 没有上游时，fetch 可显式指定 --remote；pull 还须提供远端分支
+bash $S fetch /path/to/repo --remote cnb
 
 # 克隆
 bash $S clone chris.ai/my-agent-skills
@@ -51,8 +53,8 @@ bash $S whoami
 
 | 场景 | GitHub 做法 | CNB 做法 |
 |---|---|---|
-| 克隆 | `git clone` | 需带 token：`http.extraHeader=Authorization: Bearer <token>`（本脚本自动注入） |
-| 拉取 | `git pull`（走 origin） | `git pull cnb <分支>` —— **上游仍指向 origin(github.com)，已 403** |
+| 克隆 | `git clone` | 目标为 `cnb.cool` 时按该 URL 注入 CNB 凭据；公开读取会在凭据被拒后匿名重试 |
+| 拉取 | `git pull`（按当前分支上游） | 默认沿用配置的远端与远端分支；可显式给 `--remote`，pull 同时指定远端分支 |
 | 推送 | `git push` | 走 `remote.pushDefault=cnb`（迁移时已设） |
 | 建分支 | `git push -u origin feat/x` | API：`cnb git create-branch --repo o/r --name x --start-point main` |
 | 删分支 | `git push origin -d x` | `cnb git delete-branch --repo o/r --branch x`（**是 `--branch` 不是 `--name`**） |
@@ -96,7 +98,7 @@ bash $S whoami
    公开仓库**不带凭据也能读**；但带一个**失效 token** 会被平台拒绝，且报错是
    `remote: Repository Not Found.`（fetch/pull）或 `fatal: repository '...' not found`（clone）
    —— 是**误导性的 404，不是 401**，照字面排查会以为是仓库没建或 slug 写错。
-   → 本脚本对读取类用 `load_token_optional`，被拒时**自动匿名重试**。
+   → 只有实际目标 URL 属于 `cnb.cool` 时才读取并注入 CNB token；其他主机不发送 CNB 凭据。公开 CNB 仓库被拒时**自动匿名重试**。
    （2026-09-11 实测：坏 token 读 chris.ai/workflow-manager 报 not found，去掉 token 即成功。）
 
 8. **worktree 里 `.git` 是文件，不是目录**
@@ -104,19 +106,18 @@ bash $S whoami
    → 不能用 `[ -d .git ]` 判断仓库（会误报「不是 git 仓库」），要用
    `git rev-parse --is-inside-work-tree`。
    同理，worktree 里 `git rev-parse --git-dir` 指向 `worktrees/<名>`，
-   而 **refs 的锁落在共享的主 `.git`** 下 —— 清理时必须同时看 `--git-common-dir`。
+   而 **refs 的锁落在共享的主 `.git`** 下。脚本只用 Git 判断仓库，不会检查或删除锁文件。
 
-9. **本机陈旧 `.lock` 会让 git 报 `cannot lock ref` 并雪崩**
-   `.git` 下的锁「删掉就被重建」，且越失败越多。
-   → 必须**清锁 + 重试在同一进程内零间隔**完成（隔一次调用锁就被重建）；
-   清锁要用 python `os.remove`（shell `rm` 会被 safe-delete 钩子拦）。本脚本已自动处理。
+9. **Git 报 `cannot lock ref` 时保留锁并停止**
+   `.lock` 可能仍由另一个 Git 进程持有，也可能需要人工检查。脚本不会自动删除锁或以删除锁为由重试；
+   先查明锁文件与相关 Git 进程状态，确认影响后再由操作者决定后续处理。
 
 ## 硬规则（不可违反）
 
 1. **绝不 force push** — 脚本不接受也不传递 `--force` / `-f`。
    （`pr-merge --force` 是平台的「忽略检查项强制合并」语义，与 force push 无关，且需显式写出。）
 2. **绝不自动 commit / stash** — 工作区未提交改动原样保留。
-3. **绝不改动 origin** — GitHub 地址是灾备，即使账号被暂停也保留。只新增/使用 `cnb` remote。
+3. **不修改现有 remote 或分支上游** — `fetch/pull` 默认使用当前分支配置的上游远端和服务端分支；缺上游时明确报错，用户可显式指定 `--remote`，pull 还需给服务端分支。脚本不会因旧账号状态固定改走 `cnb`。
 4. **合并需用户明确授权** — `pr-merge` 前必须确认用户要合并；脚本会打印不可逆警告。
 5. **token 不外泄** — 经 `http.extraHeader` 传递，不写入 `.git/config`，日志脱敏为 `***TOKEN***`。
 6. **读取类可匿名降级** — `clone` / `fetch` / `pull` 在凭据被拒时自动改用匿名请求
@@ -138,13 +139,13 @@ iKuuuVPN 的 TUN fake-ip 会把 `cnb.cool` 解析成 `198.18.x`：
 
 | 报错 | 原因 | 处理 |
 |---|---|---|
-| `Your account is suspended` + 403 | 上游还指向 origin(github.com) | 用本脚本 `pull`（走 cnb），或 `git branch --set-upstream-to=cnb/<分支>` |
+| `Your account is suspended` + 403 | 当前分支上游远端拒绝访问 | 核对当前上游；若要改从 CNB 读取，显式用 `--remote cnb`，pull 同时提供 CNB 远端分支。此命令不修改上游配置 |
 | `there is no diff between ...` (404/2004004) | 两分支内容相同 | 先推有实质改动的提交 |
 | `unknown host: cnb.cool` | 误用 `cnb git-credential` | 改用 `http.extraHeader`（本脚本已处理） |
 | `unknown option '--pageSize'` | 参数名错 | 用 `--page-size` |
 | `required option '--branch'` | 删分支用了 `--name` | 改成 `--branch` |
 | `Repository Not Found` / `repository '...' not found` | ① 仓库未建 ② slug 写错 ③ **token 已失效**（公开仓库带失效 token 也报这个 —— 误导性 404，不是 401） | 用本脚本读取（会自动匿名降级）；仍失败再核对 `组织/仓库` |
-| `cannot lock ref` / `Unable to create '...lock'` | 本机陈旧 `.lock` 雪崩（删掉又被重建） | 本脚本已自动清锁并在**原进程内**重试；原理见平台差异第 9 条 |
+| `cannot lock ref` / `Unable to create '...lock'` | Git 锁冲突；锁是否仍被进程使用尚未确认 | 命令失败并保留锁；检查相关 Git 进程与仓库状态后再决定如何处理，不要自动删除或盲目重试 |
 | `❌ 不是 git 仓库`（但明明在仓库里） | 在 worktree 里 —— 其 `.git` 是文件不是目录 | 已修复（改用 `git rev-parse --is-inside-work-tree`） |
 | `commit_title is required` (400/2000001) | merge-pull 未带 `commit_title` | 用本脚本 `pr-merge`（自动补），或手加 `--data '{"commit_title":"..."}'` |
 | `LibreSSL SSL_read: bad record mac` | 代理 TLS 抖动 | push 脚本内置 3 次重试 |
