@@ -120,7 +120,7 @@ RESOLVED="$(nslookup cnb.cool 2>/dev/null | awk '/^Address: /{print $NF}' | tail
 case "$RESOLVED" in
   198.18.*)
     echo "  🟡 DNS 被 fake-ip 劫持（cnb.cool → ${RESOLVED}），必须走代理才能满速"
-    [ ${#PROXY_ARGS[@]} -eq 0 ] && echo "     ⚠️  但未检测到 ${PROXY_PORT} 端口代理，将直连（可能极慢）"
+    [ "$MODE" = "直连" ] && echo "     ⚠️  但未检测到 ${PROXY_PORT} 端口代理，将直连（可能极慢）"
     ;;
 esac
 echo "  网络: ${MODE}"
@@ -131,8 +131,10 @@ GIT_ARGS=(
   -c "http.postBuffer=524288000"      # 500M，默认 1M 装不下大仓库
   -c "pack.compression=1"             # 压得快，上传体积换时间
   -c "http.extraHeader=Authorization: Bearer ${TOKEN}"
-  "${PROXY_ARGS[@]}"
 )
+if [ "$MODE" != "直连" ]; then
+  GIT_ARGS+=("${PROXY_ARGS[@]}")
+fi
 
 # ---------- 空跑 ----------
 if [ "$DRY" -eq 1 ]; then
@@ -209,6 +211,6 @@ if [ "$FAILED" -eq 0 ]; then
   exit 0
 else
   echo "═══ ❌ ${NAME} 推送未完全成功 ═══" >&2
-  echo "  排查：① 仓库是否已在 CNB 建好且为空 ② token 是否有写权限 ③ 见 SKILL.md 故障表" >&2
+  echo "  排查：① 目标 CNB 仓库与权限 ② 若首次上传且远端已有提交，先核对并衔接历史 ③ 见 SKILL.md 故障表" >&2
   exit 1
 fi

@@ -8,18 +8,23 @@
 
 > ⚠️ **排版保护说明**：本表为人工优化版。结构（三块分区、列定义、参考/范围列）请勿手工整体重写；第三方 skill 移入「参考 Skill」板块、第一方「参考的 skill/参考日期」回填，请直接在对应表格行编辑。刷新「最新更新」列请只运行 `scripts/refresh_inventory.py`（该脚本仅更新此列，不改动排版与列结构）。
 
-> 本表共 **81** 个 skill，拆分为三块——**第一方 5 个**（本仓库 4 个、workflow-manager 维护 1 个）、**第三方 71 个**（公共池收录）、**参考 Skill 5 个**（被第一方参考/可替代的第三方）。各 skill 含「skill 范围」列：用户级 / 项目仓库名。
+> 本表保留 Skill 描述、来源与维护责任说明，不设置固定总数；实际启用状态和范围以 [生命周期清单](skill-lifecycle.md) 与 skill-policy.json 为准。各 skill 含「skill 范围」列：用户级 / 项目仓库名 / 宿主限定（仅 codex）。
 
-## 第一方 Skill（本仓库自研，经软链同步至公共池 `~/.agents/skills/`；共 4 个）
+## 本仓维护的第一方 Skill（经软链同步至公共池 `~/.agents/skills/`）
 
-> 本仓库（松哥）自研的 skill。表格「参考的 skill」「参考日期」两列，记录该第一方 skill 打造时参考的第三方 skill；第三方 skill 若可被第一方替代，则移至文末「参考 Skill」板块。未来第三方 skill 的「最新更新」大于「参考日期」时，说明第三方已有更新版本，可基于此更新第一方 skill。
+> 本节保留本仓维护的第一方 skill 描述与来源线索；正式维护来源以 `inventory/skill-policy.json` 为准。表格中的「参考的 skill」「参考日期」仅保留已有记录；登记当前维护责任不代表确认原作者或最初来源。
 
 | # | Skill 名称 | 中文描述 | 参考的 skill | 参考日期 | skill 范围 | 最新更新 |
 |---|---|---|---|---|---|---|
 | 1 | `agent-cli-tool-residue-purge` | 当 AI 编程 CLI（Claude Code、Codex、Gemini CLI 等）在某个辅助/代理/包装工具被卸载后开始报错时使用——例如 SessionStart:startup hook error、每次 Bash 调用都 command not found、或 CLI 静默指向已失效的 localhost 端口。提供跨所有配置层（settings 文件、MCP 注册表、hooks、shell rc、launchd、cron）的全面排查与清理流程，确保不留任何陈旧引用。 | — | — | 用户级 | 平台内置 |
-| 2 | `agent-skill-bridge` | 统一管理多个 AI agent（claude / codex / workbuddy 等）的第三方 skill 安装流程——安全审计 + 安装到公共池 ~/.agents/skills/ + 中文化 + 软链桥接到各 agent 默认目录 + 校验每个 agent 对同一 skill 只保留 1 份（去重）。含只读的中文化守护 `cn_guard.sh`：校验已登记技能 description 是否仍为中文，退出码 0/1/2，不自动改写。 | find-skills | 2026-10-05 | 用户级 | 平台内置 |
+| 2 | `agent-skill-bridge` | 管理多个 AI agent 的技能来源与生命周期：第一方源完整执行、第三方原版保留参考、并维护退役与项目范围边界；含只读中文化守护。 | find-skills | 2026-10-05 | 用户级 | 2026-10-15 |
 | 3 | `clashx-openai-sse-debug` | 排查 ClashX（ClashX Pro）代理导致 OpenAI 或 API 流式 SSE 连接中断的问题：Codex 桌面端连不上、stream closed before response.completed、SSE 断连、macOS 上 ClashX 规则模式或全局模式下 OpenAI 流式失败。覆盖 ClashX 控制 API、热重载导致 DNS 崩溃的坑、验证 OpenAI 必须走代理、节点选择、SSE 稳定性测试。 | — | — | 用户级 | 平台内置 |
-| 4 | `duplicate-cli-unify` | 当同一个命令行工具（如 Claude Code、Codex 或任何 npm/node 类 CLI）被多个包管理器重复安装时使用——最常见的是 nvm 全局安装与 Homebrew 安装并存，导致版本混乱、残留旧副本、或自动更新静默写入错误路径。提供检测、分析、决策、修复的完整流程，把工具统一到单一安装源。 | — | — | 用户级 | 平台内置 |
+| 4 | `cnb-git` | 封装 CNB 代码平台的 Git 操作；按实际 upstream remote 与服务端分支 fetch/pull，凭据仅发往 CNB URL，保留锁并明确传播 clone/fetch/pull 失败。 | — | — | 用户级 | 2026-10-15 |
+| 5 | `cnb-push` | 把本地 Git 仓库推送至 CNB；区分已有仓库更新和首次上传，并说明 --all 与 --set-default 的实际范围。 | — | — | 用户级 | 2026-10-15 |
+| 6 | `dsh-source-upgrade` | 按当前 DeepSeek Harness 源码与运行现场升级；将源码升级、单独重启和配置对齐分别处理，并保留真实版本、LLM 与隔离网页验证要求。 | — | — | 用户级 | 2026-10-15 |
+| 7 | `dsh-web-access-recovery` | 按当前 DeepSeek Harness 认证、服务与日志证据恢复网页访问；保护 token/cookie，不把旧端口、令牌期限或后台能力当作现行事实。 | — | — | 用户级 | 2026-10-15 |
+| 8 | `duplicate-cli-unify` | 当同一个命令行工具（如 Claude Code、Codex 或任何 npm/node 类 CLI）被多个包管理器重复安装时使用——最常见的是 nvm 全局安装与 Homebrew 安装并存，导致版本混乱、残留旧副本、或自动更新静默写入错误路径。提供检测、分析、决策、修复的完整流程，把工具统一到单一安装源。 | — | — | 用户级 | 平台内置 |
+| 9 | `workspace-convergence-audit` | 只读审计多 worktree 与独立分支并形成报告；尊重原请求已授权的清理边界，对未知归属和唯一资产保留并报告。 | — | — | 用户级 | 2026-10-15 |
 
 ## 其他项目维护的第一方 Skill
 

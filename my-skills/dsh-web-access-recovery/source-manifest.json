@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "name": "dsh-web-access-recovery",
+  "maintenance_source": "my-skills/dsh-web-access-recovery",
+  "maintenance_status": "first-party-maintained",
+  "provenance": {
+    "original_source_status": "unverified",
+    "decision": "按用户明确决定，以现存完整包建立本仓第一方维护源；此登记确认当前维护责任，不证明原作者或最初来源。",
+    "preserved_original_path": "/Users/chris/Documents/Codex/2026-10-13/user-skills-instruction-review/optimization-handoff/first-party-backup/dsh-web-access-recovery",
+    "preserved_original_package_fingerprint": "f6500ab08246e3eb286284ab37b9e907d98be698b35ff9f6e7d6d6df1601dd15",
+    "preserved_original_files": {
+      "SKILL.md": "814a8165c92ab4fdb63480dfe5b0eea3a14f62b2983a1ac79ab687a5fd51064a"
+    },
+    "installed_original_path": "/Users/chris/.agents/skills/dsh-web-access-recovery",
+    "installed_original_files": {
+      "SKILL.md": "814a8165c92ab4fdb63480dfe5b0eea3a14f62b2983a1ac79ab687a5fd51064a"
+    },
+    "source_agent_record": "/Users/chris/Documents/Codex/2026-10-13/user-skills-instruction-review/optimization-handoff/first-party-adopted-result.json"
+  },
+  "files": {
+    "SKILL.md": "d514b511f2e60d5c6ea821888ab3e4b8abff0e5aa850247dc1f86008510dd2c7"
+  },
+  "validation": {
+    "final_candidate_sha256": "d514b511f2e60d5c6ea821888ab3e4b8abff0e5aa850247dc1f86008510dd2c7",
+    "candidate_matches_formal_source": true,
+    "scope": "静态规则与结构审阅；未执行真实 DSH 服务、LLM、Git 远端、凭据业务或 workspace 清理。"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "name": "workspace-convergence-audit",
+  "maintenance_source": "my-skills/workspace-convergence-audit",
+  "maintenance_status": "first-party-maintained",
+  "provenance": {
+    "original_source_status": "unverified",
+    "decision": "按用户明确决定，以现存完整包建立本仓第一方维护源；此登记确认当前维护责任，不证明原作者或最初来源。",
+    "preserved_original_path": "/Users/chris/Documents/Codex/2026-10-13/user-skills-instruction-review/optimization-handoff/first-party-backup/workspace-convergence-audit",
+    "preserved_original_package_fingerprint": "506962e236a38465e187cf3b6009da118ea625b08ba6b57a4973f995bdb433e8",
+    "preserved_original_files": {
+      "SKILL.md": "5065063e57d92e47be84ce8012c5c73e26bf42e3e6598c1453faefee1ec950e7"
+    },
+    "installed_original_path": "/Users/chris/.agents/skills/workspace-convergence-audit",
+    "installed_original_files": {
+      "SKILL.md": "5065063e57d92e47be84ce8012c5c73e26bf42e3e6598c1453faefee1ec950e7"
+    },
+    "source_agent_record": "/Users/chris/Documents/Codex/2026-10-13/user-skills-instruction-review/optimization-handoff/first-party-adopted-result.json"
+  },
+  "files": {
+    "SKILL.md": "607183d2933d3fe3937d3960d4cf9076f5f7d2e34c1d95b341aa36341500efca"
+  },
+  "validation": {
+    "final_candidate_sha256": "607183d2933d3fe3937d3960d4cf9076f5f7d2e34c1d95b341aa36341500efca",
+    "candidate_matches_formal_source": true,
+    "scope": "静态规则与结构审阅；未执行真实 DSH 服务、LLM、Git 远端、凭据业务或 workspace 清理。"
+  }
+}

@@ -15,16 +15,18 @@
 | beautiful-html-templates | reference | presentations | `project:presentations/.agent-assets/presentations/beautiful-html-templates` |
 | bottleneck-hunter | transition | global | `~/.agents/skills/bottleneck-hunter` |
 | clashx-openai-sse-debug | transition | global | `~/.agents/skills/clashx-openai-sse-debug` |
+| cnb-git | active | global | `my-skills/cnb-git`（说明：按实际 upstream remote 与服务端分支执行 fetch/pull；凭据仅注入 CNB URL；不自动删 Git lock，clone/fetch/pull 错误明确失败。） |
+| cnb-push | active | global | `my-skills/cnb-push`（说明：CNB 推送封装；区分现有仓更新与首次上传，--all/--set-default 按其实际影响范围授权并复用既有授权。） |
 | code-review | transition | global | `~/.agents/skills/code-review` |
 | codebase-design | transition | global | `~/.agents/skills/codebase-design` |
-| cnb-git | active | global | `my-skills/cnb-git` |
-| cnb-push | active | global | `my-skills/cnb-push` |
 | construction-bootstrap | retired | global | `~/.local/share/agent-skills/retired/construction-bootstrap` |
 | cross-domain-borrowing | active | global | `my-skills/cross-domain-borrowing` |
 | deep-company-series | transition | global | `~/.agents/skills/deep-company-series` |
 | dev-workflow-2-0 | retired | global | `~/.local/share/agent-skills/retired/dev-workflow-2-0` |
 | diagnosing-bugs | reference | global | `~/.local/share/agent-skills/references/diagnosing-bugs` |
 | domain-modeling | transition | global | `~/.agents/skills/domain-modeling` |
+| dsh-source-upgrade | active | global | `my-skills/dsh-source-upgrade`（说明：本仓按用户决定承担当前维护；原作者与最初来源未证实，完整原件保存在 /Users/chris/Documents/Codex/2026-10-13/user-skills-instruction-review/optimization-handoff/first-party-backup/dsh-source-upgrade） |
+| dsh-web-access-recovery | active | global | `my-skills/dsh-web-access-recovery`（说明：本仓按用户决定承担当前维护；原作者与最初来源未证实，完整原件保存在 /Users/chris/Documents/Codex/2026-10-13/user-skills-instruction-review/optimization-handoff/first-party-backup/dsh-web-access-recovery） |
 | duplicate-cli-unify | transition | global | `~/.agents/skills/duplicate-cli-unify` |
 | dyp-ask | transition | global | `~/.agents/skills/dyp-ask` |
 | earnings-review | transition | global | `~/.agents/skills/earnings-review` |
@@ -108,4 +110,5 @@
 | wf-explore | active | global | `~/.agents/skills/wf-explore` |
 | wf-optimize | active | global | `~/.agents/skills/wf-optimize` |
 | wizard | transition | global | `~/.agents/skills/wizard` |
+| workspace-convergence-audit | active | global | `my-skills/workspace-convergence-audit`（说明：本仓按用户决定承担当前维护；原作者与最初来源未证实，完整原件保存在 /Users/chris/Documents/Codex/2026-10-13/user-skills-instruction-review/optimization-handoff/first-party-backup/workspace-convergence-audit） |
 | writing-great-skills | transition | global | `~/.agents/skills/writing-great-skills` |
