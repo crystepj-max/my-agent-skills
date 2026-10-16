@@ -142,6 +142,17 @@
       ]
     },
     {
+      "name": "chatgpt-web-bridge",
+      "state": "active",
+      "scope": "global",
+      "source": "my-skills/chatgpt-web-bridge",
+      "origin": "first-party",
+      "note": "通用 ChatGPT 网页桥接：通道优先级 codex-in-app-browser → user-chrome（已登录 Chrome 会话）→ host-browser-use；支持 reasoning 与 image 两类任务合同；启用需通过 automation-consent 同意门。派生自 transition 状态的 codex-bridge-chatgpt，合同与安全护栏同源，原版保留。",
+      "accepted_fingerprints": [
+        "e6fb66f295060c452e8c53d871ce23a55e6f5e59d425a712b0cfb6c725556a05"
+      ]
+    },
+    {
       "name": "clashx-openai-sse-debug",
       "state": "active",
       "scope": "global",
