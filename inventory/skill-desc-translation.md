@@ -1,25 +1,30 @@
 > **实际启用状态已迁移到 [生命周期清单](skill-lifecycle.md) 与 skill-policy.json。** 本文件保留描述和来源，不作为恢复器的全量安装名单；旧“使用范围”以生命周期清单为准。
 
-# 公共池 Skill 中文描述总表
+# Skill 中文描述与来源档案（含历史公共池表）
 
-> 生成：2026-08-24 ｜ 范围：公共池 `~/.agents/skills/`（claude / codex / workbuddy / openclaw / hermes 五端经软链同步中文；kimi / opencode 原生直读公共池）
+> 历史快照生成：2026-08-24 ｜ 原范围：公共池 `~/.agents/skills/`（claude / codex / workbuddy / openclaw / hermes 五端经软链同步中文；kimi / opencode 原生直读公共池）。以下原表、来源与能力描述完整保留，不能作为当前启用/安装状态。
 
-> 说明：本表仅收录公共池 `~/.agents/skills/` 中的 skill。53 个 Claude 插件 skill 按规则①未改动、仍为英文，不在本表范围；agent 独有（公共池无同名）的 skill 亦不收录。各 skill 的「仓库链接 / 来源」「作者」「仓库简介」三列同源合并。
+> 说明：本表按旧快照记录当时公共池 `~/.agents/skills/` 中的 skill；53 个 Claude 插件 skill 按当时规则①未改动、仍为英文，不在本表范围；agent 独有（公共池无同名）的 skill 亦不收录。各 skill 的「仓库链接 / 来源」「作者」「仓库简介」三列同源合并。当前状态、范围和维护源以生命周期清单与正式策略为准。
 
 > ⚠️ **排版保护说明**：本表为人工优化版。结构（三块分区、列定义、参考/范围列）请勿手工整体重写；第三方 skill 移入「参考 Skill」板块、第一方「参考的 skill/参考日期」回填，请直接在对应表格行编辑。刷新「最新更新」列请只运行 `scripts/refresh_inventory.py`（该脚本仅更新此列，不改动排版与列结构）。
 
-> 本表共 **81** 个 skill，拆分为三块——**第一方 5 个**（本仓库 4 个、workflow-manager 维护 1 个）、**第三方 71 个**（公共池收录）、**参考 Skill 5 个**（被第一方参考/可替代的第三方）。各 skill 含「skill 范围」列：用户级 / 项目仓库名。
+> 本表保留 Skill 描述、来源与维护责任说明，不设置固定总数；实际启用状态和范围以 [生命周期清单](skill-lifecycle.md) 与 skill-policy.json 为准。各 skill 含「skill 范围」列：用户级 / 项目仓库名 / 宿主限定（仅 codex）。
 
-## 第一方 Skill（本仓库自研，经软链同步至公共池 `~/.agents/skills/`；共 4 个）
+## 本仓维护的第一方 Skill（原描述表；经软链同步至公共池 `~/.agents/skills/`）
 
-> 本仓库（松哥）自研的 skill。表格「参考的 skill」「参考日期」两列，记录该第一方 skill 打造时参考的第三方 skill；第三方 skill 若可被第一方替代，则移至文末「参考 Skill」板块。未来第三方 skill 的「最新更新」大于「参考日期」时，说明第三方已有更新版本，可基于此更新第一方 skill。
+> 本节保留原人工描述表，不是当前所有第一方维护源的完整清单。当前维护来源见文末 99 条映射附表。登记本仓维护源不单独证明历史作者或最初来源；表格「参考的 skill」「参考日期」两列记录当时注明的参考。
 
 | # | Skill 名称 | 中文描述 | 参考的 skill | 参考日期 | skill 范围 | 最新更新 |
 |---|---|---|---|---|---|---|
 | 1 | `agent-cli-tool-residue-purge` | 当 AI 编程 CLI（Claude Code、Codex、Gemini CLI 等）在某个辅助/代理/包装工具被卸载后开始报错时使用——例如 SessionStart:startup hook error、每次 Bash 调用都 command not found、或 CLI 静默指向已失效的 localhost 端口。提供跨所有配置层（settings 文件、MCP 注册表、hooks、shell rc、launchd、cron）的全面排查与清理流程，确保不留任何陈旧引用。 | — | — | 用户级 | 平台内置 |
-| 2 | `agent-skill-bridge` | 统一管理多个 AI agent（claude / codex / workbuddy 等）的第三方 skill 安装流程——安全审计 + 安装到公共池 ~/.agents/skills/ + 中文化 + 软链桥接到各 agent 默认目录 + 校验每个 agent 对同一 skill 只保留 1 份（去重）。含只读的中文化守护 `cn_guard.sh`：校验已登记技能 description 是否仍为中文，退出码 0/1/2，不自动改写。 | find-skills | 2026-10-05 | 用户级 | 平台内置 |
+| 2 | `agent-skill-bridge` | 管理多个 AI agent 的技能来源与生命周期：第一方源完整执行、第三方原版保留参考、并维护退役与项目范围边界；含只读中文化守护。 | find-skills | 2026-10-05 | 用户级 | 2026-10-15 |
 | 3 | `clashx-openai-sse-debug` | 排查 ClashX（ClashX Pro）代理导致 OpenAI 或 API 流式 SSE 连接中断的问题：Codex 桌面端连不上、stream closed before response.completed、SSE 断连、macOS 上 ClashX 规则模式或全局模式下 OpenAI 流式失败。覆盖 ClashX 控制 API、热重载导致 DNS 崩溃的坑、验证 OpenAI 必须走代理、节点选择、SSE 稳定性测试。 | — | — | 用户级 | 平台内置 |
-| 4 | `duplicate-cli-unify` | 当同一个命令行工具（如 Claude Code、Codex 或任何 npm/node 类 CLI）被多个包管理器重复安装时使用——最常见的是 nvm 全局安装与 Homebrew 安装并存，导致版本混乱、残留旧副本、或自动更新静默写入错误路径。提供检测、分析、决策、修复的完整流程，把工具统一到单一安装源。 | — | — | 用户级 | 平台内置 |
+| 4 | `cnb-git` | 封装 CNB 代码平台的 Git 操作；按实际 upstream remote 与服务端分支 fetch/pull，凭据仅发往 CNB URL，保留锁并明确传播 clone/fetch/pull 失败。 | — | — | 用户级 | 2026-10-15 |
+| 5 | `cnb-push` | 把本地 Git 仓库推送至 CNB；区分已有仓库更新和首次上传，并说明 --all 与 --set-default 的实际范围。 | — | — | 用户级 | 2026-10-15 |
+| 6 | `dsh-source-upgrade` | 按当前 DeepSeek Harness 源码与运行现场升级；将源码升级、单独重启和配置对齐分别处理，并保留真实版本、LLM 与隔离网页验证要求。 | — | — | 用户级 | 2026-10-15 |
+| 7 | `dsh-web-access-recovery` | 按当前 DeepSeek Harness 认证、服务与日志证据恢复网页访问；保护 token/cookie，不把旧端口、令牌期限或后台能力当作现行事实。 | — | — | 用户级 | 2026-10-15 |
+| 8 | `duplicate-cli-unify` | 当同一个命令行工具（如 Claude Code、Codex 或任何 npm/node 类 CLI）被多个包管理器重复安装时使用——最常见的是 nvm 全局安装与 Homebrew 安装并存，导致版本混乱、残留旧副本、或自动更新静默写入错误路径。提供检测、分析、决策、修复的完整流程，把工具统一到单一安装源。 | — | — | 用户级 | 平台内置 |
+| 9 | `workspace-convergence-audit` | 只读审计多 worktree 与独立分支并形成报告；尊重原请求已授权的清理边界，对未知归属和唯一资产保留并报告。 | — | — | 用户级 | 2026-10-15 |
 
 ## 其他项目维护的第一方 Skill
 
@@ -31,9 +36,11 @@
 
 > **2026-09-15 退役**：原第 4 项 `dev-workflow-2-0`。其职责已由「AI 任务交付」集合拆分为 M1 `requirements-analysis` / M2 `wf-construction-full-feature` / M3 `execution-plan` 承接，已在 `skill-policy.json` 置为 `retired`，源目录移出发现目录至 `~/.local/share/agent-skills/retired/dev-workflow-2-0`。同批退役的还有 `construction-bootstrap`。
 
-## 第三方 Skill（公共池收录）
+## 历史第三方 Skill 来源与能力说明（旧公共池记录）
 
-> 按「来源分类 > 字母顺序」排序。PPT 相关 skill 标记为项目级，归入 `crystepj-max/Chris-Vault/`。以下 skill 已被对应第一方 skill **部分覆盖**，仍保留为可用入口：`triage`（被 `requirements-analysis` 部分覆盖）、`grill-with-docs`（被 `requirements-analysis` 部分覆盖）、`wayfinder`（被 `requirements-analysis` 部分覆盖）、`skills-security-check`（被 `agent-skill-bridge` 部分覆盖）。原列于此处的 `tdd`（被 `dev-workflow-2-0` 部分覆盖）已随该第一方 skill 退役一并移除——`tdd` 现无覆盖来源。
+> 按原「来源分类 > 字母顺序」表格完整保留，内容反映旧公共池记录；不表示这些条目目前仍是独立执行入口。其当前状态以正式策略 `inventory/skill-policy.json` 和生命周期清单为准。历史上的覆盖关系和来源归属按当时资料展示，不推导为当前可用性或第一方原创声明。
+>
+> 旧表覆盖关系说明（仅保留历史原意；其中“仍保留为可用入口”不代表当前状态）：当时记录的部分覆盖关系包括 `triage`、`grill-with-docs`、`wayfinder`（对应 `requirements-analysis`）和 `skills-security-check`（对应 `agent-skill-bridge`）；旧表还记载 `tdd` 曾部分依赖已退役的 `dev-workflow-2-0`。这些记录不表示当前仍有相同覆盖或入口。
 
 | # | Skill 名称 | 中文描述 | 仓库链接 / 来源 | 作者 | 仓库简介 | skill 范围 | 最新更新 |
 |---|---|---|---|---|---|---|---|
@@ -111,8 +118,10 @@
 | 72 | `wechat-article` | 微信公众号文章：作者-编辑-读者三Agent协作。来源：skills/wechat-article.md. |  |  |  | 用户级 | 平台内置 |
 | 73 | `wizard` | 生成一个交互式 bash 向导，带着用户走完只有他们才能执行的步骤。适用于配置基础设施、设置凭据或 CI 密钥、引导陌生的第三方控制台，或执行一次性迁移/切换。不要用于 agent 能自行完成的步骤。 |  |  |  | 用户级 | 平台内置 |
 | 74 | `writing-great-skills` | 写好、改好 skill 的参考书——让 skill 可预期所需的词汇与原则。 | [github.com/sickn33/agentic-awesome-skills](https://github.com/sickn33/agentic-awesome-skills) | sickn33 | 本地 agent-first 控制面，包含 2000+ agentic skills 编目 | 用户级 | 2026-10-06 |
+| 76 | `codex-bridge-chatgpt` | 当复杂仓库任务需要 ChatGPT 网页推理、而 Codex仍负责本地证据、编辑与测试时使用。⚠️ Codex 专属技能，仅桥接 `~/.codex/skills`；启用前需先取得浏览器自动化授权。2026-10-14 曾短暂退役（判定无实用价值），当日按用户要求装回并恢复治理。来源不可考。 | 来源不可考（无 git / README / 作者声明） | 未知 | 人工粘贴式 ChatGPT 推理桥接 | 用户级（仅 codex） | 2026-09-05 |
+| 77 | `codex-with-chatgpt` | 让 ChatGPT 网页版充当 Codex 编码会话的规划与评审大脑，执行权完全留给 Codex；靠 MCP 只读连接器让 ChatGPT 自主读仓库，无需人工粘贴上下文包。❌ 已于 2026-10-14 卸载：本地来源目录与上游 checkout（`/Users/chris/plugins/codex-with-chatgpt`）均已删除，用户判定用不了、不再恢复，登记表条目已移除（内容不存在故无法走 retired 保留流程）。如需再用需重新 clone 上游仓库。 | [github.com/XiaoDuoYa/codex-with-chatgpt](https://github.com/XiaoDuoYa/codex-with-chatgpt) | XiaoDuoYa | C2C 桥接：ChatGPT 只读接入工作区，Codex 保留全部执行权 | 已卸载 | 2026-10-14 |
 
-## 参考 Skill（被第一方参考或可替代的第三方）
+## 历史参考 Skill 记录（曾被第一方参考或可替代的第三方）
 
 > 本板块收录「第一方 skill 打造时参考的第三方 skill」以及「功能可被第一方 skill 覆盖、不再单独使用的第三方 skill」。表格字段与第三方 skill 表一致（含 skill 范围列）。
 
@@ -124,7 +133,7 @@
 | 7 | `find-skills` | 当用户问『怎么实现 X』『有没有做 X 的 skill』『有没有能…的 skill』，或表达想扩展能力时，帮助发现并安装 agent skill。应在用户寻找可能以可安装 skill 形式存在的功能时使用。 |  |  |  | 用户级 | 平台内置 |
 | 8 | `diagnosing-bugs` | 针对难缠 bug 与性能回退的诊断循环。当用户说『diagnose』『debug this』，或报告某东西报错/失败/变慢时使用。已于 2026-09-15 退役为参考：诊断职责由 `wf-diagnose` 承接。 |  |  |  | 用户级 | 平台内置 |
 
-**合计**：共 **84** 个 skill —— 第一方 **5** + 第三方 **74** + 参考 Skill **5**。
+**历史快照合计**：共 **84** 个 skill —— 第一方 **5** + 第三方 **74** + 参考 Skill **5**。该数字仅对应旧表快照，不是当前 141 条策略记录的统计。
 
 > 2026-10-04：新增第三方 `typesafe-ai`（typesafe-ai/skills，TypeSafe System One / Jev 结构化判断原语）。合计 80 → 81，第三方 70 → 71。同时按表格实际行数校正前言计数（原写 6/71/4，实为 5/70/5）。安装前已过安全审计（纯文档、无脚本、无网络执行，P2）。
 
@@ -183,8 +192,119 @@
 
 > **体积提示**：以下 5 个 skill 含大体积本地资源，未打包进一键安装脚本，请用其仓库链接单独安装——`ppt-master`、`humanize-ppt`、`beautiful-html-templates`、`baoyu-slide-deck`、`guizang-ppt-skill`。
 
-## 安装方式说明
+## 旧安装方式说明（历史记录，不作为当前恢复指令）
 
-> **两种安装方式**
+> **以下只记录旧安装方式**：旧全量包及旧安装器仅供追溯历史，不得用于重新启用已被第一方替代的 99 份原第三方入口。当前恢复按策略登记的范围执行；本轮原件归档为 reference，恢复也只补回参考位置。
+>
+> **旧记录中的两种安装方式**
 > - **仓库链接安装**：从上游重新拉取，干净但版本可能略新于本机。
 > - **一键原样安装（推荐，字节级一致，含本机中文化与私有改动）**：`bash install_all_skills.sh` —— 自动解包到 `~/.agents/skills/` 并桥接到 `~/.workbuddy/skills/` 等目录。脚本已打包 **65 个轻量 skill**；**5 个含大体积本地资源的 skill**（见上「体积提示」）未打包，请用其仓库链接安装。
+
+
+## 本轮 99 条第一方正式维护源与原件参考映射
+
+本表按 2026-10-15 经审阅的 `formal-policy-preview.json` 生成，列出本轮新增的 99 条 active first-party 映射（98 个 `global` 用户级源 + 1 个 Gawain 项目源）。它是全仓 141 条策略记录的一个子集，不代表全仓第一方总数；正式全量状态请看 [生命周期清单](skill-lifecycle.md)。
+
+「正式维护源」和「原件参考」是不同路径：维护源由正式登记表确定，不等同于原作者/原创声明；原安装快照仅用于历史保留和只读比较，不作为现行入口。上游列只呈现可追溯的来源线索；有来源冲突或未确认时按说明保留，不补造作者和仓库。本轮 99 条映射包含 98 个用户级 `global` 源与 1 个 Gawain 项目源；原有三份未挂接到本轮映射的参考（`tdd`、`diagnosing-bugs`、`neat-freak`）仍单独保留，因此全表 `reference_copies` 为 99 + 3 = 102。正式维护源已本地应用，`apply`、`check` 与实际入口路径独立核验通过；29 项 updater 清退已完成，102 条参考副本在同一正式 bundle 的两个恢复入口验证中均通过。新会话可见性和业务行为仍分别验证。
+
+| Skill | 正式维护源 | 范围 | 原安装快照（来源 → 参考保存位置） | 登记上游/来源线索 |
+|---|---|---|---|---|
+| `agent-cli-tool-residue-purge` | `my-skills/agent-cli-tool-residue-purge` | 用户级（global） | local-installed-snapshot: `~/.agents/skills/agent-cli-tool-residue-purge` → `~/.local/share/agent-skills/references/agent-cli-tool-residue-purge` | 原始上游未确证；不推断作者或仓库 |
+| `agnes-ai-generation-skill` | `my-skills/agnes-ai-generation-skill` | 用户级（global） | installed-snapshot: `~/.agents/skills/agnes-ai-generation-skill` → `~/.local/share/agent-skills/references/agnes-ai-generation-skill` | 历史来源清单：[github.com/Yacey/agnes-ai-generation-skill](https://github.com/Yacey/agnes-ai-generation-skill)；inventory/skill-desc-translation.md 记录 GitHub Yacey/agnes-ai-generation-skill。 |
+| `ask-matt` | `my-skills/ask-matt` | 用户级（global） | installed-snapshot: `~/.agents/skills/ask-matt` → `~/.local/share/agent-skills/references/ask-matt` | 旧来源表线索：[仓库/来源](https://github.com/mattpocock/skills)（历史归属，非作者结论） |
+| `baoyu-comic` | `my-skills/baoyu-comic` | 用户级（global） | installed-snapshot: `~/.agents/skills/baoyu-comic` → `~/.local/share/agent-skills/references/baoyu-comic` | [登记来源链接](https://github.com/JimLiu/baoyu-skills#baoyu-comic) |
+| `baoyu-image-gen` | `my-skills/baoyu-image-gen` | 用户级（global） | installed-snapshot: `~/.agents/skills/baoyu-image-gen` → `~/.local/share/agent-skills/references/baoyu-image-gen` | [登记来源链接](https://github.com/JimLiu/baoyu-skills#baoyu-image-gen)；来源说明：原 SKILL.md 的 homepage 指向 JimLiu/baoyu-skills；inventory/skill-desc-translation.md 将来源列为平台内置。并存记录，不推断安装来源。 |
+| `baoyu-infographic` | `my-skills/baoyu-infographic` | 用户级（global） | installed-snapshot: `~/.agents/skills/baoyu-infographic` → `~/.local/share/agent-skills/references/baoyu-infographic` | [登记来源链接](https://github.com/JimLiu/baoyu-skills#baoyu-infographic)；来源说明：原 SKILL.md 的 homepage 指向 JimLiu/baoyu-skills；inventory/skill-desc-translation.md 将来源列为平台内置。并存记录，不推断安装来源。 |
+| `bottleneck-hunter` | `my-skills/bottleneck-hunter` | 用户级（global） | installed-snapshot: `~/.agents/skills/bottleneck-hunter` → `~/.local/share/agent-skills/references/bottleneck-hunter` | [登记来源链接](https://github.com/xbtlin/ai-berkshire) |
+| `clashx-openai-sse-debug` | `my-skills/clashx-openai-sse-debug` | 用户级（global） | local-installed-snapshot: `~/.agents/skills/clashx-openai-sse-debug` → `~/.local/share/agent-skills/references/clashx-openai-sse-debug` | 原始上游未确证；不推断作者或仓库 |
+| `code-review` | `my-skills/code-review` | 用户级（global） | installed-snapshot: `~/.agents/skills/code-review` → `~/.local/share/agent-skills/references/code-review` | 原始上游未确证；不推断作者或仓库 |
+| `codebase-design` | `my-skills/codebase-design` | 用户级（global） | installed-snapshot: `~/.agents/skills/codebase-design` → `~/.local/share/agent-skills/references/codebase-design` | 原始上游未确证；不推断作者或仓库 |
+| `deep-company-series` | `my-skills/deep-company-series` | 用户级（global） | installed-snapshot: `~/.agents/skills/deep-company-series` → `~/.local/share/agent-skills/references/deep-company-series` | [登记来源链接](https://github.com/xbtlin/ai-berkshire) |
+| `domain-modeling` | `my-skills/domain-modeling` | 用户级（global） | installed-snapshot: `~/.agents/skills/domain-modeling` → `~/.local/share/agent-skills/references/domain-modeling` | 原始上游未确证；不推断作者或仓库 |
+| `duplicate-cli-unify` | `my-skills/duplicate-cli-unify` | 用户级（global） | local-installed-snapshot: `~/.agents/skills/duplicate-cli-unify` → `~/.local/share/agent-skills/references/duplicate-cli-unify` | 原始上游未确证；不推断作者或仓库 |
+| `dyp-ask` | `my-skills/dyp-ask` | 用户级（global） | installed-snapshot: `~/.agents/skills/dyp-ask` → `~/.local/share/agent-skills/references/dyp-ask` | [登记来源链接](https://github.com/xbtlin/ai-berkshire) |
+| `earnings-review` | `my-skills/earnings-review` | 用户级（global） | installed-snapshot: `~/.agents/skills/earnings-review` → `~/.local/share/agent-skills/references/earnings-review` | [登记来源链接](https://github.com/xbtlin/ai-berkshire) |
+| `earnings-team` | `my-skills/earnings-team` | 用户级（global） | installed-snapshot: `~/.agents/skills/earnings-team` → `~/.local/share/agent-skills/references/earnings-team` | [登记来源链接](https://github.com/xbtlin/ai-berkshire) |
+| `edit-article` | `my-skills/edit-article` | 用户级（global） | installed-snapshot: `~/.agents/skills/edit-article` → `~/.local/share/agent-skills/references/edit-article` | 历史来源清单：WorkBuddy 内置 / 应用市场；inventory/skill-desc-translation.md 将其列为 WorkBuddy/平台内置；未将其改称独立 GitHub 上游。 |
+| `eli5` | `my-skills/eli5` | 用户级（global） | installed-snapshot: `~/.agents/skills/eli5` → `~/.local/share/agent-skills/references/eli5` | 历史来源清单：[github.com/companion-inc/feynman](https://github.com/companion-inc/feynman)；inventory/skill-desc-translation.md 记录 GitHub companion-inc/feynman。 |
+| `financial-data` | `my-skills/financial-data` | 用户级（global） | installed-snapshot: `~/.agents/skills/financial-data` → `~/.local/share/agent-skills/references/financial-data` | [登记来源链接](https://github.com/xbtlin/ai-berkshire) |
+| `frontend-design` | `my-skills/frontend-design` | 用户级（global） | installed-snapshot: `~/.agents/skills/frontend-design` → `~/.local/share/agent-skills/references/frontend-design` | 历史来源清单：[github.com/anthropics/skills](https://github.com/anthropics/skills)；inventory/skill-desc-translation.md 记录 Anthropic 官方 skills 仓库。 |
+| `git-guardrails-claude-code` | `my-skills/git-guardrails-claude-code` | 用户级（global） | installed-snapshot: `~/.agents/skills/git-guardrails-claude-code` → `~/.local/share/agent-skills/references/git-guardrails-claude-code` | 原始上游未确证；不推断作者或仓库 |
+| `grill-me` | `my-skills/grill-me` | 用户级（global） | installed-snapshot: `~/.agents/skills/grill-me` → `~/.local/share/agent-skills/references/grill-me` | 原始上游未确证；不推断作者或仓库 |
+| `grill-with-docs` | `my-skills/grill-with-docs` | 用户级（global） | installed-snapshot: `~/.agents/skills/grill-with-docs` → `~/.local/share/agent-skills/references/grill-with-docs` | 原始上游未确证；不推断作者或仓库 |
+| `grilling` | `my-skills/grilling` | 用户级（global） | installed-snapshot: `~/.agents/skills/grilling` → `~/.local/share/agent-skills/references/grilling` | 原始上游未确证；不推断作者或仓库 |
+| `handoff` | `my-skills/handoff` | 用户级（global） | installed-snapshot: `~/.agents/skills/handoff` → `~/.local/share/agent-skills/references/handoff` | 旧来源表线索：[仓库/来源](https://github.com/mattpocock/skills)（历史归属，非作者结论） |
+| `hatch-pet` | `my-skills/hatch-pet` | 用户级（global） | installed-snapshot: `~/.agents/skills/hatch-pet` → `~/.local/share/agent-skills/references/hatch-pet` | 历史来源清单：[github.com/openai/skills](https://github.com/openai/skills)；inventory/skill-desc-translation.md 记录 OpenAI 官方 skills 仓库。 |
+| `implement-spec` | `my-skills/implement-spec` | 用户级（global） | installed-snapshot: `~/.agents/skills/implement-spec` → `~/.local/share/agent-skills/references/implement-spec` | [登记来源链接](https://github.com/mattpocock/skills/tree/main/skills/engineering/implement-spec) |
+| `improve-codebase-architecture` | `my-skills/improve-codebase-architecture` | 用户级（global） | installed-snapshot: `~/.agents/skills/improve-codebase-architecture` → `~/.local/share/agent-skills/references/improve-codebase-architecture` | 原始上游未确证；不推断作者或仓库 |
+| `income-investment` | `my-skills/income-investment` | 用户级（global） | installed-snapshot: `~/.agents/skills/income-investment` → `~/.local/share/agent-skills/references/income-investment` | [登记来源链接](https://github.com/xbtlin/ai-berkshire) |
+| `industry-funnel` | `my-skills/industry-funnel` | 用户级（global） | installed-snapshot: `~/.agents/skills/industry-funnel` → `~/.local/share/agent-skills/references/industry-funnel` | [登记来源链接](https://github.com/xbtlin/ai-berkshire) |
+| `industry-research` | `my-skills/industry-research` | 用户级（global） | installed-snapshot: `~/.agents/skills/industry-research` → `~/.local/share/agent-skills/references/industry-research` | [登记来源链接](https://github.com/xbtlin/ai-berkshire) |
+| `investment-checklist` | `my-skills/investment-checklist` | 用户级（global） | installed-snapshot: `~/.agents/skills/investment-checklist` → `~/.local/share/agent-skills/references/investment-checklist` | [登记来源链接](https://github.com/xbtlin/ai-berkshire) |
+| `investment-memo-craft` | `my-skills/investment-memo-craft` | 用户级（global） | installed-snapshot: `~/.agents/skills/investment-memo-craft` → `~/.local/share/agent-skills/references/investment-memo-craft` | [登记来源链接](https://github.com/xbtlin/ai-berkshire) |
+| `investment-research` | `my-skills/investment-research` | 用户级（global） | installed-snapshot: `~/.agents/skills/investment-research` → `~/.local/share/agent-skills/references/investment-research` | [登记来源链接](https://github.com/xbtlin/ai-berkshire) |
+| `investment-team` | `my-skills/investment-team` | 用户级（global） | installed-snapshot: `~/.agents/skills/investment-team` → `~/.local/share/agent-skills/references/investment-team` | [登记来源链接](https://github.com/xbtlin/ai-berkshire) |
+| `lark-approval` | `my-skills/lark-approval` | 用户级（global） | installed-snapshot: `~/.agents/skills/lark-approval` → `~/.local/share/agent-skills/references/lark-approval` | [登记来源链接](https://open.feishu.cn/lark-cli/skills/regular/.well-known/agent-skills/lark-approval.tar.gz) |
+| `lark-apps` | `my-skills/lark-apps` | 用户级（global） | installed-snapshot: `~/.agents/skills/lark-apps` → `~/.local/share/agent-skills/references/lark-apps` | [登记来源链接](https://open.feishu.cn/lark-cli/skills/regular/.well-known/agent-skills/lark-apps.tar.gz) |
+| `lark-attendance` | `my-skills/lark-attendance` | 用户级（global） | installed-snapshot: `~/.agents/skills/lark-attendance` → `~/.local/share/agent-skills/references/lark-attendance` | [登记来源链接](https://open.feishu.cn/lark-cli/skills/regular/.well-known/agent-skills/lark-attendance.tar.gz) |
+| `lark-base` | `my-skills/lark-base` | 用户级（global） | installed-snapshot: `~/.agents/skills/lark-base` → `~/.local/share/agent-skills/references/lark-base` | [登记来源链接](https://open.feishu.cn/lark-cli/skills/regular/.well-known/agent-skills/lark-base.tar.gz) |
+| `lark-calendar` | `my-skills/lark-calendar` | 用户级（global） | installed-snapshot: `~/.agents/skills/lark-calendar` → `~/.local/share/agent-skills/references/lark-calendar` | [登记来源链接](https://open.feishu.cn/lark-cli/skills/regular/.well-known/agent-skills/lark-calendar.tar.gz) |
+| `lark-contact` | `my-skills/lark-contact` | 用户级（global） | installed-snapshot: `~/.agents/skills/lark-contact` → `~/.local/share/agent-skills/references/lark-contact` | [登记来源链接](https://open.feishu.cn/lark-cli/skills/regular/.well-known/agent-skills/lark-contact.tar.gz) |
+| `lark-doc` | `my-skills/lark-doc` | 用户级（global） | installed-snapshot: `~/.agents/skills/lark-doc` → `~/.local/share/agent-skills/references/lark-doc` | [登记来源链接](https://open.feishu.cn/lark-cli/skills/regular/.well-known/agent-skills/lark-doc.tar.gz) |
+| `lark-drive` | `my-skills/lark-drive` | 用户级（global） | installed-snapshot: `~/.agents/skills/lark-drive` → `~/.local/share/agent-skills/references/lark-drive` | [登记来源链接](https://open.feishu.cn/lark-cli/skills/regular/.well-known/agent-skills/lark-drive.tar.gz) |
+| `lark-event` | `my-skills/lark-event` | 用户级（global） | installed-snapshot: `~/.agents/skills/lark-event` → `~/.local/share/agent-skills/references/lark-event` | [登记来源链接](https://open.feishu.cn/lark-cli/skills/regular/.well-known/agent-skills/lark-event.tar.gz) |
+| `lark-im` | `my-skills/lark-im` | 用户级（global） | installed-snapshot: `~/.agents/skills/lark-im` → `~/.local/share/agent-skills/references/lark-im` | [登记来源链接](https://open.feishu.cn/lark-cli/skills/regular/.well-known/agent-skills/lark-im.tar.gz) |
+| `lark-mail` | `my-skills/lark-mail` | 用户级（global） | installed-snapshot: `~/.agents/skills/lark-mail` → `~/.local/share/agent-skills/references/lark-mail` | [登记来源链接](https://open.feishu.cn/lark-cli/skills/regular/.well-known/agent-skills/lark-mail.tar.gz) |
+| `lark-markdown` | `my-skills/lark-markdown` | 用户级（global） | installed-snapshot: `~/.agents/skills/lark-markdown` → `~/.local/share/agent-skills/references/lark-markdown` | [登记来源链接](https://open.feishu.cn/lark-cli/skills/regular/.well-known/agent-skills/lark-markdown.tar.gz) |
+| `lark-meeting` | `my-skills/lark-meeting` | 用户级（global） | installed-snapshot: `~/.agents/skills/lark-meeting` → `~/.local/share/agent-skills/references/lark-meeting` | [登记来源链接](https://open.feishu.cn/lark-cli/skills/regular/.well-known/agent-skills/lark-meeting.tar.gz) |
+| `lark-minutes` | `my-skills/lark-minutes` | 用户级（global） | installed-snapshot: `~/.agents/skills/lark-minutes` → `~/.local/share/agent-skills/references/lark-minutes` | [登记来源链接](https://open.feishu.cn/lark-cli/skills/regular/.well-known/agent-skills/lark-minutes.tar.gz) |
+| `lark-note` | `my-skills/lark-note` | 用户级（global） | installed-snapshot: `~/.agents/skills/lark-note` → `~/.local/share/agent-skills/references/lark-note` | [登记来源链接](https://open.feishu.cn/lark-cli/skills/regular/.well-known/agent-skills/lark-note.tar.gz) |
+| `lark-okr` | `my-skills/lark-okr` | 用户级（global） | installed-snapshot: `~/.agents/skills/lark-okr` → `~/.local/share/agent-skills/references/lark-okr` | [登记来源链接](https://open.feishu.cn/lark-cli/skills/regular/.well-known/agent-skills/lark-okr.tar.gz) |
+| `lark-openapi-explorer` | `my-skills/lark-openapi-explorer` | 用户级（global） | installed-snapshot: `~/.agents/skills/lark-openapi-explorer` → `~/.local/share/agent-skills/references/lark-openapi-explorer` | [登记来源链接](https://open.feishu.cn/lark-cli/skills/regular/.well-known/agent-skills/lark-openapi-explorer.tar.gz) |
+| `lark-shared` | `my-skills/lark-shared` | 用户级（global） | installed-snapshot: `~/.agents/skills/lark-shared` → `~/.local/share/agent-skills/references/lark-shared` | [登记来源链接](https://open.feishu.cn/lark-cli/skills/regular/.well-known/agent-skills/lark-shared.tar.gz) |
+| `lark-sheets` | `my-skills/lark-sheets` | 用户级（global） | installed-snapshot: `~/.agents/skills/lark-sheets` → `~/.local/share/agent-skills/references/lark-sheets` | [登记来源链接](https://open.feishu.cn/lark-cli/skills/regular/.well-known/agent-skills/lark-sheets.tar.gz) |
+| `lark-skill-maker` | `my-skills/lark-skill-maker` | 用户级（global） | installed-snapshot: `~/.agents/skills/lark-skill-maker` → `~/.local/share/agent-skills/references/lark-skill-maker` | [登记来源链接](https://open.feishu.cn/lark-cli/skills/regular/.well-known/agent-skills/lark-skill-maker.tar.gz) |
+| `lark-slides` | `my-skills/lark-slides` | 用户级（global） | installed-snapshot: `~/.agents/skills/lark-slides` → `~/.local/share/agent-skills/references/lark-slides` | [登记来源链接](https://open.feishu.cn/lark-cli/skills/regular/.well-known/agent-skills/lark-slides.tar.gz) |
+| `lark-task` | `my-skills/lark-task` | 用户级（global） | installed-snapshot: `~/.agents/skills/lark-task` → `~/.local/share/agent-skills/references/lark-task` | [登记来源链接](https://open.feishu.cn/lark-cli/skills/regular/.well-known/agent-skills/lark-task.tar.gz) |
+| `lark-vc` | `my-skills/lark-vc` | 用户级（global） | installed-snapshot: `~/.agents/skills/lark-vc` → `~/.local/share/agent-skills/references/lark-vc` | [登记来源链接](https://open.feishu.cn/lark-cli/skills/regular/.well-known/agent-skills/lark-vc.tar.gz) |
+| `lark-vc-agent` | `my-skills/lark-vc-agent` | 用户级（global） | installed-snapshot: `~/.agents/skills/lark-vc-agent` → `~/.local/share/agent-skills/references/lark-vc-agent` | [登记来源链接](https://open.feishu.cn/lark-cli/skills/regular/.well-known/agent-skills/lark-vc-agent.tar.gz) |
+| `lark-whiteboard` | `my-skills/lark-whiteboard` | 用户级（global） | installed-snapshot: `~/.agents/skills/lark-whiteboard` → `~/.local/share/agent-skills/references/lark-whiteboard` | [登记来源链接](https://open.feishu.cn/lark-cli/skills/regular/.well-known/agent-skills/lark-whiteboard.tar.gz) |
+| `lark-wiki` | `my-skills/lark-wiki` | 用户级（global） | installed-snapshot: `~/.agents/skills/lark-wiki` → `~/.local/share/agent-skills/references/lark-wiki` | [登记来源链接](https://open.feishu.cn/lark-cli/skills/regular/.well-known/agent-skills/lark-wiki.tar.gz) |
+| `lark-workflow-meeting-summary` | `my-skills/lark-workflow-meeting-summary` | 用户级（global） | installed-snapshot: `~/.agents/skills/lark-workflow-meeting-summary` → `~/.local/share/agent-skills/references/lark-workflow-meeting-summary` | [登记来源链接](https://open.feishu.cn/lark-cli/skills/regular/.well-known/agent-skills/lark-workflow-meeting-summary.tar.gz) |
+| `lark-workflow-standup-report` | `my-skills/lark-workflow-standup-report` | 用户级（global） | installed-snapshot: `~/.agents/skills/lark-workflow-standup-report` → `~/.local/share/agent-skills/references/lark-workflow-standup-report` | [登记来源链接](https://open.feishu.cn/lark-cli/skills/regular/.well-known/agent-skills/lark-workflow-standup-report.tar.gz) |
+| `llm-wiki-app` | `my-skills/llm-wiki-app` | 用户级（global） | installed-snapshot: `~/.agents/skills/llm-wiki-app` → `~/.local/share/agent-skills/references/llm-wiki-app` | 未确证独立上游；仓库登记与包内来源一致。 |
+| `management-deep-dive` | `my-skills/management-deep-dive` | 用户级（global） | installed-snapshot: `~/.agents/skills/management-deep-dive` → `~/.local/share/agent-skills/references/management-deep-dive` | [登记来源链接](https://github.com/xbtlin/ai-berkshire) |
+| `migrate-to-shoehorn` | `my-skills/migrate-to-shoehorn` | 用户级（global） | installed-snapshot: `~/.agents/skills/migrate-to-shoehorn` → `~/.local/share/agent-skills/references/migrate-to-shoehorn` | 未确证独立上游；不据此推断独立作者或 Git 仓库。 |
+| `news-pulse` | `my-skills/news-pulse` | 用户级（global） | installed-snapshot: `~/.agents/skills/news-pulse` → `~/.local/share/agent-skills/references/news-pulse` | [登记来源链接](https://github.com/xbtlin/ai-berkshire) |
+| `obsidian-vault` | `my-skills/obsidian-vault` | 用户级（global） | installed-snapshot: `~/.agents/skills/obsidian-vault` → `~/.local/share/agent-skills/references/obsidian-vault` | 未确证独立上游；inventory/skill-desc-translation.md 将其列为 WorkBuddy/平台内置；未将其改称独立 GitHub 上游。 |
+| `portfolio-review` | `my-skills/portfolio-review` | 用户级（global） | installed-snapshot: `~/.agents/skills/portfolio-review` → `~/.local/share/agent-skills/references/portfolio-review` | [登记来源链接](https://github.com/xbtlin/ai-berkshire) |
+| `pr` | `my-skills/pr` | 用户级（global） | installed-snapshot: `~/.agents/skills/pr` → `~/.local/share/agent-skills/references/pr` | [登记来源链接](https://github.com/mattpocock/skills/tree/main/skills/engineering/pr) |
+| `private-company-research` | `my-skills/private-company-research` | 用户级（global） | installed-snapshot: `~/.agents/skills/private-company-research` → `~/.local/share/agent-skills/references/private-company-research` | [登记来源链接](https://github.com/xbtlin/ai-berkshire) |
+| `prototype` | `my-skills/prototype` | 用户级（global） | installed-snapshot: `~/.agents/skills/prototype` → `~/.local/share/agent-skills/references/prototype` | 原始上游未确证；不推断作者或仓库 |
+| `quality-screen` | `my-skills/quality-screen` | 用户级（global） | installed-snapshot: `~/.agents/skills/quality-screen` → `~/.local/share/agent-skills/references/quality-screen` | [登记来源链接](https://github.com/xbtlin/ai-berkshire) |
+| `remotion-best-practices` | `my-skills/remotion-best-practices` | 用户级（global） | installed-snapshot: `~/.agents/skills/remotion-best-practices` → `~/.local/share/agent-skills/references/remotion-best-practices` | 未确证独立上游；inventory/skill-desc-translation.md 将其列为 WorkBuddy/平台内置；未将其改称独立 GitHub 上游。 |
+| `remotion-video-production` | `my-skills/remotion-video-production` | 用户级（global） | installed-snapshot: `~/.agents/skills/remotion-video-production` → `~/.local/share/agent-skills/references/remotion-video-production` | 历史来源清单：[github.com/akillness/jeo-skills](https://github.com/akillness/jeo-skills)；inventory/skill-desc-translation.md 记录 akillness/jeo-skills；当前包作为兼容别名。 |
+| `remotion-video-toolkit` | `my-skills/remotion-video-toolkit` | 用户级（global） | installed-snapshot: `~/.agents/skills/remotion-video-toolkit` → `~/.local/share/agent-skills/references/remotion-video-toolkit` | 历史来源清单：[github.com/shreefentsar/remotion-video-toolkit](https://github.com/shreefentsar/remotion-video-toolkit)；inventory/skill-desc-translation.md 记录 shreefentsar/remotion-video-toolkit。 |
+| `research` | `my-skills/research` | 用户级（global） | installed-snapshot: `~/.agents/skills/research` → `~/.local/share/agent-skills/references/research` | 原始上游未确证；不推断作者或仓库 |
+| `retro` | `my-skills/retro` | 用户级（global） | installed-snapshot: `~/.agents/skills/retro` → `~/.local/share/agent-skills/references/retro` | [登记来源链接](https://github.com/mattpocock/skills/tree/main/skills/engineering/retro) |
+| `scaffold-exercises` | `my-skills/scaffold-exercises` | 用户级（global） | installed-snapshot: `~/.agents/skills/scaffold-exercises` → `~/.local/share/agent-skills/references/scaffold-exercises` | 未确证独立上游；不补造独立 GitHub 来源。 |
+| `setup-matt-pocock-skills` | `my-skills/setup-matt-pocock-skills` | 用户级（global） | installed-snapshot: `~/.agents/skills/setup-matt-pocock-skills` → `~/.local/share/agent-skills/references/setup-matt-pocock-skills` | 原始上游未确证；不推断作者或仓库 |
+| `setup-pre-commit` | `my-skills/setup-pre-commit` | 用户级（global） | installed-snapshot: `~/.agents/skills/setup-pre-commit` → `~/.local/share/agent-skills/references/setup-pre-commit` | 未确证独立上游；不推断独立作者或仓库来源。 |
+| `skill-workbench` | `my-skills/skill-workbench` | 用户级（global） | installed-snapshot: `~/.agents/skills/skill-creator` → `~/.local/share/agent-skills/references/skill-creator` | 原始上游未确证；不推断作者或仓库 |
+| `storage-analyzer` | `my-skills/storage-analyzer` | 用户级（global） | installed-snapshot: `~/.agents/skills/storage-analyzer` → `~/.local/share/agent-skills/references/storage-analyzer` | 原始上游未确证；不推断作者或仓库 |
+| `sts2-gawain-regression-recovery` | `project:gawain/skills/sts2-gawain-regression-recovery` | Gawain 项目（gawain） | installed-snapshot: `~/.agents/skills/sts2-gawain-regression-recovery` → `~/.local/share/agent-skills/references/sts2-gawain-regression-recovery` | 当前 Gawain 项目维护源已知；原作者与最初上游未确证 |
+| `sts2-independent-run-regression` | `my-skills/sts2-independent-run-regression` | 用户级（global） | installed-snapshot: `~/.agents/skills/sts2-independent-run-regression` → `~/.local/share/agent-skills/references/sts2-independent-run-regression` | 由本仓接管维护；原作者与最初上游未确证，不推断作者或仓库 |
+| `sts2-start-game` | `my-skills/sts2-start-game` | 用户级（global） | installed-snapshot: `~/.agents/skills/sts2-start-game` → `~/.local/share/agent-skills/references/sts2-start-game` | 已知 Git 来源：`crystepj-max/STS2-AUTOTEST`；技能路径提交 `860ed5048ee4f4101046c213728bfdb618b4478d`，审计 HEAD `41f89387fa31d8208b277054828b6de00efe6eaf`。当前维护源从安装快照接管并保留其改进；该提交不代表安装版哈希或原创作者确证。 |
+| `teach` | `my-skills/teach` | 用户级（global） | installed-snapshot: `~/.agents/skills/teach` → `~/.local/share/agent-skills/references/teach` | 未确证独立上游；来源为历史平台记录；没有独立上游仓库可确认。 |
+| `test-report-html` | `my-skills/test-report-html` | 用户级（global） | installed-snapshot: `~/.agents/skills/test-report-html` → `~/.local/share/agent-skills/references/test-report-html` | 未确证独立上游；维护 inventory 与当前 skill-lock 均未找到该项；未发现可证实来源，不虚构仓库。 |
+| `thesis-drift` | `my-skills/thesis-drift` | 用户级（global） | installed-snapshot: `~/.agents/skills/thesis-drift` → `~/.local/share/agent-skills/references/thesis-drift` | [登记来源链接](https://github.com/xbtlin/ai-berkshire) |
+| `thesis-tracker` | `my-skills/thesis-tracker` | 用户级（global） | installed-snapshot: `~/.agents/skills/thesis-tracker` → `~/.local/share/agent-skills/references/thesis-tracker` | [登记来源链接](https://github.com/xbtlin/ai-berkshire) |
+| `to-questionnaire` | `my-skills/to-questionnaire` | 用户级（global） | installed-snapshot: `~/.agents/skills/to-questionnaire` → `~/.local/share/agent-skills/references/to-questionnaire` | 原始上游未确证；不推断作者或仓库 |
+| `triage` | `my-skills/triage` | 用户级（global） | installed-snapshot: `~/.agents/skills/triage` → `~/.local/share/agent-skills/references/triage` | 原始上游未确证；不推断作者或仓库 |
+| `typesafe-ai` | `my-skills/typesafe-ai` | 用户级（global） | installed-snapshot: `~/.agents/skills/typesafe-ai` → `~/.local/share/agent-skills/references/typesafe-ai` | [登记来源链接](https://github.com/typesafe-ai/skills.git) |
+| `video-production` | `my-skills/video-production` | 用户级（global） | installed-snapshot: `~/.agents/skills/video-production` → `~/.local/share/agent-skills/references/video-production` | 历史来源清单：[github.com/jmagly/aiwg](https://github.com/jmagly/aiwg)；inventory/skill-desc-translation.md 记录 jmagly/aiwg。 |
+| `wait-what` | `my-skills/wait-what` | 用户级（global） | installed-snapshot: `~/.agents/skills/wait-what` → `~/.local/share/agent-skills/references/wait-what` | 原始上游未确证；不推断作者或仓库 |
+| `wayfinder` | `my-skills/wayfinder` | 用户级（global） | installed-snapshot: `~/.agents/skills/wayfinder` → `~/.local/share/agent-skills/references/wayfinder` | 原始上游未确证；不推断作者或仓库 |
+| `wechat-article` | `my-skills/wechat-article` | 用户级（global） | installed-snapshot: `~/.agents/skills/wechat-article` → `~/.local/share/agent-skills/references/wechat-article` | 未确证独立上游；tools/add_repo_column.py 将其映射到 ai-berkshire 且该仓存在同名 canonical/generated 文件；inventory 行记“平台内置”。正文匹配度只作定位，报告保留该冲突。 |
+| `wizard` | `my-skills/wizard` | 用户级（global） | installed-snapshot: `~/.agents/skills/wizard` → `~/.local/share/agent-skills/references/wizard` | 原始上游未确证；不推断作者或仓库 |
+| `writing-great-skills` | `my-skills/writing-great-skills` | 用户级（global） | installed-snapshot: `~/.agents/skills/writing-great-skills` → `~/.local/share/agent-skills/references/writing-great-skills` | 未确证独立上游；证据支持“Matt Pocock/mattpocock/skills 为上游作者及技能来源，sickn33/agentic-awesome-skills 为目录/分发记录”并存。检查 ~/.agents/.skill-lock.json 未发现此技能的 lock 项，因此精确安装来源和安装 commit 未确证。 |

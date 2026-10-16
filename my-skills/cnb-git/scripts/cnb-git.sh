@@ -17,8 +17,8 @@
 #      → 脚本对读取类自动降级为匿名重试
 #   8. worktree 里 .git 是【文件】不是目录（内容 gitdir: .../worktrees/x）
 #      → 用 git rev-parse --is-inside-work-tree 判断，不能用 [ -d .git ]
-#   9. 本机 .git 下的陈旧 .lock 会让 git 报 cannot lock ref 并雪崩（删掉又被重建）
-#      → 脚本检测到后自动清锁，并在【同一进程内零间隔】重试
+#   9. Git 报 .lock 冲突时无法安全判断锁是否仍被另一个进程使用
+#      → 保留所有锁并原样失败；由操作者确认持锁进程后再处理
 #
 # ── 网络（iKuuuVPN TUN fake-ip 把 cnb.cool 解析成 198.18.x）──
 #   小请求无感；大 pack 直连会被限速到 ~14 KiB/s，走 ClashX SOCKS5 实测 ~131 MiB/s。
@@ -27,13 +27,13 @@
 # ── 安全护栏（硬约束）──
 #   - 绝不 force push；merge-pull 的 --force 指"忽略检查强制合并"，需显式 --force 才传
 #   - 绝不自动 commit / stash；工作区改动原样保留
-#   - 绝不改动 origin（GitHub 灾备地址）：只新增/使用 cnb remote
+#   - 不自动修改现有 remote 或分支上游；fetch/pull 沿用当前上游或显式参数
 #   - token 只经 http.extraHeader 传递，不写入 .git/config，日志脱敏为 ***TOKEN***
 #
 # 用法：cnb-git.sh <子命令> [参数...]
 #   clone <组织/仓库> [目录]              克隆（自动带凭据）
-#   pull  [目录] [分支] [--remote cnb]    拉取（默认走 cnb，因为 origin=GitHub 已 403）
-#   fetch [目录] [--remote cnb]           拉取但不合并
+#   pull  [目录] [远端分支] [--remote <远端>] 拉取上游远端分支（不猜远端或分支）
+#   fetch [目录] [--remote <远端>]            拉取但不合并；默认使用当前分支上游
 #   push  [目录] [--all|--tags]           推送（委托 cnb-push.sh）
 #   branches <组织/仓库>                  分支列表（自动全量，不受默认 10 条限制）
 #   branch-create <组织/仓库> <名> --from <基点>
@@ -111,11 +111,26 @@ _net_probe() {
   fi
 }
 
+_cnb_header_scope() {
+  [ -n "$PY" ] || return 0
+  "$PY" -c 'import sys; from urllib.parse import urlsplit
+try:
+ u=urlsplit(sys.argv[1])
+ if u.scheme.lower() in {"http","https"} and (u.hostname or "").lower()=="cnb.cool":
+  print("http.%s://cnb.cool/.extraHeader" % u.scheme.lower())
+except Exception:
+ pass' "$1"
+}
+
 build_git_args() {
+  local target_url="${1:-}" header_scope=""
   _net_probe
   GIT_ARGS=(-c "http.version=HTTP/1.1" -c "http.postBuffer=524288000" -c "pack.compression=1")
   [ ${#PROXY_ARGS[@]} -gt 0 ] && GIT_ARGS+=("${PROXY_ARGS[@]}")
-  GIT_ARGS+=(-c "http.extraHeader=Authorization: Bearer ${CNB_TOKEN}")
+  if [ -n "$CNB_TOKEN" ] && [ -n "$target_url" ]; then
+    header_scope="$( _cnb_header_scope "$target_url" )"
+    [ -z "$header_scope" ] || GIT_ARGS+=(-c "${header_scope}=Authorization: Bearer ${CNB_TOKEN}")
+  fi
 }
 
 # 不带凭据的通用参数（匿名降级重试用）
@@ -124,46 +139,12 @@ _anon_args() {
   [ ${#PROXY_ARGS[@]} -gt 0 ] && ANON_ARGS+=("${PROXY_ARGS[@]}")
 }
 
-# ---------- 陈旧锁自愈 ----------
-# 本机已知现象：.git 下 .lock 删掉就被重建，git 报 cannot lock ref 并雪崩。
-# 解法必须"清锁 + 重试"在同一进程内零间隔完成，否则锁会被后台进程立刻重建。
-# 注意：清锁用 python os.remove —— shell 的 rm 会被 safe-delete 钩子拦截。
-stale_lock_clean() {
-  [ -n "$PY" ] || return 0
-  # worktree 里 --git-dir 指向 .git/worktrees/<名>，但 refs 的锁落在共享的
-  # 主 .git 下 —— 必须同时扫 --git-common-dir，否则清了个空（实测踩过）。
-  local gd common
-  gd="$(git rev-parse --git-dir 2>/dev/null)" || gd=""
-  common="$(git rev-parse --git-common-dir 2>/dev/null)" || common=""
-  [ -n "$gd" ] || [ -n "$common" ] || return 0
-  "$PY" -c "
-import os, sys
-roots, seen, n = sys.argv[1:], set(), 0
-for root in roots:
-    if not root:
-        continue
-    real = os.path.realpath(root)
-    if real in seen:
-        continue
-    seen.add(real)
-    for dp, _, fs in os.walk(real):
-        for f in fs:
-            if f.endswith('.lock'):
-                try:
-                    os.remove(os.path.join(dp, f)); n += 1
-                except Exception:
-                    pass
-sys.stderr.write('    已清理 %d 个陈旧锁文件\n' % n)
-" "$gd" "$common"
-}
+# Git lock errors are treated as active or unknown locks: never delete them automatically.
 
 _redact() {
   if [ -n "${CNB_TOKEN:-}" ]; then sed "s|${CNB_TOKEN}|***TOKEN***|g"; else cat; fi
 }
 
-_is_lock_error() {
-  printf '%s' "$1" | grep -qE "cannot lock ref|Unable to create '.*\.lock'"
-}
 
 # 凭据被拒的两种表现形式（实测）：
 #   fetch/pull → remote: Repository Not Found.（大写，中文「仓库不存在」）
@@ -173,31 +154,19 @@ _is_auth_error() {
   printf '%s' "$1" | grep -qiE "repository.*not found|仓库不存在|authentication failed|could not read from remote repository|\b403\b"
 }
 
-# git 执行 + 脱敏 + 陈旧锁自愈
+# git 执行 + 脱敏；锁错误原样返回，不删除锁也不掩盖失败
 gitr() {
   local out rc
   out="$(git "${GIT_ARGS[@]}" "$@" 2>&1)"; rc=$?
-  if [ $rc -ne 0 ] && _is_lock_error "$out"; then
-    echo "  🟡 命中陈旧锁（本机已知现象），清理后原进程内重试…" >&2
-    stale_lock_clean >&2
-    out="$(git "${GIT_ARGS[@]}" "$@" 2>&1)"; rc=$?
-  fi
   printf '%s\n' "$out" | _redact
   return $rc
 }
 
-# 读取类专用：锁自愈 + 凭据被拒时自动匿名重试
+# 读取类专用：凭据被拒时匿名重试；锁错误保留原样
 gitr_read() {
   local out rc
   out="$(git "${GIT_ARGS[@]}" "$@" 2>&1)"; rc=$?
-  if [ $rc -ne 0 ] && _is_lock_error "$out"; then
-    echo "  🟡 命中陈旧锁（本机已知现象），清理后原进程内重试…" >&2
-    stale_lock_clean >&2
-    out="$(git "${GIT_ARGS[@]}" "$@" 2>&1)"; rc=$?
-  fi
   if [ $rc -ne 0 ] && [ -n "${CNB_TOKEN:-}" ] && _is_auth_error "$out"; then
-    # 注意措辞：不要断言"token 已失效" —— 并发锁冲突等瞬时故障也会走到这里，
-    # 误报会让人白白去重置凭据。只陈述事实 + 给私有仓库的排查方向。
     echo "  🟡 带 token 读取被拒 → 以匿名方式重试（公开仓库无需凭据）" >&2
     _anon_args
     out="$(git "${ANON_ARGS[@]}" "$@" 2>&1)"; rc=$?
@@ -218,18 +187,18 @@ case "$SUB" in
 clone)
   SLUG="${1:-}"; need_repo_slug "$SLUG"
   DIR="${2:-$(basename "$SLUG")}"
-  load_token_optional; build_git_args
+  load_token_optional; build_git_args "https://cnb.cool/${SLUG}.git"
   echo "═══ clone ${SLUG} → ${DIR} ═══"
   echo "  网络: ${NET_MODE}"
-  time gitr_read clone "https://cnb.cool/${SLUG}.git" "$DIR"
+  time gitr_read clone "https://cnb.cool/${SLUG}.git" "$DIR" || die "clone 失败；目标目录可能需要人工检查后再重试"
   echo "═══ ✅ clone 完成 ═══"
   ;;
 
 fetch|pull)
-  DIR=""; REMOTE="cnb"; BRANCH=""
+  DIR=""; REMOTE=""; BRANCH=""
   while [ $# -gt 0 ]; do
     case "$1" in
-      --remote) REMOTE="$2"; shift 2 ;;
+      --remote) [ $# -ge 2 ] || die "--remote 缺少远端名"; REMOTE="$2"; shift 2 ;;
       -*) die "未知参数：$1" ;;
       *)
         if [ -z "$DIR" ] && { [ -d "$1" ] || [ "$1" = "." ]; }; then DIR="$1"
@@ -240,40 +209,54 @@ fetch|pull)
   done
   [ -n "$DIR" ] || DIR="$PWD"
   cd "$DIR" || die "无法进入目录：$DIR"
-  # worktree 里 .git 是【文件】（内容形如 gitdir: .../.git/worktrees/x），不能用 -d 判断
   git rev-parse --is-inside-work-tree >/dev/null 2>&1 || die "不是 git 仓库：$PWD"
-  # 读取类：token 可选（公开仓库无凭据也能读，带失效 token 反被拒）
-  load_token_optional; build_git_args
+
+  # 从当前本地分支配置读取远端实际引用；@{u} 的远端跟踪 ref 可能被自定义 fetch refspec 重映射。
+  CURRENT_BRANCH="$(git symbolic-ref --quiet --short HEAD 2>/dev/null || true)"
+  UPSTREAM_REMOTE=""; UPSTREAM_MERGE=""; UPSTREAM_BRANCH=""; UPSTREAM=""
+  if [ -n "$CURRENT_BRANCH" ]; then
+    UPSTREAM_REMOTE="$(git config --get "branch.${CURRENT_BRANCH}.remote" 2>/dev/null || true)"
+    UPSTREAM_MERGE="$(git config --get "branch.${CURRENT_BRANCH}.merge" 2>/dev/null || true)"
+    case "$UPSTREAM_MERGE" in
+      refs/heads/*) UPSTREAM_BRANCH="${UPSTREAM_MERGE#refs/heads/}" ;;
+    esac
+    if [ -n "$UPSTREAM_REMOTE" ] && [ "$UPSTREAM_REMOTE" != "." ]; then
+      UPSTREAM="$UPSTREAM_REMOTE"
+      [ -z "$UPSTREAM_BRANCH" ] || UPSTREAM="$UPSTREAM_REMOTE/$UPSTREAM_BRANCH"
+    fi
+  fi
+  if [ -z "$REMOTE" ]; then
+    [ -n "$UPSTREAM_REMOTE" ] && [ "$UPSTREAM_REMOTE" != "." ] || die "当前分支没有可用的远端上游；请检查 branch.*.remote/merge，或明确指定 --remote <远端>"
+    REMOTE="$UPSTREAM_REMOTE"
+  fi
+  if [ "$SUB" = "pull" ] && [ -z "$BRANCH" ]; then
+    [ -n "$UPSTREAM_BRANCH" ] && [ "$REMOTE" = "$UPSTREAM_REMOTE" ] || die "无法确定所选远端的服务端分支；请显式指定 pull <目录> <远端分支>，并用 --remote <远端> 指定目标"
+    BRANCH="$UPSTREAM_BRANCH"
+  fi
+
+  REMOTE_URL="$(git remote get-url "$REMOTE" 2>/dev/null)" || die "本仓库没有可用的 ${REMOTE} remote（现有：$(git remote | tr '\n' ' ')）"
+  if [ -n "$(_cnb_header_scope "$REMOTE_URL")" ]; then
+    load_token_optional
+  else
+    CNB_TOKEN=""
+    echo "  ℹ️  目标远端不是 cnb.cool；不读取或发送 CNB 凭据"
+  fi
+  build_git_args "$REMOTE_URL"
 
   echo "═══ ${SUB} $(basename "$PWD") ← ${REMOTE} ═══"
-  git remote get-url "$REMOTE" >/dev/null 2>&1 || die "本仓库没有 ${REMOTE} remote（现有：$(git remote | tr '\n' ' ')）"
-
-  # 上游仍指向 GitHub 时给出明确警告 —— 实测 GitHub 账号暂停会直接 403
-  UPSTREAM="$(git rev-parse --abbrev-ref --symbolic-full-name '@{u}' 2>/dev/null || true)"
-  case "$UPSTREAM" in
-    origin/*)
-      echo "  🟡 当前分支上游是 ${UPSTREAM}（GitHub）"
-      echo "     实测：GitHub 账号暂停时 fetch origin 直接 403 \"Your account is suspended\""
-      echo "     本命令改从 ${REMOTE} 拉取；若要永久改上游：git branch --set-upstream-to=${REMOTE}/<分支>"
-      ;;
-  esac
+  [ -z "$UPSTREAM" ] || echo "  当前分支上游: ${UPSTREAM}"
   echo "  网络: ${NET_MODE}"
 
   if [ "$SUB" = "fetch" ]; then
     gitr_read fetch "$REMOTE" || die "fetch 失败"
     echo "═══ ✅ fetch 完成 ═══"
   else
-    if [ -n "$BRANCH" ]; then
-      gitr_read pull "$REMOTE" "$BRANCH" || die "pull 失败"
-    else
-      CUR="$(git branch --show-current)"
-      [ -n "$CUR" ] || die "处于分离 HEAD，请显式指定分支：cnb-git.sh pull <目录> <分支>"
-      gitr_read pull "$REMOTE" "$CUR" || die "pull 失败"
-    fi
+    gitr_read pull "$REMOTE" "$BRANCH" || die "pull 失败"
     echo "═══ ✅ pull 完成 ═══"
   fi
   ;;
 
+# ══════════════ 推送（委托给 cnb-push）══════════════
 push)
   # 委托给已验证的 cnb-push.sh（内置代理/重试/护栏），避免两套逻辑分叉
   HERE="$(cd "$(dirname "$0")" && pwd)"
