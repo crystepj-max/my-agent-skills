@@ -1,0 +1,3 @@
+interface:
+  display_name: "Scaffold Exercises"
+  short_description: "Scaffold exercises using the project's conventions"

@@ -10,8 +10,10 @@
     "~/.hermes/skills"
   ],
   "projects": {
-    "presentations": "~/Obsidian-Chris-Vault",
-    "gawain": "/Volumes/4mac/STS2-WORKSPACE/STS2-GAWAIN"
+    "presentations": "/Users/chris/Obsidian-Chris-Vault",
+    "gawain": "/Volumes/4mac/STS2-WORKSPACE/STS2-GAWAIN",
+    "investments": "/Users/chris/workspace/ai-valueinvest",
+    "autotest": "/Volumes/4mac/STS2-WORKSPACE/STS2-AUTOTEST"
   },
   "project_entry_roots": [
     ".agents/skills",
@@ -43,12 +45,12 @@
     },
     {
       "name": "agnes-ai-generation-skill",
-      "state": "active",
+      "state": "retired",
       "scope": "global",
-      "source": "my-skills/agnes-ai-generation-skill",
+      "source": "~/.local/share/agent-skills/retired/20261016/agnes-ai-generation-skill",
       "origin": "first-party",
       "accepted_fingerprints": [
-        "57f727a07ca3aa4ad1b7a7e8ac02ecb615e4a093606891c4ecc257a399467d3a"
+        "84d7feba4f29291251861166eda012875b768e4d15344af8a843ffd694dddb33"
       ]
     },
     {
@@ -59,37 +61,39 @@
       "origin": "first-party",
       "accepted_fingerprints": [
         "284c0e7894cab1ac15184bf9589909d4c5a88a2bc2f978c85663bf59a13c41a8",
-        "4087947febe31c9c1fdd8be73bbf5f6ccde1438ecf7b3a809fbe52e3abfacb50"
+        "4087947febe31c9c1fdd8be73bbf5f6ccde1438ecf7b3a809fbe52e3abfacb50",
+        "39c9817a71a8e6c51d83505558614b4a4168f340adb67eb25d2a776420dcf4d1",
+        "c2eb61154c44f632c5515c08e2afaa23cc78fda19f799c1238d2ab714382a9d5"
       ]
     },
     {
       "name": "baoyu-comic",
       "state": "active",
-      "scope": "global",
-      "source": "my-skills/baoyu-comic",
+      "scope": "presentations",
+      "source": "project:presentations/.agents/skills/baoyu-comic",
       "origin": "first-party",
       "accepted_fingerprints": [
-        "850f5aa962a04fc603b83072fb2ebc756e95191dcecb1ae0f6709f0f160a9d9f"
+        "e5ca7a49a104b3e56541faa3e3f8b425119de4805efd537d9b0abfde4cb7d260"
       ]
     },
     {
       "name": "baoyu-image-gen",
       "state": "active",
-      "scope": "global",
-      "source": "my-skills/baoyu-image-gen",
+      "scope": "presentations",
+      "source": "project:presentations/.agents/skills/baoyu-image-gen",
       "origin": "first-party",
       "accepted_fingerprints": [
-        "9b2f7de08c021d0264900b4646b31c362ba9128f23f6e8205b139e24089a1533"
+        "bab6bfc5cedfbe7f794ec2e9029d9795efe32e1b326b22051ede66656631852d"
       ]
     },
     {
       "name": "baoyu-infographic",
       "state": "active",
-      "scope": "global",
-      "source": "my-skills/baoyu-infographic",
+      "scope": "presentations",
+      "source": "project:presentations/.agents/skills/baoyu-infographic",
       "origin": "first-party",
       "accepted_fingerprints": [
-        "01f33d202b693552bb643053ebc9d08749af5a9cd24afb9fd451c7d1293f4d54"
+        "5c0b5dbfcd553c347f24b2c5a317dcd1be63ada0e7de6cc7429eccc68c233b93"
       ]
     },
     {
@@ -117,11 +121,13 @@
     {
       "name": "bottleneck-hunter",
       "state": "active",
-      "scope": "global",
-      "source": "my-skills/bottleneck-hunter",
+      "scope": "investments",
+      "source": "project:investments/codex-skills/bottleneck-hunter",
       "origin": "first-party",
       "accepted_fingerprints": [
-        "e8e8a78d7b21988603abbce237c6c18dfc41420cbf235e8be7ba17e134bb83aa"
+        "692b577b4fbe54e64d3210dea1e2586502ed4b7cb40c97c1e237ce856e3084e5",
+        "e8e8a78d7b21988603abbce237c6c18dfc41420cbf235e8be7ba17e134bb83aa",
+        "c1c4833ce6d1d7c45404f369acc9a360dca9183451fb8c29da6b4e3177f1ad2a"
       ]
     },
     {
@@ -237,11 +243,13 @@
     {
       "name": "deep-company-series",
       "state": "active",
-      "scope": "global",
-      "source": "my-skills/deep-company-series",
+      "scope": "investments",
+      "source": "project:investments/codex-skills/deep-company-series",
       "origin": "first-party",
       "accepted_fingerprints": [
-        "8d6c319b9e194ec59b13c6571ab5968d11561041f489ef104583bea0630ad6db"
+        "558dc5795334a32d63cc3bf593d22e682b0b1a936b9ceee807f68ad9b5ac53dc",
+        "8d6c319b9e194ec59b13c6571ab5968d11561041f489ef104583bea0630ad6db",
+        "0d29ec188c5e963293d468ce35ab8448b50ae1f0b8120c634b737f8a23a1c0c5"
       ]
     },
     {
@@ -315,51 +323,57 @@
     {
       "name": "dyp-ask",
       "state": "active",
-      "scope": "global",
-      "source": "my-skills/dyp-ask",
+      "scope": "investments",
+      "source": "project:investments/codex-skills/dyp-ask",
       "origin": "first-party",
       "accepted_fingerprints": [
-        "b793202910e027c085ebc818d9540bb9faecec187f495becfd15f4794156424f"
+        "6ba0b2c00615ba78b60164704f5237cf75a73f71a1d02379f6a6c89ee689d33d",
+        "b793202910e027c085ebc818d9540bb9faecec187f495becfd15f4794156424f",
+        "7f78dac369829e48498d1d844a7636fddf8ba0f14ca991cfb1750ca3e5da32e5"
       ]
     },
     {
       "name": "earnings-review",
       "state": "active",
-      "scope": "global",
-      "source": "my-skills/earnings-review",
+      "scope": "investments",
+      "source": "project:investments/codex-skills/earnings-review",
       "origin": "first-party",
       "accepted_fingerprints": [
-        "f2f7172117916213d4505dd9179ecbbd1f4436c429448a8e3f9fca86ff863278"
+        "a0aff3f89d36a89626fba7f59ba99d880e3e6608b400ff31655b2679b4523ab8",
+        "f2f7172117916213d4505dd9179ecbbd1f4436c429448a8e3f9fca86ff863278",
+        "5c86be9c4f7042dd64850b8e25c1e8d2d01765e9250d967df151896edef8662b"
       ]
     },
     {
       "name": "earnings-team",
       "state": "active",
-      "scope": "global",
-      "source": "my-skills/earnings-team",
+      "scope": "investments",
+      "source": "project:investments/codex-skills/earnings-team",
       "origin": "first-party",
       "accepted_fingerprints": [
-        "24f4347001e372d73906ccca72ab07f1a83d4f64faf3e87eef4e4fda1e93cfab"
+        "00b6fd77d3b03730523049072ad2e252a1a771a2d55490c29790df2b5545daf6",
+        "24f4347001e372d73906ccca72ab07f1a83d4f64faf3e87eef4e4fda1e93cfab",
+        "c85edb8471677fc1bdc5937792e30403ccf96795f6502262ae670a8161de0c49"
       ]
     },
     {
       "name": "edit-article",
       "state": "active",
-      "scope": "global",
-      "source": "my-skills/edit-article",
+      "scope": "presentations",
+      "source": "project:presentations/.agents/skills/edit-article",
       "origin": "first-party",
       "accepted_fingerprints": [
-        "eb2608e8ccad6ab1f514afbe6c3577e234c0d8000cb831d0cbb1569032b9ca84"
+        "5fb44cb744b9550038b03b13801cbea449b52727ef881efc4a40910784d4a4b7"
       ]
     },
     {
       "name": "eli5",
       "state": "active",
-      "scope": "global",
-      "source": "my-skills/eli5",
+      "scope": "presentations",
+      "source": "project:presentations/.agents/skills/eli5",
       "origin": "first-party",
       "accepted_fingerprints": [
-        "accdc6106eea72ab497345cd20dabcbd13fd5eac8dd61183a9a13b7cdab767ce"
+        "8967c78279aef3ab6b3ec4c95814314c226ae9400c234644dc2fbc19e59bcdaf"
       ]
     },
     {
@@ -400,11 +414,13 @@
     {
       "name": "financial-data",
       "state": "active",
-      "scope": "global",
-      "source": "my-skills/financial-data",
+      "scope": "investments",
+      "source": "project:investments/codex-skills/financial-data",
       "origin": "first-party",
       "accepted_fingerprints": [
-        "53f17f32ff2f73c3dbd3c333fda143d8e30cfd59682e47a3c5cf28806b78b373"
+        "bd83d44f6c50827733880865d50c3373e4c6a25765198664df0ab753f87ad775",
+        "53f17f32ff2f73c3dbd3c333fda143d8e30cfd59682e47a3c5cf28806b78b373",
+        "18ef640780b3a911e277a3dc7d2c6aff90a86caab33e67cb8614e3c3b82ea811"
       ]
     },
     {
@@ -432,11 +448,11 @@
     {
       "name": "frontend-design",
       "state": "active",
-      "scope": "global",
-      "source": "my-skills/frontend-design",
+      "scope": "presentations",
+      "source": "project:presentations/.agents/skills/frontend-design",
       "origin": "first-party",
       "accepted_fingerprints": [
-        "cf0574391f0be8a5bd84e8163df9ab430c39a4d3a9c61b8b7e6f4f39c2a54e3a"
+        "70704881d81aa3435ae94c036a43aa1ff54396683a1d671d0fa4a0d7c1a1304b"
       ]
     },
     {
@@ -452,13 +468,12 @@
     },
     {
       "name": "git-guardrails-claude-code",
-      "state": "active",
+      "state": "retired",
       "scope": "global",
-      "source": "my-skills/git-guardrails-claude-code",
+      "source": "~/.local/share/agent-skills/retired/20261016/git-guardrails-claude-code",
       "origin": "first-party",
       "accepted_fingerprints": [
-        "b536fbc9fd0a3a25bcd82ab3d4bc20efa947f15168d7c18f881164b768a122d3",
-        "da0ecffe749dfac4c6f629618d6547f456071909a34484f7f7011f241676b311"
+        "25a885c037c5ae7178a288dc8942257444ad68bf76bbc2df73a8a216b55d6eb1"
       ]
     },
     {
@@ -515,11 +530,11 @@
     {
       "name": "hatch-pet",
       "state": "active",
-      "scope": "global",
-      "source": "my-skills/hatch-pet",
+      "scope": "presentations",
+      "source": "project:presentations/.agents/skills/hatch-pet",
       "origin": "first-party",
       "accepted_fingerprints": [
-        "cf5705e0a600631dc98e925e9823e08aa2bf335b219c5d38d410a4035c70f5e3"
+        "b05a99cc39b3d5b81dad309ce0748cc0f5b9b0ce82c1d6386fea8c0beefa2896"
       ]
     },
     {
@@ -556,84 +571,87 @@
       ]
     },
     {
-      "name": "improve-codebase-architecture",
-      "state": "active",
-      "scope": "global",
-      "source": "my-skills/improve-codebase-architecture",
-      "origin": "first-party",
-      "accepted_fingerprints": [
-        "6b2f96240cd24ffb1cac03e5a9451cfe3c1ebb84c99943ed2cd60d7c3c60953c",
-        "75e1264bf0f29f8b81ad974d2dbea321cc17f067ef57e5789c285690cdecb7ff"
-      ]
-    },
-    {
       "name": "income-investment",
       "state": "active",
-      "scope": "global",
-      "source": "my-skills/income-investment",
+      "scope": "investments",
+      "source": "project:investments/codex-skills/income-investment",
       "origin": "first-party",
       "accepted_fingerprints": [
-        "68a1fc8a3916f90b442b90fea273810a86664345a81e733d2f071949a0e624e3"
+        "4524ff1c2bed10bba96e31a9835e1ab51d9cc62d61258073bff482585472d5ab",
+        "68a1fc8a3916f90b442b90fea273810a86664345a81e733d2f071949a0e624e3",
+        "c08f2cedb21f0a3d00ef8aed85eca74f5b483117e2e63631f16e998e56b65a4b"
       ]
     },
     {
       "name": "industry-funnel",
       "state": "active",
-      "scope": "global",
-      "source": "my-skills/industry-funnel",
+      "scope": "investments",
+      "source": "project:investments/codex-skills/industry-funnel",
       "origin": "first-party",
       "accepted_fingerprints": [
-        "83214becb7c4cea6adfc97626c4cf9f5232a2393f26959a2aae5383bc8582e06"
+        "69acd0b0bc683aa1171f1da4998a242358c3fdb770c54a09335726d8dce06eb9",
+        "83214becb7c4cea6adfc97626c4cf9f5232a2393f26959a2aae5383bc8582e06",
+        "0a049d0b9960f4e0c4bbbcea2d90cf590849a6f322e44fb1333dfffe1a885938"
       ]
     },
     {
       "name": "industry-research",
       "state": "active",
-      "scope": "global",
-      "source": "my-skills/industry-research",
+      "scope": "investments",
+      "source": "project:investments/codex-skills/industry-research",
       "origin": "first-party",
       "accepted_fingerprints": [
-        "e99037b725a420dffac1e44dadb021accac619d91707e7b0c247f9943dfb4776"
+        "ee7423bfbe7a5a7fb0e62765fe0a6c7b5f2efbff062563da70a9ca7ed1c94e33",
+        "e99037b725a420dffac1e44dadb021accac619d91707e7b0c247f9943dfb4776",
+        "a4838e6a0729b485501b06bc38571a13c1ef214a663b9b544c5e1272c275acad"
       ]
     },
     {
       "name": "investment-checklist",
       "state": "active",
-      "scope": "global",
-      "source": "my-skills/investment-checklist",
+      "scope": "investments",
+      "source": "project:investments/codex-skills/investment-checklist",
       "origin": "first-party",
       "accepted_fingerprints": [
-        "0107a64269696dc49a9b985484e369aa42694f81e3e1cd9d2be4827954e0ea20"
+        "0dd009d64dd3ccfad37afe4ef151b28d7a355bbb965157d5ec4d627996cfcb11",
+        "0107a64269696dc49a9b985484e369aa42694f81e3e1cd9d2be4827954e0ea20",
+        "334ffcd2ed740cd18afdd2dfd27d27c9223f58f9e248f1054e1d6eb2d11263db"
       ]
     },
     {
       "name": "investment-memo-craft",
       "state": "active",
-      "scope": "global",
-      "source": "my-skills/investment-memo-craft",
+      "scope": "investments",
+      "source": "project:investments/codex-skills/investment-memo-craft",
       "origin": "first-party",
       "accepted_fingerprints": [
-        "4f4ed7f431adf6783c4a515a8d06d4a134b56b94b4ed37fbacad90007aa465f8"
+        "787a258776843d9459f3d8e666032924a6d7714aaba2f9fb800b5a4b47b3e089",
+        "4f4ed7f431adf6783c4a515a8d06d4a134b56b94b4ed37fbacad90007aa465f8",
+        "b1ad22fd6dd768c85caf25142160a18db6bf0c6a736e0bef14701770b721cbd5"
       ]
     },
     {
       "name": "investment-research",
       "state": "active",
-      "scope": "global",
-      "source": "my-skills/investment-research",
+      "scope": "investments",
+      "source": "project:investments/codex-skills/investment-research",
       "origin": "first-party",
       "accepted_fingerprints": [
-        "8196fb63d11c95dcc26f2059895605bcd5960ff9569db5a3ae22933be27b1e5d"
+        "3509fe443756ea4c744cc7d5683428fc74e0715bc8e88132d4b047203f24d70d",
+        "8196fb63d11c95dcc26f2059895605bcd5960ff9569db5a3ae22933be27b1e5d",
+        "78d946b7f9562c7df11284dfdfcd68ceb52f757972f8ecd6b8d37ef3b4a163d7"
       ]
     },
     {
       "name": "investment-team",
       "state": "active",
-      "scope": "global",
-      "source": "my-skills/investment-team",
+      "scope": "investments",
+      "source": "project:investments/codex-skills/investment-team",
       "origin": "first-party",
       "accepted_fingerprints": [
-        "0089cbd0e1c54f72c74a66d2be5612a462f7241d369dc29b759f9c3fd3e63de2"
+        "e4744b19f964240defee50c9625e26840060c3ede27cbaadfae43ea29e73c309",
+        "0089cbd0e1c54f72c74a66d2be5612a462f7241d369dc29b759f9c3fd3e63de2",
+        "968131d11c619164b410d59da5bb3c9d6cab56710236dc5e3bd8cb58a220462c"
       ]
     },
     {
@@ -671,11 +689,13 @@
     {
       "name": "management-deep-dive",
       "state": "active",
-      "scope": "global",
-      "source": "my-skills/management-deep-dive",
+      "scope": "investments",
+      "source": "project:investments/codex-skills/management-deep-dive",
       "origin": "first-party",
       "accepted_fingerprints": [
-        "405c3e1858b0153b06b6105060e845339ee334065bde5032610c4f381fd37bfd"
+        "2b37a7573f52d455654910ae5a884e5d4f91111fb21c27181178749ece1915bc",
+        "405c3e1858b0153b06b6105060e845339ee334065bde5032610c4f381fd37bfd",
+        "f65bded27c275c043274c3f8a7c00ce2c8fc46b5a58199dea9ca091446f2e074"
       ]
     },
     {
@@ -711,31 +731,35 @@
     {
       "name": "news-pulse",
       "state": "active",
-      "scope": "global",
-      "source": "my-skills/news-pulse",
+      "scope": "investments",
+      "source": "project:investments/codex-skills/news-pulse",
       "origin": "first-party",
       "accepted_fingerprints": [
-        "1db367b7b8054af6f400134a2924206be5c35a016c124f6657ed63dd70cf6bf8"
+        "7b417f396a836a07d739052907e3e8d4a66430529b3ed06007efa5c215fb7d27",
+        "1db367b7b8054af6f400134a2924206be5c35a016c124f6657ed63dd70cf6bf8",
+        "6341614959190f020a0cd9b90893a808ea34632c015d541b1c6005af4d682069"
       ]
     },
     {
       "name": "obsidian-vault",
       "state": "active",
-      "scope": "global",
-      "source": "my-skills/obsidian-vault",
+      "scope": "presentations",
+      "source": "project:presentations/.agents/skills/obsidian-vault",
       "origin": "first-party",
       "accepted_fingerprints": [
-        "1e1e6edb5b5bc47a2c364b8ee4028a7d8f67b598421c80c21b032f9a54a4ca99"
+        "3cce99adad93827c1c8f022380cd57c74d55745224613a373a4f9b5eccf500c6"
       ]
     },
     {
       "name": "portfolio-review",
       "state": "active",
-      "scope": "global",
-      "source": "my-skills/portfolio-review",
+      "scope": "investments",
+      "source": "project:investments/codex-skills/portfolio-review",
       "origin": "first-party",
       "accepted_fingerprints": [
-        "06a2d8e02e14b66d586605b4190e710d86b2336b7a8e41896975c1383e1bee86"
+        "3859a3cd37d4267e05ed10eeedde9c9e589e5557ece06f841e8bb553bae78dd0",
+        "06a2d8e02e14b66d586605b4190e710d86b2336b7a8e41896975c1383e1bee86",
+        "61204511ef9b0a2c89d59c706ae895244c268294f424b1849ffebef74d26a52f"
       ]
     },
     {
@@ -750,17 +774,6 @@
       "migrate": true
     },
     {
-      "name": "pr",
-      "state": "active",
-      "scope": "global",
-      "source": "my-skills/pr",
-      "origin": "first-party",
-      "upstream": "https://github.com/mattpocock/skills/tree/main/skills/engineering/pr",
-      "accepted_fingerprints": [
-        "cfb2a05039a036ad0f9d8b58b4eac2d3c34149a242504a2bafb54d6972bfcb43"
-      ]
-    },
-    {
       "name": "presentation-production",
       "state": "active",
       "scope": "presentations",
@@ -773,61 +786,55 @@
     {
       "name": "private-company-research",
       "state": "active",
-      "scope": "global",
-      "source": "my-skills/private-company-research",
+      "scope": "investments",
+      "source": "project:investments/codex-skills/private-company-research",
       "origin": "first-party",
       "accepted_fingerprints": [
-        "9a83cf578a8a2c3fb64a0b496fe2962c0e865968ba9ead7900284c2f408ed143"
-      ]
-    },
-    {
-      "name": "prototype",
-      "state": "active",
-      "scope": "global",
-      "source": "my-skills/prototype",
-      "origin": "first-party",
-      "accepted_fingerprints": [
-        "e4d5340364cece12ebd91ed8bf4838ace18de3f12b5b7616ec443b61a2da574b"
+        "4b1598985dd033f29035dd3297d12ff88715ab51b37ffbe6e1a0ef9fdb007ddf",
+        "9a83cf578a8a2c3fb64a0b496fe2962c0e865968ba9ead7900284c2f408ed143",
+        "4ccc12066e589fa6249518edec3ed5e8c1e8af7545418bb21bd678d82a17e064"
       ]
     },
     {
       "name": "quality-screen",
       "state": "active",
-      "scope": "global",
-      "source": "my-skills/quality-screen",
+      "scope": "investments",
+      "source": "project:investments/codex-skills/quality-screen",
       "origin": "first-party",
       "accepted_fingerprints": [
-        "88bb6acfbd396a6d310b977ad42531d4911393a40c938164991ae0c42f45ac4e"
+        "f266069e9b00e2453efccabcc1b84bfab1cb965d3f9f202461c59c239a26d06d",
+        "88bb6acfbd396a6d310b977ad42531d4911393a40c938164991ae0c42f45ac4e",
+        "63d5c6292017f40cf3702afe0174adf95399999236a68e4e8230b9d72016e66c"
       ]
     },
     {
       "name": "remotion-best-practices",
       "state": "active",
-      "scope": "global",
-      "source": "my-skills/remotion-best-practices",
+      "scope": "presentations",
+      "source": "project:presentations/.agents/skills/remotion-best-practices",
       "origin": "first-party",
       "accepted_fingerprints": [
-        "84ee3a68fac8e38f2a62471c16490e43b1a1f216ad1d1e6adeab3981bb57ab34"
+        "f1d485588c4ee2e3ee0357ed194e2a5bc42ff4d95ab83d4286f98b716111eb21"
       ]
     },
     {
       "name": "remotion-video-production",
       "state": "active",
-      "scope": "global",
-      "source": "my-skills/remotion-video-production",
+      "scope": "presentations",
+      "source": "project:presentations/.agents/skills/remotion-video-production",
       "origin": "first-party",
       "accepted_fingerprints": [
-        "fbb7d388cd9bec623156cd9b6e54ef1081a389e64e5f3bf991b030efc27c91f5"
+        "3a412f23e378a735927a15cb61e682d16a75d0abe3b9a41a840a16ff2b733760"
       ]
     },
     {
       "name": "remotion-video-toolkit",
       "state": "active",
-      "scope": "global",
-      "source": "my-skills/remotion-video-toolkit",
+      "scope": "presentations",
+      "source": "project:presentations/.agents/skills/remotion-video-toolkit",
       "origin": "first-party",
       "accepted_fingerprints": [
-        "b6359ec78b9713f82d625123e63e0fdb527dfa40b529b4e95ef9ce3d341c3626"
+        "18976025d379998df0c2209b61489536e9fa04f1a9474ae56325e6f61f6a138c"
       ]
     },
     {
@@ -868,17 +875,6 @@
       "retired_on": "2026-10-06"
     },
     {
-      "name": "retro",
-      "state": "active",
-      "scope": "global",
-      "source": "my-skills/retro",
-      "origin": "first-party",
-      "upstream": "https://github.com/mattpocock/skills/tree/main/skills/engineering/retro",
-      "accepted_fingerprints": [
-        "ac467f9e12877170132552d2da6f71ed84a741e83a128d29289771c30b354332"
-      ]
-    },
-    {
       "name": "scaffold-exercises",
       "state": "active",
       "scope": "global",
@@ -897,17 +893,6 @@
       "accepted_fingerprints": [
         "153481315e5f9bb669b8e10acce97118efc9e9bf7bd0916289d5556cc3942843",
         "dd177cb6e4c3bb5b7eced9f3a4dd0e9e20463f93cb13f6a2791d8063904748f5"
-      ]
-    },
-    {
-      "name": "setup-pre-commit",
-      "state": "active",
-      "scope": "global",
-      "source": "my-skills/setup-pre-commit",
-      "origin": "first-party",
-      "accepted_fingerprints": [
-        "2005bce61d510f4b26c9d0bba226668d047f29115d924118902bf5917ffab44c",
-        "cad43acb2e24504b7ba60aafebbf945fcfe4ae34bfac31b65ae2b715665d2e95"
       ]
     },
     {
@@ -976,12 +961,12 @@
     },
     {
       "name": "sts2-independent-run-regression",
-      "state": "active",
+      "state": "retired",
       "scope": "global",
-      "source": "my-skills/sts2-independent-run-regression",
+      "source": "~/.local/share/agent-skills/retired/20261016/sts2-independent-run-regression",
       "origin": "first-party",
       "accepted_fingerprints": [
-        "fe4f1b0c5bc0ee2fcc83100ee80ce392f0f80286c1985e6058fec6f0d296ffc3"
+        "a6bab2b06e295776e8e9754c022cc1717dd7dd4b57d6f7daf897f63ae810e968"
       ]
     },
     {
@@ -1017,31 +1002,39 @@
     {
       "name": "test-report-html",
       "state": "active",
-      "scope": "global",
-      "source": "my-skills/test-report-html",
+      "scope": "gawain",
+      "source": "project:gawain/.agents/skills/test-report-html",
       "origin": "first-party",
       "accepted_fingerprints": [
-        "373c74a4f28c8b5742dd6baf189b156e868a4bba8e889e891995e44fbf02b28a"
-      ]
+        "8e4b81113caf3c322d44744cf6472894d1a8f85d63c20adf7b5c36219ca4d16e"
+      ],
+      "project_sources": {
+        "gawain": "project:gawain/.agents/skills/test-report-html",
+        "autotest": "project:autotest/.agents/skills/test-report-html"
+      }
     },
     {
       "name": "thesis-drift",
       "state": "active",
-      "scope": "global",
-      "source": "my-skills/thesis-drift",
+      "scope": "investments",
+      "source": "project:investments/codex-skills/thesis-drift",
       "origin": "first-party",
       "accepted_fingerprints": [
-        "fca243739db6a27f01b95fa8d5d49951a8ffebd3a87003f71f2bcc64146026af"
+        "aac6352235e910aae775ddcc08dd8dbb6cde54e401011475bce11284fe8010df",
+        "fca243739db6a27f01b95fa8d5d49951a8ffebd3a87003f71f2bcc64146026af",
+        "a8fb9a723b0dc0157e3205e9b581a76ae6448571e49ea57a5e8f37a7923e6a44"
       ]
     },
     {
       "name": "thesis-tracker",
       "state": "active",
-      "scope": "global",
-      "source": "my-skills/thesis-tracker",
+      "scope": "investments",
+      "source": "project:investments/codex-skills/thesis-tracker",
       "origin": "first-party",
       "accepted_fingerprints": [
-        "d2e416aaad1651239e50ddc811cc0b689a4f952cf759257ce3b75c4f4cfdff99"
+        "f5faa2489c4e5e6f07eca4577233e5591422900ced0c7361bcb25c71df76ecc9",
+        "d2e416aaad1651239e50ddc811cc0b689a4f952cf759257ce3b75c4f4cfdff99",
+        "9db86be70ecfa8441a497d5bea24727ccdf4ffecfa6bdb1f96a0b2185cc8472d"
       ]
     },
     {
@@ -1113,11 +1106,11 @@
     {
       "name": "video-production",
       "state": "active",
-      "scope": "global",
-      "source": "my-skills/video-production",
+      "scope": "presentations",
+      "source": "project:presentations/.agents/skills/video-production",
       "origin": "first-party",
       "accepted_fingerprints": [
-        "8aa32e8b8c9b2ef1afebd74c7246cf208f02e07ff1d3c29123febd450b813b36"
+        "1b64b319eb779d49c219a996e734ccb33b64ec76afd101528c1551cb73299df9"
       ]
     },
     {
@@ -1144,11 +1137,11 @@
     {
       "name": "wechat-article",
       "state": "active",
-      "scope": "global",
-      "source": "my-skills/wechat-article",
+      "scope": "presentations",
+      "source": "project:presentations/.agents/skills/wechat-article",
       "origin": "first-party",
       "accepted_fingerprints": [
-        "3bc1b6912f0e8082360b8c34e75d2d01226ca0332648d2d7ad763972ae8fef04"
+        "7e32f32dd3815e491bbd1e20314e6c5f97bd66e70374194ff80d3fe3326a9c72"
       ]
     },
     {
@@ -1909,18 +1902,6 @@
       }
     },
     {
-      "name": "improve-codebase-architecture",
-      "maps_to": "improve-codebase-architecture",
-      "source": "~/.agents/skills/improve-codebase-architecture",
-      "destination": "~/.local/share/agent-skills/references/improve-codebase-architecture",
-      "fingerprint": "75e1264bf0f29f8b81ad974d2dbea321cc17f067ef57e5789c285690cdecb7ff",
-      "origin": "installed-snapshot",
-      "prior_registry_origin": "third-party",
-      "provenance": {
-        "installed_snapshot_sha256": "75e1264bf0f29f8b81ad974d2dbea321cc17f067ef57e5789c285690cdecb7ff"
-      }
-    },
-    {
       "name": "income-investment",
       "maps_to": "income-investment",
       "source": "~/.agents/skills/income-investment",
@@ -2622,19 +2603,6 @@
       }
     },
     {
-      "name": "pr",
-      "maps_to": "pr",
-      "source": "~/.agents/skills/pr",
-      "destination": "~/.local/share/agent-skills/references/pr",
-      "fingerprint": "cfb2a05039a036ad0f9d8b58b4eac2d3c34149a242504a2bafb54d6972bfcb43",
-      "origin": "installed-snapshot",
-      "prior_registry_origin": "third-party",
-      "provenance": {
-        "installed_snapshot_sha256": "cfb2a05039a036ad0f9d8b58b4eac2d3c34149a242504a2bafb54d6972bfcb43",
-        "source_note": "区分 skill 包来源登记与被复用片段的署名。"
-      }
-    },
-    {
       "name": "private-company-research",
       "maps_to": "private-company-research",
       "source": "~/.agents/skills/private-company-research",
@@ -2648,18 +2616,6 @@
         "source_note": "tools/add_repo_column.py 将这组金融技能映射到 ai-berkshire；inventory/skill-desc-translation.md 对此项记作“平台内置”。这里列出逐项规范源文件及当前引用版本、生成包匹配结果；不要把当前 HEAD 当作原始安装版本。",
         "current_reference_repo_head_at_review": "fad8a0fae2f3ca8c99b572eb20bb74e4714ef266",
         "current_source_commit_at_review": "cd127bcbe79fdf53800afb5f38a5c0efac2d6379 2026-05-11"
-      }
-    },
-    {
-      "name": "prototype",
-      "maps_to": "prototype",
-      "source": "~/.agents/skills/prototype",
-      "destination": "~/.local/share/agent-skills/references/prototype",
-      "fingerprint": "e4d5340364cece12ebd91ed8bf4838ace18de3f12b5b7616ec443b61a2da574b",
-      "origin": "installed-snapshot",
-      "prior_registry_origin": "third-party",
-      "provenance": {
-        "installed_snapshot_sha256": "e4d5340364cece12ebd91ed8bf4838ace18de3f12b5b7616ec443b61a2da574b"
       }
     },
     {
@@ -2732,18 +2688,6 @@
       }
     },
     {
-      "name": "retro",
-      "maps_to": "retro",
-      "source": "~/.agents/skills/retro",
-      "destination": "~/.local/share/agent-skills/references/retro",
-      "fingerprint": "ac467f9e12877170132552d2da6f71ed84a741e83a128d29289771c30b354332",
-      "origin": "installed-snapshot",
-      "prior_registry_origin": "third-party",
-      "provenance": {
-        "installed_snapshot_sha256": "ac467f9e12877170132552d2da6f71ed84a741e83a128d29289771c30b354332"
-      }
-    },
-    {
       "name": "scaffold-exercises",
       "maps_to": "scaffold-exercises",
       "source": "~/.agents/skills/scaffold-exercises",
@@ -2766,19 +2710,6 @@
       "prior_registry_origin": "third-party",
       "provenance": {
         "installed_snapshot_sha256": "dd177cb6e4c3bb5b7eced9f3a4dd0e9e20463f93cb13f6a2791d8063904748f5"
-      }
-    },
-    {
-      "name": "setup-pre-commit",
-      "maps_to": "setup-pre-commit",
-      "source": "~/.agents/skills/setup-pre-commit",
-      "destination": "~/.local/share/agent-skills/references/setup-pre-commit",
-      "fingerprint": "cad43acb2e24504b7ba60aafebbf945fcfe4ae34bfac31b65ae2b715665d2e95",
-      "origin": "installed-snapshot",
-      "prior_registry_origin": "third-party",
-      "provenance": {
-        "installed_snapshot_sha256": "cad43acb2e24504b7ba60aafebbf945fcfe4ae34bfac31b65ae2b715665d2e95",
-        "source_note": "不推断独立作者或仓库来源。"
       }
     },
     {
@@ -3088,6 +3019,45 @@
         "agent_created": true,
         "author": "unknown",
         "upstream": "not established in the bounded source check"
+      }
+    },
+    {
+      "name": "dsh-source-upgrade",
+      "maps_to": "dsh-source-upgrade",
+      "source": "~/.agents/skills/dsh-source-upgrade",
+      "destination": "~/.local/share/agent-skills/references/dsh-source-upgrade",
+      "fingerprint": "1cb8b7de6b5ed920144a4cb4aaa20971b8663d0dd25882e15b41b95c30a4e4f3",
+      "origin": "installed-snapshot",
+      "prior_registry_origin": null,
+      "provenance": {
+        "installed_snapshot_sha256": "1cb8b7de6b5ed920144a4cb4aaa20971b8663d0dd25882e15b41b95c30a4e4f3",
+        "source_note": "原作者与最初来源未证实；完整原件保存在 /Users/chris/Documents/Codex/2026-10-13/user-skills-instruction-review/optimization-handoff/first-party-backup/dsh-source-upgrade，由source-manifest逐文件记录。"
+      }
+    },
+    {
+      "name": "dsh-web-access-recovery",
+      "maps_to": "dsh-web-access-recovery",
+      "source": "~/.agents/skills/dsh-web-access-recovery",
+      "destination": "~/.local/share/agent-skills/references/dsh-web-access-recovery",
+      "fingerprint": "f6500ab08246e3eb286284ab37b9e907d98be698b35ff9f6e7d6d6df1601dd15",
+      "origin": "installed-snapshot",
+      "prior_registry_origin": null,
+      "provenance": {
+        "installed_snapshot_sha256": "f6500ab08246e3eb286284ab37b9e907d98be698b35ff9f6e7d6d6df1601dd15",
+        "source_note": "原作者与最初来源未证实；完整原件保存在 /Users/chris/Documents/Codex/2026-10-13/user-skills-instruction-review/optimization-handoff/first-party-backup/dsh-web-access-recovery，由source-manifest逐文件记录。"
+      }
+    },
+    {
+      "name": "workspace-convergence-audit",
+      "maps_to": "workspace-convergence-audit",
+      "source": "~/.agents/skills/workspace-convergence-audit",
+      "destination": "~/.local/share/agent-skills/references/workspace-convergence-audit",
+      "fingerprint": "506962e236a38465e187cf3b6009da118ea625b08ba6b57a4973f995bdb433e8",
+      "origin": "installed-snapshot",
+      "prior_registry_origin": null,
+      "provenance": {
+        "installed_snapshot_sha256": "506962e236a38465e187cf3b6009da118ea625b08ba6b57a4973f995bdb433e8",
+        "source_note": "原作者与最初来源未证实；完整原件保存在 /Users/chris/Documents/Codex/2026-10-13/user-skills-instruction-review/optimization-handoff/first-party-backup/workspace-convergence-audit，由source-manifest逐文件记录。"
       }
     }
   ],

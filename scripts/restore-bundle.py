@@ -17,10 +17,22 @@ if not bundle.is_file():
 
 targets = {}
 for entry in config['skills']:
+    if entry.get('state') in {'reference', 'retired'}:
+        target = manager.expand(entry['source'])
+        if manager.is_discovery_path(target):
+            if entry.get('origin') == 'third-party' and entry.get('state') == 'reference':
+                raise SystemExit(f"拒绝把第三方参考恢复到技能发现/执行目录：{target}")
+            raise SystemExit(f"拒绝把参考/退役来源恢复到技能发现/执行目录：{target}")
     if entry['origin'] == 'third-party' and entry['scope'] == 'global' and entry['state'] in {'transition', 'reference'}:
-        targets['skills/'+entry['name']] = manager.expand(entry['source'])
+        target = manager.expand(entry['source'])
+        if entry['state'] == 'reference' and manager.is_discovery_path(target):
+            raise SystemExit(f"拒绝把第三方参考恢复到技能发现/执行目录：{target}")
+        targets['skills/'+entry['name']] = target
 for entry in config.get('reference_copies', []):
-    targets['references/'+entry['name']] = manager.expand(entry['destination'])
+    target = manager.expand(entry['destination'])
+    if manager.is_discovery_path(target):
+        raise SystemExit(f"拒绝把参考副本恢复到技能发现/执行目录：{target}")
+    targets['references/'+entry['name']] = target
 
 with tarfile.open(bundle) as archive:
     members = archive.getmembers()
