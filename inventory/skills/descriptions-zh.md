@@ -72,7 +72,7 @@
 | 14 | `earnings-review` | 财报精读：一手资料深度解读。来源：skills/earnings-review.md. |  |  |  | 用户级 | 平台内置 |
 | 15 | `earnings-team` | 财报精读团队：四大师并行解读 + 公众号发布。来源：skills/earnings-team.md. |  |  |  | 用户级 | 平台内置 |
 | 16 | `edit-article` | 通过重组章节、提升清晰度、收紧文风来编辑润色文章。当用户要编辑、修订或改进文章草稿时使用。 | WorkBuddy 内置 / 应用市场 | WorkBuddy 平台（检索未定位独立上游仓库） | WorkBuddy 平台内置 skill | 用户级 | 平台内置 |
-| 17 | `eli5` | 当用户键入 /eli5 或想要图文并茂的讲解时使用。用大图、少文字的 HTML 图卡，把任意主题讲得像给 5 岁小孩解释那样通俗易懂。 | [github.com/companion-inc/feynman](https://github.com/companion-inc/feynman) | Companion Inc | 用通俗方式讲解概念的 skill（费曼学习法） | 用户级 | 2026-10-05 |
+| 17 | `eli5` | 用平实英语解释论文、研究成果或技术概念：去术语、给具体类比、说清要点。当用户说「ELI5 一下」、要求把某篇论文或研究结果讲简单、想让人去掉术语，或问某个技术密集的东西到底是什么意思时使用。指定论文/arXiv ID/DOI 时先调用 `feynman alpha` 工具，输出为纯文本结构化解读（一句话总结 / 大想法 / 原理 / 意义 / 存疑点 / 记住三件事），非 HTML 图卡。 | [github.com/Companion-Inc/feynman](https://github.com/Companion-Inc/feynman) | Companion Inc | 费曼学习法论文/技术概念解释器，依赖 `feynman alpha` CLI | 用户级 | 2026-10-09 |
 | 18 | `financial-data` | 财务数据获取与交叉验证规范。来源：skills/financial-data.md. |  |  |  | 用户级 | 平台内置 |
 | 19 | `frontend-design` | 构建新界面或重塑旧界面时，提供独特、有意图的视觉设计指引。帮助确定美学方向、排版，以及做出不像模板默认值的取舍。 | [github.com/anthropics/skills](https://github.com/anthropics/skills) | Anthropic（官方） | Anthropic 官方 Agent Skills 公共仓库 | 用户级 | 2026-10-05 |
 | 20 | `frontend-slides` | 从零创建动画丰富的 HTML 演示，或将 PowerPoint 文件转换而来。当用户要制作演示、把 PPT/PPTX 转成网页、或为演讲/路演做幻灯片时使用。通过可视化探索(而非抽象选项)帮助非设计者找到自己的美学。 | [github.com/zarazhangrui/frontend-slides](https://github.com/zarazhangrui/frontend-slides) | zarazhangrui | 用编码 agent 的前端能力在 Web 上创建精美幻灯片 | crystepj-max/Chris-Vault/ | 2026-06-23 |
@@ -177,6 +177,10 @@
 > - 09-15：**`dev-workflow-2-0` 退役** —— 职责已由 M1 `requirements-analysis` / M2 `wf-construction-full-feature` / M3 `execution-plan` 拆分承接。合计 81 → 80，第一方 6 → 5。
 > - 09-15：同步移除第三方前言中的「`tdd` 被 `dev-workflow-2-0` 部分覆盖」——覆盖来源消失，`tdd` 视为无覆盖。
 > - 09-14：`construction-bootstrap` 退役（见 `skill-policy.json`）。
+
+> **近期更新（2026-10 月）**：
+> - 10-09：**`eli5` 描述纠错** —— 原描述写成「用大图少文字的 HTML 图卡讲给 5 岁小孩」，与上游实际能力不符。经核对上游 `Companion-Inc/feynman` 的 `skills/eli5/SKILL.md`：它是**论文/技术概念解释器**，去术语、给类比、按「一句话总结 / 大想法 / 原理 / 意义 / 存疑点 / 记住三件事」六段输出纯文本，并在指定论文/arXiv ID/DOI 时先调用 `feynman alpha` CLI。与 HTML 图卡是两回事，已改写描述与仓库简介。组织已更名为 `getcompanion-ai`，旧名 `Companion-Inc` 保留为别名，两个名字均可访问。
+> - 10-09：`pr`/`retro`/`implement-spec` 登记为 mattpocock/skills 的第三方 skill（transition，global）。`resolving-merge-conflicts` 转retired。
 
 > **近期更新（2026-08 月）**：
 > - 08-24：新增 `eli5`、`video-production`、`remotion-video-production`、`to-questionnaire`、`wait-what`、`wizard`（均为第三方，经 GitHub 核实来源）；移除 4 个 STS2 项目级 skill。

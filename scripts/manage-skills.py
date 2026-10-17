@@ -37,10 +37,21 @@ def make_link(path, source):
                    check=True, capture_output=True)
 
 
+def relative_key(relative):
+    """把相对路径归一化为 POSIX 形式。
+
+    str(Path) 会带上平台分隔符（Windows `agents\\openai.yaml`、macOS `agents/openai.yaml`），
+    直接进哈希会让同一份内容在两个平台得到不同指纹。这里统一用 `/` 拼接，
+    保证跨平台可互认。注意：目录内若含符号链接，其 readlink 结果仍可能平台相关。
+    """
+    return '/'.join(relative.parts)
+
+
 def fingerprint(path):
     digest = hashlib.sha256()
     ignored = {'.git', '__pycache__', '.DS_Store', 'node_modules', '.venv'}
-    for item in sorted(Path(path).rglob('*')):
+    entries = []
+    for item in Path(path).rglob('*'):
         relative = item.relative_to(path)
         if any(part in ignored for part in relative.parts):
             continue
@@ -50,7 +61,11 @@ def fingerprint(path):
             value = item.read_bytes()
         else:
             continue
-        digest.update(str(relative).encode() + b'\0' + value + b'\0')
+        entries.append((relative_key(relative), value))
+    # 按归一化后的字符串排序：Path 之间的大小比较在 Windows 上大小写不敏感、
+    # 在 POSIX 上敏感，直接 sorted(Path) 会让混合大小写的文件名排出不同顺序。
+    for key, value in sorted(entries):
+        digest.update(key.encode() + b'\0' + value + b'\0')
     return digest.hexdigest()
 
 
