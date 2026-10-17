@@ -1,0 +1,3 @@
+interface:
+  display_name: "Skill Workbench"
+  short_description: "Create, revise, and validate agent skills"

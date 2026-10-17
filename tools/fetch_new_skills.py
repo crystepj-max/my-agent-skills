@@ -1,39 +1,20 @@
-import urllib.request, json, os
+#!/usr/bin/env python3
+"""Fail-closed compatibility entry point for the retired installer.
 
-POOL = os.path.expanduser("~/.agents/skills")
-REPO = "mattpocock/skills"
-BRANCH = "main"
-skills = {
-    "wizard": "skills/engineering/wizard",
-    "to-questionnaire": "skills/productivity/to-questionnaire",
-    "wait-what": "skills/productivity/wait-what",
-}
+The old command downloaded upstream files directly into ~/.agents/skills,
+which can now point at first-party maintained sources. Keep this filename as
+a safe stop so old instructions cannot reactivate or overwrite those sources.
+"""
 
-def api(path):
-    req = urllib.request.Request(
-        f"https://api.github.com/repos/{REPO}/{path}",
-        headers={"User-Agent": "workbuddy", "Accept": "application/vnd.github+json"})
-    return json.load(urllib.request.urlopen(req, timeout=30))
+import sys
 
-def raw(path):
-    url = f"https://raw.githubusercontent.com/{REPO}/{BRANCH}/{path}"
-    return urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent":"wb"}), timeout=30).read()
 
-# 1. recursive tree
-tree = api(f"git/trees/{BRANCH}?recursive=1")["tree"]
-blobs = [t for t in tree if t["type"] == "blob"]
+def main() -> int:
+    print("此旧安装入口已停用：不会联网、写入或覆盖任何技能目录。")
+    print("如需查看上游变化，请使用只读工具：python3 tools/compare_skill_reference.py。")
+    print("需要获取独立快照时，请使用：python3 tools/fetch_skill_reference.py。")
+    return 2
 
-for name, prefix in skills.items():
-    files = [b for b in blobs if b["path"].startswith(prefix + "/")]
-    dest = os.path.join(POOL, name)
-    os.makedirs(dest, exist_ok=True)
-    for b in files:
-        rel = b["path"][len(prefix) + 1:]  # strip "skills/<cat>/<name>/"
-        target = os.path.join(dest, rel)
-        os.makedirs(os.path.dirname(target), exist_ok=True)
-        data = raw(b["path"])
-        with open(target, "wb") as f:
-            f.write(data)
-        print(f"{name}: wrote {rel} ({len(data)} bytes)")
-    print(f"--- {name} done, {len(files)} files ---")
-print("ALL DONE")
+
+if __name__ == "__main__":
+    raise SystemExit(main())
