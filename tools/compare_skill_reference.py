@@ -25,10 +25,16 @@ def digest_tree(root: Path) -> dict[str, str]:
 
 
 def manager_fingerprint(root: Path) -> str:
-    """Match scripts/manage-skills.py fingerprint() for the preserved copy."""
+    """Match scripts/manage-skills.py fingerprint() for the preserved copy.
+
+    相对路径统一用 POSIX 形式参与哈希。str(Path) 会带上平台分隔符
+    （Windows `agents\\openai.yaml`、macOS `agents/openai.yaml`），
+    同一份内容在两个平台会得到不同指纹，导致比对工具误报漂移。
+    """
     digest = hashlib.sha256()
     ignored = {".git", "__pycache__", ".DS_Store", "node_modules", ".venv"}
-    for item in sorted(root.rglob("*")):
+    entries: list[tuple[str, bytes]] = []
+    for item in root.rglob("*"):
         relative = item.relative_to(root)
         if any(part in ignored for part in relative.parts):
             continue
@@ -38,7 +44,9 @@ def manager_fingerprint(root: Path) -> str:
             value = item.read_bytes()
         else:
             continue
-        digest.update(str(relative).encode() + b"\0" + value + b"\0")
+        entries.append(("/".join(relative.parts), value))
+    for key, value in sorted(entries):
+        digest.update(key.encode() + b"\0" + value + b"\0")
     return digest.hexdigest()
 
 

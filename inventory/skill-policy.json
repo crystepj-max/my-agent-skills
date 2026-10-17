@@ -40,7 +40,8 @@
         "d22ad333668cda47ba3c75a8d8a7f217e5131465ebb58abacdbb916a6dc9c79b",
         "aba26b3f68a0a85bb96cf8c1b0e33eea2eb2265da5e615ae0268430539012bfb",
         "db3ac07d3187044ef0372013423784c8f13da11d46c93b9b19e37ec14abe8de8",
-        "37649e89c843d599204fe2310a996f75f6a49e8066c54c457abe0f3d8b3cfe9f"
+        "37649e89c843d599204fe2310a996f75f6a49e8066c54c457abe0f3d8b3cfe9f",
+        "3629bab4f5167af261305757ac506d552993d9ac029d70f3e5accd6f23dc80d1"
       ]
     },
     {
@@ -1151,7 +1152,7 @@
       "source": "~/.agents/skills/wf-construction-full-feature",
       "origin": "first-party",
       "accepted_fingerprints": [
-        "0d8589dad309f561243d25eebd8656aae582ee871233c02a664f2d6bbbf1deea"
+        "b2c11fc93834fa4e282bcc9c64c1c3eeb7551bc51d1a21cc0e6b83ef30655def"
       ],
       "upstream": "~/workspace/workflow-manager/templates/wf-construction-full-feature.json"
     },
@@ -1162,7 +1163,7 @@
       "source": "~/.agents/skills/wf-diagnose",
       "origin": "first-party",
       "accepted_fingerprints": [
-        "ff11e92e5b64e3864ba270b766855f06001fc3a9577296491470eab699facc2d"
+        "e374d686c3ff3cb82708c1f7aeb208ccc7b573a4254e35e05de65ffc2bc87131"
       ],
       "upstream": "~/workspace/workflow-manager/templates/wf-diagnose.json"
     },
@@ -1173,7 +1174,7 @@
       "source": "~/.agents/skills/wf-explore",
       "origin": "first-party",
       "accepted_fingerprints": [
-        "aafec6dc8109e57b9d13078dda4e599b64023221ddd8251993274f9583d1b489"
+        "43e8063828202ba77b8ffa847efdfeedee2ead50eec24ffdb59b05caf35070db"
       ],
       "upstream": "~/workspace/workflow-manager/templates/wf-explore.json"
     },
@@ -1184,7 +1185,7 @@
       "source": "~/.agents/skills/wf-optimize",
       "origin": "first-party",
       "accepted_fingerprints": [
-        "ea56293d4ffe6537d2390f1f41c0c35bf64f5f54c04e93ac0c2bd2ed6ff22992"
+        "cab9cc7394cf5811d5318d866799a5761f37e9776cac7fe873cd2d7137c25442"
       ],
       "upstream": "~/workspace/workflow-manager/templates/wf-optimize.json"
     },
