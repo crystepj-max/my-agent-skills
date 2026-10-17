@@ -1,0 +1,4 @@
+interface:
+  display_name: "ChatGPT 网页桥接"
+  short_description: "多宿主通用桥接 ChatGPT 网页推理与文生图，本地验证后采纳"
+  default_prompt: "使用 $chatgpt-web-bridge 把这个任务桥接给 ChatGPT 网页完成。"

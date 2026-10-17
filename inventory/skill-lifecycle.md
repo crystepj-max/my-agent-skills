@@ -14,6 +14,7 @@
 | baoyu-slide-deck | reference | presentations | `project:presentations/.agent-assets/presentations/baoyu-slide-deck` |
 | beautiful-html-templates | reference | presentations | `project:presentations/.agent-assets/presentations/beautiful-html-templates` |
 | bottleneck-hunter | transition | global | `~/.agents/skills/bottleneck-hunter` |
+| chatgpt-web-bridge | active | global | `my-skills/chatgpt-web-bridge`（说明：通用 ChatGPT 网页桥接；通道优先级 codex-in-app-browser → user-chrome（用户已登录 Chrome 会话）→ host-browser-use；reasoning 与 image 两类任务合同；启用前需通过 automation-consent 同意门；自动传输属非官方实验特性，有账号风险，禁止无头/反检测执行。） |
 | clashx-openai-sse-debug | transition | global | `~/.agents/skills/clashx-openai-sse-debug` |
 | cnb-git | active | global | `my-skills/cnb-git`（说明：按实际 upstream remote 与服务端分支执行 fetch/pull；凭据仅注入 CNB URL；不自动删 Git lock，clone/fetch/pull 错误明确失败。） |
 | cnb-push | active | global | `my-skills/cnb-push`（说明：CNB 推送封装；区分现有仓更新与首次上传，--all/--set-default 按其实际影响范围授权并复用既有授权。） |
