@@ -1540,7 +1540,7 @@
       "prior_registry_origin": "third-party",
       "provenance": {
         "installed_snapshot_sha256": "31d5ed85193140d631e45bfb76951cdafba16ad5c1653e0661d0ac6d13de04ad",
-        "source_correction": "inventory/skill-desc-translation.md identifies this package as locally authored; prior third-party registry attribution is a conflict."
+        "source_correction": "inventory/skills/descriptions-zh.md identifies this package as locally authored; prior third-party registry attribution is a conflict."
       }
     },
     {
@@ -1553,7 +1553,7 @@
       "prior_registry_origin": "third-party",
       "provenance": {
         "installed_snapshot_sha256": "57f727a07ca3aa4ad1b7a7e8ac02ecb615e4a093606891c4ecc257a399467d3a",
-        "source_note": "inventory/skill-desc-translation.md 记录 GitHub Yacey/agnes-ai-generation-skill。",
+        "source_note": "inventory/skills/descriptions-zh.md 记录 GitHub Yacey/agnes-ai-generation-skill。",
         "inventory_source_record": "[github.com/Yacey/agnes-ai-generation-skill](https://github.com/Yacey/agnes-ai-generation-skill)"
       }
     },
@@ -1597,7 +1597,7 @@
         "installed_snapshot_sha256": "9b2f7de08c021d0264900b4646b31c362ba9128f23f6e8205b139e24089a1533",
         "source_url": "https://github.com/JimLiu/baoyu-skills#baoyu-image-gen",
         "observed_frontmatter_version": "2.2.0",
-        "source_note": "原 SKILL.md 的 homepage 指向 JimLiu/baoyu-skills；inventory/skill-desc-translation.md 将来源列为平台内置。并存记录，不推断安装来源。"
+        "source_note": "原 SKILL.md 的 homepage 指向 JimLiu/baoyu-skills；inventory/skills/descriptions-zh.md 将来源列为平台内置。并存记录，不推断安装来源。"
       }
     },
     {
@@ -1612,7 +1612,7 @@
         "installed_snapshot_sha256": "01f33d202b693552bb643053ebc9d08749af5a9cd24afb9fd451c7d1293f4d54",
         "source_url": "https://github.com/JimLiu/baoyu-skills#baoyu-infographic",
         "observed_frontmatter_version": "1.117.4",
-        "source_note": "原 SKILL.md 的 homepage 指向 JimLiu/baoyu-skills；inventory/skill-desc-translation.md 将来源列为平台内置。并存记录，不推断安装来源。"
+        "source_note": "原 SKILL.md 的 homepage 指向 JimLiu/baoyu-skills；inventory/skills/descriptions-zh.md 将来源列为平台内置。并存记录，不推断安装来源。"
       }
     },
     {
@@ -1626,7 +1626,7 @@
       "provenance": {
         "installed_snapshot_sha256": "e8e8a78d7b21988603abbce237c6c18dfc41420cbf235e8be7ba17e134bb83aa",
         "source_url": "https://github.com/xbtlin/ai-berkshire",
-        "source_note": "tools/add_repo_column.py 将这组金融技能映射到 ai-berkshire；inventory/skill-desc-translation.md 对此项记作“平台内置”。这里列出逐项规范源文件及当前引用版本、生成包匹配结果；不要把当前 HEAD 当作原始安装版本。",
+        "source_note": "tools/add_repo_column.py 将这组金融技能映射到 ai-berkshire；inventory/skills/descriptions-zh.md 对此项记作“平台内置”。这里列出逐项规范源文件及当前引用版本、生成包匹配结果；不要把当前 HEAD 当作原始安装版本。",
         "current_reference_repo_head_at_review": "fad8a0fae2f3ca8c99b572eb20bb74e4714ef266",
         "current_source_commit_at_review": "726d35d1acd8bbabb8111992a281bed49d0901b9 2026-07-18"
       }
@@ -1641,7 +1641,7 @@
       "prior_registry_origin": "third-party",
       "provenance": {
         "installed_snapshot_sha256": "0950d054dc662f5030bf6040a00ebc11c3f939238efb9872331a5acb1d3c3496",
-        "source_correction": "inventory/skill-desc-translation.md identifies this package as locally authored; prior third-party registry attribution is a conflict."
+        "source_correction": "inventory/skills/descriptions-zh.md identifies this package as locally authored; prior third-party registry attribution is a conflict."
       }
     },
     {
@@ -1679,7 +1679,7 @@
       "provenance": {
         "installed_snapshot_sha256": "8d6c319b9e194ec59b13c6571ab5968d11561041f489ef104583bea0630ad6db",
         "source_url": "https://github.com/xbtlin/ai-berkshire",
-        "source_note": "tools/add_repo_column.py 将这组金融技能映射到 ai-berkshire；inventory/skill-desc-translation.md 对此项记作“平台内置”。这里列出逐项规范源文件及当前引用版本、生成包匹配结果；不要把当前 HEAD 当作原始安装版本。",
+        "source_note": "tools/add_repo_column.py 将这组金融技能映射到 ai-berkshire；inventory/skills/descriptions-zh.md 对此项记作“平台内置”。这里列出逐项规范源文件及当前引用版本、生成包匹配结果；不要把当前 HEAD 当作原始安装版本。",
         "current_reference_repo_head_at_review": "fad8a0fae2f3ca8c99b572eb20bb74e4714ef266",
         "current_source_commit_at_review": "a1976609b5538d976bb1e3a61f11c1e8d6cfae96 2026-07-11"
       }
@@ -1706,7 +1706,7 @@
       "prior_registry_origin": "third-party",
       "provenance": {
         "installed_snapshot_sha256": "6e29a28a79410c7c1209fa7ab6b007890c8f579c09b36fd08fc9c122ec2d6f33",
-        "source_correction": "inventory/skill-desc-translation.md identifies this package as locally authored; prior third-party registry attribution is a conflict."
+        "source_correction": "inventory/skills/descriptions-zh.md identifies this package as locally authored; prior third-party registry attribution is a conflict."
       }
     },
     {
@@ -1720,7 +1720,7 @@
       "provenance": {
         "installed_snapshot_sha256": "b793202910e027c085ebc818d9540bb9faecec187f495becfd15f4794156424f",
         "source_url": "https://github.com/xbtlin/ai-berkshire",
-        "source_note": "tools/add_repo_column.py 将这组金融技能映射到 ai-berkshire；inventory/skill-desc-translation.md 对此项记作“平台内置”。这里列出逐项规范源文件及当前引用版本、生成包匹配结果；不要把当前 HEAD 当作原始安装版本。",
+        "source_note": "tools/add_repo_column.py 将这组金融技能映射到 ai-berkshire；inventory/skills/descriptions-zh.md 对此项记作“平台内置”。这里列出逐项规范源文件及当前引用版本、生成包匹配结果；不要把当前 HEAD 当作原始安装版本。",
         "current_reference_repo_head_at_review": "fad8a0fae2f3ca8c99b572eb20bb74e4714ef266",
         "current_source_commit_at_review": "007fa338cca4f3a37df9174001f8921f56d48209 2026-04-10"
       }
@@ -1736,7 +1736,7 @@
       "provenance": {
         "installed_snapshot_sha256": "f2f7172117916213d4505dd9179ecbbd1f4436c429448a8e3f9fca86ff863278",
         "source_url": "https://github.com/xbtlin/ai-berkshire",
-        "source_note": "tools/add_repo_column.py 将这组金融技能映射到 ai-berkshire；inventory/skill-desc-translation.md 对此项记作“平台内置”。这里列出逐项规范源文件及当前引用版本、生成包匹配结果；不要把当前 HEAD 当作原始安装版本。",
+        "source_note": "tools/add_repo_column.py 将这组金融技能映射到 ai-berkshire；inventory/skills/descriptions-zh.md 对此项记作“平台内置”。这里列出逐项规范源文件及当前引用版本、生成包匹配结果；不要把当前 HEAD 当作原始安装版本。",
         "current_reference_repo_head_at_review": "fad8a0fae2f3ca8c99b572eb20bb74e4714ef266",
         "current_source_commit_at_review": "726d35d1acd8bbabb8111992a281bed49d0901b9 2026-07-18"
       }
@@ -1752,7 +1752,7 @@
       "provenance": {
         "installed_snapshot_sha256": "24f4347001e372d73906ccca72ab07f1a83d4f64faf3e87eef4e4fda1e93cfab",
         "source_url": "https://github.com/xbtlin/ai-berkshire",
-        "source_note": "tools/add_repo_column.py 将这组金融技能映射到 ai-berkshire；inventory/skill-desc-translation.md 对此项记作“平台内置”。这里列出逐项规范源文件及当前引用版本、生成包匹配结果；不要把当前 HEAD 当作原始安装版本。",
+        "source_note": "tools/add_repo_column.py 将这组金融技能映射到 ai-berkshire；inventory/skills/descriptions-zh.md 对此项记作“平台内置”。这里列出逐项规范源文件及当前引用版本、生成包匹配结果；不要把当前 HEAD 当作原始安装版本。",
         "current_reference_repo_head_at_review": "fad8a0fae2f3ca8c99b572eb20bb74e4714ef266",
         "current_source_commit_at_review": "9472222a86a6cf2b6bd0dc056c31a64e46cd8237 2026-07-04"
       }
@@ -1767,7 +1767,7 @@
       "prior_registry_origin": "third-party",
       "provenance": {
         "installed_snapshot_sha256": "eb2608e8ccad6ab1f514afbe6c3577e234c0d8000cb831d0cbb1569032b9ca84",
-        "source_note": "inventory/skill-desc-translation.md 将其列为 WorkBuddy/平台内置；未将其改称独立 GitHub 上游。",
+        "source_note": "inventory/skills/descriptions-zh.md 将其列为 WorkBuddy/平台内置；未将其改称独立 GitHub 上游。",
         "inventory_source_record": "WorkBuddy 内置 / 应用市场"
       }
     },
@@ -1781,7 +1781,7 @@
       "prior_registry_origin": "third-party",
       "provenance": {
         "installed_snapshot_sha256": "accdc6106eea72ab497345cd20dabcbd13fd5eac8dd61183a9a13b7cdab767ce",
-        "source_note": "inventory/skill-desc-translation.md 记录 GitHub companion-inc/feynman。",
+        "source_note": "inventory/skills/descriptions-zh.md 记录 GitHub companion-inc/feynman。",
         "inventory_source_record": "[github.com/companion-inc/feynman](https://github.com/companion-inc/feynman)"
       }
     },
@@ -1796,7 +1796,7 @@
       "provenance": {
         "installed_snapshot_sha256": "53f17f32ff2f73c3dbd3c333fda143d8e30cfd59682e47a3c5cf28806b78b373",
         "source_url": "https://github.com/xbtlin/ai-berkshire",
-        "source_note": "tools/add_repo_column.py 将这组金融技能映射到 ai-berkshire；inventory/skill-desc-translation.md 对此项记作“平台内置”。这里列出逐项规范源文件及当前引用版本、生成包匹配结果；不要把当前 HEAD 当作原始安装版本。",
+        "source_note": "tools/add_repo_column.py 将这组金融技能映射到 ai-berkshire；inventory/skills/descriptions-zh.md 对此项记作“平台内置”。这里列出逐项规范源文件及当前引用版本、生成包匹配结果；不要把当前 HEAD 当作原始安装版本。",
         "current_reference_repo_head_at_review": "fad8a0fae2f3ca8c99b572eb20bb74e4714ef266",
         "current_source_commit_at_review": "726d35d1acd8bbabb8111992a281bed49d0901b9 2026-07-18"
       }
@@ -1811,7 +1811,7 @@
       "prior_registry_origin": "third-party",
       "provenance": {
         "installed_snapshot_sha256": "cf0574391f0be8a5bd84e8163df9ab430c39a4d3a9c61b8b7e6f4f39c2a54e3a",
-        "source_note": "inventory/skill-desc-translation.md 记录 Anthropic 官方 skills 仓库。",
+        "source_note": "inventory/skills/descriptions-zh.md 记录 Anthropic 官方 skills 仓库。",
         "inventory_source_record": "[github.com/anthropics/skills](https://github.com/anthropics/skills)"
       }
     },
@@ -1885,7 +1885,7 @@
       "prior_registry_origin": "third-party",
       "provenance": {
         "installed_snapshot_sha256": "cf5705e0a600631dc98e925e9823e08aa2bf335b219c5d38d410a4035c70f5e3",
-        "source_note": "inventory/skill-desc-translation.md 记录 OpenAI 官方 skills 仓库。",
+        "source_note": "inventory/skills/descriptions-zh.md 记录 OpenAI 官方 skills 仓库。",
         "inventory_source_record": "[github.com/openai/skills](https://github.com/openai/skills)"
       }
     },
@@ -1912,7 +1912,7 @@
       "provenance": {
         "installed_snapshot_sha256": "68a1fc8a3916f90b442b90fea273810a86664345a81e733d2f071949a0e624e3",
         "source_url": "https://github.com/xbtlin/ai-berkshire",
-        "source_note": "tools/add_repo_column.py 将这组金融技能映射到 ai-berkshire；inventory/skill-desc-translation.md 对此项记作“平台内置”。这里列出逐项规范源文件及当前引用版本、生成包匹配结果；不要把当前 HEAD 当作原始安装版本。",
+        "source_note": "tools/add_repo_column.py 将这组金融技能映射到 ai-berkshire；inventory/skills/descriptions-zh.md 对此项记作“平台内置”。这里列出逐项规范源文件及当前引用版本、生成包匹配结果；不要把当前 HEAD 当作原始安装版本。",
         "current_reference_repo_head_at_review": "fad8a0fae2f3ca8c99b572eb20bb74e4714ef266",
         "current_source_commit_at_review": "9c7aad18b5d749155a561ea76280b4b1a7b1ebc7 2026-07-18"
       }
@@ -1928,7 +1928,7 @@
       "provenance": {
         "installed_snapshot_sha256": "83214becb7c4cea6adfc97626c4cf9f5232a2393f26959a2aae5383bc8582e06",
         "source_url": "https://github.com/xbtlin/ai-berkshire",
-        "source_note": "tools/add_repo_column.py 将这组金融技能映射到 ai-berkshire；inventory/skill-desc-translation.md 对此项记作“平台内置”。这里列出逐项规范源文件及当前引用版本、生成包匹配结果；不要把当前 HEAD 当作原始安装版本。",
+        "source_note": "tools/add_repo_column.py 将这组金融技能映射到 ai-berkshire；inventory/skills/descriptions-zh.md 对此项记作“平台内置”。这里列出逐项规范源文件及当前引用版本、生成包匹配结果；不要把当前 HEAD 当作原始安装版本。",
         "current_reference_repo_head_at_review": "fad8a0fae2f3ca8c99b572eb20bb74e4714ef266",
         "current_source_commit_at_review": "9472222a86a6cf2b6bd0dc056c31a64e46cd8237 2026-07-04"
       }
@@ -1944,7 +1944,7 @@
       "provenance": {
         "installed_snapshot_sha256": "e99037b725a420dffac1e44dadb021accac619d91707e7b0c247f9943dfb4776",
         "source_url": "https://github.com/xbtlin/ai-berkshire",
-        "source_note": "tools/add_repo_column.py 将这组金融技能映射到 ai-berkshire；inventory/skill-desc-translation.md 对此项记作“平台内置”。这里列出逐项规范源文件及当前引用版本、生成包匹配结果；不要把当前 HEAD 当作原始安装版本。",
+        "source_note": "tools/add_repo_column.py 将这组金融技能映射到 ai-berkshire；inventory/skills/descriptions-zh.md 对此项记作“平台内置”。这里列出逐项规范源文件及当前引用版本、生成包匹配结果；不要把当前 HEAD 当作原始安装版本。",
         "current_reference_repo_head_at_review": "fad8a0fae2f3ca8c99b572eb20bb74e4714ef266",
         "current_source_commit_at_review": "9472222a86a6cf2b6bd0dc056c31a64e46cd8237 2026-07-04"
       }
@@ -1960,7 +1960,7 @@
       "provenance": {
         "installed_snapshot_sha256": "0107a64269696dc49a9b985484e369aa42694f81e3e1cd9d2be4827954e0ea20",
         "source_url": "https://github.com/xbtlin/ai-berkshire",
-        "source_note": "tools/add_repo_column.py 将这组金融技能映射到 ai-berkshire；inventory/skill-desc-translation.md 对此项记作“平台内置”。这里列出逐项规范源文件及当前引用版本、生成包匹配结果；不要把当前 HEAD 当作原始安装版本。",
+        "source_note": "tools/add_repo_column.py 将这组金融技能映射到 ai-berkshire；inventory/skills/descriptions-zh.md 对此项记作“平台内置”。这里列出逐项规范源文件及当前引用版本、生成包匹配结果；不要把当前 HEAD 当作原始安装版本。",
         "current_reference_repo_head_at_review": "fad8a0fae2f3ca8c99b572eb20bb74e4714ef266",
         "current_source_commit_at_review": "9472222a86a6cf2b6bd0dc056c31a64e46cd8237 2026-07-04"
       }
@@ -1990,7 +1990,7 @@
       "provenance": {
         "installed_snapshot_sha256": "8196fb63d11c95dcc26f2059895605bcd5960ff9569db5a3ae22933be27b1e5d",
         "source_url": "https://github.com/xbtlin/ai-berkshire",
-        "source_note": "tools/add_repo_column.py 将这组金融技能映射到 ai-berkshire；inventory/skill-desc-translation.md 对此项记作“平台内置”。这里列出逐项规范源文件及当前引用版本、生成包匹配结果；不要把当前 HEAD 当作原始安装版本。",
+        "source_note": "tools/add_repo_column.py 将这组金融技能映射到 ai-berkshire；inventory/skills/descriptions-zh.md 对此项记作“平台内置”。这里列出逐项规范源文件及当前引用版本、生成包匹配结果；不要把当前 HEAD 当作原始安装版本。",
         "current_reference_repo_head_at_review": "fad8a0fae2f3ca8c99b572eb20bb74e4714ef266",
         "current_source_commit_at_review": "8ab676f18cc0272e4c4f8ba4c7d608ea6c11629f 2026-08-17"
       }
@@ -2006,7 +2006,7 @@
       "provenance": {
         "installed_snapshot_sha256": "0089cbd0e1c54f72c74a66d2be5612a462f7241d369dc29b759f9c3fd3e63de2",
         "source_url": "https://github.com/xbtlin/ai-berkshire",
-        "source_note": "tools/add_repo_column.py 将这组金融技能映射到 ai-berkshire；inventory/skill-desc-translation.md 对此项记作“平台内置”。这里列出逐项规范源文件及当前引用版本、生成包匹配结果；不要把当前 HEAD 当作原始安装版本。",
+        "source_note": "tools/add_repo_column.py 将这组金融技能映射到 ai-berkshire；inventory/skills/descriptions-zh.md 对此项记作“平台内置”。这里列出逐项规范源文件及当前引用版本、生成包匹配结果；不要把当前 HEAD 当作原始安装版本。",
         "current_reference_repo_head_at_review": "fad8a0fae2f3ca8c99b572eb20bb74e4714ef266",
         "current_source_commit_at_review": "726d35d1acd8bbabb8111992a281bed49d0901b9 2026-07-18"
       }
@@ -2539,7 +2539,7 @@
       "provenance": {
         "installed_snapshot_sha256": "405c3e1858b0153b06b6105060e845339ee334065bde5032610c4f381fd37bfd",
         "source_url": "https://github.com/xbtlin/ai-berkshire",
-        "source_note": "tools/add_repo_column.py 将这组金融技能映射到 ai-berkshire；inventory/skill-desc-translation.md 对此项记作“平台内置”。这里列出逐项规范源文件及当前引用版本、生成包匹配结果；不要把当前 HEAD 当作原始安装版本。",
+        "source_note": "tools/add_repo_column.py 将这组金融技能映射到 ai-berkshire；inventory/skills/descriptions-zh.md 对此项记作“平台内置”。这里列出逐项规范源文件及当前引用版本、生成包匹配结果；不要把当前 HEAD 当作原始安装版本。",
         "current_reference_repo_head_at_review": "fad8a0fae2f3ca8c99b572eb20bb74e4714ef266",
         "current_source_commit_at_review": "ef1711332940541349dea4f32165c7cc50b628f9 2026-04-09"
       }
@@ -2568,7 +2568,7 @@
       "provenance": {
         "installed_snapshot_sha256": "1db367b7b8054af6f400134a2924206be5c35a016c124f6657ed63dd70cf6bf8",
         "source_url": "https://github.com/xbtlin/ai-berkshire",
-        "source_note": "tools/add_repo_column.py 将这组金融技能映射到 ai-berkshire；inventory/skill-desc-translation.md 对此项记作“平台内置”。这里列出逐项规范源文件及当前引用版本、生成包匹配结果；不要把当前 HEAD 当作原始安装版本。",
+        "source_note": "tools/add_repo_column.py 将这组金融技能映射到 ai-berkshire；inventory/skills/descriptions-zh.md 对此项记作“平台内置”。这里列出逐项规范源文件及当前引用版本、生成包匹配结果；不要把当前 HEAD 当作原始安装版本。",
         "current_reference_repo_head_at_review": "fad8a0fae2f3ca8c99b572eb20bb74e4714ef266",
         "current_source_commit_at_review": "9472222a86a6cf2b6bd0dc056c31a64e46cd8237 2026-07-04"
       }
@@ -2583,7 +2583,7 @@
       "prior_registry_origin": "third-party",
       "provenance": {
         "installed_snapshot_sha256": "1e1e6edb5b5bc47a2c364b8ee4028a7d8f67b598421c80c21b032f9a54a4ca99",
-        "source_note": "inventory/skill-desc-translation.md 将其列为 WorkBuddy/平台内置；未将其改称独立 GitHub 上游。"
+        "source_note": "inventory/skills/descriptions-zh.md 将其列为 WorkBuddy/平台内置；未将其改称独立 GitHub 上游。"
       }
     },
     {
@@ -2597,7 +2597,7 @@
       "provenance": {
         "installed_snapshot_sha256": "06a2d8e02e14b66d586605b4190e710d86b2336b7a8e41896975c1383e1bee86",
         "source_url": "https://github.com/xbtlin/ai-berkshire",
-        "source_note": "tools/add_repo_column.py 将这组金融技能映射到 ai-berkshire；inventory/skill-desc-translation.md 对此项记作“平台内置”。这里列出逐项规范源文件及当前引用版本、生成包匹配结果；不要把当前 HEAD 当作原始安装版本。",
+        "source_note": "tools/add_repo_column.py 将这组金融技能映射到 ai-berkshire；inventory/skills/descriptions-zh.md 对此项记作“平台内置”。这里列出逐项规范源文件及当前引用版本、生成包匹配结果；不要把当前 HEAD 当作原始安装版本。",
         "current_reference_repo_head_at_review": "fad8a0fae2f3ca8c99b572eb20bb74e4714ef266",
         "current_source_commit_at_review": "ef1711332940541349dea4f32165c7cc50b628f9 2026-04-09"
       }
@@ -2613,7 +2613,7 @@
       "provenance": {
         "installed_snapshot_sha256": "9a83cf578a8a2c3fb64a0b496fe2962c0e865968ba9ead7900284c2f408ed143",
         "source_url": "https://github.com/xbtlin/ai-berkshire",
-        "source_note": "tools/add_repo_column.py 将这组金融技能映射到 ai-berkshire；inventory/skill-desc-translation.md 对此项记作“平台内置”。这里列出逐项规范源文件及当前引用版本、生成包匹配结果；不要把当前 HEAD 当作原始安装版本。",
+        "source_note": "tools/add_repo_column.py 将这组金融技能映射到 ai-berkshire；inventory/skills/descriptions-zh.md 对此项记作“平台内置”。这里列出逐项规范源文件及当前引用版本、生成包匹配结果；不要把当前 HEAD 当作原始安装版本。",
         "current_reference_repo_head_at_review": "fad8a0fae2f3ca8c99b572eb20bb74e4714ef266",
         "current_source_commit_at_review": "cd127bcbe79fdf53800afb5f38a5c0efac2d6379 2026-05-11"
       }
@@ -2629,7 +2629,7 @@
       "provenance": {
         "installed_snapshot_sha256": "88bb6acfbd396a6d310b977ad42531d4911393a40c938164991ae0c42f45ac4e",
         "source_url": "https://github.com/xbtlin/ai-berkshire",
-        "source_note": "tools/add_repo_column.py 将这组金融技能映射到 ai-berkshire；inventory/skill-desc-translation.md 对此项记作“平台内置”。这里列出逐项规范源文件及当前引用版本、生成包匹配结果；不要把当前 HEAD 当作原始安装版本。",
+        "source_note": "tools/add_repo_column.py 将这组金融技能映射到 ai-berkshire；inventory/skills/descriptions-zh.md 对此项记作“平台内置”。这里列出逐项规范源文件及当前引用版本、生成包匹配结果；不要把当前 HEAD 当作原始安装版本。",
         "current_reference_repo_head_at_review": "fad8a0fae2f3ca8c99b572eb20bb74e4714ef266",
         "current_source_commit_at_review": "4dcafafbfb2d0d7b533a150b773c161ca0479327 2026-05-17"
       }
@@ -2644,7 +2644,7 @@
       "prior_registry_origin": "third-party",
       "provenance": {
         "installed_snapshot_sha256": "84ee3a68fac8e38f2a62471c16490e43b1a1f216ad1d1e6adeab3981bb57ab34",
-        "source_note": "inventory/skill-desc-translation.md 将其列为 WorkBuddy/平台内置；未将其改称独立 GitHub 上游。"
+        "source_note": "inventory/skills/descriptions-zh.md 将其列为 WorkBuddy/平台内置；未将其改称独立 GitHub 上游。"
       }
     },
     {
@@ -2657,7 +2657,7 @@
       "prior_registry_origin": "third-party",
       "provenance": {
         "installed_snapshot_sha256": "fbb7d388cd9bec623156cd9b6e54ef1081a389e64e5f3bf991b030efc27c91f5",
-        "source_note": "inventory/skill-desc-translation.md 记录 akillness/jeo-skills；当前包作为兼容别名。",
+        "source_note": "inventory/skills/descriptions-zh.md 记录 akillness/jeo-skills；当前包作为兼容别名。",
         "inventory_source_record": "[github.com/akillness/jeo-skills](https://github.com/akillness/jeo-skills)"
       }
     },
@@ -2671,7 +2671,7 @@
       "prior_registry_origin": "third-party",
       "provenance": {
         "installed_snapshot_sha256": "b6359ec78b9713f82d625123e63e0fdb527dfa40b529b4e95ef9ce3d341c3626",
-        "source_note": "inventory/skill-desc-translation.md 记录 shreefentsar/remotion-video-toolkit。",
+        "source_note": "inventory/skills/descriptions-zh.md 记录 shreefentsar/remotion-video-toolkit。",
         "inventory_source_record": "[github.com/shreefentsar/remotion-video-toolkit](https://github.com/shreefentsar/remotion-video-toolkit)"
       }
     },
@@ -2785,7 +2785,7 @@
       "provenance": {
         "installed_snapshot_sha256": "fca243739db6a27f01b95fa8d5d49951a8ffebd3a87003f71f2bcc64146026af",
         "source_url": "https://github.com/xbtlin/ai-berkshire",
-        "source_note": "tools/add_repo_column.py 将这组金融技能映射到 ai-berkshire；inventory/skill-desc-translation.md 对此项记作“平台内置”。这里列出逐项规范源文件及当前引用版本、生成包匹配结果；不要把当前 HEAD 当作原始安装版本。",
+        "source_note": "tools/add_repo_column.py 将这组金融技能映射到 ai-berkshire；inventory/skills/descriptions-zh.md 对此项记作“平台内置”。这里列出逐项规范源文件及当前引用版本、生成包匹配结果；不要把当前 HEAD 当作原始安装版本。",
         "current_reference_repo_head_at_review": "fad8a0fae2f3ca8c99b572eb20bb74e4714ef266",
         "current_source_commit_at_review": "05c66b87d298c80128e9c22ca7cab7cef7610603 2026-07-04"
       }
@@ -2801,7 +2801,7 @@
       "provenance": {
         "installed_snapshot_sha256": "d2e416aaad1651239e50ddc811cc0b689a4f952cf759257ce3b75c4f4cfdff99",
         "source_url": "https://github.com/xbtlin/ai-berkshire",
-        "source_note": "tools/add_repo_column.py 将这组金融技能映射到 ai-berkshire；inventory/skill-desc-translation.md 对此项记作“平台内置”。这里列出逐项规范源文件及当前引用版本、生成包匹配结果；不要把当前 HEAD 当作原始安装版本。",
+        "source_note": "tools/add_repo_column.py 将这组金融技能映射到 ai-berkshire；inventory/skills/descriptions-zh.md 对此项记作“平台内置”。这里列出逐项规范源文件及当前引用版本、生成包匹配结果；不要把当前 HEAD 当作原始安装版本。",
         "current_reference_repo_head_at_review": "fad8a0fae2f3ca8c99b572eb20bb74e4714ef266",
         "current_source_commit_at_review": "ef1711332940541349dea4f32165c7cc50b628f9 2026-04-09"
       }
@@ -2857,7 +2857,7 @@
       "prior_registry_origin": "third-party",
       "provenance": {
         "installed_snapshot_sha256": "8aa32e8b8c9b2ef1afebd74c7246cf208f02e07ff1d3c29123febd450b813b36",
-        "source_note": "inventory/skill-desc-translation.md 记录 jmagly/aiwg。",
+        "source_note": "inventory/skills/descriptions-zh.md 记录 jmagly/aiwg。",
         "inventory_source_record": "[github.com/jmagly/aiwg](https://github.com/jmagly/aiwg)"
       }
     },

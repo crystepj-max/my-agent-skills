@@ -7,7 +7,7 @@
   识别数据行，按「单元格数 - 1」定位最后一列（最新更新），与具体列数无关。
 - 非表格行（标题、前言、表头、分隔符、元数据章节、合计、说明）一律原样保留。
 
-读取 inventory/skill-desc-translation.md，按「仓库链接 / 来源」列（名称列之后的第 2 格）
+读取 inventory/skills/descriptions-zh.md，按「仓库链接 / 来源」列（名称列之后的第 2 格）
 重新拉取 GitHub 仓库 pushed_at，仅重写最后一列后写回同一文件。
 无公开仓库（平台内置 / 市场 skill）标记为「平台内置」。
 
@@ -18,7 +18,7 @@ import os, re, subprocess, json
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(HERE)
-INV = os.path.join(REPO, "inventory", "skill-desc-translation.md")
+INV = os.path.join(REPO, "inventory", "skills", "descriptions-zh.md")
 
 # 匹配任意列数的数据行：首列数字、次列 `name`、其后为单元格，最后以 `|` 结尾。
 # 组1=序号，组2=名称，组3=名称之后的全部内容（含各单元格与末尾 `|`）。
