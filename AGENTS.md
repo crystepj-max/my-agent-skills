@@ -18,5 +18,5 @@
 - 发布前先 `git fetch origin`；远端有他人提交时 `git pull --rebase origin main` 再推，冲突逐条人工判定，不强推 main（除清理自身探测提交）。
 - `scripts/sync.sh` 在无暂存内容时静默 `exit 0`（不报错、不推送）。若提交后 `git status -sb` 仍显示 `[ahead N]`，说明推送未发生，需手动 `git push origin HEAD:main` 复核。
 - CNB 镜像为单向 GitHub → CNB（`.github/workflows/mirror-cnb.yml`，`on: push` 触发、`contents: read`、推 `cnb.cool/chris.ai/my-agent-skills`），**不受 GitHub 分支保护约束**，是异步的；推送后需 `git fetch cnb` 核对两端 sha 一致，镜像落后 1～2 个提交属正常。
-- 临时验证分支用完必须删除：`gh pr merge --delete-branch` **不会**删除远端分支（实测失效），须显式 `git push origin --delete <branch>`，再 `git remote prune origin` 清本地过期追踪引用。若探测提交已进 main，需 force-with-lease 回退并**同步修正 CNB 镜像**（镜像在 GitHub 侧已触发过，会快进到错误状态）。
+- 临时验证分支用完必须删除：`gh pr merge --delete-branch` 在 gh 2.100.0（2026-10-17 实测）**会**删除远端分支——2026-10-06 记录的「不会删除」已不成立，按版本差异处理，不要把它当作既定事实。合并后仍用 `git ls-remote --heads origin <branch>` 复核：确有残留才需要 `git push origin --delete <branch>`，最后 `git remote prune origin` 清本地过期追踪引用。若探测提交已进 main，需 force-with-lease 回退并**同步修正 CNB 镜像**（镜像在 GitHub 侧已触发过，会快进到错误状态）。
 - 规则集查询用 `gh api repos/<owner>/<repo>/rulesets/<id> --jq ...`；直接对 `.../rulesets` 列表用 `[.rules[].type]` 会因列表项无 `rules` 字段而报 `cannot iterate over: null`，须逐条取。
