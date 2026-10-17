@@ -4,6 +4,7 @@
 
 | 日期 | 项目结构与治理 | Skill 修订/迁移 | 依据/证据 |
 |---|---|---|---|
+| 2026-10-17 | 将此前暂缓的 5 项登记为 `first-party/global/active`，并为每项保留一份带指纹的原版只读 reference；维护源与旧参考分开恢复。 | 修订并纳入 `improve-codebase-architecture`、`prototype`、`pr`、`retro`、`setup-pre-commit` 五个完整包；架构审阅默认给出有证据的设计建议，仅按明确实施请求进入实现。 | 五项维护源、原版 SHA-256 与本轮策略/来源记录；四项已审阅提交 `af24122`、`4acfdfa`、`02ef22c`、`651f9ac`。 |
 | 2026-10-17 | 人读目录重整：总表改名为 `skills-summary.md`；中文描述、来源档案、重要修订拆到 `inventory/skills/`，总表从机器 JSON 生成。 | 来源登记版式优化，并补录此前可查的结构与 Skill 更新里程碑。 | 本轮目录与文档修订 |
 | 2026-10-16 | 扩大项目级维护范围，登记演示、金融、Gawain/AUTOTEST 来源并保留原件参考；3 项退役、5 项本机待讨论技能留在发布范围之外。 | 内化及调整多项第一方 Skill；新增 `chatgpt-web-bridge`；13 项演示技能与 20 项金融技能迁入各自项目范围，`test-report-html` 同时映射到 Gawain 与 AUTOTEST。 | `0719846`、`498e011`、`5d1df54` |
 | 2026-10-15 | 细化第一方 Skill 治理规则和定点修正。 | 修订 `agent-skill-bridge`、`leader` 及多项第一方 Skills；新增 DSH 升级/访问恢复和工作区收敛能力。 | `4dd008c`、`dd01b57` |

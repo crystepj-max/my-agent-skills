@@ -14,11 +14,11 @@
 
 ## 登记概况
 
-共 **137** 项：第一方维护 **122** 项，第三方来源 **15** 项。
+共 **142** 项：第一方维护 **127** 项，第三方来源 **15** 项。
 
 | 状态 | 数量 |
 |---|---:|
-| 启用 | 116 |
+| 启用 | 121 |
 | 迁移中 | 1 |
 | 仅参考 | 12 |
 | 已退役 | 8 |
@@ -26,7 +26,7 @@
 | 使用范围 | 数量 |
 |---|---:|
 | `gawain` | 2 |
-| `global` | 95 |
+| `global` | 100 |
 | `investments` | 20 |
 | `presentations` | 20 |
 
@@ -85,6 +85,7 @@
 | `humanize-ppt` | 第三方来源 | 仅参考 | `presentations` | `project:presentations/.agent-assets/presentations/humanize-ppt` | [描述](skills/descriptions-zh.md) | [来源](skills/provenance.md) |
 | `implement` | 第三方来源 | 仅参考 | `global` | `~/.local/share/agent-skills/reference/implement` | [描述](skills/descriptions-zh.md) | [来源](skills/provenance.md) |
 | `implement-spec` | 第一方维护 | 启用 | `global` | `my-skills/implement-spec` | [描述](skills/descriptions-zh.md) | [来源](skills/provenance.md) |
+| `improve-codebase-architecture` | 第一方维护 | 启用 | `global` | `my-skills/improve-codebase-architecture` | [描述](skills/descriptions-zh.md) | [来源](skills/provenance.md) |
 | `income-investment` | 第一方维护 | 启用 | `investments` | `project:investments/codex-skills/income-investment` | [描述](skills/descriptions-zh.md) | [来源](skills/provenance.md) |
 | `industry-funnel` | 第一方维护 | 启用 | `investments` | `project:investments/codex-skills/industry-funnel` | [描述](skills/descriptions-zh.md) | [来源](skills/provenance.md) |
 | `industry-research` | 第一方维护 | 启用 | `investments` | `project:investments/codex-skills/industry-research` | [描述](skills/descriptions-zh.md) | [来源](skills/provenance.md) |
@@ -131,8 +132,10 @@
 | `obsidian-vault` | 第一方维护 | 启用 | `presentations` | `project:presentations/.agents/skills/obsidian-vault` | [描述](skills/descriptions-zh.md) | [来源](skills/provenance.md) |
 | `portfolio-review` | 第一方维护 | 启用 | `investments` | `project:investments/codex-skills/portfolio-review` | [描述](skills/descriptions-zh.md) | [来源](skills/provenance.md) |
 | `ppt-master` | 第三方来源 | 仅参考 | `presentations` | `project:presentations/.agent-assets/presentations/ppt-master` | [描述](skills/descriptions-zh.md) | [来源](skills/provenance.md) |
+| `pr` | 第一方维护 | 启用 | `global` | `my-skills/pr` | [描述](skills/descriptions-zh.md) | [来源](skills/provenance.md) |
 | `presentation-production` | 第一方维护 | 启用 | `presentations` | `my-skills/presentation-production` | [描述](skills/descriptions-zh.md) | [来源](skills/provenance.md) |
 | `private-company-research` | 第一方维护 | 启用 | `investments` | `project:investments/codex-skills/private-company-research` | [描述](skills/descriptions-zh.md) | [来源](skills/provenance.md) |
+| `prototype` | 第一方维护 | 启用 | `global` | `my-skills/prototype` | [描述](skills/descriptions-zh.md) | [来源](skills/provenance.md) |
 | `quality-screen` | 第一方维护 | 启用 | `investments` | `project:investments/codex-skills/quality-screen` | [描述](skills/descriptions-zh.md) | [来源](skills/provenance.md) |
 | `remotion-best-practices` | 第一方维护 | 启用 | `presentations` | `project:presentations/.agents/skills/remotion-best-practices` | [描述](skills/descriptions-zh.md) | [来源](skills/provenance.md) |
 | `remotion-video-production` | 第一方维护 | 启用 | `presentations` | `project:presentations/.agents/skills/remotion-video-production` | [描述](skills/descriptions-zh.md) | [来源](skills/provenance.md) |
@@ -140,8 +143,10 @@
 | `requirements-analysis.bak-20260905-224705` | 第三方来源 | 已退役 | `global` | `~/.local/share/agent-skills/retired/requirements-analysis.bak-20260905-224705` | [描述](skills/descriptions-zh.md) | [来源](skills/provenance.md) |
 | `research` | 第一方维护 | 启用 | `global` | `my-skills/research` | [描述](skills/descriptions-zh.md) | [来源](skills/provenance.md) |
 | `resolving-merge-conflicts` | 第三方来源 | 已退役 | `global` | `~/.local/share/agent-skills/retired/resolving-merge-conflicts` | [描述](skills/descriptions-zh.md) | [来源](skills/provenance.md) |
+| `retro` | 第一方维护 | 启用 | `global` | `my-skills/retro` | [描述](skills/descriptions-zh.md) | [来源](skills/provenance.md) |
 | `scaffold-exercises` | 第一方维护 | 启用 | `global` | `my-skills/scaffold-exercises` | [描述](skills/descriptions-zh.md) | [来源](skills/provenance.md) |
 | `setup-matt-pocock-skills` | 第一方维护 | 启用 | `global` | `my-skills/setup-matt-pocock-skills` | [描述](skills/descriptions-zh.md) | [来源](skills/provenance.md) |
+| `setup-pre-commit` | 第一方维护 | 启用 | `global` | `my-skills/setup-pre-commit` | [描述](skills/descriptions-zh.md) | [来源](skills/provenance.md) |
 | `skill-creator` | 第三方来源 | 仅参考 | `global` | `~/.local/share/agent-skills/references/skill-creator` | [描述](skills/descriptions-zh.md) | [来源](skills/provenance.md) |
 | `skill-workbench` | 第一方维护 | 启用 | `global` | `my-skills/skill-workbench` | [描述](skills/descriptions-zh.md) | [来源](skills/provenance.md) |
 | `skills-security-check` | 第一方维护 | 启用 | `global` | `my-skills/skills-security-check` | [描述](skills/descriptions-zh.md) | [来源](skills/provenance.md) |

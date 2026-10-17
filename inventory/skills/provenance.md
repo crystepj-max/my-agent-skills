@@ -12,7 +12,7 @@
 更新上游时，将快照保存在技能发现目录之外，以 commit 固定版本；再用 `tools/compare_skill_reference.py` 输出只读差异。比较报告须保留快照路径、上游 commit、日期和报告日期。此流程只用于检查，不自动把上游内容覆盖到维护源。
 
 ## 技能来源与日期登记
-> 本节覆盖策略中 122 项第一方技能。按字母分组，来源结论与维护路径、日期记录分开查阅。`first-party` 表示当前维护责任，不等于原创声明；“未记录”表示现有材料无法证明日期。
+> 本节保留原 122 项第一方技能的来源/日期档案；当前 127 个维护源及新增 5 项的来源映射见后文。按字母分组，来源结论与维护路径、日期记录分开查阅。`first-party` 表示当前维护责任，不等于原创声明；“未记录”表示现有材料无法证明日期。
 
 ### 来源与维护路径
 
@@ -314,9 +314,9 @@
 
 ## 当前第一方维护源与原件参考映射
 
-本表保留已登记维护来源、范围与原件参考线索；当前状态以正式策略和 [Skills 总览](../skills-summary.md) 为准。历史来源/能力表反映当时公共池记录，不作为现行分发状态。5 项本机待讨论技能仅公开名称并标为不分发，不附包内容或可下载来源。
+本表保留已登记维护来源、范围与原件参考线索；当前状态以正式策略和 [Skills 总览](../skills-summary.md) 为准。历史来源/能力表反映当时公共池记录，不作为现行分发状态。此前暂缓的 5 项现已作为第一方维护源登记；各自旧安装快照另存为只读 reference，不作为执行入口。
 
-「正式维护源」和「原件参考」是不同路径：维护源由正式登记表确定，不等同于原作者/原创声明；原安装快照仅用于历史保留和只读比较，不作为现行入口。上游列只呈现可追溯的来源线索；有来源冲突或未确认时按说明保留，不补造作者和仓库。本轮正式策略 `reference_copies` 共 100 条：基于 142 行接受基线的 102 条，排除 5 项本机待讨论项，并保留 main 新增的 3 项 DSH/workspace 参考记录。本轮正式 `apply`、`check` 与重复检查通过；独立入口核验及 64 项管理测试通过。100 项参考副本已通过两个恢复入口分别核验，均为 100/100 完整指纹匹配（离线包 SHA-256：`410ebcee70e2cbe53007f4af7c756dfb5d008225681535b90a964bdeb76b94de`）；旧 102 项恢复验证仅适用于旧策略快照，不能替代。新会话可见性、创作/投研/游戏业务行为、Windows 恢复与用户验收仍未验证。
+「正式维护源」和「原件参考」是不同路径：维护源由正式登记表确定，不等同于原作者/原创声明；原安装快照仅用于历史保留和只读比较，不作为现行入口。上游列只呈现可追溯的来源线索；有来源冲突或未确认时按说明保留，不补造作者和仓库。远端 `main` 的基线为 137 项策略与 100 条 reference；本候选新增 5 项 `first-party/global/active` 登记及 5 条原版 reference，合计 142 项与 105 条，原 137 条登记和 100 条 reference 均保留。候选恢复与入口验证只在隔离临时 HOME 中进行；没有对真实 HOME 执行 `apply`。新会话可见性、真实业务行为、Windows 恢复与用户验收仍未验证。
 
 | Skill | 正式维护源 | 范围 | 原安装快照（来源 → 参考保存位置） | 登记上游/来源线索 |
 |---|---|---|---|---|
@@ -347,7 +347,7 @@
 | `handoff` | `my-skills/handoff` | 用户级（global） | installed-snapshot: `~/.agents/skills/handoff` → `~/.local/share/agent-skills/references/handoff` | 旧来源表线索：[仓库/来源](https://github.com/mattpocock/skills)（历史归属，非作者结论） |
 | `hatch-pet` | `project:presentations/.agents/skills/hatch-pet` | Chris-Vault 项目（presentations） | installed-snapshot: `~/.agents/skills/hatch-pet` → `~/.local/share/agent-skills/references/hatch-pet` | 历史来源清单：[github.com/openai/skills](https://github.com/openai/skills)；inventory/skills/descriptions-zh.md 记录 OpenAI 官方 skills 仓库。 |
 | `implement-spec` | `my-skills/implement-spec` | 用户级（global） | installed-snapshot: `~/.agents/skills/implement-spec` → `~/.local/share/agent-skills/references/implement-spec` | [登记来源链接](https://github.com/mattpocock/skills/tree/main/skills/engineering/implement-spec) |
-| `improve-codebase-architecture` | 本机待讨论（不分发） | 本机保留；不进入本次策略/参考副本/离线包 | 本机保留；不纳入本次 reference_copies | 本机待讨论；不公开包内容或来源。 |
+| `improve-codebase-architecture` | `my-skills/improve-codebase-architecture` | 用户级（global） | installed-snapshot: `~/.agents/skills/improve-codebase-architecture` → `~/.local/share/agent-skills/references/improve-codebase-architecture` | 旧登记为第三方；具体上游未确证，不据此推断作者或原创来源。 |
 | `income-investment` | `project:investments/codex-skills/income-investment` | ai-valueinvest 项目（investments） | installed-snapshot: `~/.agents/skills/income-investment` → `~/.local/share/agent-skills/references/income-investment` | [登记来源链接](https://github.com/xbtlin/ai-berkshire) |
 | `industry-funnel` | `project:investments/codex-skills/industry-funnel` | ai-valueinvest 项目（investments） | installed-snapshot: `~/.agents/skills/industry-funnel` → `~/.local/share/agent-skills/references/industry-funnel` | [登记来源链接](https://github.com/xbtlin/ai-berkshire) |
 | `industry-research` | `project:investments/codex-skills/industry-research` | ai-valueinvest 项目（investments） | installed-snapshot: `~/.agents/skills/industry-research` → `~/.local/share/agent-skills/references/industry-research` | [登记来源链接](https://github.com/xbtlin/ai-berkshire) |
@@ -389,18 +389,18 @@
 | `news-pulse` | `project:investments/codex-skills/news-pulse` | ai-valueinvest 项目（investments） | installed-snapshot: `~/.agents/skills/news-pulse` → `~/.local/share/agent-skills/references/news-pulse` | [登记来源链接](https://github.com/xbtlin/ai-berkshire) |
 | `obsidian-vault` | `project:presentations/.agents/skills/obsidian-vault` | Chris-Vault 项目（presentations） | installed-snapshot: `~/.agents/skills/obsidian-vault` → `~/.local/share/agent-skills/references/obsidian-vault` | 未确证独立上游；inventory/skills/descriptions-zh.md 将其列为 WorkBuddy/平台内置；未将其改称独立 GitHub 上游。 |
 | `portfolio-review` | `project:investments/codex-skills/portfolio-review` | ai-valueinvest 项目（investments） | installed-snapshot: `~/.agents/skills/portfolio-review` → `~/.local/share/agent-skills/references/portfolio-review` | [登记来源链接](https://github.com/xbtlin/ai-berkshire) |
-| `pr` | 本机待讨论（不分发） | 本机保留；不进入本次策略/参考副本/离线包 | 本机保留；不纳入本次 reference_copies | 本机待讨论；不公开包内容或来源。 |
+| `pr` | `my-skills/pr` | 用户级（global） | installed-snapshot: `~/.agents/skills/pr` → `~/.local/share/agent-skills/references/pr` | 历史上游线索：[mattpocock/skills · engineering/pr](https://github.com/mattpocock/skills/tree/main/skills/engineering/pr)；可视化内容另注明 Dex Horthy / Humanlayer `show-me`，见 `my-skills/pr/CREDITS.md`。 |
 | `private-company-research` | `project:investments/codex-skills/private-company-research` | ai-valueinvest 项目（investments） | installed-snapshot: `~/.agents/skills/private-company-research` → `~/.local/share/agent-skills/references/private-company-research` | [登记来源链接](https://github.com/xbtlin/ai-berkshire) |
-| `prototype` | 本机待讨论（不分发） | 本机保留；不进入本次策略/参考副本/离线包 | 本机保留；不纳入本次 reference_copies | 本机待讨论；不公开包内容或来源。 |
+| `prototype` | `my-skills/prototype` | 用户级（global） | installed-snapshot: `~/.agents/skills/prototype` → `~/.local/share/agent-skills/references/prototype` | 旧登记为第三方，但未找到可确认的上游或作者；第一方维护不等同于原创声明。 |
 | `quality-screen` | `project:investments/codex-skills/quality-screen` | ai-valueinvest 项目（investments） | installed-snapshot: `~/.agents/skills/quality-screen` → `~/.local/share/agent-skills/references/quality-screen` | [登记来源链接](https://github.com/xbtlin/ai-berkshire) |
 | `remotion-best-practices` | `project:presentations/.agents/skills/remotion-best-practices` | Chris-Vault 项目（presentations） | installed-snapshot: `~/.agents/skills/remotion-best-practices` → `~/.local/share/agent-skills/references/remotion-best-practices` | 未确证独立上游；inventory/skills/descriptions-zh.md 将其列为 WorkBuddy/平台内置；未将其改称独立 GitHub 上游。 |
 | `remotion-video-production` | `project:presentations/.agents/skills/remotion-video-production` | Chris-Vault 项目（presentations） | installed-snapshot: `~/.agents/skills/remotion-video-production` → `~/.local/share/agent-skills/references/remotion-video-production` | 历史来源清单：[github.com/akillness/jeo-skills](https://github.com/akillness/jeo-skills)；inventory/skills/descriptions-zh.md 记录 akillness/jeo-skills；当前包作为兼容别名。 |
 | `remotion-video-toolkit` | `project:presentations/.agents/skills/remotion-video-toolkit` | Chris-Vault 项目（presentations） | installed-snapshot: `~/.agents/skills/remotion-video-toolkit` → `~/.local/share/agent-skills/references/remotion-video-toolkit` | 历史来源清单：[github.com/shreefentsar/remotion-video-toolkit](https://github.com/shreefentsar/remotion-video-toolkit)；inventory/skills/descriptions-zh.md 记录 shreefentsar/remotion-video-toolkit。 |
 | `research` | `my-skills/research` | 用户级（global） | installed-snapshot: `~/.agents/skills/research` → `~/.local/share/agent-skills/references/research` | 原始上游未确证；不推断作者或仓库 |
-| `retro` | 本机待讨论（不分发） | 本机保留；不进入本次策略/参考副本/离线包 | 本机保留；不纳入本次 reference_copies | 本机待讨论；不公开包内容或来源。 |
+| `retro` | `my-skills/retro` | 用户级（global） | installed-snapshot: `~/.agents/skills/retro` → `~/.local/share/agent-skills/references/retro` | 历史上游线索：[mattpocock/skills · engineering/retro](https://github.com/mattpocock/skills/tree/main/skills/engineering/retro)；固定 commit 与获取日期未登记。 |
 | `scaffold-exercises` | `my-skills/scaffold-exercises` | 用户级（global） | installed-snapshot: `~/.agents/skills/scaffold-exercises` → `~/.local/share/agent-skills/references/scaffold-exercises` | 未确证独立上游；不补造独立 GitHub 来源。 |
 | `setup-matt-pocock-skills` | `my-skills/setup-matt-pocock-skills` | 用户级（global） | installed-snapshot: `~/.agents/skills/setup-matt-pocock-skills` → `~/.local/share/agent-skills/references/setup-matt-pocock-skills` | 原始上游未确证；不推断作者或仓库 |
-| `setup-pre-commit` | 本机待讨论（不分发） | 本机保留；不进入本次策略/参考副本/离线包 | 本机保留；不纳入本次 reference_copies | 本机待讨论；不公开包内容或来源。 |
+| `setup-pre-commit` | `my-skills/setup-pre-commit` | 用户级（global） | installed-snapshot: `~/.agents/skills/setup-pre-commit` → `~/.local/share/agent-skills/references/setup-pre-commit` | 旧登记为第三方，但未找到可确认的上游或作者；不据此推断原创来源。 |
 | `skill-workbench` | `my-skills/skill-workbench` | 用户级（global） | installed-snapshot: `~/.agents/skills/skill-creator` → `~/.local/share/agent-skills/references/skill-creator` | 原始上游未确证；不推断作者或仓库 |
 | `storage-analyzer` | `my-skills/storage-analyzer` | 用户级（global） | installed-snapshot: `~/.agents/skills/storage-analyzer` → `~/.local/share/agent-skills/references/storage-analyzer` | 原始上游未确证；不推断作者或仓库 |
 | `sts2-gawain-regression-recovery` | `project:gawain/skills/sts2-gawain-regression-recovery` | Gawain 项目（gawain） | installed-snapshot: `~/.agents/skills/sts2-gawain-regression-recovery` → `~/.local/share/agent-skills/references/sts2-gawain-regression-recovery` | 当前 Gawain 项目维护源已知；原作者与最初上游未确证 |

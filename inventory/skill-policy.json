@@ -1509,6 +1509,63 @@
       "accepted_fingerprints": [
         "bdf6b27be9b3c1d10b3716e9a13d99472355c5e97ec4e44e865e5dc7da146533"
       ]
+    },
+    {
+      "name": "improve-codebase-architecture",
+      "state": "active",
+      "scope": "global",
+      "source": "my-skills/improve-codebase-architecture",
+      "origin": "first-party",
+      "accepted_fingerprints": [
+        "e341471e3aa2a4509128965698c81815b481effd9a6eb8b865fbcf60b3b164c5",
+        "75e1264bf0f29f8b81ad974d2dbea321cc17f067ef57e5789c285690cdecb7ff"
+      ]
+    },
+    {
+      "name": "prototype",
+      "state": "active",
+      "scope": "global",
+      "source": "my-skills/prototype",
+      "origin": "first-party",
+      "accepted_fingerprints": [
+        "43d85cb085b967f1921682ea2521b827f47ff3972076f6001468ac56e6e2fdf5",
+        "e4d5340364cece12ebd91ed8bf4838ace18de3f12b5b7616ec443b61a2da574b"
+      ]
+    },
+    {
+      "name": "pr",
+      "state": "active",
+      "scope": "global",
+      "source": "my-skills/pr",
+      "origin": "first-party",
+      "accepted_fingerprints": [
+        "31cd2ee29c0543d5a9fc15eec7e9c979f1ab1ea30d00dd899259274cde52f71a",
+        "cfb2a05039a036ad0f9d8b58b4eac2d3c34149a242504a2bafb54d6972bfcb43"
+      ],
+      "upstream": "https://github.com/mattpocock/skills/tree/main/skills/engineering/pr"
+    },
+    {
+      "name": "retro",
+      "state": "active",
+      "scope": "global",
+      "source": "my-skills/retro",
+      "origin": "first-party",
+      "accepted_fingerprints": [
+        "1c6322631acb1d1b96bdfa7778f09aa47284c2a7aca303da71fb2218d65beacf",
+        "ac467f9e12877170132552d2da6f71ed84a741e83a128d29289771c30b354332"
+      ],
+      "upstream": "https://github.com/mattpocock/skills/tree/main/skills/engineering/retro"
+    },
+    {
+      "name": "setup-pre-commit",
+      "state": "active",
+      "scope": "global",
+      "source": "my-skills/setup-pre-commit",
+      "origin": "first-party",
+      "accepted_fingerprints": [
+        "9b0bdf76e604912088b6242f3d390c34a79741d04d85196e834b2471912121ae",
+        "cad43acb2e24504b7ba60aafebbf945fcfe4ae34bfac31b65ae2b715665d2e95"
+      ]
     }
   ],
   "reference_copies": [
@@ -3058,6 +3115,66 @@
       "provenance": {
         "installed_snapshot_sha256": "506962e236a38465e187cf3b6009da118ea625b08ba6b57a4973f995bdb433e8",
         "source_note": "原作者与最初来源未证实；完整原件保存在 /Users/chris/Documents/Codex/2026-10-13/user-skills-instruction-review/optimization-handoff/first-party-backup/workspace-convergence-audit，由source-manifest逐文件记录。"
+      }
+    },
+    {
+      "name": "improve-codebase-architecture",
+      "maps_to": "improve-codebase-architecture",
+      "source": "~/.agents/skills/improve-codebase-architecture",
+      "destination": "~/.local/share/agent-skills/references/improve-codebase-architecture",
+      "fingerprint": "75e1264bf0f29f8b81ad974d2dbea321cc17f067ef57e5789c285690cdecb7ff",
+      "origin": "installed-snapshot",
+      "prior_registry_origin": "third-party",
+      "provenance": {
+        "installed_snapshot_sha256": "75e1264bf0f29f8b81ad974d2dbea321cc17f067ef57e5789c285690cdecb7ff"
+      }
+    },
+    {
+      "name": "prototype",
+      "maps_to": "prototype",
+      "source": "~/.agents/skills/prototype",
+      "destination": "~/.local/share/agent-skills/references/prototype",
+      "fingerprint": "e4d5340364cece12ebd91ed8bf4838ace18de3f12b5b7616ec443b61a2da574b",
+      "origin": "installed-snapshot",
+      "prior_registry_origin": "third-party",
+      "provenance": {
+        "installed_snapshot_sha256": "e4d5340364cece12ebd91ed8bf4838ace18de3f12b5b7616ec443b61a2da574b"
+      }
+    },
+    {
+      "name": "pr",
+      "maps_to": "pr",
+      "source": "~/.agents/skills/pr",
+      "destination": "~/.local/share/agent-skills/references/pr",
+      "fingerprint": "cfb2a05039a036ad0f9d8b58b4eac2d3c34149a242504a2bafb54d6972bfcb43",
+      "origin": "installed-snapshot",
+      "prior_registry_origin": "third-party",
+      "provenance": {
+        "installed_snapshot_sha256": "cfb2a05039a036ad0f9d8b58b4eac2d3c34149a242504a2bafb54d6972bfcb43"
+      }
+    },
+    {
+      "name": "retro",
+      "maps_to": "retro",
+      "source": "~/.agents/skills/retro",
+      "destination": "~/.local/share/agent-skills/references/retro",
+      "fingerprint": "ac467f9e12877170132552d2da6f71ed84a741e83a128d29289771c30b354332",
+      "origin": "installed-snapshot",
+      "prior_registry_origin": "third-party",
+      "provenance": {
+        "installed_snapshot_sha256": "ac467f9e12877170132552d2da6f71ed84a741e83a128d29289771c30b354332"
+      }
+    },
+    {
+      "name": "setup-pre-commit",
+      "maps_to": "setup-pre-commit",
+      "source": "~/.agents/skills/setup-pre-commit",
+      "destination": "~/.local/share/agent-skills/references/setup-pre-commit",
+      "fingerprint": "cad43acb2e24504b7ba60aafebbf945fcfe4ae34bfac31b65ae2b715665d2e95",
+      "origin": "installed-snapshot",
+      "prior_registry_origin": "third-party",
+      "provenance": {
+        "installed_snapshot_sha256": "cad43acb2e24504b7ba60aafebbf945fcfe4ae34bfac31b65ae2b715665d2e95"
       }
     }
   ],
