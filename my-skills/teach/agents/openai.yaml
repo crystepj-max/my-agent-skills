@@ -1,0 +1,5 @@
+interface:
+  display_name: "Teach"
+  short_description: "Teach through interactive goal-based practice"
+policy:
+  allow_implicit_invocation: false

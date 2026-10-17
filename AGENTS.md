@@ -3,7 +3,7 @@
 全局协作规则见 `~/.config/agent-policy/AGENTS.md`；本文件只补充本项目约定。
 
 - 目标：第一方入口负责完整执行，第三方逐步转为参考，专业能力进入项目工作空间；恢复后不倒退。
-- 正式登记为 `inventory/skill-policy.json`，人读状态表为 `inventory/skill-lifecycle.md`。说明清单保留来源资料，不能代替实际启用状态。
+- 机器正式登记为 `inventory/skill-policy.json`；人读总表为 `inventory/skills-summary.md`，由 `python3 scripts/build_skills_summary.py` 从 JSON 生成。人读子表按职责放在 `inventory/skills/`：`descriptions-zh.md` 维护中文描述，`provenance.md` 维护出处和上游版本，`revision-history.md` 记录重要修订。人读文件不得冒充机器登记权威。
 - 允许围绕当前请求修改 my-skills、my-plugins、overrides、inventory、scripts、tools 和相应说明；不改无关业务代码、凭据、其他助手独有配置。
 - M1 Requirements Analysis 由 workflow-manager 维护并直接安装到用户级技能目录；M3 Execution Plan 由 dev-flow 维护为项目级 Skill；M2 单任务交付继续由 workflow-manager 蓝图生成。本仓不登记、不镜像、不分发 M1 或 M3。遗留的 `inventory/history/requirements-analysis/content/` 仅作历史副本保留，不在此编辑或安装。
 - 第一方入口连接各自维护源；未审阅的本机差异须保留。参考、退役和备份放在发现目录外。定点第三方修正仅适配登记的原版本，遇到上游变化先报告。

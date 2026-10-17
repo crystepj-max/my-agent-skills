@@ -61,9 +61,60 @@ class Manager:
         self.config = config
         self.apply = apply
         self.rows = []
+        self.validate_project_sources()
         self.backup_root = self.home_dir / '.local/share/agent-skills/backups' / datetime.now().strftime('%Y%m%d-%H%M%S-%f')
         self.pool = self.expand(config['pool'])
         self.alias_roots = [self.expand(p) for p in config['agent_roots']]
+        self.discovery_roots = [
+            self.pool,
+            *self.alias_roots,
+            self.repo / 'my-skills',
+            *(self.expand(p) for p in config.get('discovery_roots', [])),
+        ]
+        project_roots = [self.expand(path) for path in config.get('projects', {}).values()]
+        self.discovery_roots.extend(
+            project_root / relative
+            for project_root in project_roots
+            for relative in config.get('project_entry_roots', [])
+        )
+        for entry in config.get('skills', []):
+            if entry.get('state') not in {'active', 'transition'}:
+                continue
+            sources = entry.get('project_sources')
+            if sources is None:
+                sources = {'primary': entry.get('source')}
+            self.discovery_roots.extend(
+                self.expand(source) for source in sources.values() if source
+            )
+
+    def validate_project_sources(self):
+        """Validate the optional multi-project source map before any plan/apply work."""
+        projects = self.config.get('projects', {})
+        for entry in self.config.get('skills', []):
+            if 'project_sources' not in entry:
+                continue
+            sources = entry['project_sources']
+            scope = entry.get('scope')
+            if not isinstance(sources, dict) or not sources:
+                raise ValueError(f"技能 {entry.get('name')} 的 project_sources 必须是非空对象")
+            if scope == 'global' or entry.get('state') != 'active':
+                raise ValueError(f"技能 {entry.get('name')} 的 project_sources 仅适用于 active 项目技能")
+            if scope not in projects:
+                raise ValueError(f"技能 {entry.get('name')} 的主项目未登记：{scope}")
+            if scope not in sources or sources[scope] != entry.get('source'):
+                raise ValueError(f"技能 {entry.get('name')} 的主 source 必须与 project_sources[{scope!r}] 一致")
+            for project, source in sources.items():
+                if project not in projects:
+                    raise ValueError(f"技能 {entry.get('name')} 的来源项目未登记：{project}")
+                prefix = f'project:{project}/'
+                if not isinstance(source, str) or not source.startswith(prefix) or not source[len(prefix):]:
+                    raise ValueError(f"技能 {entry.get('name')} 的来源必须位于项目 {project}：{source!r}")
+                project_root = self.expand(projects[project]).resolve(strict=False)
+                resolved_source = self.expand(source).resolve(strict=False)
+                if resolved_source == project_root or not resolved_source.is_relative_to(project_root):
+                    raise ValueError(
+                        f"技能 {entry.get('name')} 的来源解析后必须位于项目 {project} 内：{source!r}"
+                    )
 
     def expand(self, value):
         if value.startswith('~/'):
@@ -73,6 +124,15 @@ class Manager:
             return self.expand(self.config['projects'][project]) / relative
         p = Path(value)
         return p if p.is_absolute() else self.repo / p
+
+    def is_discovery_path(self, path):
+        """Reference copies must stay outside executable roots and maintained sources."""
+        candidate = Path(path).expanduser().resolve(strict=False)
+        for root in self.discovery_roots:
+            root = root.expanduser().resolve(strict=False)
+            if candidate == root or candidate in root.parents or root in candidate.parents:
+                return True
+        return False
 
     def note(self, status, path, detail):
         self.rows.append(dict(status=status, path=str(path), detail=detail))
@@ -89,7 +149,10 @@ class Manager:
 
     def accepted(self, path, entry):
         if is_link(path):
-            return path.resolve() in {(self.pool / entry['name']).resolve(), self.expand(entry['source']).resolve()}
+            sources = entry.get('project_sources') or {'primary': entry['source']}
+            accepted_sources = {(self.pool / entry['name']).resolve()}
+            accepted_sources.update(self.expand(source).resolve() for source in sources.values())
+            return path.resolve() in accepted_sources
         return path.is_dir() and fingerprint(path) in entry.get('accepted_fingerprints', [])
 
     def ensure_link(self, path, source, entry):
@@ -138,6 +201,9 @@ class Manager:
                     entry.symlink_to(source, target_is_directory=True)
         for ref in self.config.get('reference_copies', []):
             source, dest = self.expand(ref['source']), self.expand(ref['destination'])
+            if self.is_discovery_path(dest):
+                self.note('CONFLICT', dest, '参考副本目标落入技能发现/执行目录；拒绝恢复')
+                continue
             if dest.exists():
                 if fingerprint(dest) != ref['fingerprint']:
                     self.note('CONFLICT', dest, '参考资料与保留版本不同，未覆盖')
@@ -180,10 +246,24 @@ class Manager:
                 raise ValueError(f'无效或重复目录名：{name}')
             names.add(name)
             source = self.expand(entry['source'])
+            project_sources = entry.get('project_sources')
             pool_entry = self.pool / name
+            if entry.get('state') in {'reference', 'retired'} and self.is_discovery_path(source):
+                self.note('CONFLICT', source, '参考/退役原件位于技能发现/执行目录；拒绝迁入或启用')
+                continue
             global_active = entry['scope'] == 'global' and entry['state'] in {'active', 'transition'}
             project_active = entry['scope'] != 'global' and entry['state'] == 'active'
-            if not (source / 'SKILL.md').is_file():
+            if project_sources:
+                missing_sources = [
+                    self.expand(project_source)
+                    for project_source in project_sources.values()
+                    if not (self.expand(project_source) / 'SKILL.md').is_file()
+                ]
+                if missing_sources:
+                    for missing_source in missing_sources:
+                        self.note('MISSING', missing_source, '项目维护源缺少 SKILL.md；多项目技能不从其他项目复制')
+                    continue
+            elif not (source / 'SKILL.md').is_file():
                 if entry.get('migrate') and (pool_entry / 'SKILL.md').is_file():
                     if not self.accepted(pool_entry, entry):
                         self.note('CONFLICT', pool_entry, '迁移前内容改变，未覆盖')
@@ -215,20 +295,25 @@ class Manager:
                 for target_root in self.alias_roots:
                     self.remove_entry(target_root / name, entry, source)
                 if project_active:
-                    project_root = self.expand(self.config['projects'][entry['scope']])
-                    if not project_root.exists():
-                        self.note('MISSING', project_root, '请设置已存在的专业工作空间')
-                        continue
-                    for relative in self.config['project_entry_roots']:
-                        self.ensure_link(project_root / relative / name, source, entry)
-            if (source / 'SKILL.md').is_file():
-                self.note('SOURCE', source, fingerprint(source))
-                manifest = source / 'source-manifest.json'
-                if manifest.is_file():
-                    for relative, expected in json.loads(manifest.read_text())['files'].items():
-                        asset = source / relative
-                        if not asset.is_file() or hashlib.sha256(asset.read_bytes()).hexdigest() != expected:
-                            self.note('CONFLICT', asset, '配套资产与正式同步版本不同，请从维护源重新同步')
+                    sources = project_sources or {entry['scope']: entry['source']}
+                    for project, project_source in sources.items():
+                        project_root = self.expand(self.config['projects'][project])
+                        if not project_root.exists():
+                            self.note('MISSING', project_root, '请设置已存在的专业工作空间')
+                            continue
+                        project_source = self.expand(project_source)
+                        for relative in self.config['project_entry_roots']:
+                            self.ensure_link(project_root / relative / name, project_source, entry)
+            for project_source in (project_sources or {'primary': entry['source']}).values():
+                source_path = self.expand(project_source)
+                if (source_path / 'SKILL.md').is_file():
+                    self.note('SOURCE', source_path, fingerprint(source_path))
+                    manifest = source_path / 'source-manifest.json'
+                    if manifest.is_file():
+                        for relative, expected in json.loads(manifest.read_text())['files'].items():
+                            asset = source_path / relative
+                            if not asset.is_file() or hashlib.sha256(asset.read_bytes()).hexdigest() != expected:
+                                self.note('CONFLICT', asset, '配套资产与正式同步版本不同，请从维护源重新同步')
         # 未登记对象只报告；备份和同名发现按实际声明核对，不凭文件夹名称判定。
         declared = {}
         for folder in sorted(self.pool.iterdir()) if self.pool.exists() else []:
@@ -304,9 +389,9 @@ def cn_targets(config, scope):
     for entry in config['skills']:
         if entry['state'] not in {'active', 'transition'}:
             continue
-        source = Path(entry['source']).expanduser()
-        skill_md = source / 'SKILL.md'
-        if skill_md.is_file():
+        sources = entry.get('project_sources') or {'primary': entry['source']}
+        for source in sources.values():
+            skill_md = config_source_path(config, source) / 'SKILL.md'
             rows.append((entry['name'], skill_md, 'managed'))
     if scope == 'all' and pool.is_dir():
         registered = {name for name, _, _ in rows}
@@ -315,6 +400,17 @@ def cn_targets(config, scope):
             if folder.is_dir() and skill_md.is_file() and folder.name not in registered:
                 rows.append((folder.name, skill_md, 'unmanaged'))
     return rows
+
+
+def config_source_path(config, source):
+    """Resolve registry paths for read-only checks, including project: references."""
+    if source.startswith('project:'):
+        project, relative = source[8:].split('/', 1)
+        project_root = config.get('projects', {}).get(project)
+        if project_root is None:
+            return Path(config['pool']).expanduser().parent / '.missing-projects' / project / relative
+        return Path(project_root).expanduser() / relative
+    return Path(source).expanduser()
 
 
 def cn_guard(config, scope='managed', report=None):

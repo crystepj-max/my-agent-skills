@@ -60,6 +60,6 @@ bash ~/.agents/skills/agent-skill-bridge/scripts/cn_guard.sh --all    # 并查�
 
 1. `skill-policy.json` 里置 `state: retired`，`source` 改指 `~/.local/share/agent-skills/retired/<name>`（已有先例，注意该目录在 git 之外，PR 里只会看到登记表的条目变化）。
 2. 目录移出发现目录（`my-skills/` 与 `~/.agents/skills/`），不能只改表不挪目录，也不能只删目录不改表。
-3. 派生文档 `skill-lifecycle.md`、`skill-desc-translation.md` 同步；它们由登记表派生，改表后必须跟着改，改它们不改表没有意义。
+3. 人读文件按职责维护：`inventory/skills-summary.md` 由策略 JSON 生成；`inventory/skills/descriptions-zh.md` 维护中文描述；`inventory/skills/provenance.md` 记录来源与上游版本；`inventory/skills/revision-history.md` 记录重要变更。修改机器登记后重新生成总表，并检查相关子表链接与字段。
 
 **登记新版时顺手查 UNMANAGED**：`plan` 输出里的 UNMANAGED 项没有进入登记表，退役旧版前先确认承接方已在表中，否则退役后正式入口缺失。指纹用 `manage-skills.py` 自己的 `fingerprint()` 算，不要自己实现。
