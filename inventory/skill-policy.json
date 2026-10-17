@@ -36,7 +36,8 @@
       "accepted_fingerprints": [
         "d22ad333668cda47ba3c75a8d8a7f217e5131465ebb58abacdbb916a6dc9c79b",
         "aba26b3f68a0a85bb96cf8c1b0e33eea2eb2265da5e615ae0268430539012bfb",
-        "db3ac07d3187044ef0372013423784c8f13da11d46c93b9b19e37ec14abe8de8"
+        "db3ac07d3187044ef0372013423784c8f13da11d46c93b9b19e37ec14abe8de8",
+        "37649e89c843d599204fe2310a996f75f6a49e8066c54c457abe0f3d8b3cfe9f"
       ]
     },
     {
@@ -122,6 +123,17 @@
       ]
     },
     {
+      "name": "chatgpt-web-bridge",
+      "state": "active",
+      "scope": "global",
+      "source": "my-skills/chatgpt-web-bridge",
+      "origin": "first-party",
+      "note": "通用 ChatGPT 网页桥接：通道优先级 codex-in-app-browser → user-chrome（已登录 Chrome 会话）→ host-browser-use；支持 reasoning 与 image 两类任务合同；启用需通过 automation-consent 同意门。派生自 transition 状态的 codex-bridge-chatgpt，合同与安全护栏同源，原版保留。",
+      "accepted_fingerprints": [
+        "e6fb66f295060c452e8c53d871ce23a55e6f5e59d425a712b0cfb6c725556a05"
+      ]
+    },
+    {
       "name": "clashx-openai-sse-debug",
       "state": "transition",
       "scope": "global",
@@ -137,9 +149,11 @@
       "scope": "global",
       "source": "my-skills/cnb-git",
       "origin": "first-party",
-      "note": "CNB 全场景 Git 操作：clone/pull/fetch/push/分支/PR(含 WIP 草稿)/合并；内置凭据注入、代理修正与平台差异处理",
+      "note": "按实际 upstream remote 与服务端分支执行 fetch/pull；凭据仅注入 CNB URL；不自动删 Git lock，clone/fetch/pull 错误明确失败。",
       "accepted_fingerprints": [
-        "bbef8092ec0e90b87326a8099cc2ab88b91ad1f792265ce450b34caa7b167a2c"
+        "bbef8092ec0e90b87326a8099cc2ab88b91ad1f792265ce450b34caa7b167a2c",
+        "037ccb2df8307824cb504052faf309cf0ba78fa97b3a740d647c406236c9d986",
+        "5ec0993d1bbb52807515425f759668be946dcfa14164cba87eb53369b12c53e0"
       ]
     },
     {
@@ -148,9 +162,10 @@
       "scope": "global",
       "source": "my-skills/cnb-push",
       "origin": "first-party",
-      "note": "推送到 CNB 的封装脚本；内置代理绕过与 HTTP/1.1 修正",
+      "note": "CNB 推送封装；区分现有仓更新与首次上传，--all/--set-default 按其实际影响范围授权并复用既有授权。",
       "accepted_fingerprints": [
-        "5ebecc5e1ff85c944372bba78d30aa977c183eda1bd8ee1a500eb16cdb21d55c"
+        "5ebecc5e1ff85c944372bba78d30aa977c183eda1bd8ee1a500eb16cdb21d55c",
+        "064e1be3f5ed31f68ce3d11a3eb9a47313328dd82a8ca13909b76aa136f6431a"
       ]
     },
     {
@@ -238,6 +253,30 @@
       "origin": "third-party",
       "accepted_fingerprints": [
         "16b3c134713d50d8af073a407eafa863cffce6ee983c345a8da80d05940fd427"
+      ]
+    },
+    {
+      "name": "dsh-source-upgrade",
+      "state": "active",
+      "scope": "global",
+      "source": "my-skills/dsh-source-upgrade",
+      "origin": "first-party",
+      "note": "本仓按用户决定承担当前维护；原作者与最初来源未证实，完整原件保存在 /Users/chris/Documents/Codex/2026-10-13/user-skills-instruction-review/optimization-handoff/first-party-backup/dsh-source-upgrade",
+      "accepted_fingerprints": [
+        "1cb8b7de6b5ed920144a4cb4aaa20971b8663d0dd25882e15b41b95c30a4e4f3",
+        "4a0593c0e68b9763448dfaacfd57474918f4378e333935fa663699598fcefd09"
+      ]
+    },
+    {
+      "name": "dsh-web-access-recovery",
+      "state": "active",
+      "scope": "global",
+      "source": "my-skills/dsh-web-access-recovery",
+      "origin": "first-party",
+      "note": "本仓按用户决定承担当前维护；原作者与最初来源未证实，完整原件保存在 /Users/chris/Documents/Codex/2026-10-13/user-skills-instruction-review/optimization-handoff/first-party-backup/dsh-web-access-recovery",
+      "accepted_fingerprints": [
+        "f6500ab08246e3eb286284ab37b9e907d98be698b35ff9f6e7d6d6df1601dd15",
+        "06990f4289c24c7102b09ed1ae0a873bb4b113af640896c3a4ba5271c0d2da2b"
       ]
     },
     {
@@ -1136,6 +1175,18 @@
       ]
     },
     {
+      "name": "workspace-convergence-audit",
+      "state": "active",
+      "scope": "global",
+      "source": "my-skills/workspace-convergence-audit",
+      "origin": "first-party",
+      "note": "本仓按用户决定承担当前维护；原作者与最初来源未证实，完整原件保存在 /Users/chris/Documents/Codex/2026-10-13/user-skills-instruction-review/optimization-handoff/first-party-backup/workspace-convergence-audit",
+      "accepted_fingerprints": [
+        "506962e236a38465e187cf3b6009da118ea625b08ba6b57a4973f995bdb433e8",
+        "505c4ef44a4c137926bc9a243d3bc94dc05acb285b6016e920449d8ec5ee4b6b"
+      ]
+    },
+    {
       "name": "writing-great-skills",
       "state": "transition",
       "scope": "global",
@@ -1164,6 +1215,45 @@
       "source": "~/.agents/skills/neat-freak",
       "destination": "~/.local/share/agent-skills/references/neat-freak",
       "fingerprint": "aab8084701bdcc6c6ab3388d5323b3644e5b4fb8c8a1911a437995a2111052d4"
+    },
+    {
+      "name": "dsh-source-upgrade",
+      "maps_to": "dsh-source-upgrade",
+      "source": "~/.agents/skills/dsh-source-upgrade",
+      "destination": "~/.local/share/agent-skills/references/dsh-source-upgrade",
+      "fingerprint": "1cb8b7de6b5ed920144a4cb4aaa20971b8663d0dd25882e15b41b95c30a4e4f3",
+      "origin": "installed-snapshot",
+      "prior_registry_origin": null,
+      "provenance": {
+        "installed_snapshot_sha256": "1cb8b7de6b5ed920144a4cb4aaa20971b8663d0dd25882e15b41b95c30a4e4f3",
+        "source_note": "原作者与最初来源未证实；完整原件保存在 /Users/chris/Documents/Codex/2026-10-13/user-skills-instruction-review/optimization-handoff/first-party-backup/dsh-source-upgrade，由source-manifest逐文件记录。"
+      }
+    },
+    {
+      "name": "dsh-web-access-recovery",
+      "maps_to": "dsh-web-access-recovery",
+      "source": "~/.agents/skills/dsh-web-access-recovery",
+      "destination": "~/.local/share/agent-skills/references/dsh-web-access-recovery",
+      "fingerprint": "f6500ab08246e3eb286284ab37b9e907d98be698b35ff9f6e7d6d6df1601dd15",
+      "origin": "installed-snapshot",
+      "prior_registry_origin": null,
+      "provenance": {
+        "installed_snapshot_sha256": "f6500ab08246e3eb286284ab37b9e907d98be698b35ff9f6e7d6d6df1601dd15",
+        "source_note": "原作者与最初来源未证实；完整原件保存在 /Users/chris/Documents/Codex/2026-10-13/user-skills-instruction-review/optimization-handoff/first-party-backup/dsh-web-access-recovery，由source-manifest逐文件记录。"
+      }
+    },
+    {
+      "name": "workspace-convergence-audit",
+      "maps_to": "workspace-convergence-audit",
+      "source": "~/.agents/skills/workspace-convergence-audit",
+      "destination": "~/.local/share/agent-skills/references/workspace-convergence-audit",
+      "fingerprint": "506962e236a38465e187cf3b6009da118ea625b08ba6b57a4973f995bdb433e8",
+      "origin": "installed-snapshot",
+      "prior_registry_origin": null,
+      "provenance": {
+        "installed_snapshot_sha256": "506962e236a38465e187cf3b6009da118ea625b08ba6b57a4973f995bdb433e8",
+        "source_note": "原作者与最初来源未证实；完整原件保存在 /Users/chris/Documents/Codex/2026-10-13/user-skills-instruction-review/optimization-handoff/first-party-backup/workspace-convergence-audit，由source-manifest逐文件记录。"
+      }
     }
   ],
   "overrides": [
@@ -1191,6 +1281,18 @@
       "name": "leader",
       "path": "/Users/chris/.codex/plugins/cache/personal/leader/0.1.0/skills/leader/SKILL.md",
       "patch": "overrides/leader.json",
+      "optional": true
+    },
+    {
+      "name": "leader",
+      "path": "/Users/chris/.codex/plugins/cache/personal/leader/0.1.0/skills/leader/references/anatomy.md",
+      "patch": "overrides/leader-anatomy.json",
+      "optional": true
+    },
+    {
+      "name": "leader",
+      "path": "/Users/chris/.codex/plugins/cache/personal/leader/0.1.0/skills/leader/references/style.md",
+      "patch": "overrides/leader-style.json",
       "optional": true
     }
   ],

@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "name": "dsh-source-upgrade",
+  "maintenance_source": "my-skills/dsh-source-upgrade",
+  "maintenance_status": "first-party-maintained",
+  "provenance": {
+    "original_source_status": "unverified",
+    "decision": "按用户明确决定，以现存完整包建立本仓第一方维护源；此登记确认当前维护责任，不证明原作者或最初来源。",
+    "preserved_original_path": "/Users/chris/Documents/Codex/2026-10-13/user-skills-instruction-review/optimization-handoff/first-party-backup/dsh-source-upgrade",
+    "preserved_original_package_fingerprint": "1cb8b7de6b5ed920144a4cb4aaa20971b8663d0dd25882e15b41b95c30a4e4f3",
+    "preserved_original_files": {
+      "SKILL.md": "e83bb5028ecd958ec35392b8ea4f93a97efb1f6354eecc4ddb628d155a30fa6a"
+    },
+    "installed_original_path": "/Users/chris/.agents/skills/dsh-source-upgrade",
+    "installed_original_files": {
+      "SKILL.md": "e83bb5028ecd958ec35392b8ea4f93a97efb1f6354eecc4ddb628d155a30fa6a"
+    },
+    "source_agent_record": "/Users/chris/Documents/Codex/2026-10-13/user-skills-instruction-review/optimization-handoff/first-party-adopted-result.json"
+  },
+  "files": {
+    "SKILL.md": "02c89d3cc40004f36da5bd80b8c34a6fbcfbc91e572b8017d15e33fb1c574639"
+  },
+  "validation": {
+    "final_candidate_sha256": "02c89d3cc40004f36da5bd80b8c34a6fbcfbc91e572b8017d15e33fb1c574639",
+    "candidate_matches_formal_source": true,
+    "scope": "静态规则与结构审阅；未执行真实 DSH 服务、LLM、Git 远端、凭据业务或 workspace 清理。"
+  }
+}
