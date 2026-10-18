@@ -112,6 +112,11 @@ bash $S whoami
    `.lock` 可能仍由另一个 Git 进程持有，也可能需要人工检查。脚本不会自动删除锁或以删除锁为由重试；
    先查明锁文件与相关 Git 进程状态，确认影响后再由操作者决定后续处理。
 
+10. **GitHub → CNB 单向镜像只推 `main`，不清特性分支**
+    `my-agent-skills` 的 `.github/workflows/mirror-cnb.yml` 只执行 `git push cnb "HEAD:refs/heads/main"`。
+    → 在 GitHub 合并并删除特性分支后，CNB 上同名分支**仍在**，必须 `git push cnb --delete <分支>` 手动删。
+    → 收口时用 `git ls-remote --heads cnb` 核对，别假定镜像会跟随删除；两端的 `main` sha 应一致。
+
 ## 硬规则（不可违反）
 
 1. **绝不 force push** — 脚本不接受也不传递 `--force` / `-f`。
