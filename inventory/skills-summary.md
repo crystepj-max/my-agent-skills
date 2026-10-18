@@ -14,11 +14,11 @@
 
 ## 登记概况
 
-共 **142** 项：第一方维护 **127** 项，第三方来源 **15** 项。
+共 **143** 项：第一方维护 **128** 项，第三方来源 **15** 项。
 
 | 状态 | 数量 |
 |---|---:|
-| 启用 | 121 |
+| 启用 | 122 |
 | 迁移中 | 1 |
 | 仅参考 | 12 |
 | 已退役 | 8 |
@@ -26,7 +26,7 @@
 | 使用范围 | 数量 |
 |---|---:|
 | `gawain` | 2 |
-| `global` | 100 |
+| `global` | 101 |
 | `investments` | 20 |
 | `presentations` | 20 |
 
@@ -142,6 +142,7 @@
 | `remotion-video-toolkit` | 第一方维护 | 启用 | `presentations` | `project:presentations/.agents/skills/remotion-video-toolkit` | [描述](skills/descriptions-zh.md) | [来源](skills/provenance.md) |
 | `requirements-analysis.bak-20260905-224705` | 第三方来源 | 已退役 | `global` | `~/.local/share/agent-skills/retired/requirements-analysis.bak-20260905-224705` | [描述](skills/descriptions-zh.md) | [来源](skills/provenance.md) |
 | `research` | 第一方维护 | 启用 | `global` | `my-skills/research` | [描述](skills/descriptions-zh.md) | [来源](skills/provenance.md) |
+| `research-report-generator` | 第一方维护 | 启用 | `global` | `my-skills/research-report-generator` | [描述](skills/descriptions-zh.md) | [来源](skills/provenance.md) |
 | `resolving-merge-conflicts` | 第三方来源 | 已退役 | `global` | `~/.local/share/agent-skills/retired/resolving-merge-conflicts` | [描述](skills/descriptions-zh.md) | [来源](skills/provenance.md) |
 | `retro` | 第一方维护 | 启用 | `global` | `my-skills/retro` | [描述](skills/descriptions-zh.md) | [来源](skills/provenance.md) |
 | `scaffold-exercises` | 第一方维护 | 启用 | `global` | `my-skills/scaffold-exercises` | [描述](skills/descriptions-zh.md) | [来源](skills/provenance.md) |

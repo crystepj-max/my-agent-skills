@@ -12,7 +12,7 @@
 更新上游时，将快照保存在技能发现目录之外，以 commit 固定版本；再用 `tools/compare_skill_reference.py` 输出只读差异。比较报告须保留快照路径、上游 commit、日期和报告日期。此流程只用于检查，不自动把上游内容覆盖到维护源。
 
 ## 技能来源与日期登记
-> 本节保留原 122 项第一方技能的来源/日期档案；当前 127 个维护源及新增 5 项的来源映射见后文。按字母分组，来源结论与维护路径、日期记录分开查阅。`first-party` 表示当前维护责任，不等于原创声明；“未记录”表示现有材料无法证明日期。
+> 本节保留原 122 项第一方技能的来源/日期档案；当前 128 个维护源及新增 5 项的来源映射见后文。按字母分组，来源结论与维护路径、日期记录分开查阅。`first-party` 表示当前维护责任，不等于原创声明；“未记录”表示现有材料无法证明日期。
 
 ### 来源与维护路径
 
@@ -270,6 +270,7 @@
 | `remotion-video-production` | 未记录 | 未记录 |
 | `remotion-video-toolkit` | 未记录 | 未记录 |
 | `research` | 未记录 | 未记录 |
+| `research-report-generator` | 2026-10-18 | 2026-10-18 |
 
 #### S–Z｜日期
 
@@ -316,7 +317,7 @@
 
 本表保留已登记维护来源、范围与原件参考线索；当前状态以正式策略和 [Skills 总览](../skills-summary.md) 为准。历史来源/能力表反映当时公共池记录，不作为现行分发状态。此前暂缓的 5 项现已作为第一方维护源登记；各自旧安装快照另存为只读 reference，不作为执行入口。
 
-「正式维护源」和「原件参考」是不同路径：维护源由正式登记表确定，不等同于原作者/原创声明；原安装快照仅用于历史保留和只读比较，不作为现行入口。上游列只呈现可追溯的来源线索；有来源冲突或未确认时按说明保留，不补造作者和仓库。远端 `main` 的基线为 137 项策略与 100 条 reference；本候选新增 5 项 `first-party/global/active` 登记及 5 条原版 reference，合计 142 项与 105 条，原 137 条登记和 100 条 reference 均保留。候选恢复与入口验证只在隔离临时 HOME 中进行；没有对真实 HOME 执行 `apply`。新会话可见性、真实业务行为、Windows 恢复与用户验收仍未验证。
+「正式维护源」和「原件参考」是不同路径：维护源由正式登记表确定，不等同于原作者/原创声明；原安装快照仅用于历史保留和只读比较，不作为现行入口。上游列只呈现可追溯的来源线索；有来源冲突或未确认时按说明保留，不补造作者和仓库。远端 `main` 的基线为 137 项策略与 100 条 reference；本候选新增 5 项 `first-party/global/active` 登记及 5 条原版 reference，合计 142 项与 105 条，原 137 条登记和 100 条 reference 均保留。候选恢复与入口验证只在隔离临时 HOME 中进行；没有对真实 HOME 执行 `apply`。新会话可见性、真实业务行为、Windows 恢复与用户验收仍未验证。2026-10-18 追加 `research-report-generator` 一项 `first-party/global/active` 登记，策略合计 143 项、第一方维护 128 项，`reference_copies` 仍为 105 条。
 
 | Skill | 正式维护源 | 范围 | 原安装快照（来源 → 参考保存位置） | 登记上游/来源线索 |
 |---|---|---|---|---|
@@ -397,6 +398,7 @@
 | `remotion-video-production` | `project:presentations/.agents/skills/remotion-video-production` | Chris-Vault 项目（presentations） | installed-snapshot: `~/.agents/skills/remotion-video-production` → `~/.local/share/agent-skills/references/remotion-video-production` | 历史来源清单：[github.com/akillness/jeo-skills](https://github.com/akillness/jeo-skills)；inventory/skills/descriptions-zh.md 记录 akillness/jeo-skills；当前包作为兼容别名。 |
 | `remotion-video-toolkit` | `project:presentations/.agents/skills/remotion-video-toolkit` | Chris-Vault 项目（presentations） | installed-snapshot: `~/.agents/skills/remotion-video-toolkit` → `~/.local/share/agent-skills/references/remotion-video-toolkit` | 历史来源清单：[github.com/shreefentsar/remotion-video-toolkit](https://github.com/shreefentsar/remotion-video-toolkit)；inventory/skills/descriptions-zh.md 记录 shreefentsar/remotion-video-toolkit。 |
 | `research` | `my-skills/research` | 用户级（global） | installed-snapshot: `~/.agents/skills/research` → `~/.local/share/agent-skills/references/research` | 原始上游未确证；不推断作者或仓库 |
+| `research-report-generator` | `my-skills/research-report-generator` | 用户级（global） | 无原安装快照；技能以本仓维护源首次登记，不新增 reference | 新建第一方技能，无已确认外部参考；不补造上游作者或仓库 |
 | `retro` | `my-skills/retro` | 用户级（global） | installed-snapshot: `~/.agents/skills/retro` → `~/.local/share/agent-skills/references/retro` | 历史上游线索：[mattpocock/skills · engineering/retro](https://github.com/mattpocock/skills/tree/main/skills/engineering/retro)；固定 commit 与获取日期未登记。 |
 | `scaffold-exercises` | `my-skills/scaffold-exercises` | 用户级（global） | installed-snapshot: `~/.agents/skills/scaffold-exercises` → `~/.local/share/agent-skills/references/scaffold-exercises` | 未确证独立上游；不补造独立 GitHub 来源。 |
 | `setup-matt-pocock-skills` | `my-skills/setup-matt-pocock-skills` | 用户级（global） | installed-snapshot: `~/.agents/skills/setup-matt-pocock-skills` → `~/.local/share/agent-skills/references/setup-matt-pocock-skills` | 原始上游未确证；不推断作者或仓库 |

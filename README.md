@@ -15,7 +15,7 @@
 
 ## 原件、上游对照与参考边界
 
-候选的远端基线 `origin/main`（`9a5c930`）有 137 项登记：`first-party` 122 项（active 116、retired 6），`third-party` 15 项（transition 1、reference 12、retired 2）；范围为 `global` 95、`presentations` 20、`investments` 20、`gawain` 2，`reference_copies` 为 100 条。候选新增 5 项 `first-party/global/active`，并为五份原安装快照各新增一条 reference，合计 142 项、127 项第一方维护（active 121、retired 6）、15 项第三方来源，以及 105 条 reference；原有 137 项和 100 条 reference 保持不变。`test-report-html` 仍只计一个技能名，同时覆盖 Gawain 与 AUTOTEST。完整映射见 [Skills 总览](inventory/skills-summary.md) 与 [来源档案](inventory/skills/provenance.md)。
+候选的远端基线 `origin/main`（`9a5c930`）有 137 项登记：`first-party` 122 项（active 116、retired 6），`third-party` 15 项（transition 1、reference 12、retired 2）；范围为 `global` 95、`presentations` 20、`investments` 20、`gawain` 2，`reference_copies` 为 100 条。候选新增 5 项 `first-party/global/active`，并为五份原安装快照各新增一条 reference，合计 142 项、127 项第一方维护（active 121、retired 6）、15 项第三方来源，以及 105 条 reference；原有 137 项和 100 条 reference 保持不变。`test-report-html` 仍只计一个技能名，同时覆盖 Gawain 与 AUTOTEST。2026-10-18 追加 1 项第一方维护源 `research-report-generator` 后为 143 项、128 项第一方维护（active 122、retired 6）、15 项第三方来源，`reference_copies` 仍为 105 条。完整映射见 [Skills 总览](inventory/skills-summary.md) 与 [来源档案](inventory/skills/provenance.md)。
 
 此前对 137 项/100 条的正式 `apply`、`check` 和独立入口核验属于上一轮基线，不能代替本候选的应用结果。本候选的 64 项管理测试在隔离 worktree 中通过；两个恢复入口在全新临时 HOME 中各自恢复 105/105 条参考并匹配完整指纹，重复恢复保留了刻意修改；临时 HOME 的 `Manager.apply` 建立 35 个入口，重复检查为 35 个 `OK`、5 个 `SOURCE`，无 `CHANGE`、`CONFLICT` 或 `MISSING`。未对真实 HOME 执行本候选的策略 `apply`。这些结果不证明新会话可见性、真实业务行为、Windows 恢复或用户验收。
 
