@@ -864,6 +864,16 @@
       "exclusion_reason": "Hermes 的 research 是包含多个内置技能的分类目录，不可替换为公共技能"
     },
     {
+      "name": "research-report-generator",
+      "state": "active",
+      "scope": "global",
+      "source": "my-skills/research-report-generator",
+      "origin": "first-party",
+      "accepted_fingerprints": [
+        "51275c7ebaedcef3a221769cbca0a1635d8cfd468dc92f7e87930ec18ca9932a"
+      ]
+    },
+    {
       "name": "resolving-merge-conflicts",
       "state": "retired",
       "scope": "global",

@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <defs>
+    <linearGradient id="bgC" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#15306b"/>
+      <stop offset="100%" stop-color="#1E53A4"/>
+    </linearGradient>
+    <filter id="shadowC" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.22"/>
+    </filter>
+  </defs>
+
+  <rect width="256" height="256" rx="48" fill="url(#bgC)"/>
+
+  <g filter="url(#shadowC)">
+    <g transform="translate(54, 44)">
+      <rect x="0" y="0" width="104" height="138" rx="8" fill="#ffffff"/>
+      <rect x="0" y="0" width="104" height="14" rx="8" fill="#FF7400"/>
+      <rect x="0" y="7" width="104" height="7" fill="#FF7400"/>
+
+      <rect x="16" y="32" width="64" height="5" rx="2.5" fill="#1E53A4"/>
+      <rect x="16" y="48" width="72" height="3.5" rx="1.75" fill="#1f2937" opacity="0.28"/>
+      <rect x="16" y="60" width="56" height="3.5" rx="1.75" fill="#1f2937" opacity="0.28"/>
+      <rect x="16" y="72" width="72" height="3.5" rx="1.75" fill="#1f2937" opacity="0.28"/>
+      <rect x="16" y="84" width="48" height="3.5" rx="1.75" fill="#1f2937" opacity="0.28"/>
+      <rect x="16" y="96" width="64" height="3.5" rx="1.75" fill="#1f2937" opacity="0.28"/>
+    </g>
+  </g>
+
+  <g transform="translate(132, 132)" filter="url(#shadowC)">
+    <circle cx="40" cy="40" r="38" fill="#15306b" stroke="#FF7400" stroke-width="8"/>
+    <text x="40" y="52" font-family="sans-serif" font-size="36" font-weight="700" fill="#ffffff" text-anchor="middle">!</text>
+    <line x1="68" y1="68" x2="96" y2="96" stroke="#FF7400" stroke-width="12" stroke-linecap="round"/>
+  </g>
+</svg>
